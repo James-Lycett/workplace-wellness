@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1, h2, h3, h4, h5, h6, p {
+  @apply font-arial
+}
+
+.progress-container {
+  position: relative;
+  height: 15px;
+  background-color: #ffffff;
+}
+
+.completed-bar {
+  position: absolute;
+  height: 100%;
+  background-color: #000000;
+  border-radius: 999px;
+}
+
+.progress-bar {
+  position: absolute;
+  height: 100%;
+  background-color: #000000;
+  border-radius: 999px;
+}
+
+.black-circle {
+  width: 40px; /* Adjust as needed */
+  height: 40px; /* Adjust as needed */
+  background-color: #000000; /* Black Circle */
+}
+
+@layer components {
+  .button-white-rounded {
+    @apply 
+      text-primary-3
+      text-center
+      text-xl
+      font-medium
+      font-arial
+      bg-primary-2
+      border-2
+      border-primary-3
+      rounded-xl
+      focus:outline-none
+      hover:bg-accent-3
+      focus:ring-4
+      focus:ring-accent-3
+      py-1
+      me-2
+      mb-2
+  }
+
+  .button-dark-rounded {
+    @apply
+    text-white
+    text-center
+    text-xl
+    font-bold
+    font-arial
+    bg-primary-3
+    hover:bg-accent-2
+    focus:outline-none
+    focus:ring-4
+    focus:ring-accent-2
+    rounded-xl
+    pt-1.5
+    pb-1.5
+    py-1
+    me-2
+    mb-2
+
+  }
+}
+

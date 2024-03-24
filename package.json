@@ -1,0 +1,48 @@
+{
+    "name": "winter_24_hackathon",
+    "version": "1.0.0",
+    "description": "An app for tracking various metrics impacting employees' sleep and thus workplace performance.",
+    "scripts": {
+        "build": "npm -prefix frontend run build",
+        "preinstall": "cd ./backend && npm install",
+        "install": "cd ./frontend && npm install",
+        "start": "npx concurrently 'npm run start:backend' 'npm run start:frontend'",
+        "start:backend": "npm --prefix ./backend start",
+        "start:frontend": "npm --prefix ./frontend start",
+        "start:dev": "npx concurrently \"npm run start:dev --prefix ./backend\" \"npm start --prefix ./frontend\" ",
+        "test": "npm run test:frontend && npm run test:backend",
+        "test:backend": "npm test --prefix ./backend",
+        "test:frontend": "npm test --prefix ./frontend"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://www.github.com/engineerpehr/winter_24_hackathon.git"
+    },
+    "contributors": [
+        {
+            "name": "Alexander Jimenez",
+            "email": "alexjimra906@gmail.com"
+        },
+        {
+            "name": "Tay Tyson",
+            "email": "tayshatyson@gmail.com"
+        },
+        {
+            "name": "Gregory Topscher",
+            "email": "gtopscher@gmail.com"
+        },
+        {
+            "name": "Odonchimeg Myagmar",
+            "email": "on12odnoo@gmail.com"
+        },
+        {
+            "name": "Pehr Lofgreen",
+            "email": "dallenlofgreen@duck.com"
+        },
+        {
+            "name": "James Lycett",
+            "email": "jrlycett@gmail.com"
+        }
+    ],
+    "license": "UNLICENSED"
+}
