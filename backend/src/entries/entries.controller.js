@@ -187,6 +187,24 @@ async function deleteEntry(req, res, next) {
     }
 }
 
+async function lastMonthAverages(req, res, next) {
+    const { personId } = req.params
+
+    try {
+        const numericalAverages = await service.lastMonthAverages(personId)
+        const bmiAverage = await service.lastMonthBMI(personId)
+        const averages = {
+            ...numericalAverages,
+            bmi_category_average: bmiAverage
+        }
+        
+        res.json({ data: averages })
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: "Error fetching last month averages from database"})
+    }
+}
+
 module.exports = {
     list: asyncErrorBoundary(list),
     create: [validateInput, asyncErrorBoundary(create)],
@@ -201,4 +219,5 @@ module.exports = {
         asyncErrorBoundary(entryExists),
         asyncErrorBoundary(deleteEntry),
     ],
+    readLastMonthAverages: [asyncErrorBoundary(personExists), asyncErrorBoundary(lastMonthAverages)]
 }

@@ -17,4 +17,8 @@ router
     .delete(controller.deleteEntry)
     .all(methodNotAllowed)
 
+router
+    .route("/user/averages/:personId")
+    .get(controller.readLastMonthAverages)
+    .all(methodNotAllowed)
 module.exports = router
