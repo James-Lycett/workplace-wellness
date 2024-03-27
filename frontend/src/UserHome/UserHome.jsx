@@ -1,13 +1,22 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import DropDownMenuButton from '../utils/DropDownMenuButton'
-import { readUserById } from '../utils/api'
+import { readUserById, readAveragesById } from '../utils/api'
 import Spinner from '../utils/Spinner'
 import CircularProgressBar from '../utils/ProgressCircle'
 import { initDropdowns } from 'flowbite'
 
 export default function UserHome() {
     const { userId } = useParams()
+
+    // Placeholder 'Recommended Daily Goals'
+    const dailyGoals = {
+        sleep: 8,
+        bmi: 21.7,
+        steps: 8000,
+        stress: 5,
+        heartRate: 70,
+    }
     // Options to pass down to <DropDownMenuButton/>
     const menuOptions = [
         {
@@ -31,15 +40,26 @@ export default function UserHome() {
             route: '/bp/privacy',
         },
     ]
+
     const [user, setUser] = useState(null)
+    const [averages, setAverages] = useState({
+        sleep_duration_average: 0,
+        daily_steps_average: 0,
+        stress_level_average: 0,
+        heart_rate_average: 0,
+        bmi_category_average: "N/A"
+    })
 
     // Fetches user from the API
     const loadUser = useCallback(async () => {
         const abortController = new AbortController()
 
         try {
-            const response = await readUserById(userId, abortController.signal)
-            setUser(response)
+            const readUserResponse = await readUserById(userId, abortController.signal)
+            const readAveragesResponse = await readAveragesById(userId, abortController.signal)
+            console.log(readAveragesResponse)
+            setAverages(readAveragesResponse)
+            setUser(readUserResponse)
         } catch (error) {
             console.error(error)
         } finally {
@@ -51,6 +71,23 @@ export default function UserHome() {
         loadUser()
         initDropdowns()
     }, [loadUser, userId])
+
+    function percentProgressCalculator(average, goal) {
+        return Math.round((100 * (average / goal)))
+    }
+
+    function stressLevelProgressCalculator(average, goal) {
+        if (averages.heart_rate_average === 0) {
+            return 0
+        } else if (average <= goal) {
+            return 100
+        } else {
+            const goalInverseProportionOfMax = (10 - goal)
+            const averageInverseProportionOfMax = (10 - average)
+
+            return (100 * (averageInverseProportionOfMax / goalInverseProportionOfMax))
+        }
+    }
 
     if (user) {
         return (
@@ -90,17 +127,17 @@ export default function UserHome() {
                             Recommended Daily Goals
                         </h2>
                         <div className="text-lg mt-2">
-                            <h3>Sleep Duration: 8 hours per day</h3>
-                            <h3>BMI 18.5 to 24.9</h3>
-                            <h3>Steps: 6,000 to 8,000 steps per day</h3>
-                            <h3>Stress Levels: Below 5</h3>
-                            <h3>Heart Rate: Below 70</h3>
+                            <h3>Sleep Duration: {dailyGoals.sleep} hours per day</h3>
+                            <h3>BMI: {dailyGoals.bmi}</h3>
+                            <h3>Steps: {dailyGoals.steps} steps per day</h3>
+                            <h3>Stress Levels: Below {dailyGoals.stress}</h3>
+                            <h3>Heart Rate: Below {dailyGoals.heartRate}</h3>
                         </div>
                     </div>
                 </div>
                 <div className="bg-accent-background border-accent-1 border-2 rounded-md mx-6 mt-6">
                     <div className="flex relative justify-center px-3 pt-3">
-                        <h2 className="text-2xl">Last Month Metrics</h2>
+                        <h2 className="text-2xl">{averages.heart_rate_average === 0 ? "No Activity Logged This Month" : "Last Month Metrics"}</h2>
                         <div className="absolute right-5 mt-1.5">
                             <DropDownMenuButton options={menuOptions} />
                         </div>
@@ -109,27 +146,28 @@ export default function UserHome() {
                     <div className="grid grid-cols-2 gap-4 p-3 mt-1">
                         <div className="flex flex-col text-center items-center border-2 border-black p-1 pb-4">
                             <h2 className="text-xl">Sleep Duration</h2>
-                            <p>Your Average: 6 Hours/Day</p>
-                            <CircularProgressBar progress={75} />
+                            <p>Your Average: {averages.sleep_duration_average} Hours/Day</p>
+                            <CircularProgressBar progress={percentProgressCalculator(averages.sleep_duration_average, dailyGoals.sleep)} />
                         </div>
                         <div className="flex flex-col text-center items-center border-2 border-black p-1 pb-4">
                             <h2 className="text-xl">BMI</h2>
-                            <p>Category: Overweight</p>
-                            <CircularProgressBar progress={29} />
+                            <p>Category: {averages.bmi_category_average}</p>
+                            <h3 className="text-lg font-bold mt-9">{averages.bmi_category_average === "Normal" ? "Great Work!" : "Keep At It!"}</h3>
+                            {/*<CircularProgressBar progress={29} />*/}
                         </div>
                         <div className="flex flex-col text-center items-center border-2 border-black p-1 pb-4">
                             <h2 className="text-xl">Steps</h2>
-                            <p>Your Average: 5300 Steps/Day</p>
-                            <CircularProgressBar progress={88} />
+                            <p>Your Average: {averages.daily_steps_average} Steps/Day</p>
+                            <CircularProgressBar progress={percentProgressCalculator(averages.daily_steps_average, dailyGoals.steps)} />
                         </div>
                         <div className="flex flex-col text-center items-center border-2 border-black p-1 pb-4">
                             <h2 className="text-xl">Stress Levels</h2>
-                            <p>Your Average: 7/10</p>
-                            <CircularProgressBar progress={70} />
+                            <p>Your Average: {averages.stress_level_average}/10</p>
+                            <CircularProgressBar progress={stressLevelProgressCalculator(averages.stress_level_average, dailyGoals.stress)} />
                         </div>
                     </div>
                     <p className="ms-3 pb-10">
-                        Your Average Heart Rate: 87 bpm (Above Average)
+                        Your Average Heart Rate: {averages.heart_rate_average} bpm
                     </p>
                 </div>
             </div>

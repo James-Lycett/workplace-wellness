@@ -187,6 +187,23 @@ async function deleteEntry(req, res, next) {
     }
 }
 
+
+/*
+    lastMonthAverages calls both the query functions (service.lastMonthBMI handles bmi_category 
+    string data differently than lastMonthAverages, which only handles numerical data) 
+    from entries.service for the average of last month's kpi metrics and mashes them together in a 
+    single object that looks like this:
+
+        data: {
+            sleep_duration_average: number,
+            daily_steps_average: number,
+            stress_level_average: number,
+            heart_rate_average: number,
+            bmi_category_average: "string"
+        }
+
+    and sends it in JSON format
+*/
 async function lastMonthAverages(req, res, next) {
     const { personId } = req.params
 
@@ -197,6 +214,8 @@ async function lastMonthAverages(req, res, next) {
             ...numericalAverages,
             bmi_category_average: bmiAverage
         }
+
+        console.log(averages)
         
         res.json({ data: averages })
     } catch (error) {

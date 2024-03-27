@@ -20,6 +20,7 @@ async function fetchJson(url, options, onCancel) {
             return Promise.reject({ message: payload.error })
         }
 
+        console.log(payload.data)
         return payload.data
     } catch (error) {
         if (error.name !== "AbortError") {
@@ -149,6 +150,19 @@ export async function deleteEntry(entryId, signal) {
     const url = `${API_BASE_URL}/entries/${entryId}`
     const options = {
         method: "DELETE",
+        headers,
+        signal,
+    }
+
+    return await fetchJson(url, options)
+}
+
+
+// Returns a single user's 'Last Month's Metrics' from the matching userId
+export async function readAveragesById(userId, signal) {
+    const url = `${API_BASE_URL}/entries/averages/${userId}`
+    const options = {
+        method: "GET",
         headers,
         signal,
     }

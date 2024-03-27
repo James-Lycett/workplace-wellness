@@ -46,10 +46,11 @@ Returns an object that looks like this:
         sleep_duration_average: n,
         daily_steps_average: n,
         stress_level_average: n,
+        heart_rate_average: n
     }
 */
 function lastMonthAverages(personId) {
-    const columnsToAvg = ["sleep_duration", "daily_steps", "stress_level"]
+    const columnsToAvg = ["sleep_duration", "daily_steps", "stress_level", "heart_rate"]
 
     return knex("entries")
         .select(columnsToAvg.map(column => knex.raw(`AVG(${column}) AS ${column}_average`)))
@@ -63,9 +64,10 @@ function lastMonthAverages(personId) {
 
             // Loops through the object returned from the above query and converts string values to numbers
             for (const column in averages) {
-                    averages[column] = Number(averages[column])
+                averages[column] = Number(averages[column])
             }
 
+            console.log(averages)
             return averages
         })
 }
