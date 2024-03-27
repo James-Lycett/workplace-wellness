@@ -18,7 +18,7 @@ router
     .all(methodNotAllowed)
 
 router
-    .route("/user/averages/:personId")
+    .route("/averages/:personId")
     .get(controller.readLastMonthAverages)
     .all(methodNotAllowed)
 module.exports = router
