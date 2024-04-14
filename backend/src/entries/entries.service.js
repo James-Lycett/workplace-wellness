@@ -76,7 +76,7 @@ function lastMonthAverages(personId) {
 /*
 lastMonthBMI selects (for the personId provided) all of the bmi_category rows from the last 30 days, 
 assigns each category a numerical value, averages those numerical values, rounds that average to a whole number,
-converts the number back to its corresponding category (string), and returns it
+converts the number back to its corresponding category ( as a string), and returns it
 */
 function lastMonthBMI(personId) {
     return knex("entries")
