@@ -5,6 +5,9 @@ function generator(n) {
     let entries = []
     let currentDate = moment()
 
+    // Start 30 days in the past
+    let workingDate = currentDate.subtract(30, 'days')
+
     // Got this straight off of MDN, random number between two values (e.g. 4 - 10) rather than 0 - max
     function getRandomArbitrary(min, max) {
         return Math.random() * (max - min) + min;
@@ -12,7 +15,7 @@ function generator(n) {
 
 
     for (let i = 0; i < n; i++) {
-        const tomorrow = moment(currentDate).add(1, 'days')
+        const tomorrow = moment(workingDate).add(1, 'days')
         const formattedTomorrow = moment(tomorrow).format("YYYY-MM-DD")
 
         // If desired, person_id value can be set to:
@@ -64,7 +67,7 @@ function generator(n) {
         entries.push(generatedEntry2)
         entries.push(generatedEntry3)
 
-        currentDate = tomorrow
+        workingDate = tomorrow
     }
 
     return entries
