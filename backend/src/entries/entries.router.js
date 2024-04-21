@@ -17,6 +17,7 @@ router
     .delete(controller.deleteEntry)
     .all(methodNotAllowed)
 
+// Special route just to get kpi averages over the past thirty days for a specific user
 router
     .route("/averages/:personId")
     .get(controller.readLastMonthAverages)

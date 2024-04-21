@@ -20,6 +20,7 @@ function create(newEntryData) {
 function readPerson(personId) {
     return knex("entries")
         .where({ person_id: personId })
+        .andWhere('date', '<=', knex.raw('CURRENT_DATE'))
         .orderBy("date", "desc")
 }
 
