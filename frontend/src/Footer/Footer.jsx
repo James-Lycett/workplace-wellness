@@ -14,7 +14,7 @@ export default function Footer() {
                         <Link 
                             to="/"
                         >
-                            <img src={logo} alt="Logo" className="m-auto w-4/5 sm:w-1/2 md:w-1/2 lg:w-full sm:" />
+                            <img src={logo} alt="Logo" className="sm:w-1/2 md:w-1/2 lg:w-full sm:" />
                         </Link>
                     </div>
                     {/* Company Links */}
