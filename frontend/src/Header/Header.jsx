@@ -13,7 +13,7 @@ function Header() {
                         <img src={logo} alt="Logo" className="m-auto lg:ms-3 lg:w-1/2" />
                     </Link>
                 </div>
-                <nav className=" text-lg font-semibold lg:flex lg:items-center">
+                <nav className="font-semibold lg:flex lg:items-center">
                     <ul className="flex flex-col gap-2 lg:flex lg:flex-row lg:gap-6 text-blue-800 dark:text-neutral-200">
                         <li className=" hover:text-blue-500 dark:hover:text-blue-400">
                             <Link
