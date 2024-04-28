@@ -1,11 +1,11 @@
 import React from "react";
 import purpleLadyGraphic from "./purpleLadyGraphic.png"
 
-function IntroBlock(){
+export default function IntroBlock(){
     return (
-        <div className="flex flex-row gap-10 lg:w-4/5 lg:p-12 bg-white rounded-xl">
-            <div className="flex items-center flex-1">
-                <p className="text-midxl font-medium px-3">
+        <div className="flex lg:flex-row flex-col-reverse gap-10 lg:w-4/5 lg:p-12 lg:bg-white lg:rounded-xl m-4">
+            <div className="flex lg:items-center flex-1">
+                <p className="lg:text-midxl font-medium lg:px-3">
                     At Workplace Wellness, we are dedicated to guiding you on a journey towards
                     improved sleep quality and enhanced mental wellness. 
                     Whether you're dealing with stress, anxiety, insomnia, or simply seeking to
@@ -15,10 +15,8 @@ function IntroBlock(){
                 </p>
             </div>
             <div className="flex flex-col items-center flex-1">
-                <img src={purpleLadyGraphic} className="w-4/5"/>
+                <img src={purpleLadyGraphic} className="lg:w-4/5 w-3/5 max-w-full"/>
             </div>
         </div>
     )
 }
-
-export default IntroBlock
