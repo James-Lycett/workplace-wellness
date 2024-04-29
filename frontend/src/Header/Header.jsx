@@ -4,7 +4,7 @@ import logo from './logo.png'
 
 function Header() {
     return (
-        <header className="bg-white text-center text-neutral-600 border-b-1 border-slate-500 dark:bg-neutral-600 dark:text-neutral-200">
+        <header className="bg-white text-center text-neutral-600 border-b dark:bg-neutral-600 dark:text-neutral-200">
             <div className="flex flex-col lg:flex-row lg:justify-between lg:pe-16">
                 <div className="flex flex-col mx-12">
                     <Link to="/">
