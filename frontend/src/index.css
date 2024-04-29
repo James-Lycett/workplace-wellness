@@ -9,7 +9,7 @@ h4,
 h5,
 h6,
 p {
-    @apply font-roboto;
+    @apply font-poppins;
 }
 
 .progress-container {
@@ -64,7 +64,7 @@ p {
         text-center
         text-xl
         font-medium
-        font-roboto
+        font-poppins
         bg-primary-2
         border-2
         border-primary-3
@@ -82,7 +82,7 @@ p {
         text-center
         text-xl
         font-bold
-        font-roboto
+        font-poppins
         bg-primary-3
         hover:bg-accent-2
         focus:outline-none
