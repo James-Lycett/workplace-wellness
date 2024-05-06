@@ -1,12 +1,12 @@
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 // import UserHome from "./UserHome";
-import { readUserByUsername } from "../utils/api"
-import "../index.css"
+import { readUserByUsername } from '../utils/api'
+import '../index.css'
 
 export default function LoginPage() {
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
     const navigate = useNavigate()
 
     const handleUsernameChange = (e) => {
@@ -40,11 +40,9 @@ export default function LoginPage() {
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <h1 className="mt-8 text-3xl font-bold">
-                Welcome Back to Workplace Wellness
-            </h1>
+            <h1 className="mt-8 text-3xl font-bold">Welcome Back</h1>
             <div
-                className="mt-5 mb-2 block w-1/2 rounded border-2 border-black px-6 pb-[6px] pt-2 text-s font-medium leading-normal text-primary"
+                className="mt-5 mb-2 block w-1/2 px-6 pb-[6px] pt-2 text-s font-medium leading-normal text-primary"
                 data-te-ripple-init
             >
                 <form onSubmit={handleSubmit}>
@@ -52,7 +50,7 @@ export default function LoginPage() {
                         {/* Username input */}
                         <label htmlFor="username"></label>
                         <input
-                            className="relative mt-8 mb-6 py-2 px-2 w-full rounded border-2"
+                            className="relative bg-slate-100 mt-8 mb-6 py-2 px-2 w-full rounded"
                             type="string"
                             id="username"
                             value={username}
@@ -62,7 +60,7 @@ export default function LoginPage() {
                         {/* Password input */}
                         <label htmlFor="password"></label>
                         <input
-                            className="relative mb-6 py-2 px-2 w-full rounded border-2"
+                            className="relative border-0 bg-slate-100 mb-6 py-2 px-2 w-full rounded"
                             type="password"
                             id="password"
                             autocomplete="new-password"
