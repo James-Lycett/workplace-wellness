@@ -40,9 +40,9 @@ export default function LoginPage() {
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <h1 className="mt-8 text-3xl font-bold">Welcome Back</h1>
+            <h1 className="mt-16 text-3xl font-bold">Welcome Back</h1>
             <div
-                className="mt-5 mb-2 block w-1/2 px-6 pb-[6px] pt-2 text-s font-medium leading-normal text-primary"
+                className="mt-8 mb-2 block w-1/2 px-6 pb-[6px] pt-2 text-s font-medium leading-normal text-primary"
                 data-te-ripple-init
             >
                 <form onSubmit={handleSubmit}>
@@ -50,7 +50,7 @@ export default function LoginPage() {
                         {/* Username input */}
                         <label htmlFor="username"></label>
                         <input
-                            className="relative bg-slate-100 mt-8 mb-6 py-2 px-2 w-full rounded"
+                            className="relative bg-slate-100 my-4 py-3 px-2 w-full rounded"
                             type="string"
                             id="username"
                             value={username}
@@ -60,7 +60,7 @@ export default function LoginPage() {
                         {/* Password input */}
                         <label htmlFor="password"></label>
                         <input
-                            className="relative border-0 bg-slate-100 mb-8 py-2 px-2 w-full rounded"
+                            className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded"
                             type="password"
                             id="password"
                             autocomplete="new-password"
@@ -68,7 +68,7 @@ export default function LoginPage() {
                             placeholder="........"
                             onChange={handlePasswordChange}
                         />
-                        <div className="flex flex-col items-center justify-center mt-0 mb-8">
+                        <div className="flex flex-col items-center justify-center mt-4 mb-8">
                             <a
                                 href="#"
                                 className="underline hover:text-blue-500"
