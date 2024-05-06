@@ -38,6 +38,30 @@ p {
     background-color: #000000; /* Black Circle */
 }
 
+.left-right-divider::before,
+.left-right-divider::after {
+    height: 1px;
+    width: auto;
+    background-color: rgb(0 0 0 / 0.35);
+    --tw-content: '';
+    content: var(--tw-content);
+    flex-grow: 1;
+}
+
+.left-right-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.left-right-divider::before,
+.left-right-divider::after {
+    content: '';
+    flex-grow: 1;
+    border-bottom: 1px solid rgb(0 0 0 / 0.35);
+    margin: 0 0.5rem;
+}
+
 @layer components {
     /*
     text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 
@@ -48,6 +72,23 @@ p {
         @apply text-white
         bg-v2-ltblue
         hover:bg-v2-drkblue
+        focus:ring-2
+        focus:ring-blue-300 
+        font-semibold rounded-lg text-sm px-5 py-4 
+        mb-2
+        dark:bg-blue-600
+        dark:hover:bg-blue-700
+        focus:outline-none
+        dark:focus:ring-blue-800;
+    }
+
+    .button-light-blue-inverse {
+        @apply text-v2-ltblue
+        bg-white
+        border-2
+        border-v2-ltblue
+        hover:bg-v2-ltblue
+        hover:text-white
         focus:ring-2
         focus:ring-blue-300 
         font-semibold rounded-lg text-sm px-5 py-4 

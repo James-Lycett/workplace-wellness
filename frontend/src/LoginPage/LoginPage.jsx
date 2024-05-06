@@ -54,13 +54,13 @@ export default function LoginPage() {
                             type="string"
                             id="username"
                             value={username}
-                            placeholder="Enter Username"
+                            placeholder="Username or Email"
                             onChange={handleUsernameChange}
                         />
                         {/* Password input */}
                         <label htmlFor="password"></label>
                         <input
-                            className="relative border-0 bg-slate-100 mb-6 py-2 px-2 w-full rounded"
+                            className="relative border-0 bg-slate-100 mb-8 py-2 px-2 w-full rounded"
                             type="password"
                             id="password"
                             autocomplete="new-password"
@@ -68,32 +68,34 @@ export default function LoginPage() {
                             placeholder="........"
                             onChange={handlePasswordChange}
                         />
-                        <div className="flex flex-col items-center justify-center mt-6 mb-20">
-                            <p>Forget your password?</p>
+                        <div className="flex flex-col items-center justify-center mt-0 mb-8">
                             <a
                                 href="#"
                                 className="underline hover:text-blue-500"
                             >
-                                Reset Password
+                                <p>Forget your password?</p>
                             </a>
                         </div>
                         {/* Sign in button */}
                         <div className="flex flex-col items-center justify-center">
                             <button
                                 type="submit"
-                                className="button-dark-rounded w-full mx-20"
+                                className="w-full mx-20 button-light-blue"
                             >
-                                SIGN IN
+                                Sign In
                             </button>
                         </div>
-                        <p>
-                            Or,{' '}
-                            <a href="/register" className="underline">
-                                {' '}
-                                {/* fixed route from ./register */}
+                        <div className="left-right-divider">
+                            <p className="mb-4 mt-2">Or </p>
+                        </div>
+                        <div className="flex flex-col mb-10 items-center justify-center">
+                            <button
+                                href="/register"
+                                className="w-full mx-20 button-light-blue-inverse flex justify-center"
+                            >
                                 Register
-                            </a>
-                        </p>
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
