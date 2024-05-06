@@ -38,16 +38,6 @@ p {
     background-color: #000000; /* Black Circle */
 }
 
-.left-right-divider::before,
-.left-right-divider::after {
-    height: 1px;
-    width: auto;
-    background-color: rgb(0 0 0 / 0.35);
-    --tw-content: '';
-    content: var(--tw-content);
-    flex-grow: 1;
-}
-
 .left-right-divider {
     display: flex;
     align-items: center;
@@ -56,11 +46,21 @@ p {
 
 .left-right-divider::before,
 .left-right-divider::after {
+    min-height: 1px;
+    min-width: 100%;
+    border-top: 1px solid;
     content: '';
     flex-grow: 1;
-    border-bottom: 1px solid rgb(0 0 0 / 0.35);
-    margin: 0 0.5rem;
+    padding-top: 0.5rem;
 }
+
+/* .left-right-divider::before,
+.left-right-divider::after {
+    content: '';
+    flex-grow: 1;
+    border-top: 2px solid;
+    width: 100%;
+} */
 
 @layer components {
     /*

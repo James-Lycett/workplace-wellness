@@ -85,8 +85,8 @@ export default function LoginPage() {
                                 Sign In
                             </button>
                         </div>
-                        <div className="left-right-divider">
-                            <p className="mb-4 mt-2">Or </p>
+                        <div className="left-right-divider flex items-center justify-center">
+                            <p className="mb-4 mt-2 mx-8">or </p>
                         </div>
                         <div className="flex flex-col mb-10 items-center justify-center">
                             <button
