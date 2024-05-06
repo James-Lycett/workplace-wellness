@@ -77,7 +77,7 @@ export default function LoginPage() {
                             </a>
                         </div>
                         {/* Sign in button */}
-                        <div className="flex flex-col items-center justify-center">
+                        <div className="flex flex-col items-center justify-center max-w-52">
                             <button
                                 type="submit"
                                 className="w-full mx-20 button-light-blue"
@@ -85,10 +85,10 @@ export default function LoginPage() {
                                 Sign In
                             </button>
                         </div>
-                        <div className="left-right-divider flex items-center justify-center">
-                            <p className="mb-4 mt-2 mx-8">or </p>
+                        <div className="left-right-divider flex items-center justify-center max-w-52">
+                            <p className="mb-4 mt-2 mx-6">or </p>
                         </div>
-                        <div className="flex flex-col mb-10 items-center justify-center">
+                        <div className="flex flex-col mb-10 items-center justify-center max-w-52">
                             <button
                                 href="/register"
                                 className="w-full mx-20 button-light-blue-inverse flex justify-center"
