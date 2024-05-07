@@ -18,25 +18,46 @@ function Header() {
                         />
                     </Link>
                 </div>
-                <nav className="font-semibold flex items-center">
-                    <ul className="flex flex-row gap-2 lg:flex lg:flex-row lg:gap-6 text-blue-800 dark:text-neutral-200">
-                        <li className=" hover:text-blue-500 dark:hover:text-blue-400 hidden sm:flex">
+                <nav className="font-semibold flex items-center ">
+                    <ul className="hidden sm:flex flex-row gap-2 lg:flex lg:flex-row lg:gap-6 text-blue-800 dark:text-neutral-200">
+                        <li className=" hover:text-blue-500 dark:hover:text-blue-400 ">
                             <Link to="/bp/contact">Contact</Link>
                         </li>
-                        <li className="hover:text-blue-500 dark:hover:text-blue-400 hidden sm:flex">
+                        <li className="hover:text-blue-500 dark:hover:text-blue-400">
                             <Link to="/bp/about">About</Link>
                         </li>
-                        <li className="hover:text-blue-500 dark:hover:text-blue-400 hidden sm:flex">
+                        <li className="hover:text-blue-500 dark:hover:text-blue-400">
                             <Link to="/login">Sign In</Link>
                         </li>
-                        <li>
-                            <FontAwesomeIcon
-                                icon={faBars}
-                                className="burger sm:hidden text-2xl"
-                                onClick={() => setShowMenu(!showMenu)}
-                            />
-                        </li>
                     </ul>
+                    <FontAwesomeIcon
+                        icon={faBars}
+                        className="burger text-2xl sm:hidden"
+                        onClick={() => setShowMenu(!showMenu)}
+                    />
+                    <div
+                        className="mobile-menu"
+                        style={{ display: showMenu ? 'flex' : 'none' }}
+                    >
+                        <Link
+                            to="/bp/contact"
+                            className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white"
+                        >
+                            Contact
+                        </Link>
+                        <Link
+                            to="/bp/about"
+                            className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white"
+                        >
+                            About
+                        </Link>
+                        <Link
+                            to="/login"
+                            className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white"
+                        >
+                            Sign In
+                        </Link>
+                    </div>
                 </nav>
             </div>
         </header>
