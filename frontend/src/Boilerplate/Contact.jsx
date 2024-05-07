@@ -3,12 +3,12 @@ import React from 'react'
 const Contact = () => {
     return (
         <>
-            <section className='max-w-screen-md mx-auto mt-8 p-6 bg-white shadow-md'>
-                <div className='text-2xl text-center font-bold mb-4'>
+            <section className="max-w-screen-md mx-auto my-8 p-6 bg-white flex flex-col lg:px-10">
+                <div className="text-2xl text-center font-bold mb-4">
                     Contact
                 </div>
 
-                <p className='mb-4'>
+                <p className="mb-4">
                     Have questions or feedback? We'd love to hear from you! Feel
                     free to reach out to Workspace Wellness using the contact
                     information below. Whether you're interested in our
@@ -16,9 +16,9 @@ const Contact = () => {
                     to connect, our team is here to assist you.
                 </p>
 
-                <h2 className='text-xl font-bold mb-2'>Contact Information</h2>
+                <h2 className="text-xl font-bold mb-2">Contact Information</h2>
 
-                <ul className='list-disc pl-6 mb-4'>
+                <ul className="list-disc pl-6 mb-4">
                     <li>
                         <strong>Email:</strong> info@workplacewellness.com
                     </li>
