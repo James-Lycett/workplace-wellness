@@ -42,15 +42,15 @@ export default function LoginPage() {
         <div className="flex flex-col items-center justify-center">
             <h1 className="mt-16 text-3xl font-bold">Welcome Back</h1>
             <div
-                className="mt-8 mb-2 block w-1/2 px-6 pb-[6px] pt-2 text-s font-medium leading-normal text-primary"
+                className="mt-8 mb-2 block w-1/2 px-10 pb-[6px] pt-2 text-s font-medium leading-normal text-primary w-full"
                 data-te-ripple-init
             >
                 <form onSubmit={handleSubmit}>
-                    <div className="flex flex-col items-center justify-center">
+                    <div className="flex flex-col items-center justify-center ">
                         {/* Username input */}
                         <label htmlFor="username"></label>
                         <input
-                            className=" bg-slate-100 my-4 py-3 md:px-2 w-full rounded"
+                            className="relative border-0 bg-slate-100 my-4 py-3 md:px-2 w-full rounded"
                             type="string"
                             id="username"
                             value={username}
@@ -80,7 +80,7 @@ export default function LoginPage() {
                         <div className="flex flex-col items-center justify-center max-w-52">
                             <button
                                 type="submit"
-                                className="w-full mx-20 button-light-blue"
+                                className="w-full text-xl font-bold mx-20 button-light-blue"
                             >
                                 Sign In
                             </button>
@@ -91,7 +91,7 @@ export default function LoginPage() {
                         <div className="flex flex-col mb-10 items-center justify-center max-w-52">
                             <button
                                 href="/register"
-                                className="w-full mx-20 button-light-blue-inverse flex justify-center"
+                                className="w-full text-xl font bold mx-20 button-light-blue-inverse flex justify-center"
                             >
                                 Register
                             </button>
