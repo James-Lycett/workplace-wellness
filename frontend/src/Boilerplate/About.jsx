@@ -3,7 +3,7 @@ import React from 'react'
 const About = () => {
     return (
         <>
-            <section className="max-w-screen-md mx-auto mt-8 p-6 bg-white shadow-md">
+            <section className="max-w-screen-md mx-4 md:mx-auto mt-8 p-6 bg-white">
                 <h5 className="text-3xl font-bold text-center">
                     Welcome to Workplace Wellness
                 </h5>
@@ -19,7 +19,7 @@ const About = () => {
                     mental resilience.
                 </p>
                 <br />
-                <h5 className="text-xl text-center">Our Mission</h5>
+                <h5 className="text-xl font-bold text-center">Our Mission</h5>
                 <br />
                 <p>
                     At the core of Workplace Wellness is a mission to empower
