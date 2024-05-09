@@ -42,18 +42,21 @@ function Header() {
                         <Link
                             to="/bp/contact"
                             className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white"
+                            onClick={() => setShowMenu(!showMenu)}
                         >
                             Contact
                         </Link>
                         <Link
                             to="/bp/about"
                             className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white"
+                            onClick={() => setShowMenu(!showMenu)}
                         >
                             About
                         </Link>
                         <Link
                             to="/login"
                             className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white"
+                            onClick={() => setShowMenu(!showMenu)}
                         >
                             Sign In
                         </Link>
