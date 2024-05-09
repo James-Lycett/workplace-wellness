@@ -38,6 +38,37 @@ p {
     background-color: #000000; /* Black Circle */
 }
 
+.left-right-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.left-right-divider::before,
+.left-right-divider::after {
+    min-height: 1px;
+    min-width: 100%;
+    border-top: 1px solid;
+    content: '';
+    flex-grow: 1;
+    padding-top: 0.5rem;
+}
+
+.mobile-menu {
+    position: absolute;
+    top: 5rem;
+    right: 2rem;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    height: fit-content;
+    min-width: 90%;
+    background-color: white;
+    border: solid 2px #38b6ff;
+    border-radius: 0 0 0.5em 0.5em;
+}
+
 @layer components {
     /*
     text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 
@@ -47,7 +78,33 @@ p {
     .button-light-blue {
         @apply text-white
         bg-v2-ltblue
+        text-center
+        text-xl
+        font-bold
+        border-2
+        border-v2-ltblue
         hover:bg-v2-drkblue
+        hover:border-v2-drkblue
+        focus:ring-2
+        focus:ring-blue-300 
+        font-semibold rounded-lg text-sm px-5 py-4 
+        mb-2
+        dark:bg-blue-600
+        dark:hover:bg-blue-700
+        focus:outline-none
+        dark:focus:ring-blue-800;
+    }
+
+    .button-light-blue-inverse {
+        @apply text-v2-ltblue
+        bg-white
+        text-center
+        text-xl
+        font-bold
+        border-2
+        border-v2-ltblue
+        hover:bg-v2-ltblue
+        hover:text-white
         focus:ring-2
         focus:ring-blue-300 
         font-semibold rounded-lg text-sm px-5 py-4 

@@ -1,12 +1,12 @@
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 // import UserHome from "./UserHome";
-import { readUserByUsername } from "../utils/api"
-import "../index.css"
+import { readUserByUsername } from '../utils/api'
+import '../index.css'
 
 export default function LoginPage() {
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
     const navigate = useNavigate()
 
     const handleUsernameChange = (e) => {
@@ -40,11 +40,9 @@ export default function LoginPage() {
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <h1 className="mt-8 text-3xl font-bold">
-                Welcome Back to Workplace Wellness
-            </h1>
+            <h1 className="mt-16 text-3xl font-bold">Welcome Back</h1>
             <div
-                className="mt-5 mb-2 block w-1/2 rounded border-2 border-black px-6 pb-[6px] pt-2 text-s font-medium leading-normal text-primary"
+                className="mt-8 mb-2 block w-1/2 px-6 pb-[6px] pt-2 text-s font-medium leading-normal text-primary"
                 data-te-ripple-init
             >
                 <form onSubmit={handleSubmit}>
@@ -52,17 +50,17 @@ export default function LoginPage() {
                         {/* Username input */}
                         <label htmlFor="username"></label>
                         <input
-                            className="relative mt-8 mb-6 py-2 px-2 w-full rounded border-2"
+                            className="relative bg-slate-100 my-4 py-3 px-2 w-full rounded"
                             type="string"
                             id="username"
                             value={username}
-                            placeholder="Enter Username"
+                            placeholder="Username or Email"
                             onChange={handleUsernameChange}
                         />
                         {/* Password input */}
                         <label htmlFor="password"></label>
                         <input
-                            className="relative mb-6 py-2 px-2 w-full rounded border-2"
+                            className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded"
                             type="password"
                             id="password"
                             autocomplete="new-password"
@@ -70,32 +68,34 @@ export default function LoginPage() {
                             placeholder="........"
                             onChange={handlePasswordChange}
                         />
-                        <div className="flex flex-col items-center justify-center mt-6 mb-20">
-                            <p>Forget your password?</p>
+                        <div className="flex flex-col items-center justify-center mt-4 mb-8">
                             <a
                                 href="#"
                                 className="underline hover:text-blue-500"
                             >
-                                Reset Password
+                                <p>Forget your password?</p>
                             </a>
                         </div>
                         {/* Sign in button */}
-                        <div className="flex flex-col items-center justify-center">
+                        <div className="flex flex-col items-center justify-center max-w-52">
                             <button
                                 type="submit"
-                                className="button-dark-rounded w-full mx-20"
+                                className="w-full mx-20 button-light-blue"
                             >
-                                SIGN IN
+                                Sign In
                             </button>
                         </div>
-                        <p>
-                            Or,{' '}
-                            <a href="/register" className="underline">
-                                {' '}
-                                {/* fixed route from ./register */}
+                        <div className="left-right-divider flex items-center justify-center max-w-52">
+                            <p className="mb-4 mt-2 mx-6">or </p>
+                        </div>
+                        <div className="flex flex-col mb-10 items-center justify-center max-w-52">
+                            <button
+                                href="/register"
+                                className="w-full mx-20 button-light-blue-inverse flex justify-center"
+                            >
                                 Register
-                            </a>
-                        </p>
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
