@@ -36,7 +36,7 @@ function Header() {
                         onClick={() => setShowMenu(!showMenu)}
                     />
                     <div
-                        className="mobile-menu"
+                        className="mobile-menu text-v2-drkblue"
                         style={{ display: showMenu ? 'flex' : 'none' }}
                     >
                         <Link
