@@ -81,18 +81,17 @@ export default function Footer() {
         <footer className="bg-white text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left border-t border-grey-100">
             <div className="flex md:flex-row flex-col md:justify-around md:p-14">
                 {/* Logo */}
-                <div className="flex flex-col items-center">
-                    <Link to="/" className="flex justify-center">
-                        <img
-                            src={logo}
-                            alt="Logo"
-                            className="sm:w-1/2 md:w-2/3 lg:w-full"
-                        />
+                <div className="flex flex-col items-center md:max-w-40 lg:max-w-[300px]">
+                    <Link
+                        to="/"
+                        className="flex lg:justify-center justify-start"
+                    >
+                        <img src={logo} alt="Logo" className="sm:w-full" />
                     </Link>
                 </div>
-                <div className="sm:flex hidden">
+                <div className="sm:flex sm:flex-col md:flex-row hidden gap-5 md:text-sm lg:text-base">
                     {/* Company Links */}
-                    <div className="flex flex-col lg:gap-5 gap-3 text-blue-800">
+                    <div className="flex flex-col md:gap-5 gap-3 text-blue-800">
                         <h5 className="font-bold lg:mb-6">Company</h5>
                         <Link
                             to="/bp/about"
@@ -114,15 +113,17 @@ export default function Footer() {
                         </Link>
                     </div>
                     {/* Support Links */}
-                    <div className="flex flex-col lg:gap-5 gap-3 text-blue-800 lg:mt-0 mt-6">
-                        <h5 className="font-bold lg:mb-6">Support</h5>
+                    <div className="flex flex-col md:gap-5 gap-3 text-blue-800 md:mt-0 mt-6">
+                        <h5 className="font-bold lg:mb-6 self-center">
+                            Support
+                        </h5>
                         <p className="dark:text-neutral-200">Help center</p>
                         <p className="dark:text-neutral-200">Getting started</p>
                         <p className="dark:text-neutral-200">Report a bug</p>
                         <p className="dark:text-neutral-200">Chat support</p>
                     </div>
                     {/* Contact */}
-                    <div className="flex flex-col items-center md:items-start lg:gap-6 gap-3 lg:my-0 my-6 lg:mt-0 mt-6 text-blue-800">
+                    <div className="flex flex-col items-center md:items-start lg:gap-6 gap-3 lg:my-0 my-6 md:mt-0 mt-6 text-blue-800">
                         <h5 className="font-bold self-center lg:mb-6">
                             Contact Us
                         </h5>
@@ -150,7 +151,7 @@ export default function Footer() {
             <div
                 id="accordion-collapse"
                 data-accordion="collapse"
-                className="sm:hidden"
+                className="md:hidden"
             >
                 <h2 id="accordion-collapse-heading-1">
                     <button
