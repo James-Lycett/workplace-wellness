@@ -6,6 +6,13 @@ import logo from './logo.png'
 import { Link } from 'react-router-dom'
 import { Accordion } from 'flowbite'
 
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth', // Smooth scroll animation
+    })
+}
+
 export default function Footer() {
     useEffect(() => {
         const accordionElement = document.getElementById('accordion-example')
@@ -151,7 +158,7 @@ export default function Footer() {
             <div
                 id="accordion-collapse"
                 data-accordion="collapse"
-                className="md:hidden"
+                className="md:hidden text-v2-drkblue"
             >
                 <h2 id="accordion-collapse-heading-1">
                     <button
@@ -160,7 +167,7 @@ export default function Footer() {
                         aria-expanded="false"
                         aria-controls="accordion-collapse-body-1"
                     >
-                        <span>Company</span>
+                        <span className="text-v2-drkblue">Company</span>
                         <svg
                             data-accordion-icon
                             class="w-3 h-3 rotate-180 shrink-0"
@@ -187,18 +194,21 @@ export default function Footer() {
                     <div className="p-5 flex flex-col gap-5">
                         <Link
                             to="/bp/about"
+                            onClick={scrollToTop}
                             className=" dark:text-neutral-200 hover:text-blue-500 dark:hover:text-blue-400"
                         >
                             About
                         </Link>
                         <Link
                             to="/bp/careers"
+                            onClick={scrollToTop}
                             className="dark:text-neutral-200 hover:text-blue-500 dark:hover:text-blue-400"
                         >
                             Careers
                         </Link>
                         <Link
                             to="/bp/contact"
+                            onClick={scrollToTop}
                             className="dark:text-neutral-200 hover:text-blue-500 dark:hover:text-blue-400"
                         >
                             Contact us
@@ -212,7 +222,7 @@ export default function Footer() {
                         aria-expanded="false"
                         aria-controls="accordion-collapse-body-2"
                     >
-                        <span>Support</span>
+                        <span className="text-v2-drkblue">Support</span>
                         <svg
                             data-accordion-icon
                             class="w-3 h-3 rotate-180 shrink-0"
@@ -250,7 +260,7 @@ export default function Footer() {
                         aria-expanded="false"
                         aria-controls="accordion-collapse-body-2"
                     >
-                        <span>Contact Us</span>
+                        <span className="text-v2-drkblue">Contact Us</span>
                         <svg
                             data-accordion-icon
                             class="w-3 h-3 rotate-180 shrink-0"
