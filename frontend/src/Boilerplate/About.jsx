@@ -3,7 +3,7 @@ import React from 'react'
 const About = () => {
     return (
         <>
-            <section className="max-w-screen-md mx-4 md:mx-auto mt-8 p-6 bg-white">
+            <section className="max-w-screen-md mx-4 md:mx-auto my-8 p-6 bg-white">
                 <h5 className="text-3xl font-bold text-center">
                     Welcome to Workplace Wellness
                 </h5>
