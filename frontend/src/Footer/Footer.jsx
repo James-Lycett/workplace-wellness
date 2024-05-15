@@ -91,9 +91,13 @@ export default function Footer() {
                 <div className="flex flex-col items-center md:max-w-40 lg:max-w-[300px]">
                     <Link
                         to="/"
-                        className="flex lg:justify-center justify-start"
+                        className="flex justify-center md:justify-start"
                     >
-                        <img src={logo} alt="Logo" className="sm:w-full" />
+                        <img
+                            src={logo}
+                            alt="Logo"
+                            className="md:w-full w-1/2"
+                        />
                     </Link>
                 </div>
                 <div className="sm:flex sm:flex-col md:flex-row hidden gap-5 md:text-sm lg:text-base">
