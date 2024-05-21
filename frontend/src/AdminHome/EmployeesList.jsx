@@ -3,7 +3,7 @@ import Spinner from '../utils/Spinner'
 import { listUsers } from '../utils/api'
 import EmployeeCard from './EmployeeCard'
 
-export default function EmployeesList() {
+export default function EmployeesListNew() {
     const [employees, setEmployees] = useState(null)
     const [error, setError] = useState(null)
 

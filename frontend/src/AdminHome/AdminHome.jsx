@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import EmployeesList from './EmployeesList'
+import EmployeesListNew from './EmployeesListNew'
 import mood from './mood_img.png'
 import DropDownMenuButton from '../utils/DropDownMenuButton'
-import { Progress, Sidebar, Table } from 'flowbite-react'
+import { Progress, Sidebar, Table, Checkbox } from 'flowbite-react'
 import RadialBar from './RadialBar'
 import {
     HiBan,
@@ -147,10 +148,10 @@ export default function AdminHome() {
                         </Sidebar>
                     </div>
                     <div className="overflow-x-auto">
-                        <Table>
+                        <Table hoverable>
                             <Table.Head>
                                 <Table.HeadCell>
-                                    <input type="checkbox"></input>
+                                    <Checkbox />
                                 </Table.HeadCell>
                                 <Table.HeadCell>User</Table.HeadCell>
                                 <Table.HeadCell>Age</Table.HeadCell>
@@ -159,65 +160,12 @@ export default function AdminHome() {
                                 <Table.HeadCell>
                                     <span className="sr-only">Edit</span>
                                 </Table.HeadCell>
+                                <Table.HeadCell>
+                                    <span className="sr-only">X</span>
+                                </Table.HeadCell>
                             </Table.Head>
                             <Table.Body className="divide-y">
-                                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                    <Table.Cell>
-                                        <input type="checkbox"></input>
-                                    </Table.Cell>
-                                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                        {'Blanfer0'}
-                                    </Table.Cell>
-                                    <Table.Cell>Sliver</Table.Cell>
-                                    <Table.Cell>Laptop</Table.Cell>
-                                    <Table.Cell>$2999</Table.Cell>
-                                    <Table.Cell>
-                                        <a
-                                            href="#"
-                                            className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                                        >
-                                            Edit
-                                        </a>
-                                    </Table.Cell>
-                                </Table.Row>
-                                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                    <Table.Cell>
-                                        <input type="checkbox"></input>
-                                    </Table.Cell>
-                                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                        Microsoft Surface Pro
-                                    </Table.Cell>
-                                    <Table.Cell>White</Table.Cell>
-                                    <Table.Cell>Laptop PC</Table.Cell>
-                                    <Table.Cell>$1999</Table.Cell>
-                                    <Table.Cell>
-                                        <a
-                                            href="#"
-                                            className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                                        >
-                                            Edit
-                                        </a>
-                                    </Table.Cell>
-                                </Table.Row>
-                                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                    <Table.Cell>
-                                        <input type="checkbox"></input>
-                                    </Table.Cell>
-                                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                        Magic Mouse 2
-                                    </Table.Cell>
-                                    <Table.Cell>Black</Table.Cell>
-                                    <Table.Cell>Accessories</Table.Cell>
-                                    <Table.Cell>$99</Table.Cell>
-                                    <Table.Cell>
-                                        <a
-                                            href="#"
-                                            className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                                        >
-                                            Edit
-                                        </a>
-                                    </Table.Cell>
-                                </Table.Row>
+                                <EmployeesListNew />
                             </Table.Body>
                         </Table>
                     </div>

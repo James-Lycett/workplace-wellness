@@ -3,11 +3,12 @@ import { deleteUser } from '../utils/api'
 import sleepingPersonImage from './sleeping_person.jpg'
 import { FaEyeSlash, FaEye } from 'react-icons/fa6'
 import RemoveCardButton from '../utils/RemoveCardButton'
+import { Checkbox, Table } from 'flowbite-react'
 import img1 from './1.png'
 import img2 from './2.png'
 import img3 from './3.png'
 
-export default function EmployeeCard({
+export default function EmployeeCarNew({
     employee,
     setError,
     loadUsers,
@@ -32,9 +33,9 @@ export default function EmployeeCard({
     }
 
     // Hides this card
-    const toggleVisibility = () => {
-        hidden ? setHidden(false) : setHidden(true)
-    }
+    // const toggleVisibility = () => {
+    //     hidden ? setHidden(false) : setHidden(true)
+    // }
 
     const images = {
         1: img1,
@@ -52,16 +53,21 @@ export default function EmployeeCard({
     return (
         <>
             <Table.Cell>
-                <input type="checkbox"></input>
+                <Checkbox />
             </Table.Cell>
             <Table.Cell
                 id="user"
-                className="whitespace-nowrap font-medium text-gray-900 dark:text-white"
+                className="flex justify-center items-center whitespace-nowrap font-medium text-gray-900 dark:text-white"
             >
                 {imgNumber in images ? (
                     <img
                         src={images[imgNumber]}
-                        style={{ width: '100px' }}
+                        style={{
+                            width: '50px',
+                            margin: '0 1rem 0 0 ',
+                            'border-radius': '50%',
+                            border: '1px solid gray',
+                        }}
                         alt={`Employee ${imgNumber}`}
                     />
                 ) : (
@@ -92,11 +98,11 @@ export default function EmployeeCard({
                     option={'employee'}
                 />
             </Table.Cell>
-            <Table.Cell>
+            {/* <Table.Cell>
                 <button onClick={toggleVisibility}>
                     <FaEyeSlash />
                 </button>
-            </Table.Cell>
+            </Table.Cell> */}
         </>
     )
 }
