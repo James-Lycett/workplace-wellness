@@ -57,7 +57,7 @@ export default function EmployeeCarNew({
             </Table.Cell>
             <Table.Cell
                 id="user"
-                className="flex justify-center items-center whitespace-nowrap font-medium text-gray-900 dark:text-white"
+                className="flex justify-start items-center whitespace-nowrap font-medium text-gray-900 dark:text-white"
             >
                 {imgNumber in images ? (
                     <img
