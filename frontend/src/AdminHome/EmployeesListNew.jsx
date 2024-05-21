@@ -31,7 +31,7 @@ export default function EmployeesList() {
             <>
                 {employees.map((employee) => (
                     <Table.Row
-                        className="flex items-center bg-white dark:border-gray-700 dark:bg-gray-800"
+                        className="bg-white dark:border-gray-700 dark:bg-gray-800"
                         key={employee.person_id}
                     >
                         <EmployeeCardNew
