@@ -94,7 +94,7 @@ export default function AdminHome() {
                         />
                     </div>
                 </div>
-                <div className=" flex flex-row justify-center w-full max-w-5xl">
+                <div className=" flex flex-row w-full mx-auto mt-5 max-w-5xl rounded-lg shadow-md overflow-y-auto ">
                     <div>
                         <Sidebar aria-label="Default sidebar example">
                             <Sidebar.Logo
@@ -147,9 +147,9 @@ export default function AdminHome() {
                             </Sidebar.Items>
                         </Sidebar>
                     </div>
-                    <div className="overflow-x-auto">
+                    <div className="overflow-auto max-h-svh">
                         <Table hoverable>
-                            <Table.Head>
+                            <Table.Head className="sticky">
                                 <Table.HeadCell>
                                     <Checkbox />
                                 </Table.HeadCell>

@@ -98,11 +98,6 @@ export default function EmployeeCarNew({
                     option={'employee'}
                 />
             </Table.Cell>
-            {/* <Table.Cell>
-                <button onClick={toggleVisibility}>
-                    <FaEyeSlash />
-                </button>
-            </Table.Cell> */}
         </>
     )
 }
