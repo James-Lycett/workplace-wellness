@@ -6,17 +6,14 @@ import DropDownMenuButton from '../utils/DropDownMenuButton'
 import { Progress, Sidebar, Table } from 'flowbite-react'
 import RadialBar from './RadialBar'
 import {
-    HiArrowSmRight,
     HiBan,
     HiChartPie,
-    HiInbox,
     HiLightningBolt,
     HiLogout,
-    HiShoppingBag,
+    HiOutlinePlus,
+    HiOutlineIdentification,
     HiTable,
-    HiUser,
     HiUserGroup,
-    HiViewBoards,
 } from 'react-icons/hi'
 
 export default function AdminHome() {
@@ -101,13 +98,19 @@ export default function AdminHome() {
                         <Sidebar aria-label="Default sidebar example">
                             <Sidebar.Logo
                                 href="#"
-                                img="/favicon.svg"
-                                imgAlt="Flowbite logo"
+                                img="/circle.png"
+                                imgAlt="Workplace Wellness logo"
                             >
-                                Flowbite
+                                Workplace Wellness
                             </Sidebar.Logo>
                             <Sidebar.Items>
                                 <Sidebar.ItemGroup>
+                                    <Sidebar.Item
+                                        href="#"
+                                        icon={HiOutlineIdentification}
+                                    >
+                                        Profile
+                                    </Sidebar.Item>
                                     <Sidebar.Item href="#" icon={HiTable}>
                                         My Logs
                                     </Sidebar.Item>
@@ -133,7 +136,7 @@ export default function AdminHome() {
                                     </Sidebar.Collapse>
                                 </Sidebar.ItemGroup>
                                 <Sidebar.ItemGroup>
-                                    <Sidebar.Item href="#" icon={HiLogout}>
+                                    <Sidebar.Item href="#" icon={HiOutlinePlus}>
                                         Register A New Employee
                                     </Sidebar.Item>
                                     <Sidebar.Item href="#" icon={HiLogout}>
@@ -163,7 +166,7 @@ export default function AdminHome() {
                                         <input type="checkbox"></input>
                                     </Table.Cell>
                                     <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                        {'Apple MacBook Pro 17"'}
+                                        {'Blanfer0'}
                                     </Table.Cell>
                                     <Table.Cell>Sliver</Table.Cell>
                                     <Table.Cell>Laptop</Table.Cell>
