@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { deleteUser } from '../utils/api'
-import sleepingPersonImage from './sleeping_person.jpg'
+import sleepingPersonImage from './sleep.png'
 import { FaEyeSlash, FaEye } from 'react-icons/fa6'
 import RemoveCardButton from '../utils/RemoveCardButton'
 import { Checkbox, Table } from 'flowbite-react'
@@ -73,7 +73,12 @@ export default function EmployeeCarNew({
                 ) : (
                     <img
                         src={sleepingPersonImage}
-                        style={{ width: '100px' }}
+                        style={{
+                            width: '50px',
+                            margin: '0 1rem 0 0 ',
+                            'border-radius': '50%',
+                            border: '1px solid gray',
+                        }}
                         alt="sleeping person"
                     />
                 )}

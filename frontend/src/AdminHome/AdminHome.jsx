@@ -127,14 +127,14 @@ export default function AdminHome() {
                                             >
                                                 Statistics
                                             </Sidebar.Item>
-                                            <Sidebar.Item href="#" icon={HiBan}>
-                                                Inactive
-                                            </Sidebar.Item>
                                             <Sidebar.Item
                                                 href="#"
                                                 icon={HiLightningBolt}
                                             >
                                                 Goals
+                                            </Sidebar.Item>
+                                            <Sidebar.Item href="#" icon={HiBan}>
+                                                Inactive
                                             </Sidebar.Item>
                                         </Sidebar.Collapse>
                                     </Sidebar.ItemGroup>
