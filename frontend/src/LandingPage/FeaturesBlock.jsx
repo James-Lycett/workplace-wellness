@@ -5,7 +5,7 @@ import stretchingGraphic from './stretchingGraphic.png'
 
 export default function FeaturesBlock() {
     return (
-        <div className="flex lg:flex-row flex-col lg:gap-16 lg:w-4/5 lg:p-12 lg:text-xl font-regular lg:bg-white lg:rounded-b-xl">
+        <div className="flex lg:flex-row flex-col lg:gap-16 lg:w-4/5 lg:p-12 lg:text-xl font-regular">
             <div className="flex lg:flex-col flex-row items-center flex-1 lg:m-0 m-4">
                 <img
                     src={sleepingGraphic}

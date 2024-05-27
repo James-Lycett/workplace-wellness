@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function CallToActionBlock() {
     return (
-        <div className="lg:w-4/5 text-center lg:text-midxl font-medium lg:p-12 my-8 lg:bg-white lg:rounded-xl">
+        <div className="lg:w-4/5 text-center lg:text-midxl font-medium lg:p-12 my-8">
             <p className="mb-10">
                 Are you ready to wellness up your workplace? Click here to
                 register an account and get your workness wellplace journey
