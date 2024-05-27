@@ -1,9 +1,10 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import Spinner from '../utils/Spinner'
 import { listUsers } from '../utils/api'
-import EmployeeCard from './EmployeeCard'
+import { Table } from 'flowbite-react'
+import EmployeeCardNew from './EmployeeCardNew'
 
-export default function EmployeesListNew() {
+export default function EmployeesList() {
     const [employees, setEmployees] = useState(null)
     const [error, setError] = useState(null)
 
@@ -27,18 +28,21 @@ export default function EmployeesListNew() {
 
     if (employees) {
         return (
-            <ul>
+            <>
                 {employees.map((employee) => (
-                    <li key={employee.person_id}>
-                        <EmployeeCard
+                    <Table.Row
+                        className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                        key={employee.person_id}
+                    >
+                        <EmployeeCardNew
                             employee={employee}
                             setError={setError}
                             loadUsers={loadUsers}
                             imgNumber={employee.person_id}
                         />
-                    </li>
+                    </Table.Row>
                 ))}
-            </ul>
+            </>
         )
     } else {
         return <Spinner />
