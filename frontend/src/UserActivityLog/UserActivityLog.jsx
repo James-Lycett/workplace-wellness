@@ -90,11 +90,10 @@ export default function UserActivityLog() {
     }
 
     return (
-        <div className="columns-2">
+        <div className="mx-20">
             <div className="break-after-column m-6">
-                <div className="">
+                <div className="flex flex-col items-center">
                     <h2 className="text-3xl font-bold">Today's Activity</h2>
-                    <hr className="mt-1 h-px border-0 bg-black" />
                 </div>
                 <div className="mt-6">
                     <ActivityLogForm
@@ -103,37 +102,21 @@ export default function UserActivityLog() {
                         handleSubmit={handleSubmit}
                     />
                 </div>
-                <div className="flex flex-row gap-2 my-2">
-                    <Link
-                        to={`/user/${userId}/home`}
-                        className="w-1/2 button-dark-rounded"
-                        reloadDocument
-                    >
-                        DASHBOARD
-                    </Link>
-                    <Link
-                        to={`/user/${userId}/history`}
-                        className="w-1/2 button-dark-rounded"
-                        reloadDocument
-                    >
-                        PAST REPORTS
-                    </Link>
+            </div>
+            {/* <div className="bg-accent-background border-accent-1 border-2 rounded-md m-6"> */}
+            {/* <div className="flex relative justify-center px-3">
+                <h2 className="text-3xl">Sleep Quality Guides</h2>
+                <div className="absolute right-5 mt-2">
+                    <DropDownMenuButton options={menuOptions} />
                 </div>
             </div>
-            <div className="bg-accent-background border-accent-1 border-2 rounded-md m-6">
-                <div className="flex relative justify-center px-3">
-                    <h2 className="text-3xl">Sleep Quality Guides</h2>
-                    <div className="absolute right-5 mt-2">
-                        <DropDownMenuButton options={menuOptions} />
-                    </div>
-                </div>
-                <hr className="h-px border-0 bg-black" />
-                <div className="px-3">
-                    <SuggestionCard suggestion={suggestions[0]} />
-                    <SuggestionCard suggestion={suggestions[1]} />
-                    <SuggestionCard suggestion={suggestions[2]} />
-                </div>
-            </div>
+            <hr className="h-px border-0 bg-black" />
+            <div className="px-3">
+                <SuggestionCard suggestion={suggestions[0]} />
+                <SuggestionCard suggestion={suggestions[1]} />
+                <SuggestionCard suggestion={suggestions[2]} />
+            </div> */}
+            {/* </div> */}
         </div>
     )
 }
