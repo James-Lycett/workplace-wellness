@@ -20,7 +20,6 @@ async function fetchJson(url, options, onCancel) {
             return Promise.reject({ message: payload.error })
         }
 
-        console.log(payload.data)
         return payload.data
     } catch (error) {
         if (error.name !== "AbortError") {
@@ -161,6 +160,27 @@ export async function deleteEntry(entryId, signal) {
 // Returns a single user's 'Last Month's Metrics' from the matching userId
 export async function readAveragesById(userId, signal) {
     const url = `${API_BASE_URL}/entries/averages/${userId}`
+    const options = {
+        method: "GET",
+        headers,
+        signal,
+    }
+
+    return await fetchJson(url, options)
+}
+
+
+/* GETs all users' sleep total and average quality of sleep, for use in adminHome progress chart things
+    returns:
+    {
+        data: {
+            sleep_duration_total: n,
+            quality_of_sleep_average: n
+        }
+    }
+*/
+export async function readCompanyMetrics(signal) {
+    const url = `${API_BASE_URL}/entries/all/metrics`
     const options = {
         method: "GET",
         headers,
