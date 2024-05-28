@@ -79,11 +79,11 @@ export default function ActivityLogForm({ entry, handleChange, handleSubmit }) {
                 <div className="my-3 text-lg">
                     <small>* Required Entry</small>
                 </div>
-                <div className="flex justify-center my-2">
+                <div className="flex flex-col items-center justify-center my-2 ">
                     <button
                         onSubmit={handleSubmit}
                         type="submit"
-                        className="w-1/2 text-xl font-bold mx-20 button-light-blue"
+                        className="w-full max-w-52 text-xl mx-10 font-bold button-light-blue"
                     >
                         SUBMIT
                     </button>
