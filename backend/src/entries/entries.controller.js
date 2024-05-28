@@ -225,21 +225,27 @@ async function lastMonthAverages(req, res, next) {
 
 
 /*
-    Just like lastMonthAverages but for all users not just one
+    Gets sleep duration total hours and average quality of sleep, combine them into a single object
     returns (in JSON):
     {
         data: {
-            sleep_duration_average: n,
+            sleep_duration_total: n,
             quality_of_sleep_average: n
         }
     }
 */
-async function lastMonthAveragesCompanyWide(req, res, next) {
+async function lastMonthCompanyMetrics(req, res, next) {
 
     try {
-        const averages = await service.lastMonthAveragesCompanyWide()
+        const totalHoursOfSleep = await service.lastMonthCompanyTotalSleep()
+        const averageQualityOfSleep = await service.lastMonthCompanySleepQualityAverage()
 
-        res.json({ data: averages })
+        const data = {
+            ...totalHoursOfSleep,
+            ...averageQualityOfSleep
+        }
+
+        res.json({ data })
     } catch (error) {
         console.error(error)
         res.status(500).json({ error: "Error fetching all last month averages from database"})
@@ -261,5 +267,5 @@ module.exports = {
         asyncErrorBoundary(deleteEntry),
     ],
     readLastMonthAverages: [asyncErrorBoundary(personExists), asyncErrorBoundary(lastMonthAverages)],
-    readLastMonthAveragesCompanyWide: [asyncErrorBoundary(lastMonthAveragesCompanyWide)]
+    readLastMonthCompanyMetrics: [asyncErrorBoundary(lastMonthCompanyMetrics)]
 }

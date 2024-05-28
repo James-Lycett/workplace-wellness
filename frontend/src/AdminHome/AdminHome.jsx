@@ -17,7 +17,7 @@ import {
     HiUserGroup,
     HiDocumentReport,
 } from 'react-icons/hi'
-import { readUserById, readAveragesById, readAllAverages } from '../utils/api'
+import { readUserById, readAveragesById, readCompanyMetrics } from '../utils/api'
 
 
 export default function AdminHome() {
@@ -67,8 +67,8 @@ export default function AdminHome() {
         heart_rate_average: 0,
         bmi_category_average: "N/A"
     })
-    const [companyAverages, setCompanyAverages] = useState({
-        sleep_duration_average: 0,
+    const [companyMetrics, setCompanyMetrics] = useState({
+        sleep_duration_total: 0,
         quality_of_sleep_average: 0,
     })
 
@@ -82,16 +82,10 @@ export default function AdminHome() {
             setAverages(readAveragesResponse)
             setUser(readUserResponse)
             if (readUserResponse.admin) {
-                const readCompanyAveragesResponse = await readAllAverages(abortController.signal)
-                setCompanyAverages(readCompanyAveragesResponse)
-                console.log(`companyAverages: ${JSON.stringify(companyAverages, null, 4)}`)
+                const readCompanyMetricsResponse = await readCompanyMetrics(abortController.signal)
+                setCompanyMetrics(readCompanyMetricsResponse)
             }
-            
-            console.log(`
-            user: ${JSON.stringify(user, null, 4)},
-            averages: ${JSON.stringify(averages, null, 4)},
-            `)
-            
+
         } catch (error) {
             console.error(error)
         } finally {
@@ -99,13 +93,35 @@ export default function AdminHome() {
         }
     }, [userId])
 
+
     useEffect(() => {
         loadUser()
     }, [loadUser, userId])
 
+/*
+    was just using this jenky lil thing instead of console.logs to prove my data was showing up
+    cause I had some trouble logging async promise stuff from directly in the loadUser function
+    figured I'll keep it around for now
+
+    function generateElements() {
+        let output = [(<h2>USER</h2>)];
+        for (const [key, value] of Object.entries(user)) {
+            output.push(
+                <>
+                    <h3>{key + ":"}</h3>
+                    <p>{value}</p>
+                </>
+            );
+        }
+
+        return output
+    }
+*/
+
     return (
         <>
             <section className="bg-slate-100 py-5">
+                {/*{user ? generateElements() : null}*/}
                 <div className="flex flex-col justify-center bg-white w-full max-w-5xl mx-auto rounded-md shadow-md">
                     <h2 className="text-v2-drkblue font-semibold self-center mt-5">
                         Department Goals

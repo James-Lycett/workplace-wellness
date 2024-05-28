@@ -73,31 +73,44 @@ function lastMonthAverages(personId) {
 }
 
 /* 
-    Just like 'lastMonthAverages' but for all users rather than just a single user
+    Just like 'lastMonthAverages' but for all users and just sums the past month's hours of sleep
     returns:
     {
-        sleep_duration_average: n,
-        quality_of_sleep_average: n
+        sleep_duration_total: n
     }
 */
-function lastMonthAveragesCompanyWide() {
-    const columnsToAvg = ["sleep_duration", "quality_of_sleep"]
-
+function lastMonthCompanyTotalSleep() {
     return knex("entries")
-        .select(columnsToAvg.map(column => knex.raw(`AVG(${column}) AS ${column}_average`)))
+        .select(knex.raw(`SUM(sleep_duration) AS sleep_duration_total`))
         .where('date', '>=', knex.raw("(CURRENT_DATE - INTERVAL '30 days')"))
         .then(createdRecords => {
-            const averages = {}
-            columnsToAvg.forEach(column => {
-                averages[`${column}_average`] = createdRecords[0][`${column}_average`]
-            })
+            createdRecords[0].sleep_duration_total = Number(createdRecords[0].sleep_duration_total)
+            return createdRecords[0]
+        })
+        .catch(error => {
+            console.error("Error summing sleep_duration:", error)
+            throw error
+        })
+}
 
-            // Loops through the object returned from the above query and converts string values to numbers
-            for (const column in averages) {
-                averages[column] = Number(averages[column])
-            }
-
-            return averages
+/* 
+    Just like 'lastMonthAverages' but for all users and just averages the past month's quality of sleep
+    returns:
+    {
+        quality_of_sleep: n
+    }
+*/
+function lastMonthCompanySleepQualityAverage() {
+    return knex("entries")
+        .select(knex.raw(`AVG(quality_of_sleep) AS quality_of_sleep_average`))
+        .where('date', '>=', knex.raw("(CURRENT_DATE - INTERVAL '30 days')"))
+        .then(createdRecords => {
+            createdRecords[0].quality_of_sleep_average = Number(createdRecords[0].quality_of_sleep_average)
+            return createdRecords[0]
+        })
+        .catch(error => {
+            console.error("Error averaging quality_of_sleep:", error)
+            throw error
         })
 }
 
@@ -153,5 +166,6 @@ module.exports = {
     deleteEntry,
     lastMonthAverages,
     lastMonthBMI,
-    lastMonthAveragesCompanyWide
+    lastMonthCompanyTotalSleep,
+    lastMonthCompanySleepQualityAverage
 }
