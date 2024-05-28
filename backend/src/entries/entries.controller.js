@@ -215,7 +215,6 @@ async function lastMonthAverages(req, res, next) {
             bmi_category_average: bmiAverage
         }
 
-        console.log(averages)
         
         res.json({ data: averages })
     } catch (error) {
@@ -240,8 +239,6 @@ async function lastMonthAveragesCompanyWide(req, res, next) {
     try {
         const averages = await service.lastMonthAveragesCompanyWide()
 
-        //console.log(averages)
-        
         res.json({ data: averages })
     } catch (error) {
         console.error(error)

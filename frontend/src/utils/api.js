@@ -20,7 +20,6 @@ async function fetchJson(url, options, onCancel) {
             return Promise.reject({ message: payload.error })
         }
 
-        console.log(payload.data)
         return payload.data
     } catch (error) {
         if (error.name !== "AbortError") {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import EmployeesList from './EmployeesList'
 import EmployeesListNew from './EmployeesListNew'
@@ -17,6 +17,8 @@ import {
     HiUserGroup,
     HiDocumentReport,
 } from 'react-icons/hi'
+import { readUserById, readAveragesById, readAllAverages } from '../utils/api'
+
 
 export default function AdminHome() {
     const { userId } = useParams()
@@ -55,6 +57,51 @@ export default function AdminHome() {
     //const sleepHoursProgress = (goals.sleepHoursThisMonth / goals.sleepHoursGoal) * 100
     //const tasksProgress = (goals.tasksMet / goals.tasksGoal) * 100
     // if we ever get around to making a backend route for this
+
+
+    const [user, setUser] = useState(null)
+    const [averages, setAverages] = useState({
+        sleep_duration_average: 0,
+        daily_steps_average: 0,
+        stress_level_average: 0,
+        heart_rate_average: 0,
+        bmi_category_average: "N/A"
+    })
+    const [companyAverages, setCompanyAverages] = useState({
+        sleep_duration_average: 0,
+        quality_of_sleep_average: 0,
+    })
+
+    // Fetches user from the API along with lastMonthAverages for that user and company-wide lastMonthAverages for admin purposes
+    const loadUser = useCallback(async () => {
+        const abortController = new AbortController()
+
+        try {
+            const readUserResponse = await readUserById(userId, abortController.signal)
+            const readAveragesResponse = await readAveragesById(userId, abortController.signal)
+            setAverages(readAveragesResponse)
+            setUser(readUserResponse)
+            if (readUserResponse.admin) {
+                const readCompanyAveragesResponse = await readAllAverages(abortController.signal)
+                setCompanyAverages(readCompanyAveragesResponse)
+                console.log(`companyAverages: ${JSON.stringify(companyAverages, null, 4)}`)
+            }
+            
+            console.log(`
+            user: ${JSON.stringify(user, null, 4)},
+            averages: ${JSON.stringify(averages, null, 4)},
+            `)
+            
+        } catch (error) {
+            console.error(error)
+        } finally {
+            abortController.abort()
+        }
+    }, [userId])
+
+    useEffect(() => {
+        loadUser()
+    }, [loadUser, userId])
 
     return (
         <>
