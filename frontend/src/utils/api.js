@@ -169,3 +169,24 @@ export async function readAveragesById(userId, signal) {
 
     return await fetchJson(url, options)
 }
+
+
+/* GETs all users' 'Last Month's Metrics', for use in adminHome radial progress chart things
+    returns:
+    {
+        data: {
+            sleep_duration_average: n,
+            quality_of_sleep_average: n
+        }
+    }
+*/
+export async function readAllAverages(signal) {
+    const url = `${API_BASE_URL}/entries/all/averages`
+    const options = {
+        method: "GET",
+        headers,
+        signal,
+    }
+
+    return await fetchJson(url, options)
+}
