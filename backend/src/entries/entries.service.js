@@ -68,10 +68,34 @@ function lastMonthAverages(personId) {
                 averages[column] = Number(averages[column])
             }
 
-            console.log(averages)
             return averages
         })
 }
+
+/* 
+    Just like 'lastMonthAverages' but for all users rather than just a single user
+*/
+function lastMonthAveragesCompanyWide() {
+    const columnsToAvg = ["sleep_duration", ]
+
+    return knex("entries")
+        .select(columnsToAvg.map(column => knex.raw(`AVG(${column}) AS ${column}_average`)))
+        .where('date', '>=', knex.raw("(CURRENT_DATE - INTERVAL '30 days')"))
+        .then(createdRecords => {
+            const averages = {}
+            columnsToAvg.forEach(column => {
+                averages[`${column}_average`] = createdRecords[0][`${column}_average`]
+            })
+
+            // Loops through the object returned from the above query and converts string values to numbers
+            for (const column in averages) {
+                averages[column] = Number(averages[column])
+            }
+
+            return averages
+        })
+}
+
 
 
 /*
