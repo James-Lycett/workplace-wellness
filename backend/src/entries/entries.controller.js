@@ -224,6 +224,31 @@ async function lastMonthAverages(req, res, next) {
     }
 }
 
+
+/*
+    Just like lastMonthAverages but for all users not just one
+    returns (in JSON):
+    {
+        data: {
+            sleep_duration_average: n,
+            quality_of_sleep_average: n
+        }
+    }
+*/
+async function lastMonthAveragesCompanyWide(req, res, next) {
+
+    try {
+        const averages = await service.lastMonthAveragesCompanyWide()
+
+        //console.log(averages)
+        
+        res.json({ data: averages })
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: "Error fetching all last month averages from database"})
+    }
+}
+
 module.exports = {
     list: asyncErrorBoundary(list),
     create: [validateInput, asyncErrorBoundary(create)],
@@ -238,5 +263,6 @@ module.exports = {
         asyncErrorBoundary(entryExists),
         asyncErrorBoundary(deleteEntry),
     ],
-    readLastMonthAverages: [asyncErrorBoundary(personExists), asyncErrorBoundary(lastMonthAverages)]
+    readLastMonthAverages: [asyncErrorBoundary(personExists), asyncErrorBoundary(lastMonthAverages)],
+    readLastMonthAveragesCompanyWide: [asyncErrorBoundary(lastMonthAveragesCompanyWide)]
 }

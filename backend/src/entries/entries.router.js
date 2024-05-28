@@ -22,4 +22,11 @@ router
     .route("/averages/:personId")
     .get(controller.readLastMonthAverages)
     .all(methodNotAllowed)
+
+// Special route just to get kpi averages over the past thirty days for *all* users
+router
+    .route("/all/averages")
+    .get(controller.readLastMonthAveragesCompanyWide)
+    .all(methodNotAllowed)
+
 module.exports = router

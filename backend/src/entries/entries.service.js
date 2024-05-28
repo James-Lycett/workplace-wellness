@@ -74,9 +74,14 @@ function lastMonthAverages(personId) {
 
 /* 
     Just like 'lastMonthAverages' but for all users rather than just a single user
+    returns:
+    {
+        sleep_duration_average: n,
+        quality_of_sleep_average: n
+    }
 */
 function lastMonthAveragesCompanyWide() {
-    const columnsToAvg = ["sleep_duration", ]
+    const columnsToAvg = ["sleep_duration", "quality_of_sleep"]
 
     return knex("entries")
         .select(columnsToAvg.map(column => knex.raw(`AVG(${column}) AS ${column}_average`)))
@@ -148,4 +153,5 @@ module.exports = {
     deleteEntry,
     lastMonthAverages,
     lastMonthBMI,
+    lastMonthAveragesCompanyWide
 }
