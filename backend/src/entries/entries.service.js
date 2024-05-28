@@ -56,6 +56,7 @@ function lastMonthAverages(personId) {
     return knex("entries")
         .select(columnsToAvg.map(column => knex.raw(`AVG(${column}) AS ${column}_average`)))
         .where({ person_id: personId })
+        .andWhere('date', '<=', knex.raw("CURRENT_DATE"))
         .andWhere('date', '>=', knex.raw("(CURRENT_DATE - INTERVAL '30 days')"))
         .then(createdRecords => {
             const averages = {}
@@ -82,7 +83,8 @@ function lastMonthAverages(personId) {
 function lastMonthCompanyTotalSleep() {
     return knex("entries")
         .select(knex.raw(`SUM(sleep_duration) AS sleep_duration_total`))
-        .where('date', '>=', knex.raw("(CURRENT_DATE - INTERVAL '30 days')"))
+        .where('date', '<=', knex.raw("CURRENT_DATE"))
+        .andWhere('date', '>=', knex.raw("(CURRENT_DATE - INTERVAL '30 days')"))
         .then(createdRecords => {
             createdRecords[0].sleep_duration_total = Number(createdRecords[0].sleep_duration_total)
             return createdRecords[0]
@@ -103,7 +105,8 @@ function lastMonthCompanyTotalSleep() {
 function lastMonthCompanySleepQualityAverage() {
     return knex("entries")
         .select(knex.raw(`AVG(quality_of_sleep) AS quality_of_sleep_average`))
-        .where('date', '>=', knex.raw("(CURRENT_DATE - INTERVAL '30 days')"))
+        .where('date', '<=', knex.raw("CURRENT_DATE"))
+        .andWhere('date', '>=', knex.raw("(CURRENT_DATE - INTERVAL '30 days')"))
         .then(createdRecords => {
             createdRecords[0].quality_of_sleep_average = Number(createdRecords[0].quality_of_sleep_average)
             return createdRecords[0]

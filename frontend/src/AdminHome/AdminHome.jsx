@@ -18,17 +18,19 @@ import {
     HiDocumentReport,
 } from 'react-icons/hi'
 import { readUserById, readAveragesById, readCompanyMetrics } from '../utils/api'
+import Spinner from '../utils/Spinner'
 
 
 export default function AdminHome() {
     const { userId } = useParams()
     // Placeholder admin goals data:
     const goals = {
-        sleepHoursThisMonth: 1545,
-        sleepHoursGoal: 2800,
+        // sleepHoursThisMonth: 1545, now getting this straight from the db, see "companyMetrics"
+        sleepHoursGoal: 1200,
         tasksMet: 80,
         tasksGoal: 128,
         companyMood: 'Decent',
+        sleepQualityGoal: 8,
     }
     // Options to pass down to <DropDownMenuButton/>
     const menuOptions = [
@@ -53,10 +55,6 @@ export default function AdminHome() {
             route: '/bp/privacy',
         },
     ]
-    // Calculate percent progress towards a goal
-    //const sleepHoursProgress = (goals.sleepHoursThisMonth / goals.sleepHoursGoal) * 100
-    //const tasksProgress = (goals.tasksMet / goals.tasksGoal) * 100
-    // if we ever get around to making a backend route for this
 
 
     const [user, setUser] = useState(null)
@@ -73,7 +71,7 @@ export default function AdminHome() {
     })
 
     // Fetches user from the API along with lastMonthAverages for that user and company-wide lastMonthAverages for admin purposes
-    const loadUser = useCallback(async () => {
+    const loadData = useCallback(async () => {
         const abortController = new AbortController()
 
         try {
@@ -95,12 +93,33 @@ export default function AdminHome() {
 
 
     useEffect(() => {
-        loadUser()
-    }, [loadUser, userId])
+        loadData()
+    }, [loadData, userId])
+
+
+    function calculateSleepHoursProgress() {
+        const progressValue = (companyMetrics.sleep_duration_total / goals.sleepHoursGoal) * 100;
+        const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100);
+    
+        return Math.floor(boundedProgressValue) // Return the progress value
+    }
+
+    function calculateSleepQualityProgress() {
+        return (companyMetrics.quality_of_sleep_average / goals.sleepQualityGoal) * 100
+    }
+
+    function renderConditionsMet() {
+        // I left out companyMetrics since that's conditionally fetched in loadData()
+        if (user && averages.sleep_duration_average) {
+            return true
+        } else {
+            return false
+        }
+    }
 
 /*
     was just using this jenky lil thing instead of console.logs to prove my data was showing up
-    cause I had some trouble logging async promise stuff from directly in the loadUser function
+    cause I had some trouble logging async promise stuff from directly in the loadData function
     figured I'll keep it around for now
 
     function generateElements() {
@@ -117,7 +136,7 @@ export default function AdminHome() {
         return output
     }
 */
-
+    if (renderConditionsMet()) {
     return (
         <>
             <section className="bg-slate-100 py-5">
@@ -138,7 +157,7 @@ export default function AdminHome() {
                 <div className="flex flex-row justify-between my-5 mx-auto max-w-5xl font-light">
                     <div className="flex flex-col justify-center bg-white me-5 rounded-lg shadow-md">
                         <RadialBar
-                            series={[70]}
+                            series={[calculateSleepHoursProgress()]}
                             labels={['Sleep Hours']}
                             colors={['#7AEB7F']}
                         />
@@ -250,6 +269,9 @@ export default function AdminHome() {
             </section>
         </>
     )
+    } else {
+        return <Spinner />
+    }
 }
 
 /*
