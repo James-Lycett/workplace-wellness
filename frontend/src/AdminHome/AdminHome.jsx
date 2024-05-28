@@ -112,14 +112,12 @@ export default function AdminHome() {
         return Math.floor(boundedProgressValue) // Return the progress value
     }
 
-    const sleepHourProg = calculateSleepHoursProgress()
-    console.log(averages.sleep_duration_average)
-
     function calculateSleepQualityProgress() {
-        return (
+        const progressValue =
             (companyMetrics.quality_of_sleep_average / goals.sleepQualityGoal) *
             100
-        )
+        const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
+        return Math.floor(boundedProgressValue)
     }
 
     function renderConditionsMet() {
@@ -171,14 +169,14 @@ export default function AdminHome() {
                     <div className="flex flex-row justify-between my-5 mx-auto max-w-5xl font-light">
                         <div className="flex flex-col justify-center bg-white me-5 rounded-lg shadow-md">
                             <RadialBar
-                                series={[{ sleepHourProg }]}
+                                series={[calculateSleepHoursProgress()]}
                                 labels={['Sleep Hours']}
                                 colors={['#7AEB7F']}
                             />
                         </div>
                         <div className="flex flex-col justify-center bg-white mx-10 rounded-lg shadow-md">
                             <RadialBar
-                                series={[30]}
+                                series={[calculateSleepQualityProgress()]}
                                 labels={['Sleep Quality']}
                                 colors={['#EB897A']}
                             />

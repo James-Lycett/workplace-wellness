@@ -28,6 +28,22 @@ class RadialBar extends Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.series !== this.props.series) {
+            this.setState({ series: this.props.series })
+        }
+        if (prevProps.labels !== this.props.labels) {
+            this.setState({
+                options: { ...this.state.options, labels: this.props.labels },
+            })
+        }
+        if (prevProps.colors !== this.props.colors) {
+            this.setState({
+                options: { ...this.state.options, colors: this.props.colors },
+            })
+        }
+    }
+
     render() {
         return (
             <div id="chart">
