@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 // import UserHome from "./UserHome";
 import { readUserByUsername } from '../utils/api'
 import '../index.css'
+import { initFlowbite } from 'flowbite'
 
 export default function LoginPage() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+
+    useEffect(() => {
+        initFlowbite()
+    }, [])
 
     const handleUsernameChange = (e) => {
         setUsername(e.target.value)
@@ -51,7 +56,7 @@ export default function LoginPage() {
         <div className="flex flex-col items-center justify-center">
             <h1 className="mt-16 text-3xl font-bold">Welcome Back</h1>
             <div
-                className="mt-8 mb-2 block w-1/2 px-10 pb-[6px] pt-2 text-s font-medium leading-normal text-primary w-full"
+                className="mt-8 mb-2 block px-10 pb-[6px] pt-2 text-s font-medium leading-normal text-primary w-full"
                 data-te-ripple-init
             >
                 <form onSubmit={handleSubmit}>
