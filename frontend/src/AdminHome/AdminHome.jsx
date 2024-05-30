@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import EmployeesListNew from './EmployeesListNew'
-import { Progress, Sidebar, Table, Checkbox } from 'flowbite-react'
-import RadialBar from './RadialBar'
+import { Sidebar, Table, Checkbox } from 'flowbite-react'
 import {
     HiBan,
     HiChartPie,
@@ -20,8 +19,8 @@ import {
     readCompanyMetrics,
 } from '../utils/api'
 import Spinner from '../utils/Spinner'
-import ActivityLogForm from '../UserActivityLog/ActivityLogForm'
 import ActivityLogModal from './ActivityLogModal'
+import AdminProgressCharts from './AdminProgressCharts'
 
 export default function AdminHome() {
     const { userId } = useParams()
@@ -81,22 +80,6 @@ export default function AdminHome() {
         loadData()
     }, [loadData, userId])
 
-    function calculateSleepHoursProgress() {
-        const progressValue =
-            (companyMetrics.sleep_duration_total / goals.sleepHoursGoal) * 100
-        const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
-
-        return Math.floor(boundedProgressValue) // Return the progress value
-    }
-
-    function calculateSleepQualityProgress() {
-        const progressValue =
-            (companyMetrics.quality_of_sleep_average / goals.sleepQualityGoal) *
-            100
-        const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
-        return Math.floor(boundedProgressValue)
-    }
-
     function renderConditionsMet() {
         // I left out companyMetrics since that's conditionally fetched in loadData()
         if (user && averages.sleep_duration_average) {
@@ -114,42 +97,7 @@ export default function AdminHome() {
         return (
             <>
                 <section className="bg-slate-100 py-5">
-                    <div className="flex flex-col justify-center bg-white w-full max-w-5xl mx-auto rounded-md shadow-md">
-                        <h2 className="text-v2-drkblue font-semibold self-center mt-5">
-                            Department Goals
-                        </h2>
-                        <Progress
-                            progress={70}
-                            color="blue"
-                            progressLabelPosition="inside"
-                            className="mt-10 mb-5 max-w-4xl mx-auto"
-                            size="xl"
-                            labelProgress
-                        />
-                    </div>
-                    <div className="flex flex-row justify-between my-5 mx-auto max-w-5xl font-light">
-                        <div className="flex flex-col justify-center bg-white me-5 rounded-lg shadow-md">
-                            <RadialBar
-                                series={[calculateSleepHoursProgress()]}
-                                labels={['Sleep Hours']}
-                                colors={['#7AEB7F']}
-                            />
-                        </div>
-                        <div className="flex flex-col justify-center bg-white mx-10 rounded-lg shadow-md">
-                            <RadialBar
-                                series={[calculateSleepQualityProgress()]}
-                                labels={['Sleep Quality']}
-                                colors={['#EB897A']}
-                            />
-                        </div>
-                        <div className="flex flex-col justify-center bg-white ms-5 rounded-lg shadow-md">
-                            <RadialBar
-                                series={[45]}
-                                labels={['Tasks Completed']}
-                                colors={['#E8EA8B']}
-                            />
-                        </div>
-                    </div>
+                    <AdminProgressCharts companyMetrics={companyMetrics}/>
                     <div className=" flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[50vh] rounded-lg shadow-md overflow-hidden ">
                         <div>
                             <Sidebar aria-label="Default sidebar example">
