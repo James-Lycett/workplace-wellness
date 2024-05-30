@@ -6,10 +6,11 @@ import {
     readCompanyMetrics,
 } from '../utils/api'
 import Spinner from '../utils/Spinner'
-import ActivityLogModal from './ActivityLogModal'
-import AdminProgressCharts from './AdminProgressCharts'
-import AdminSidebar from './AdminSidebar'
-import AdminEmployeesTable from './AdminEmployeesTable'
+import ActivityLogModal from './ActivityLog/ActivityLogModal'
+import AdminProgressCharts from './AdminProgressCharts/AdminProgressCharts'
+import AdminSidebar from './AdminSidebar/AdminSidebar'
+import AdminEmployeesTable from './AdminEmployeesTable/AdminEmployeesTable'
+import UserRecordsTable from './UserRecordsTable/UserRecordsTable'
 
 export default function AdminHome() {
     const { userId } = useParams()
@@ -26,6 +27,7 @@ export default function AdminHome() {
         sleep_duration_total: 0,
         quality_of_sleep_average: 0,
     })
+    const [admin, setAdmin] = useState(false)
 
 
     // Fetches user from the API along with lastMonthAverages for that user and company-wide lastMonthAverages for admin purposes
@@ -48,6 +50,7 @@ export default function AdminHome() {
                     abortController.signal
                 )
                 setCompanyMetrics(readCompanyMetricsResponse)
+                setAdmin(true)
             }
         } catch (error) {
             console.error(error)
@@ -74,22 +77,37 @@ export default function AdminHome() {
     }
 
     if (renderConditionsMet()) {
-        return (
-            <>
+        if (admin) {
+            return (
+                <>
+                    <section className="bg-slate-100 py-5">
+                        <AdminProgressCharts companyMetrics={companyMetrics}/>
+                        <div className=" flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[50vh] rounded-lg shadow-md overflow-hidden ">
+                            <AdminSidebar openModal={openModal} />
+                            <AdminEmployeesTable />
+                        </div>
+                    </section>
+                    {isModalOpen && <ActivityLogModal setIsModalOpen={setIsModalOpen}/>}
+                </>
+            )
+        } else {
+            return (
+                <>
                 <section className="bg-slate-100 py-5">
                     <AdminProgressCharts companyMetrics={companyMetrics}/>
-                    <div className=" flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[50vh] rounded-lg shadow-md overflow-hidden ">
+                    <div className="flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[50vh] rounded-lg shadow-md overflow-hidden ">
                         <AdminSidebar openModal={openModal} />
-                        <AdminEmployeesTable />
+                        <UserRecordsTable userId={userId} />
                     </div>
                 </section>
                 {isModalOpen && <ActivityLogModal setIsModalOpen={setIsModalOpen}/>}
             </>
-        )
+            )
+        }
     } else {
         return (
             <>
-            <div className=' py-20'>
+            <div className='py-20'>
                 <Spinner />
             </div>
             </>

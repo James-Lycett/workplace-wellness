@@ -11,6 +11,7 @@ import {
     HiUserGroup,
     HiDocumentReport,
 } from 'react-icons/hi'
+import logo from './circle.svg'
 
 export default function AdminSidebar({ openModal }) {
     return (
@@ -19,7 +20,7 @@ export default function AdminSidebar({ openModal }) {
                 <Sidebar aria-label="Default sidebar example">
                     <Sidebar.Logo
                         href="#"
-                        img="/circle.png"
+                        img={logo}
                         imgAlt="Workplace Wellness logo"
                     >
                         Workplace Wellness

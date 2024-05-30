@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ActivityLogForm from "../UserActivityLog/ActivityLogForm";
+import ActivityLogForm from "./ActivityLogForm";
 
 export default function ActivityLogModal({ setIsModalOpen }) {
 
