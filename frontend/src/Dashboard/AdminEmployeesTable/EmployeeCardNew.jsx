@@ -31,11 +31,6 @@ export default function EmployeeCarNew({
         return () => abortController.abort()
     }
 
-    // Hides this card
-    // const toggleVisibility = () => {
-    //     hidden ? setHidden(false) : setHidden(true)
-    // }
-
     const images = {
         1: img1,
         2: img2,

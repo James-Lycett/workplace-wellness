@@ -13,7 +13,10 @@ export default function UserActivitiesList({ userId }) {
         const abortController = new AbortController()
 
         try {
-            const response = await readEntriesByPerson(userId, abortController.signal)
+            const response = await readEntriesByPerson(
+                userId,
+                abortController.signal
+            )
             setEntries(response)
         } catch (error) {
             setError(error)
@@ -34,7 +37,11 @@ export default function UserActivitiesList({ userId }) {
                         className="bg-white dark:border-gray-700 dark:bg-gray-800"
                         key={entry.entry_id}
                     >
-                        <ActivityCard entry={entry} setError={setError} userId={userId}/>
+                        <ActivityCard
+                            entry={entry}
+                            setError={setError}
+                            userId={userId}
+                        />
                     </Table.Row>
                 ))}
             </>
