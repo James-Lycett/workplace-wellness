@@ -29,7 +29,6 @@ export default function AdminHome() {
     })
     const [admin, setAdmin] = useState(false)
 
-
     // Fetches user from the API along with lastMonthAverages for that user and company-wide lastMonthAverages for admin purposes
     const loadData = useCallback(async () => {
         const abortController = new AbortController()
@@ -80,35 +79,39 @@ export default function AdminHome() {
             return (
                 <>
                     <section className="bg-slate-100 py-5">
-                        <AdminProgressCharts companyMetrics={companyMetrics}/>
-                        <div className=" flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[50vh] rounded-lg shadow-md overflow-hidden ">
+                        <AdminProgressCharts companyMetrics={companyMetrics} />
+                        <div className=" flex flex-col md:flex-row w-full mx-auto mt-5 max-w-5xl max-h-[50vh] rounded-lg shadow-md overflow-hidden ">
                             <AdminSidebar openModal={openModal} />
                             <AdminEmployeesTable />
                         </div>
                     </section>
-                    {isModalOpen && <ActivityLogModal setIsModalOpen={setIsModalOpen}/>}
+                    {isModalOpen && (
+                        <ActivityLogModal setIsModalOpen={setIsModalOpen} />
+                    )}
                 </>
             )
         } else {
             return (
                 <>
                     <section className="bg-slate-100 py-5">
-                        <AdminProgressCharts companyMetrics={companyMetrics}/>
+                        <AdminProgressCharts companyMetrics={companyMetrics} />
                         <div className="flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[50vh] rounded-lg shadow-md overflow-hidden ">
                             <AdminSidebar openModal={openModal} />
                             <UserRecordsTable userId={userId} />
                         </div>
                     </section>
-                    {isModalOpen && <ActivityLogModal setIsModalOpen={setIsModalOpen}/>}
+                    {isModalOpen && (
+                        <ActivityLogModal setIsModalOpen={setIsModalOpen} />
+                    )}
                 </>
             )
         }
     } else {
         return (
             <>
-            <div className='py-20'>
-                <Spinner />
-            </div>
+                <div className="py-20">
+                    <Spinner />
+                </div>
             </>
         )
     }

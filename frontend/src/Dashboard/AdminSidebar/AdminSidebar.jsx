@@ -17,7 +17,10 @@ export default function AdminSidebar({ openModal }) {
     return (
         <>
             <div>
-                <Sidebar aria-label="Default sidebar example">
+                <Sidebar
+                    aria-label="Default sidebar example"
+                    className="w-full md:w-auto"
+                >
                     <Sidebar.Logo
                         href="#"
                         img={logo}
@@ -25,9 +28,9 @@ export default function AdminSidebar({ openModal }) {
                     >
                         Workplace Wellness
                     </Sidebar.Logo>
-                    <Sidebar.Items className="flex flex-col justify-between h-[43vh]">
+                    <Sidebar.Items className="flex flex-row h-full w-full md:flex-col justify-between md:h-[43vh]">
                         <div>
-                            <Sidebar.ItemGroup className="">
+                            <Sidebar.ItemGroup className="flex flex-row items-center md:flex-col">
                                 <Sidebar.Item
                                     href="#"
                                     icon={HiOutlineIdentification}
@@ -57,7 +60,7 @@ export default function AdminSidebar({ openModal }) {
                             </Sidebar.ItemGroup>
                         </div>
                         <div>
-                            <Sidebar.ItemGroup>
+                            <Sidebar.ItemGroup className="flex flex-row items-center md:flex-col">
                                 <Sidebar.Item
                                     href="#"
                                     onClick={openModal}
