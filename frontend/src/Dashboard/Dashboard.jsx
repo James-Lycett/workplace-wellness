@@ -93,15 +93,15 @@ export default function AdminHome() {
         } else {
             return (
                 <>
-                <section className="bg-slate-100 py-5">
-                    <AdminProgressCharts companyMetrics={companyMetrics}/>
-                    <div className="flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[50vh] rounded-lg shadow-md overflow-hidden ">
-                        <AdminSidebar openModal={openModal} />
-                        <UserRecordsTable userId={userId} />
-                    </div>
-                </section>
-                {isModalOpen && <ActivityLogModal setIsModalOpen={setIsModalOpen}/>}
-            </>
+                    <section className="bg-slate-100 py-5">
+                        <AdminProgressCharts companyMetrics={companyMetrics}/>
+                        <div className="flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[50vh] rounded-lg shadow-md overflow-hidden ">
+                            <AdminSidebar openModal={openModal} />
+                            <UserRecordsTable userId={userId} />
+                        </div>
+                    </section>
+                    {isModalOpen && <ActivityLogModal setIsModalOpen={setIsModalOpen}/>}
+                </>
             )
         }
     } else {
