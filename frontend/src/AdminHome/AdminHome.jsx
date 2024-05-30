@@ -87,6 +87,12 @@ export default function AdminHome() {
             </>
         )
     } else {
-        return <Spinner />
+        return (
+            <>
+            <div className=' py-20'>
+                <Spinner />
+            </div>
+            </>
+        )
     }
 }
