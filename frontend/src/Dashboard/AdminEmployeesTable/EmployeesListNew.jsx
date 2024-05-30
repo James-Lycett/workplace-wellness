@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import Spinner from '../utils/Spinner'
-import { listUsers } from '../utils/api'
+import Spinner from '../../utils/Spinner'
+import { listUsers } from '../../utils/api'
 import { Table } from 'flowbite-react'
 import EmployeeCardNew from './EmployeeCardNew'
 

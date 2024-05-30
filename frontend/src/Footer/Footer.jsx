@@ -305,7 +305,8 @@ export default function Footer() {
                             <p className="text-3xl me-3">
                                 <SlLocationPin />
                             </p>
-                            <p>11 East 9th Street Manhattan, 10036</p>
+                            <p>123 Serenity Street</p>
+                            <p>Wellness City, WZ 54321</p>
                         </div>
                     </div>
                 </div>

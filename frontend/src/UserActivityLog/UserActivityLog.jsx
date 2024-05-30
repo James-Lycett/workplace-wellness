@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import DropDownMenuButton from '../utils/DropDownMenuButton'
-import ActivityLogForm from './ActivityLogForm'
+import ActivityLogForm from '../Dashboard/ActivityLog/ActivityLogForm'
 import SuggestionCard from './SuggestionCard'
 import { createEntry } from '../utils/api'
 

@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { deleteUser } from '../utils/api'
-import sleepingPersonImage from './sleep.png'
-import { FaEyeSlash, FaEye } from 'react-icons/fa6'
-import RemoveCardButton from '../utils/RemoveCardButton'
+import { deleteUser } from '../../utils/api'
+import sleepingPersonImage from './images/sleep.png'
+import RemoveCardButton from '../../utils/RemoveCardButton'
 import { Checkbox, Table } from 'flowbite-react'
-import img1 from './1.png'
-import img2 from './2.png'
-import img3 from './3.png'
+import img1 from './images/1.png'
+import img2 from './images/2.png'
+import img3 from './images/3.png'
 
 export default function EmployeeCarNew({
     employee,
@@ -31,11 +30,6 @@ export default function EmployeeCarNew({
         }
         return () => abortController.abort()
     }
-
-    // Hides this card
-    // const toggleVisibility = () => {
-    //     hidden ? setHidden(false) : setHidden(true)
-    // }
 
     const images = {
         1: img1,
