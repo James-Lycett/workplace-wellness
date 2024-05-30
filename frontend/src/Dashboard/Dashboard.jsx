@@ -64,7 +64,6 @@ export default function AdminHome() {
     }, [loadData, userId])
 
     function renderConditionsMet() {
-        // I left out companyMetrics since that's conditionally fetched in loadData()
         if (user && averages.sleep_duration_average) {
             return true
         } else {
