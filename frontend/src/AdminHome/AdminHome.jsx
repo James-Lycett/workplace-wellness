@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import EmployeesListNew from './EmployeesListNew'
-import { Table, Checkbox } from 'flowbite-react'
 import {
     readUserById,
     readAveragesById,
@@ -11,6 +9,7 @@ import Spinner from '../utils/Spinner'
 import ActivityLogModal from './ActivityLogModal'
 import AdminProgressCharts from './AdminProgressCharts'
 import AdminSidebar from './AdminSidebar'
+import AdminEmployeesTable from './AdminEmployeesTable'
 
 export default function AdminHome() {
     const { userId } = useParams()
@@ -81,30 +80,7 @@ export default function AdminHome() {
                     <AdminProgressCharts companyMetrics={companyMetrics}/>
                     <div className=" flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[50vh] rounded-lg shadow-md overflow-hidden ">
                         <AdminSidebar openModal={openModal} />
-                        <div className="overflow-auto">
-                            <Table hoverable>
-                                <Table.Head className="sticky top-0 bg-white z-10">
-                                    <Table.HeadCell>
-                                        <Checkbox />
-                                    </Table.HeadCell>
-                                    <Table.HeadCell>User</Table.HeadCell>
-                                    <Table.HeadCell>Age</Table.HeadCell>
-                                    <Table.HeadCell>
-                                        Stress Level
-                                    </Table.HeadCell>
-                                    <Table.HeadCell>Sleep Hours</Table.HeadCell>
-                                    <Table.HeadCell>
-                                        <span className="sr-only">Edit</span>
-                                    </Table.HeadCell>
-                                    <Table.HeadCell>
-                                        <span className="sr-only">X</span>
-                                    </Table.HeadCell>
-                                </Table.Head>
-                                <Table.Body className="divide-y">
-                                    <EmployeesListNew />
-                                </Table.Body>
-                            </Table>
-                        </div>
+                        <AdminEmployeesTable />
                     </div>
                 </section>
                 {isModalOpen && <ActivityLogModal setIsModalOpen={setIsModalOpen}/>}
