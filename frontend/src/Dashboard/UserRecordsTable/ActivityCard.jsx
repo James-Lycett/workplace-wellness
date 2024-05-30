@@ -3,6 +3,7 @@ import { readEntriesByPerson } from '../../utils/api'
 import RemoveCardButton from '../../utils/RemoveCardButton'
 import { Checkbox, Table } from 'flowbite-react'
 
+
 export default function ActivityCard({ setError, entry }) {
     const [openModal, setOpenModal] = useState(false)
 
@@ -26,10 +27,7 @@ export default function ActivityCard({ setError, entry }) {
             <Table.Cell>
                 <Checkbox />
             </Table.Cell>
-            <Table.Cell
-                id="user"
-                className="flex justify-start items-center whitespace-nowrap font-medium text-gray-900 dark:text-white"
-            ></Table.Cell>
+            <Table.Cell id="date">(date)</Table.Cell>
             <Table.Cell id="steps">{entry.daily_steps}</Table.Cell>
             <Table.Cell id="stress-lvl">{entry.heart_rate}</Table.Cell>
             <Table.Cell id="bmi">{entry.bmi_category}</Table.Cell>

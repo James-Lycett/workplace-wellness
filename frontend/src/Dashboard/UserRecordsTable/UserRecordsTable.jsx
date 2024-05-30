@@ -11,6 +11,7 @@ export default function UserRecordsTable({ userId }) {
                         <Table.HeadCell>
                             <Checkbox />
                         </Table.HeadCell>
+                        <Table.HeadCell>Date</Table.HeadCell>
                         <Table.HeadCell>Steps</Table.HeadCell>
                         <Table.HeadCell>Heart Rate</Table.HeadCell>
                         <Table.HeadCell>BMI Category</Table.HeadCell>

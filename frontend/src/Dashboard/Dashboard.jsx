@@ -27,7 +27,7 @@ export default function AdminHome() {
         sleep_duration_total: 0,
         quality_of_sleep_average: 0,
     })
-    const [admin, setAdmin] = useState(false)
+    const [view, setView] = useState("user")
 
 
     // Fetches user from the API along with lastMonthAverages for that user and company-wide lastMonthAverages for admin purposes
@@ -50,7 +50,7 @@ export default function AdminHome() {
                     abortController.signal
                 )
                 setCompanyMetrics(readCompanyMetricsResponse)
-                setAdmin(true)
+                setView("admin")
             }
         } catch (error) {
             console.error(error)
@@ -76,7 +76,7 @@ export default function AdminHome() {
     }
 
     if (renderConditionsMet()) {
-        if (admin) {
+        if (view === "admin") {
             return (
                 <>
                     <section className="bg-slate-100 py-5">
