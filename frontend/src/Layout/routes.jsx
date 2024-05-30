@@ -17,9 +17,7 @@ import Contact from '../Boilerplate/Contact'
 import Terms from '../Boilerplate/Terms'
 import PrivacyPolicy from '../Boilerplate/Privacy'
 //import AdminReport from '../AdminHome/AdminReport'
-import TipsSleep from '../Tips/TipsSleep'
-import TipsMed from '../Tips/TipsMed'
-import TipsFit from '../Tips/TipsFit'
+import { TipsSleep, TipsMed, TipsFit } from '../Tips/TipsPages'
 // import ImagePage from "../Tips/ImagePage"
 
 export default function RoutesComponent() {
