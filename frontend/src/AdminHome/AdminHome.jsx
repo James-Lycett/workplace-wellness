@@ -1,18 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import EmployeesListNew from './EmployeesListNew'
-import { Sidebar, Table, Checkbox } from 'flowbite-react'
-import {
-    HiBan,
-    HiChartPie,
-    HiLightningBolt,
-    HiLogout,
-    HiOutlinePlus,
-    HiOutlineIdentification,
-    HiTable,
-    HiUserGroup,
-    HiDocumentReport,
-} from 'react-icons/hi'
+import { Table, Checkbox } from 'flowbite-react'
 import {
     readUserById,
     readAveragesById,
@@ -21,6 +10,7 @@ import {
 import Spinner from '../utils/Spinner'
 import ActivityLogModal from './ActivityLogModal'
 import AdminProgressCharts from './AdminProgressCharts'
+import AdminSidebar from './AdminSidebar'
 
 export default function AdminHome() {
     const { userId } = useParams()
@@ -38,15 +28,6 @@ export default function AdminHome() {
         quality_of_sleep_average: 0,
     })
 
-    // Placeholder admin goals data:
-    const goals = {
-        // sleepHoursThisMonth: 1545, now getting this straight from the db, see "companyMetrics"
-        sleepHoursGoal: 1200,
-        tasksMet: 80,
-        tasksGoal: 128,
-        companyMood: 'Decent',
-        sleepQualityGoal: 8,
-    }
 
     // Fetches user from the API along with lastMonthAverages for that user and company-wide lastMonthAverages for admin purposes
     const loadData = useCallback(async () => {
@@ -99,81 +80,7 @@ export default function AdminHome() {
                 <section className="bg-slate-100 py-5">
                     <AdminProgressCharts companyMetrics={companyMetrics}/>
                     <div className=" flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[50vh] rounded-lg shadow-md overflow-hidden ">
-                        <div>
-                            <Sidebar aria-label="Default sidebar example">
-                                <Sidebar.Logo
-                                    href="#"
-                                    img="/circle.png"
-                                    imgAlt="Workplace Wellness logo"
-                                >
-                                    Workplace Wellness
-                                </Sidebar.Logo>
-                                <Sidebar.Items className="flex flex-col justify-between h-[43vh]">
-                                    <div>
-                                        <Sidebar.ItemGroup className="">
-                                            <Sidebar.Item
-                                                href="#"
-                                                icon={HiOutlineIdentification}
-                                            >
-                                                Profile
-                                            </Sidebar.Item>
-                                            <Sidebar.Item
-                                                href="#"
-                                                icon={HiTable}
-                                            >
-                                                My Logs
-                                            </Sidebar.Item>
-                                            <Sidebar.Collapse
-                                                icon={HiUserGroup}
-                                                label="Users"
-                                            >
-                                                <Sidebar.Item
-                                                    href="#"
-                                                    icon={HiChartPie}
-                                                >
-                                                    Statistics
-                                                </Sidebar.Item>
-                                                <Sidebar.Item
-                                                    href="#"
-                                                    icon={HiLightningBolt}
-                                                >
-                                                    Goals
-                                                </Sidebar.Item>
-                                                <Sidebar.Item
-                                                    href="#"
-                                                    icon={HiBan}
-                                                >
-                                                    Inactive
-                                                </Sidebar.Item>
-                                            </Sidebar.Collapse>
-                                        </Sidebar.ItemGroup>
-                                    </div>
-                                    <div>
-                                        <Sidebar.ItemGroup>
-                                            <Sidebar.Item
-                                                href="#"
-                                                onClick={openModal}
-                                                icon={HiDocumentReport}
-                                            >
-                                                LOG NEW ACTIVITY
-                                            </Sidebar.Item>
-                                            <Sidebar.Item
-                                                href="#"
-                                                icon={HiOutlinePlus}
-                                            >
-                                                Add A New Employee
-                                            </Sidebar.Item>
-                                            <Sidebar.Item
-                                                href="#"
-                                                icon={HiLogout}
-                                            >
-                                                Sign Out
-                                            </Sidebar.Item>
-                                        </Sidebar.ItemGroup>
-                                    </div>
-                                </Sidebar.Items>
-                            </Sidebar>
-                        </div>
+                        <AdminSidebar openModal={openModal} />
                         <div className="overflow-auto">
                             <Table hoverable>
                                 <Table.Head className="sticky top-0 bg-white z-10">
