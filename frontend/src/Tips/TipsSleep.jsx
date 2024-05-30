@@ -6,18 +6,20 @@ import sleep4 from './Images/sleep4.jpg'
 
 export default function TipsSleep() {
     return (
-        <div>
-            <div className="flex flex-col items-center justify-center">
-                <h2 className="text-3xl text-center font-bold">
-                    Sleep Disorders Guide
-                </h2>
-                <hr className="mb-5 w-2/5 mx-auto border-2 border-black" />
-                <div className="grid grid-cols-4 gap-4">
+        <div className="flex justify-center m-10">
+            <div className="flex flex-col items-center justify-center max-w-4xl">
+                <div className="mb-10 w-full">
+                    <h2 className="text-3xl text-center font-bold">
+                        Sleep Disorders Guide
+                    </h2>
+                    <hr className="mb-5 w-3/4 mx-auto border-2 border-black" />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
-                        <div className="relative overflow-hidden ">
+                        <div className="relative overflow-hidden">
                             <img
                                 src={sleep1}
-                                className="object-contain"
+                                className="object-contain rounded-lg"
                                 alt="Sleep Routine"
                             />
                             <p className="text-xl text-center mt-2 mb-10">
@@ -29,7 +31,7 @@ export default function TipsSleep() {
                         <div className="relative overflow-hidden">
                             <img
                                 src={sleep2}
-                                className="object-fill"
+                                className="object-fill rounded-lg"
                                 alt="Common Sleep Disorders"
                             />
                         </div>
@@ -42,7 +44,7 @@ export default function TipsSleep() {
                         <div className="relative overflow-hidden">
                             <img
                                 src={sleep3}
-                                className="object-fill h-150 w-150"
+                                className="object-fill rounded-lg h-150 w-150"
                                 alt="Consult With A Licensed Sleep Specialist"
                             />
                         </div>
@@ -55,7 +57,7 @@ export default function TipsSleep() {
                         <div className="relative overflow-hidden">
                             <img
                                 src={sleep4}
-                                className="object-fill h-150 w-150"
+                                className="object-fill rounded-lg h-150 w-150"
                                 alt="Sleep Disorder Self Help Modules"
                             />
                         </div>
