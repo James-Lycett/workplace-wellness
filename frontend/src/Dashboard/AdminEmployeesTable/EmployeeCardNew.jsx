@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { deleteUser } from '../../utils/api'
+import React, { useState, useCallback } from 'react'
+import { deleteUser, listUsers } from '../../utils/api'
 import sleepingPersonImage from './images/sleep.png'
 import RemoveCardButton from '../../utils/RemoveCardButton'
 import { Checkbox, Table } from 'flowbite-react'
@@ -7,14 +7,27 @@ import img1 from './images/1.png'
 import img2 from './images/2.png'
 import img3 from './images/3.png'
 
-export default function EmployeeCarNew({
+export default function EmployeeCardNew({
     employee,
-    setError,
-    loadUsers,
+    setEmployees,
     imgNumber,
 }) {
     const [hidden, setHidden] = useState(false)
     const [openModal, setOpenModal] = useState(false)
+
+        // Fetches all users from the API
+        const loadUsers = useCallback(async () => {
+            const abortController = new AbortController()
+    
+            try {
+                const response = await listUsers(abortController.signal)
+                setEmployees(response)
+            } catch (error) {
+                console.error(error)
+            } finally {
+                abortController.abort()
+            }
+        }, [])
 
     // RemoveEmployeeButton functionality, deletes employee
     async function handleDelete() {
@@ -22,8 +35,8 @@ export default function EmployeeCarNew({
 
         try {
             await deleteUser(employee.person_id, abortController.signal)
-        } catch (er) {
-            setError(er)
+        } catch (error) {
+            console.error(error)
         } finally {
             setOpenModal(false)
             loadUsers()
