@@ -121,7 +121,7 @@ export default function AdminHome() {
                 <>
                     <section className="bg-slate-100 py-5">
                         <UserProgressCharts averages={averages} />
-                        <div className="flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[50vh] rounded-lg shadow-md overflow-hidden ">
+                        <div className="flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[80vh] rounded-lg shadow-md overflow-hidden ">
                             <DashboardSidebar
                                 openModal={openModal}
                                 userIsAdmin={user.admin}

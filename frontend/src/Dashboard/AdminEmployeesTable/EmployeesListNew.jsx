@@ -22,6 +22,14 @@ export default function EmployeesList({ employees, setEmployees }) {
             </>
         )
     } else {
-        return <Spinner />
+        return (
+            <Table.Row>
+                <Table.Cell colSpan="8" className="h-80 p-0">
+                    <div className="flex items-center justify-center h-full">
+                        <Spinner />
+                    </div>
+                </Table.Cell>
+            </Table.Row>
+        )
     }
 }
