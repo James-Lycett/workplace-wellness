@@ -114,7 +114,7 @@ export default function AdminHome() {
                         </div>
                     </section>
                     {isModalOpen.state && (
-                        <Modal setIsModalOpen={setIsModalOpen} option={isModalOpen.option} />
+                        <Modal setIsModalOpen={setIsModalOpen} option={isModalOpen.option} setEmployees={setEmployees} />
                     )}
                 </>
             )

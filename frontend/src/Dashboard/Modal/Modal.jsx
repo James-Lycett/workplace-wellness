@@ -3,7 +3,7 @@ import ActivityLogForm from "./ActivityLogForm";
 import AddNewEmployeeForm from "./AddNewEmployeeForm";
 import { createUser } from "../../utils/api"
 
-export default function Modal({ setIsModalOpen, option }) {
+export default function Modal({ setIsModalOpen, option, setEmployees }) {
 
     const [entry, setEntry] = useState({
         sleep_duration: '',
@@ -31,11 +31,10 @@ export default function Modal({ setIsModalOpen, option }) {
 
 
     const [employee, setEmployee] = useState({
+        username: "",
         age: "",
         gender: "",
-        height: "",
-        weight: "",
-        sleepDisorder: "",
+        sleep_disorder: "",
         occupation: "",
     })
 
@@ -47,10 +46,23 @@ export default function Modal({ setIsModalOpen, option }) {
         })
     }
 
-    const handleEmployeeSubmit = (e) => {
+    const handleEmployeeSubmit = async (e) => {
         e.preventDefault()
-        createUser(employee)
-        setIsModalOpen(false)
+        const abortController = new AbortController
+        employee.age = Number(employee.age)
+
+        try {
+            await createUser(employee, abortController.signal)
+        } catch (error) {
+            console.error(error)
+        } finally {
+            // Refresh employees list
+            const listUsersResponse = await listUsers(abortController.signal)
+            setEmployees(listUsersResponse)
+
+            setIsModalOpen(false)
+            abortController.abort()
+        }
     }
 
     

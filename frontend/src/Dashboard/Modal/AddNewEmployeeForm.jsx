@@ -5,19 +5,36 @@ export default function AddNewEmployeeForm({
     handleChange,
     handleSubmit,
 }) {
-    /*
-        const [employee, setEmployee] = useState({
-        age: "",
-        gender: "",
-        height: "",
-        weight: "",
-        sleepDisorder: "",
-        occupation: "",
-    })
-    */
+
     return (
         <div className="text-xl">
             <form onSubmit={handleSubmit} className="flex flex-col">
+                <div className="flex items-center justify-between my-2 h-10">
+                    <label htmlFor="username">Username *</label>
+                    <input
+                        type="string"
+                        id="username"
+                        name="username"
+                        value={employee.username}
+                        placeholder="Username"
+                        onChange={handleChange}
+                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5"
+                    />
+                </div>
+                {/* Need to add a password column to db. Don't forget to add {password: ""} property to employee default state
+                <div className="flex items-center justify-between my-2 h-10">
+                    <label htmlFor="password">Password</label>
+                    <input
+                        type="string"
+                        id="password"
+                        name="password"
+                        value={employee.password}
+                        placeholder="Password"
+                        onChange={handleChange}
+                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5"
+                    />
+                </div>
+                */}
                 <div className="flex items-center justify-between my-2 h-10">
                     <label htmlFor="age">Age *</label>
                     <input
@@ -36,59 +53,33 @@ export default function AddNewEmployeeForm({
                 </div>
                 <div className="flex items-center justify-between my-2 h-10">
                     <label htmlFor="gender">Gender *</label>
-                    <select name="dropdown" id="gender" value={employee.gender} className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5">
+                    <select
+                        name="gender"
+                        id="gender"
+                        value={employee.gender}
+                        onChange={handleChange}
+                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5"
+                    >
                         <option value="/">Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
                     </select>
                 </div>
                 <div className="flex items-center justify-between my-2 h-10">
-                    <label htmlFor="height">Height *</label>
-                    <input
-                        type="string"
-                        id="height"
-                        name="height"
-                        value={employee.height}
-                        placeholder="Height (feet)"
-                        onChange={handleChange}
-                        min="3"
-                        max="8"
-                        step="0.1"
-                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5"
-                    />
-                </div>
-                <div className="flex items-center justify-between my-2 h-10">
-                    <label htmlFor="weight">Weight *</label>
-                    <input
-                        type="string"
-                        id="weight"
-                        name="weight"
-                        value={employee.weight}
-                        placeholder="Weight (lb)"
-                        onChange={handleChange}
-                        min="50"
-                        max="800"
-                        step="1"
-                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5"
-                    />
-                </div>
-                <div className="flex items-center justify-between my-2 h-10">
-                    <label
-                        htmlFor="sleep-disorder"
-                        onChange={handleChange}
-                    >
+                    <label htmlFor="sleep_disorder">
                         Sleep Disorder *
                     </label>
                     <select
-                        name="dropdown"
-                        id="sleep-disorder"
-                        value={employee.gender}
+                        name="sleep_disorder"
+                        id="sleep_disorder"
+                        value={employee.sleep_disorder}
+                        onChange={handleChange}
                         className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5"
                     >
                         <option value="">Sleep Disorder</option>
-                        <option value="none">None</option>
-                        <option value="insomnia">Insomnia</option>
-                        <option value="sleep-apnea">Sleep Apnea</option>
+                        <option value="None">None</option>
+                        <option value="Insomnia">Insomnia</option>
+                        <option value="Sleep Apnea">Sleep Apnea</option>
                     </select>
                 </div>
                 <div className="flex items-center justify-between my-2 h-10">
