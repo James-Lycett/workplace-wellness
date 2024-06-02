@@ -116,6 +116,7 @@ export default function DashboardSidebar({
                                 </Sidebar.ItemGroup>
                             </Sidebar.ItemGroup>
                         </div>
+                        <div></div>
                     </Sidebar.Items>
                 </Sidebar>
             </div>
