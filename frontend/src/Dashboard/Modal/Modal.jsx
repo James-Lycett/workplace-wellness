@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ActivityLogForm from "./ActivityLogForm";
 import AddNewEmployeeForm from "./AddNewEmployeeForm";
-import { createUser } from "../../utils/api"
+import { createUser, listUsers } from "../../utils/api"
 
 export default function Modal({ setIsModalOpen, option, setEmployees }) {
 
