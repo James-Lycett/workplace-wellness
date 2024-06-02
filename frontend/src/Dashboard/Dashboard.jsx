@@ -19,7 +19,7 @@ export default function AdminHome() {
     const [user, setUser] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState({
         state: false,
-        option: 'activity',
+        option: "activity"
     })
     const [averages, setAverages] = useState({
         sleep_duration_average: 0,
@@ -67,6 +67,7 @@ export default function AdminHome() {
                 )
                 setEmployees(listUsersResponse)
             }
+
         } catch (error) {
             console.error(error)
         } finally {
@@ -89,9 +90,10 @@ export default function AdminHome() {
     const openModal = (option) => {
         setIsModalOpen({
             state: true,
-            option: option,
+            option: option
         })
     }
+
 
     const renderContent = () => {
         if (!renderConditionsMet()) {
@@ -101,7 +103,7 @@ export default function AdminHome() {
                 </div>
             )
         }
-
+    
         return (
             <>
                 <section className="bg-slate-100 py-5">
@@ -109,7 +111,8 @@ export default function AdminHome() {
                         <AdminProgressCharts companyMetrics={companyMetrics} />
                     ) : (
                         <UserProgressCharts averages={averages} />
-                    )}
+                    )
+                    }
                     <div className="flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[80vh] rounded-lg shadow-md overflow-hidden ">
                         <DashboardSidebar
                             openModal={openModal}
@@ -118,10 +121,7 @@ export default function AdminHome() {
                             setView={setView}
                         />
                         {view === 'admin' ? (
-                            <AdminEmployeesTable
-                                employees={employees}
-                                setEmployees={setEmployees}
-                            />
+                            <AdminEmployeesTable employees={employees} setEmployees={setEmployees} />
                         ) : (
                             <UserRecordsTable userId={userId} />
                         )}
@@ -139,6 +139,6 @@ export default function AdminHome() {
             </>
         )
     }
-
+    
     return renderContent()
 }
