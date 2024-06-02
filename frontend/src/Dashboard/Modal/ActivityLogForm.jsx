@@ -95,18 +95,3 @@ export default function ActivityLogForm({ entry, handleChange, handleSubmit }) {
         </div>
     )
 }
-
-/* 
-                    <input
-                        type="number"
-                        name="bmi"
-                        id="bmi"
-                        value={entry.bmi_category}
-                        onChange={handleChange}
-                        required={true}
-                        step="1"
-                        min="0"
-                        max="100"
-                        className="border-2 rounded-md w-1/2"
-                    />
-*/

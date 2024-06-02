@@ -66,8 +66,6 @@ export default function AdminHome() {
                     abortController.signal
                 )
                 setEmployees(listUsersResponse)
-
-                setView('admin')
             }
 
         } catch (error) {
@@ -134,7 +132,7 @@ export default function AdminHome() {
                         </div>
                     </section>
                     {isModalOpen.state && (
-                        <Modal setIsModalOpen={setIsModalOpen} option={isModalOpen.option} />
+                        <Modal setIsModalOpen={setIsModalOpen} option={isModalOpen.option} loadData={loadData} userId={userId} />
                     )}
                 </>
             )

@@ -83,7 +83,7 @@ function validateInput(req, res, next) {
             (validValues && !validateEnum(value, validValues)) ||
             (custom && !custom(value))
         ) {
-            return res.status(400).json({ error: `Invalid ${field}` })
+            return res.status(400).json({ error: `Invalid ${field}, ${field} must be a ${validationRules[field].type} with a maximum length of [${validationRules[field].max}]. Received: '${value}' of type: '${typeof value}'` })
         }
     }
 

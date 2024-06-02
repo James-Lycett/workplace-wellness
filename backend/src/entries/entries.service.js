@@ -5,7 +5,6 @@ function list() {
 }
 
 function create(newEntryData) {
-    console.log("Input data:", newEntryData)
 
     return knex("entries")
         .insert(newEntryData)

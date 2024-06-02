@@ -1,17 +1,33 @@
-import React, { useState } from "react";
-import ActivityLogForm from "./ActivityLogForm";
-import AddNewEmployeeForm from "./AddNewEmployeeForm";
-import { createUser, listUsers } from "../../utils/api"
+import React, { useState } from 'react'
+import ActivityLogForm from './ActivityLogForm'
+import AddNewEmployeeForm from './AddNewEmployeeForm'
+import { createEntry, createUser, listUsers } from '../../utils/api'
 
-export default function Modal({ setIsModalOpen, option, setEmployees }) {
+export default function Modal({
+    setIsModalOpen,
+    option,
+    setEmployees,
+    loadData,
+    userId,
+}) {
 
     const [entry, setEntry] = useState({
+        person_id: userId,
         sleep_duration: '',
         bmi_category: 'Normal',
         daily_steps: '',
         stress_level: '',
         heart_rate: '',
+        date: new Date().toISOString(),
     })
+
+    function convertStringsToNumbers(object, propsToConvert) {
+        for (let prop in object) {
+            if (propsToConvert.includes(prop)) {
+                object[prop] = Number(object[prop])
+            }
+        }
+    }
 
     const handleEntryChange = (e) => {
         const { name, value } = e.target
@@ -21,21 +37,36 @@ export default function Modal({ setIsModalOpen, option, setEmployees }) {
         })
     }
 
-    const handleEntrySubmit = (e) => {
+    const handleEntrySubmit = async (e) => {
         e.preventDefault()
-        // Handle form submission logic
-        console.log('Form submitted', entry)
-        // Close modal after submission
-        setIsModalOpen(false)
+        const abortController = new AbortController()
+
+        convertStringsToNumbers(entry, [
+            'sleep_duration',
+            'daily_steps',
+            'stress_level',
+            'heart_rate',
+        ])
+
+        try {
+            await createEntry(entry, abortController.signal)
+        } catch (error) {
+            console.error(error)
+        } finally {
+            // Refresh entries list and recalculate averages
+            loadData()
+
+            setIsModalOpen(false)
+            abortController.abort()
+        }
     }
 
-
     const [employee, setEmployee] = useState({
-        username: "",
-        age: "",
-        gender: "",
-        sleep_disorder: "",
-        occupation: "",
+        username: '',
+        age: '',
+        gender: '',
+        sleep_disorder: '',
+        occupation: '',
     })
 
     const handleEmployeeChange = (e) => {
@@ -48,7 +79,7 @@ export default function Modal({ setIsModalOpen, option, setEmployees }) {
 
     const handleEmployeeSubmit = async (e) => {
         e.preventDefault()
-        const abortController = new AbortController
+        const abortController = new AbortController()
         employee.age = Number(employee.age)
 
         try {
@@ -65,11 +96,9 @@ export default function Modal({ setIsModalOpen, option, setEmployees }) {
         }
     }
 
-    
     const closeModal = () => {
         setIsModalOpen(false)
     }
-
 
     return (
         <>
@@ -84,7 +113,9 @@ export default function Modal({ setIsModalOpen, option, setEmployees }) {
                         <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                             <div className="flex-grow"></div>{' '}
                             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                {option === "activity" ? "Log New Activity" : "Add New Employee"}
+                                {option === 'activity'
+                                    ? 'Log New Activity'
+                                    : 'Add New Employee'}
                             </h3>
                             <div className="flex-grow flex justify-end">
                                 <button
@@ -107,28 +138,25 @@ export default function Modal({ setIsModalOpen, option, setEmployees }) {
                                             d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                                         />
                                     </svg>
-                                    <span className="sr-only">
-                                        Close modal
-                                    </span>
+                                    <span className="sr-only">Close modal</span>
                                 </button>
                             </div>
                         </div>
 
                         <div className="p-4 md:p-5">
-                            {option === "activity" ? (
+                            {option === 'activity' ? (
                                 <ActivityLogForm
                                     entry={entry}
                                     handleChange={handleEntryChange}
                                     handleSubmit={handleEntrySubmit}
                                 />
-                                ) : (
-                                    <AddNewEmployeeForm 
-                                        employee={employee}
-                                        handleChange={handleEmployeeChange}
-                                        handleSubmit={handleEmployeeSubmit}
-                                    />
-                                )
-                            }
+                            ) : (
+                                <AddNewEmployeeForm
+                                    employee={employee}
+                                    handleChange={handleEmployeeChange}
+                                    handleSubmit={handleEmployeeSubmit}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>
