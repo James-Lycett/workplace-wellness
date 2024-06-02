@@ -95,55 +95,50 @@ export default function AdminHome() {
     }
 
 
-    if (renderConditionsMet()) {
-        if (view === 'admin') {
+    const renderContent = () => {
+        if (!renderConditionsMet()) {
             return (
-                <>
-                    <section className="bg-slate-100 py-5">
-                        {view === 'admin' && (<AdminProgressCharts companyMetrics={companyMetrics} />)}
-                        <div className="flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[80vh] rounded-lg shadow-md overflow-hidden ">
-                            <DashboardSidebar
-                                openModal={openModal}
-                                userIsAdmin={user.admin}
-                                view={view}
-                                setView={setView}
-                            />
-                            {view === 'admin' ? (<AdminEmployeesTable employees={employees} setEmployees={setEmployees} />) : (<UserRecordsTable userId={userId} />)}
-                        </div>
-                    </section>
-                    {isModalOpen.state && (
-                        <Modal setIsModalOpen={setIsModalOpen} option={isModalOpen.option} setEmployees={setEmployees} />
-                    )}
-                </>
-            )
-        } else {
-            return (
-                <>
-                    <section className="bg-slate-100 py-5">
-                        <UserProgressCharts averages={averages} />
-                        <div className="flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[80vh] rounded-lg shadow-md overflow-hidden ">
-                            <DashboardSidebar
-                                openModal={openModal}
-                                userIsAdmin={user.admin}
-                                view={view}
-                                setView={setView}
-                            />
-                            <UserRecordsTable userId={userId} />
-                        </div>
-                    </section>
-                    {isModalOpen.state && (
-                        <Modal setIsModalOpen={setIsModalOpen} option={isModalOpen.option} loadData={loadData} userId={userId} />
-                    )}
-                </>
-            )
-        }
-    } else {
-        return (
-            <>
                 <div className="py-20">
                     <Spinner />
                 </div>
+            )
+        }
+    
+        return (
+            <>
+                <section className="bg-slate-100 py-5">
+                    {view === 'admin' ? (
+                        <AdminProgressCharts companyMetrics={companyMetrics} />
+                    ) : (
+                        <UserProgressCharts averages={averages} />
+                    )
+                    }
+                    <div className="flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[80vh] rounded-lg shadow-md overflow-hidden ">
+                        <DashboardSidebar
+                            openModal={openModal}
+                            userIsAdmin={user.admin}
+                            view={view}
+                            setView={setView}
+                        />
+                        {view === 'admin' ? (
+                            <AdminEmployeesTable employees={employees} setEmployees={setEmployees} />
+                        ) : (
+                            <UserRecordsTable userId={userId} />
+                        )}
+                    </div>
+                </section>
+                {isModalOpen.state && (
+                    <Modal
+                        setIsModalOpen={setIsModalOpen}
+                        option={isModalOpen.option}
+                        loadData={loadData}
+                        userId={userId}
+                        setEmployees={setEmployees}
+                    />
+                )}
             </>
         )
     }
+    
+    return renderContent()
 }
