@@ -7,7 +7,7 @@ import {
     listUsers,
 } from '../utils/api'
 import Spinner from '../utils/Spinner'
-import ActivityLogModal from './ActivityLog/ActivityLogModal'
+import Modal from './Modal/Modal'
 import AdminProgressCharts from './AdminProgressCharts/AdminProgressCharts'
 import AdminEmployeesTable from './AdminEmployeesTable/AdminEmployeesTable'
 import UserRecordsTable from './UserRecordsTable/UserRecordsTable'
@@ -114,7 +114,7 @@ export default function AdminHome() {
                         </div>
                     </section>
                     {isModalOpen.state && (
-                        <ActivityLogModal setIsModalOpen={setIsModalOpen} option={isModalOpen.option} />
+                        <Modal setIsModalOpen={setIsModalOpen} option={isModalOpen.option} />
                     )}
                 </>
             )
@@ -134,7 +134,7 @@ export default function AdminHome() {
                         </div>
                     </section>
                     {isModalOpen.state && (
-                        <ActivityLogModal setIsModalOpen={setIsModalOpen} option={isModalOpen.option} />
+                        <Modal setIsModalOpen={setIsModalOpen} option={isModalOpen.option} />
                     )}
                 </>
             )

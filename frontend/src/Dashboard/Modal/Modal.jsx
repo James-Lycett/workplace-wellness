@@ -3,7 +3,7 @@ import ActivityLogForm from "./ActivityLogForm";
 import AddNewEmployeeForm from "./AddNewEmployeeForm";
 import { createUser } from "../../utils/api"
 
-export default function ActivityLogModal({ setIsModalOpen, option }) {
+export default function Modal({ setIsModalOpen, option }) {
 
     const [entry, setEntry] = useState({
         sleep_duration: '',
