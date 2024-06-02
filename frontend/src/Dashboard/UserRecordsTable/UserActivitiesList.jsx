@@ -39,6 +39,7 @@ export default function UserActivitiesList({ userId }) {
                     >
                         <ActivityCard
                             entry={entry}
+                            setEntries={setEntries}
                             setError={setError}
                             userId={userId}
                         />

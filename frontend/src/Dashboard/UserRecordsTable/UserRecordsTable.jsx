@@ -18,9 +18,6 @@ export default function UserRecordsTable({ userId }) {
                         <Table.HeadCell>Stress Level</Table.HeadCell>
                         <Table.HeadCell>Sleep Hours</Table.HeadCell>
                         <Table.HeadCell>
-                            <span className="sr-only">Edit</span>
-                        </Table.HeadCell>
-                        <Table.HeadCell>
                             <span className="sr-only">X</span>
                         </Table.HeadCell>
                     </Table.Head>
