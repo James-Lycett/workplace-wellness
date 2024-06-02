@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import ActivityLogForm from "./ActivityLogForm";
+import AddNewEmployeeForm from "./AddNewEmployeeForm";
+import { createUser } from "../../utils/api"
 
-export default function ActivityLogModal({ setIsModalOpen }) {
+export default function ActivityLogModal({ setIsModalOpen, option }) {
 
     const [entry, setEntry] = useState({
         sleep_duration: '',
@@ -11,7 +13,7 @@ export default function ActivityLogModal({ setIsModalOpen }) {
         heart_rate: '',
     })
 
-    const handleChange = (e) => {
+    const handleEntryChange = (e) => {
         const { name, value } = e.target
         setEntry({
             ...entry,
@@ -19,11 +21,35 @@ export default function ActivityLogModal({ setIsModalOpen }) {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleEntrySubmit = (e) => {
         e.preventDefault()
         // Handle form submission logic
         console.log('Form submitted', entry)
         // Close modal after submission
+        setIsModalOpen(false)
+    }
+
+
+    const [employee, setEmployee] = useState({
+        age: "",
+        gender: "",
+        height: "",
+        weight: "",
+        sleepDisorder: "",
+        occupation: "",
+    })
+
+    const handleEmployeeChange = (e) => {
+        const { name, value } = e.target
+        setEmployee({
+            ...employee,
+            [name]: value,
+        })
+    }
+
+    const handleEmployeeSubmit = (e) => {
+        e.preventDefault()
+        createUser(employee)
         setIsModalOpen(false)
     }
 
@@ -46,7 +72,7 @@ export default function ActivityLogModal({ setIsModalOpen }) {
                         <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                             <div className="flex-grow"></div>{' '}
                             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                Log New Activity
+                                {option === "activity" ? "Log New Activity" : "Add New Employee"}
                             </h3>
                             <div className="flex-grow flex justify-end">
                                 <button
@@ -77,11 +103,20 @@ export default function ActivityLogModal({ setIsModalOpen }) {
                         </div>
 
                         <div className="p-4 md:p-5">
-                            <ActivityLogForm
-                                entry={entry}
-                                handleChange={handleChange}
-                                handleSubmit={handleSubmit}
-                            />
+                            {option === "activity" ? (
+                                <ActivityLogForm
+                                    entry={entry}
+                                    handleChange={handleEntryChange}
+                                    handleSubmit={handleEntrySubmit}
+                                />
+                                ) : (
+                                    <AddNewEmployeeForm 
+                                        employee={employee}
+                                        handleChange={handleEmployeeChange}
+                                        handleSubmit={handleEmployeeSubmit}
+                                    />
+                                )
+                            }
                         </div>
                     </div>
                 </div>

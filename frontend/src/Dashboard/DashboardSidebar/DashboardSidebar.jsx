@@ -13,8 +13,14 @@ import {
 } from 'react-icons/hi'
 import logo from './circle.svg'
 
-export default function DashboardSidebar({ openModal, userIsAdmin, view, setView }) {
-    console.log('AdminSidebar Props:', { userIsAdmin, view });
+export default function DashboardSidebar({ openModal, openAddEmployeeModal, userIsAdmin, view, setView }) {
+
+    const handleNavigation = (e, newView) => {
+        e.preventDefault();
+        setView(newView);
+        // Perform any other necessary state updates here
+    };
+
     return (
         <>
             <div>
@@ -34,9 +40,16 @@ export default function DashboardSidebar({ openModal, userIsAdmin, view, setView
                                     <Sidebar.Item
                                         href="#"
                                         icon={HiOutlineIdentification}
-                                        onClick={() => setView("user")}
+                                        onClick={(e) => handleNavigation(e, "user")}
                                     >
                                         Profile
+                                    </Sidebar.Item>
+                                    <Sidebar.Item
+                                        href="#"
+                                        icon={HiTable}
+                                        onClick={(e) => handleNavigation(e, "admin")}
+                                    >
+                                        Employees
                                     </Sidebar.Item>
                                     <Sidebar.Collapse
                                     icon={HiUserGroup}
@@ -58,16 +71,6 @@ export default function DashboardSidebar({ openModal, userIsAdmin, view, setView
                                 </>
                                     : null
                                 }
-                                {userIsAdmin && view === "user" ?
-                                    <Sidebar.Item
-                                        href="#"
-                                        icon={HiTable}
-                                        onClick={() => setView("admin")}
-                                    >
-                                        Employees
-                                    </Sidebar.Item>
-                                    : null
-                                }
                                 <Sidebar.Item href="#" icon={HiTable}>
                                     My Logs
                                 </Sidebar.Item>
@@ -79,7 +82,7 @@ export default function DashboardSidebar({ openModal, userIsAdmin, view, setView
                                 {view === "user" ?
                                     <Sidebar.Item
                                     href="#"
-                                    onClick={openModal}
+                                    onClick={() => openModal("activity")}
                                     icon={HiDocumentReport}
                                     >
                                         LOG NEW ACTIVITY
@@ -87,7 +90,11 @@ export default function DashboardSidebar({ openModal, userIsAdmin, view, setView
                                     : null
                                 }
                                 {view === "admin" ?
-                                    <Sidebar.Item href="#" icon={HiOutlinePlus}>
+                                    <Sidebar.Item
+                                        href="#"
+                                        icon={HiOutlinePlus}
+                                        onClick={() => openModal("employee")}
+                                    >
                                         Add A New Employee
                                     </Sidebar.Item>
                                     : null

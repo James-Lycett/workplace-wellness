@@ -16,8 +16,11 @@ import DashboardSidebar from './DashboardSidebar/DashboardSidebar'
 
 export default function AdminHome() {
     const { userId } = useParams()
-    const [isModalOpen, setIsModalOpen] = useState(false) // State to control modal visibility
     const [user, setUser] = useState(null)
+    const [isModalOpen, setIsModalOpen] = useState({
+        state: false,
+        option: "activity"
+    })
     const [averages, setAverages] = useState({
         sleep_duration_average: 0,
         daily_steps_average: 0,
@@ -86,8 +89,11 @@ export default function AdminHome() {
         }
     }
 
-    const openModal = () => {
-        setIsModalOpen(true)
+    const openModal = (option) => {
+        setIsModalOpen({
+            state: true,
+            option: option
+        })
     }
 
 
@@ -107,8 +113,8 @@ export default function AdminHome() {
                             {view === 'admin' ? (<AdminEmployeesTable employees={employees} setEmployees={setEmployees} />) : (<UserRecordsTable userId={userId} />)}
                         </div>
                     </section>
-                    {isModalOpen && (
-                        <ActivityLogModal setIsModalOpen={setIsModalOpen} />
+                    {isModalOpen.state && (
+                        <ActivityLogModal setIsModalOpen={setIsModalOpen} option={isModalOpen.option} />
                     )}
                 </>
             )
@@ -127,8 +133,8 @@ export default function AdminHome() {
                             <UserRecordsTable userId={userId} />
                         </div>
                     </section>
-                    {isModalOpen && (
-                        <ActivityLogModal setIsModalOpen={setIsModalOpen} />
+                    {isModalOpen.state && (
+                        <ActivityLogModal setIsModalOpen={setIsModalOpen} option={isModalOpen.option} />
                     )}
                 </>
             )
