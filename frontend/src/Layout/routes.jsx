@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Router, Routes } from 'react-router-dom'
 import LandingPage from '../LandingPage/LandingPage'
 import Dashboard from '../Dashboard/Dashboard'
 import LoginPage from '../LoginPage/LoginPage'
@@ -26,26 +26,36 @@ export default function RoutesComponent() {
     return (
         <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/admin/:userId/home" element={<Dashboard />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<CreateAccount />} />
-            <Route path="/user/:userId/home" element={<UserHome />} />
-            <Route path="/user/account" element={<CreateUserAccount />} />
-            <Route path="/admin/account" element={<CreateAdminAccount />} />
-            {/*<Route path="/admin/:userId/report" element={<AdminReport />} />*/}
-            <Route path="/user/:userId/log" element={<UserActivityLog />} />
-            <Route path="/user/registerForm" element={<UserRegisterForm />} />
-            <Route path="/tips/options" element={<TipsPage />} />
-            {/* <Route path="/tips/images" element={<ImagePage />} /> */}
-            <Route path="/user/:userId/history" element={<UserPastReports />} />
-            <Route path="/bp/about" element={<About />} />
-            <Route path="/bp/careers" element={<Careers />} />
-            <Route path="/bp/contact" element={<Contact />} />
-            <Route path="/bp/terms" element={<Terms />} />
-            <Route path="/bp/privacy" element={<PrivacyPolicy />} />
-            <Route path="/tips/sleep" element={<TipsSleep />} />
-            <Route path="/tips/fitness" element={<TipsFit />} />
-            <Route path="/tips/meditation" element={<TipsMed />} />
+            <Route path="/user">
+                <Route path="account" element={<CreateUserAccount />} />
+                <Route path="registerForm" element={<UserRegisterForm />} />
+                <Route path=":userId">
+                    <Route path="log" element={<UserActivityLog />} />
+                    <Route path="home" element={<UserHome />} />
+                    <Route path="history" element={<UserPastReports />} />
+                </Route>
+            </Route>
+            <Route path="/admin">
+                <Route path="/admin/account" element={<CreateAdminAccount />} />
+                <Route path="/admin/:userId/home" element={<Dashboard />} />
+                {/*<Route path="/admin/:userId/report" element={<AdminReport />} />*/}
+            </Route>
+            <Route path="/tips">
+                <Route path="options" element={<TipsPage />} />
+                <Route path="sleep" element={<TipsSleep />} />
+                <Route path="fitness" element={<TipsFit />} />
+                <Route path="meditation" element={<TipsMed />} />
+                {/* <Route path="/tips/images" element={<ImagePage />} /> */}
+            </Route>
+            <Route path="/bp">
+                <Route path="about" element={<About />} />
+                <Route path="careers" element={<Careers />} />
+                <Route path="contact" element={<Contact />} />
+                <Route path="terms" element={<Terms />} />
+                <Route path="privacy" element={<PrivacyPolicy />} />
+            </Route>
         </Routes>
     )
 }
