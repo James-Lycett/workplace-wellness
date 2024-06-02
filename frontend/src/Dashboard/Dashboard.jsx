@@ -11,6 +11,7 @@ import AdminProgressCharts from './AdminProgressCharts/AdminProgressCharts'
 import AdminSidebar from './AdminSidebar/AdminSidebar'
 import AdminEmployeesTable from './AdminEmployeesTable/AdminEmployeesTable'
 import UserRecordsTable from './UserRecordsTable/UserRecordsTable'
+import UserProgressCharts from './UserProgressCharts/UserProgressCharts'
 
 export default function AdminHome() {
     const { userId } = useParams()
@@ -93,7 +94,7 @@ export default function AdminHome() {
             return (
                 <>
                     <section className="bg-slate-100 py-5">
-                        <AdminProgressCharts companyMetrics={companyMetrics}/>
+                        <UserProgressCharts averages={averages}/>
                         <div className="flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[50vh] rounded-lg shadow-md overflow-hidden ">
                             <AdminSidebar openModal={openModal} />
                             <UserRecordsTable userId={userId} />

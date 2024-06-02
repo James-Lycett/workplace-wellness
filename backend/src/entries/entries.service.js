@@ -51,7 +51,7 @@ Returns an object that looks like this:
     }
 */
 function lastMonthAverages(personId) {
-    const columnsToAvg = ["sleep_duration", "daily_steps", "stress_level", "heart_rate"]
+    const columnsToAvg = ["sleep_duration", "daily_steps", "stress_level", "heart_rate", "quality_of_sleep"]
 
     return knex("entries")
         .select(columnsToAvg.map(column => knex.raw(`AVG(${column}) AS ${column}_average`)))
