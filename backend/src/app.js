@@ -10,6 +10,7 @@ const notFound = require("./errors/notFound")
 
 var dataRouter = require("./data/data.router")
 var entriesRouter = require("./entries/entries.router")
+const loadDataRouter = require("./loadData/loadData.router")
 
 var app = express()
 
@@ -18,6 +19,7 @@ app.use(express.json())
 
 app.use("/data", dataRouter)
 app.use("/entries", entriesRouter)
+app.use("/load", loadDataRouter)
 app.use(notFound)
 app.use(errorHandler)
 

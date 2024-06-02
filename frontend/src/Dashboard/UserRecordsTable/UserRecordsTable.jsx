@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, Checkbox } from 'flowbite-react'
 import UserActivitiesList from './UserActivitiesList'
 
-export default function UserRecordsTable({ userId }) {
+export default function UserRecordsTable({ userId, entries, setEntries }) {
     return (
         <>
             <div className="overflow-auto">
@@ -22,7 +22,7 @@ export default function UserRecordsTable({ userId }) {
                         </Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
-                        <UserActivitiesList userId={userId} />
+                        <UserActivitiesList userId={userId} entries={entries} setEntries={setEntries} />
                     </Table.Body>
                 </Table>
             </div>

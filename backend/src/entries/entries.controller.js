@@ -245,7 +245,7 @@ async function lastMonthCompanyMetrics(req, res, next) {
             ...averageQualityOfSleep
         }
 
-        res.json({ data })
+        return data
     } catch (error) {
         console.error(error)
         res.status(500).json({ error: "Error fetching all last month averages from database"})
@@ -267,5 +267,6 @@ module.exports = {
         asyncErrorBoundary(deleteEntry),
     ],
     readLastMonthAverages: [asyncErrorBoundary(personExists), asyncErrorBoundary(lastMonthAverages)],
-    readLastMonthCompanyMetrics: [asyncErrorBoundary(lastMonthCompanyMetrics)]
+    readLastMonthCompanyMetrics: [asyncErrorBoundary(lastMonthCompanyMetrics)],
+    lastMonthCompanyMetrics
 }

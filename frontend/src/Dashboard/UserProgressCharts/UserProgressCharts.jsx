@@ -1,6 +1,7 @@
 import React from "react";
 import RadialBar from '../AdminProgressCharts/RadialBar'
 import { Progress } from 'flowbite-react'
+import Spinner from "../../utils/Spinner";
 
 export default function UserProgressCharts({ averages }) {
         // Placeholder admin goals data:
@@ -28,7 +29,8 @@ export default function UserProgressCharts({ averages }) {
         const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
         return Math.floor(boundedProgressValue)
     }
-
+    
+    if (averages.loaded) {
     return (
         <>
         <div className="flex flex-col justify-center bg-white w-full max-w-5xl mx-auto rounded-md shadow-md">
@@ -69,4 +71,11 @@ export default function UserProgressCharts({ averages }) {
                     </div>
         </>
     )
+    } else {
+        return (
+            <div className="py-20">
+                <Spinner />
+            </div>
+        )
+    }
 }

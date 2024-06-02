@@ -1,10 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import {
-    readUserById,
-    readAveragesById,
-    readCompanyMetrics,
-    listUsers,
+    loadAllData
 } from '../utils/api'
 import Spinner from '../utils/Spinner'
 import Modal from './Modal/Modal'
@@ -27,6 +24,7 @@ export default function AdminHome() {
         stress_level_average: 0,
         heart_rate_average: 0,
         bmi_category_average: 'N/A',
+        loaded: false,
     })
     const [companyMetrics, setCompanyMetrics] = useState({
         sleep_duration_total: 0,
@@ -34,40 +32,25 @@ export default function AdminHome() {
     })
     const [view, setView] = useState('user')
     const [employees, setEmployees] = useState(null)
+    const [entries, setEntries] = useState(null)
 
-    // Fetches user from the API along with lastMonthAverages for that user and company-wide lastMonthAverages for admin purposes
+    // Fetches user from the API along with that user's entries, lastMonthAverages for that user, and company-wide lastMonthAverages for admin purposes (if user is an admin)
     const loadData = useCallback(async () => {
         const abortController = new AbortController()
 
         try {
-            // Reads user designated by url param
-            const readUserResponse = await readUserById(
-                userId,
-                abortController.signal
-            )
-            setUser(readUserResponse)
 
-            // Reads that user's lastMonthAverages from his/her entries
-            const readAveragesResponse = await readAveragesById(
-                userId,
-                abortController.signal
-            )
-            setAverages(readAveragesResponse)
+           const data = await loadAllData(userId, abortController.signal)
 
-            if (readUserResponse.admin) {
-                // Reads all user's lastMonthAverages and totals
-                const readCompanyMetricsResponse = await readCompanyMetrics(
-                    abortController.signal
-                )
-                setCompanyMetrics(readCompanyMetricsResponse)
-
-                // Lists all users for use in AdminEmployeesTable
-                const listUsersResponse = await listUsers(
-                    abortController.signal
-                )
-                setEmployees(listUsersResponse)
-            }
-
+           setUser(data.user)
+           setEntries(data.entries)
+           setAverages({
+                ...data.averages,
+                loaded: true,
+           })
+           setCompanyMetrics(data.companyMetrics)
+           setEmployees(data.employees)
+           
         } catch (error) {
             console.error(error)
         } finally {
@@ -77,10 +60,10 @@ export default function AdminHome() {
 
     useEffect(() => {
         loadData()
-    }, [loadData, userId])
+    }, [])
 
     function renderConditionsMet() {
-        if (user && averages.sleep_duration_average) {
+        if (user) {
             return true
         } else {
             return false
@@ -123,7 +106,7 @@ export default function AdminHome() {
                         {view === 'admin' ? (
                             <AdminEmployeesTable employees={employees} setEmployees={setEmployees} />
                         ) : (
-                            <UserRecordsTable userId={userId} />
+                            <UserRecordsTable userId={userId} entries={entries} setEntries={setEntries} />
                         )}
                     </div>
                 </section>

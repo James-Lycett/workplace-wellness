@@ -201,3 +201,15 @@ export async function readCompanyMetrics(signal) {
 
     return await fetchJson(url, options)
 }
+
+
+export async function loadAllData(userId, signal) {
+    const url = `${API_BASE_URL}/load/${userId}`
+    const options = {
+        method: "GET",
+        headers,
+        signal,
+    }
+
+    return await fetchJson(url, options)
+}

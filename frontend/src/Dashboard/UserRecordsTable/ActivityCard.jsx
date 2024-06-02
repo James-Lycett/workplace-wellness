@@ -5,7 +5,7 @@ import { Checkbox, Table } from 'flowbite-react'
 import moment from 'moment'
 
 
-export default function ActivityCard({ setError, entry, userId, setEntries }) {
+export default function ActivityCard({ entry, userId, setEntries }) {
     const [openModal, setOpenModal] = useState(false)
 
     async function handleDelete() {
@@ -13,8 +13,8 @@ export default function ActivityCard({ setError, entry, userId, setEntries }) {
 
         try {
             await deleteEntry(entry.entry_id, abortController.signal)
-        } catch (er) {
-            setError(er)
+        } catch (error) {
+            console.error(error)
         } finally {
             setOpenModal(false)
             const newEntries = await readEntriesByPerson(userId)
