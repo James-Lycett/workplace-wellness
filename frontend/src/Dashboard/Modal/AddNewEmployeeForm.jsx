@@ -5,7 +5,6 @@ export default function AddNewEmployeeForm({
     handleChange,
     handleSubmit,
 }) {
-
     return (
         <div className="text-xl">
             <form onSubmit={handleSubmit} className="flex flex-col">
@@ -58,7 +57,7 @@ export default function AddNewEmployeeForm({
                         id="gender"
                         value={employee.gender}
                         onChange={handleChange}
-                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5"
+                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5 text-xl text-accent-1"
                     >
                         <option value="/">Gender</option>
                         <option value="Male">Male</option>
@@ -66,15 +65,13 @@ export default function AddNewEmployeeForm({
                     </select>
                 </div>
                 <div className="flex items-center justify-between my-2 h-10">
-                    <label htmlFor="sleep_disorder">
-                        Sleep Disorder *
-                    </label>
+                    <label htmlFor="sleep_disorder">Sleep Disorder *</label>
                     <select
                         name="sleep_disorder"
                         id="sleep_disorder"
                         value={employee.sleep_disorder}
                         onChange={handleChange}
-                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5"
+                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5 text-xl text-accent-1"
                     >
                         <option value="">Sleep Disorder</option>
                         <option value="None">None</option>
