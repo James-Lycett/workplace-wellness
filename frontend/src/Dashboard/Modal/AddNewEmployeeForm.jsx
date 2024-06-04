@@ -21,19 +21,19 @@ export default function AddNewEmployeeForm({
                     />
                 </div>
                 {/* Need to add a password column to db. Don't forget to add {password: ""} property to employee default state
-                <div className="flex items-center justify-between my-2 h-10">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="string"
-                        id="password"
-                        name="password"
-                        value={employee.password}
-                        placeholder="Password"
-                        onChange={handleChange}
-                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5"
-                    />
-                </div>
-                */}
+        <div className="flex items-center justify-between my-2 h-10">
+            <label htmlFor="password">Password</label>
+            <input
+                type="string"
+                id="password"
+                name="password"
+                value={employee.password}
+                placeholder="Password"
+                onChange={handleChange}
+                className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5"
+            />
+        </div>
+        */}
                 <div className="flex items-center justify-between my-2 h-10">
                     <label htmlFor="age">Age *</label>
                     <input
@@ -57,9 +57,11 @@ export default function AddNewEmployeeForm({
                         id="gender"
                         value={employee.gender}
                         onChange={handleChange}
-                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5 text-xl text-accent-1"
+                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5 text-xl text-accent-1 "
                     >
-                        <option value="/">Gender</option>
+                        <option className="" value="/">
+                            Gender
+                        </option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
