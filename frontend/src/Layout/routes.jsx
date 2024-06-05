@@ -22,10 +22,11 @@ export default function RoutesComponent() {
             <Route path="/register" element={<CreateAccount />} />
             <Route path="/user">
                 <Route path="account" element={<CreateUserAccount />} />
+                <Route path=":userId/home" element={<Dashboard />} />
             </Route>
             <Route path="/admin">
-                <Route path="/admin/account" element={<CreateAdminAccount />} />
-                <Route path="/admin/:userId/home" element={<Dashboard />} />
+                <Route path="account" element={<CreateAdminAccount />} />
+                <Route path=":userId/home" element={<Dashboard />} />
             </Route>
             <Route path="/tips">
                 <Route path="sleep" element={<TipsSleep />} />

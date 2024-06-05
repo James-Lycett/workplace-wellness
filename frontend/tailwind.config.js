@@ -52,6 +52,9 @@ module.exports = {
                     background: '#E2EFF2',
                 },
             },
+            boxShadow: {
+                'inset-lg': 'inset 0 2px 8px regba(0, 0, 0, 0.25)',
+            },
         },
     },
     plugins: [require('flowbite/plugin')],
