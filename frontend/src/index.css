@@ -83,8 +83,6 @@ p {
         @apply text-white
         bg-v2-ltblue
         text-center
-        text-xl
-        font-bold
         border-2
         border-v2-ltblue
         hover:bg-v2-drkblue
@@ -103,8 +101,6 @@ p {
         @apply text-v2-ltblue
         bg-white
         text-center
-        text-xl
-        font-bold
         border-2
         border-v2-ltblue
         hover:bg-v2-ltblue

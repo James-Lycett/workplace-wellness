@@ -52,16 +52,16 @@ export default function Footer() {
                 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white',
             inactiveClasses: 'text-gray-500 dark:text-gray-400',
             onOpen: (item) => {
-                console.log('accordion item has been shown')
-                console.log(item)
+                //console.log('accordion item has been shown')
+                //console.log(item)
             },
             onClose: (item) => {
-                console.log('accordion item has been hidden')
-                console.log(item)
+                //console.log('accordion item has been hidden')
+                //console.log(item)
             },
             onToggle: (item) => {
-                console.log('accordion item has been toggled')
-                console.log(item)
+                //console.log('accordion item has been toggled')
+                //console.log(item)
             },
         }
 
@@ -174,7 +174,7 @@ export default function Footer() {
                         <span className="text-v2-drkblue">Company</span>
                         <svg
                             data-accordion-icon
-                            class="w-3 h-3 rotate-180 shrink-0"
+                            className="w-3 h-3 rotate-180 shrink-0"
                             aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -182,9 +182,9 @@ export default function Footer() {
                         >
                             <path
                                 stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
                                 d="M9 5 5 1 1 5"
                             />
                         </svg>
@@ -229,7 +229,7 @@ export default function Footer() {
                         <span className="text-v2-drkblue">Support</span>
                         <svg
                             data-accordion-icon
-                            class="w-3 h-3 rotate-180 shrink-0"
+                            className="w-3 h-3 rotate-180 shrink-0"
                             aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -237,9 +237,9 @@ export default function Footer() {
                         >
                             <path
                                 stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
                                 d="M9 5 5 1 1 5"
                             />
                         </svg>
@@ -267,7 +267,7 @@ export default function Footer() {
                         <span className="text-v2-drkblue">Contact Us</span>
                         <svg
                             data-accordion-icon
-                            class="w-3 h-3 rotate-180 shrink-0"
+                            className="w-3 h-3 rotate-180 shrink-0"
                             aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -275,9 +275,9 @@ export default function Footer() {
                         >
                             <path
                                 stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
                                 d="M9 5 5 1 1 5"
                             />
                         </svg>

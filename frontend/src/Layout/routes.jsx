@@ -1,26 +1,20 @@
 import React from 'react'
-import { Route, Router, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import LandingPage from '../LandingPage/LandingPage'
 import Dashboard from '../Dashboard/Dashboard'
 import LoginPage from '../LoginPage/LoginPage'
 import CreateAccount from '../CreateAccount/CreateAccount'
-import UserHome from '../UserHome/UserHome'
-import UserActivityLog from '../UserActivityLog/UserActivityLog'
 import CreateUserAccount from '../CreateAccount/CreateUserAccount'
 import CreateAdminAccount from '../CreateAccount/CreateAdminAccount'
-import UserRegisterForm from '../CreateAccount/UserRegisterForm'
-import UserPastReports from '../UserPastReports/UserPastReports'
 import TipsPage from '../Tips/TipsPage'
 import About from '../Boilerplate/About'
 import Careers from '../Boilerplate/Careers'
 import Contact from '../Boilerplate/Contact'
 import Terms from '../Boilerplate/Terms'
 import PrivacyPolicy from '../Boilerplate/Privacy'
-//import AdminReport from '../AdminHome/AdminReport'
 import TipsSleep from '../Tips/TipsSleep'
 import TipsMed from '../Tips/TipsMed'
 import TipsFit from '../Tips/TipsFit'
-// import ImagePage from "../Tips/ImagePage"
 
 export default function RoutesComponent() {
     return (
@@ -30,24 +24,16 @@ export default function RoutesComponent() {
             <Route path="/register" element={<CreateAccount />} />
             <Route path="/user">
                 <Route path="account" element={<CreateUserAccount />} />
-                <Route path="registerForm" element={<UserRegisterForm />} />
-                <Route path=":userId">
-                    {/*<Route path="log" element={<UserActivityLog />} />*/}
-                    <Route path="home" element={<UserHome />} />
-                    <Route path="history" element={<UserPastReports />} />
-                </Route>
             </Route>
             <Route path="/admin">
                 <Route path="/admin/account" element={<CreateAdminAccount />} />
                 <Route path="/admin/:userId/home" element={<Dashboard />} />
-                {/*<Route path="/admin/:userId/report" element={<AdminReport />} />*/}
             </Route>
             <Route path="/tips">
                 <Route path="options" element={<TipsPage />} />
                 <Route path="sleep" element={<TipsSleep />} />
                 <Route path="fitness" element={<TipsFit />} />
                 <Route path="meditation" element={<TipsMed />} />
-                {/* <Route path="/tips/images" element={<ImagePage />} /> */}
             </Route>
             <Route path="/bp">
                 <Route path="about" element={<About />} />
