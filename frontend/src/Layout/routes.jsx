@@ -28,7 +28,6 @@ export default function RoutesComponent() {
                 <Route path="/admin/:userId/home" element={<Dashboard />} />
             </Route>
             <Route path="/tips">
-                <Route path="options" element={<TipsPage />} />
                 <Route path="sleep" element={<TipsSleep />} />
                 <Route path="fitness" element={<TipsFit />} />
                 <Route path="meditation" element={<TipsMed />} />
