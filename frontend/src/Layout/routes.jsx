@@ -12,9 +12,7 @@ import Careers from '../Boilerplate/Careers'
 import Contact from '../Boilerplate/Contact'
 import Terms from '../Boilerplate/Terms'
 import PrivacyPolicy from '../Boilerplate/Privacy'
-import TipsSleep from '../Tips/TipsSleep'
-import TipsMed from '../Tips/TipsMed'
-import TipsFit from '../Tips/TipsFit'
+import { TipsSleep, TipsMed, TipsFit } from '../Tips/TipsPages'
 
 export default function RoutesComponent() {
     return (
