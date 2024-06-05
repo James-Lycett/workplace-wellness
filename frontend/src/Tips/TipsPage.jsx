@@ -13,92 +13,92 @@ import meditation2 from './Images/meditation2.jpg'
 import meditation3 from './Images/meditation3.jpg'
 import meditation4 from './Images/meditation4.jpg'
 
+export const sleepTips = [
+    {
+        title: 'Sleep Disorders Guide',
+        images: [
+            {
+                src: sleep1,
+                alt: 'Image 1',
+                description: 'Personalize Your Sleep Routine',
+            },
+            {
+                src: sleep2,
+                alt: 'Image 2',
+                description: 'Common Sleep Disorders',
+            },
+            {
+                src: sleep3,
+                alt: 'Image 3',
+                description: 'Consult With A Licensed Sleep Specialist',
+            },
+            {
+                src: sleep4,
+                alt: 'Image 4',
+                description: 'Sleep Disorder Self Help Modules',
+            },
+        ],
+    },
+]
+
+export const fitnessTips = [
+    {
+        title: 'Physical Fitness Guide',
+        images: [
+            {
+                src: fitness1,
+                alt: 'Image 1',
+                description: 'Select A Workout Plan That Fits Your Needs',
+            },
+            {
+                src: fitness2,
+                alt: 'Image 2',
+                description:
+                    'The Link Between Physical Activity and Mental Health',
+            },
+            {
+                src: fitness3,
+                alt: 'Image 3',
+                description: 'Find Local Trails and Parks',
+            },
+            {
+                src: fitness4,
+                alt: 'Image 4',
+                description: 'Nutrition Tips and Mindful Meals',
+            },
+        ],
+    },
+]
+
+export const meditationTips = [
+    {
+        title: 'Meditation & Relaxation Guide',
+        images: [
+            {
+                src: meditation1,
+                alt: 'Image 1',
+                description: 'Meditation Techniques',
+            },
+            {
+                src: meditation2,
+                alt: 'Image 2',
+                description: 'Setup Deep Breathing Reminders',
+            },
+            {
+                src: meditation3,
+                alt: 'Image 3',
+                description: 'In Depth Mood Tracker',
+            },
+            {
+                src: meditation4,
+                alt: 'Image 4',
+                description: "Sights & Sounds for A Better Night's Sleep",
+            },
+        ],
+    },
+]
+
 export default function TipsPage() {
-    const sleepDisorderImages = [
-        {
-            title: 'Sleep Disorders Guide',
-            images: [
-                {
-                    src: sleep1,
-                    alt: 'Image 1',
-                    description: 'Personalize Your Sleep Routine',
-                },
-                {
-                    src: sleep2,
-                    alt: 'Image 2',
-                    description: 'Common Sleep Disorders',
-                },
-                {
-                    src: sleep3,
-                    alt: 'Image 3',
-                    description: 'Consult With A Licensed Sleep Specialist',
-                },
-                {
-                    src: sleep4,
-                    alt: 'Image 4',
-                    description: 'Sleep Disorder Self Help Modules',
-                },
-            ],
-        },
-    ]
-
-    const physicalFitnessImages = [
-        {
-            title: 'Physical Fitness Guide',
-            images: [
-                {
-                    src: fitness1,
-                    alt: 'Image 1',
-                    description: 'Select A Workout Plan That Fits Your Needs',
-                },
-                {
-                    src: fitness2,
-                    alt: 'Image 2',
-                    description:
-                        'The Link Between Physical Activity and Mental Health',
-                },
-                {
-                    src: fitness3,
-                    alt: 'Image 3',
-                    description: 'Find Local Trails and Parks',
-                },
-                {
-                    src: fitness4,
-                    alt: 'Image 4',
-                    description: 'Nutrition Tips and Mindful Meals',
-                },
-            ],
-        },
-    ]
-
-    const meditationRelaxationImages = [
-        {
-            title: 'Meditation & Relaxation Guide',
-            images: [
-                {
-                    src: meditation1,
-                    alt: 'Image 1',
-                    description: 'Meditation Techniques',
-                },
-                {
-                    src: meditation2,
-                    alt: 'Image 2',
-                    description: 'Setup Deep Breathing Reminders',
-                },
-                {
-                    src: meditation3,
-                    alt: 'Image 3',
-                    description: 'In Depth Mood Tracker',
-                },
-                {
-                    src: meditation4,
-                    alt: 'Image 4',
-                    description: "Sights & Sounds for A Better Night's Sleep",
-                },
-            ],
-        },
-    ]
-
     return (
         <div>
             <div className="flex flex-col items-center justify-center">

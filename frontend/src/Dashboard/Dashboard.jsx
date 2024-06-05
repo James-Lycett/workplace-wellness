@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import {
-    loadAllData
-} from '../utils/api'
+import { loadAllData } from '../utils/api'
 import Spinner from '../utils/Spinner'
 import Modal from './Modal/Modal'
 import AdminProgressCharts from './AdminProgressCharts/AdminProgressCharts'
@@ -16,7 +14,7 @@ export default function AdminHome() {
     const [user, setUser] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState({
         state: false,
-        option: "activity"
+        option: 'activity',
     })
     const [averages, setAverages] = useState({
         sleep_duration_average: 0,
@@ -39,18 +37,16 @@ export default function AdminHome() {
         const abortController = new AbortController()
 
         try {
+            const data = await loadAllData(userId, abortController.signal)
 
-           const data = await loadAllData(userId, abortController.signal)
-
-           setUser(data.user)
-           setEntries(data.entries)
-           setAverages({
+            setUser(data.user)
+            setEntries(data.entries)
+            setAverages({
                 ...data.averages,
                 loaded: true,
-           })
-           setCompanyMetrics(data.companyMetrics)
-           setEmployees(data.employees)
-           
+            })
+            setCompanyMetrics(data.companyMetrics)
+            setEmployees(data.employees)
         } catch (error) {
             console.error(error)
         } finally {
@@ -73,10 +69,9 @@ export default function AdminHome() {
     const openModal = (option) => {
         setIsModalOpen({
             state: true,
-            option: option
+            option: option,
         })
     }
-
 
     const renderContent = () => {
         if (!renderConditionsMet()) {
@@ -86,7 +81,7 @@ export default function AdminHome() {
                 </div>
             )
         }
-    
+
         return (
             <>
                 <section className="bg-slate-100 py-5">
@@ -94,8 +89,7 @@ export default function AdminHome() {
                         <AdminProgressCharts companyMetrics={companyMetrics} />
                     ) : (
                         <UserProgressCharts averages={averages} />
-                    )
-                    }
+                    )}
                     <div className="flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[80vh] rounded-lg shadow-md overflow-hidden ">
                         <DashboardSidebar
                             openModal={openModal}
@@ -104,9 +98,16 @@ export default function AdminHome() {
                             setView={setView}
                         />
                         {view === 'admin' ? (
-                            <AdminEmployeesTable employees={employees} setEmployees={setEmployees} />
+                            <AdminEmployeesTable
+                                employees={employees}
+                                setEmployees={setEmployees}
+                            />
                         ) : (
-                            <UserRecordsTable userId={userId} entries={entries} setEntries={setEntries} />
+                            <UserRecordsTable
+                                userId={userId}
+                                entries={entries}
+                                setEntries={setEntries}
+                            />
                         )}
                     </div>
                 </section>
@@ -122,6 +123,6 @@ export default function AdminHome() {
             </>
         )
     }
-    
+
     return renderContent()
 }
