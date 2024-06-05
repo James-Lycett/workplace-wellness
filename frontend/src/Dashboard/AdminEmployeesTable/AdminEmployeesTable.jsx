@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, Checkbox } from 'flowbite-react'
 import EmployeesListNew from './EmployeesListNew'
 
-export default function AdminEmployeesTable() {
+export default function AdminEmployeesTable({ employees, setEmployees }) {
     return (
         <>
             <div className="overflow-auto">
@@ -23,7 +23,7 @@ export default function AdminEmployeesTable() {
                         </Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
-                        <EmployeesListNew />
+                        <EmployeesListNew employees={employees} setEmployees={setEmployees} />
                     </Table.Body>
                 </Table>
             </div>

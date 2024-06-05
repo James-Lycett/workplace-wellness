@@ -83,7 +83,7 @@ function validateInput(req, res, next) {
             (validValues && !validateEnum(value, validValues)) ||
             (custom && !custom(value))
         ) {
-            return res.status(400).json({ error: `Invalid ${field}` })
+            return res.status(400).json({ error: `Invalid ${field}, ${field} must be a ${validationRules[field].type} with a maximum length of [${validationRules[field].max}]. Received: '${value}' of type: '${typeof value}'` })
         }
     }
 
@@ -193,7 +193,7 @@ async function deleteEntry(req, res, next) {
     string data differently than lastMonthAverages, which only handles numerical data) 
     from entries.service for the average of last month's kpi metrics and mashes them together in a 
     single object that looks like this:
-
+    {
         data: {
             sleep_duration_average: number,
             daily_steps_average: number,
@@ -201,7 +201,7 @@ async function deleteEntry(req, res, next) {
             heart_rate_average: number,
             bmi_category_average: "string"
         }
-
+    }
     and sends it in JSON format
 */
 async function lastMonthAverages(req, res, next) {
@@ -245,7 +245,7 @@ async function lastMonthCompanyMetrics(req, res, next) {
             ...averageQualityOfSleep
         }
 
-        res.json({ data })
+        return data
     } catch (error) {
         console.error(error)
         res.status(500).json({ error: "Error fetching all last month averages from database"})
@@ -267,5 +267,6 @@ module.exports = {
         asyncErrorBoundary(deleteEntry),
     ],
     readLastMonthAverages: [asyncErrorBoundary(personExists), asyncErrorBoundary(lastMonthAverages)],
-    readLastMonthCompanyMetrics: [asyncErrorBoundary(lastMonthCompanyMetrics)]
+    readLastMonthCompanyMetrics: [asyncErrorBoundary(lastMonthCompanyMetrics)],
+    lastMonthCompanyMetrics
 }

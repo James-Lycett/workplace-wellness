@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import DropDownMenuButton from '../utils/DropDownMenuButton'
-import ActivityLogForm from '../Dashboard/ActivityLog/ActivityLogForm'
+//import ActivityLogForm from '../Dashboard/ActivityLog/ActivityLogForm'
 import SuggestionCard from './SuggestionCard'
 import { createEntry } from '../utils/api'
 
@@ -96,11 +96,11 @@ export default function UserActivityLog() {
                     <h2 className="text-3xl font-bold">Today's Activity</h2>
                 </div>
                 <div className="mt-6">
-                    <ActivityLogForm
+                    {/*<ActivityLogForm
                         entry={entry}
                         handleChange={handleChange}
                         handleSubmit={handleSubmit}
-                    />
+    />*/}
                 </div>
             </div>
             {/* <div className="bg-accent-background border-accent-1 border-2 rounded-md m-6"> */}

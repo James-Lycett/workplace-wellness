@@ -157,7 +157,19 @@ export async function deleteEntry(entryId, signal) {
 }
 
 
-// Returns a single user's 'Last Month's Metrics' from the matching userId
+/* Returns a single user's 'Last Month's Metrics' from the matching userId
+    returns:
+    {
+        data: 
+            sleep_duration_average: 6.931034482758621,
+            daily_steps_average: 5286.275862068966,
+            stress_level_average: 4.206896551724138,
+            heart_rate_average: 97.06896551724138,
+            bmi_category_average: "Overweight"
+        }
+    }
+
+*/
 export async function readAveragesById(userId, signal) {
     const url = `${API_BASE_URL}/entries/averages/${userId}`
     const options = {
@@ -181,6 +193,18 @@ export async function readAveragesById(userId, signal) {
 */
 export async function readCompanyMetrics(signal) {
     const url = `${API_BASE_URL}/entries/all/metrics`
+    const options = {
+        method: "GET",
+        headers,
+        signal,
+    }
+
+    return await fetchJson(url, options)
+}
+
+
+export async function loadAllData(userId, signal) {
+    const url = `${API_BASE_URL}/load/${userId}`
     const options = {
         method: "GET",
         headers,

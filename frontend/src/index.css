@@ -169,3 +169,8 @@ p {
         }
     }
 }
+
+/* Add this CSS to your styles */
+[data-lastpass-icon-root] {
+    display: none !important; /* Hide the LastPass icon container */
+}

@@ -28,7 +28,7 @@ function validateInput(req, res, next) {
     const validationRules = {
         username: { type: "string", maxLength: 50 },
         admin: { type: "boolean" },
-        gender: { type: "string", enum: ["Male", "Female"] },
+        gender: { type: "string", enum: ["Male", "Female"], maxLength: 6 },
         age: { type: "number", min: 0, max: 200 },
         sleep_duration: { type: "number", min: 0, max: 24 },
         quality_of_sleep: { type: "number", min: 1, max: 10 },
@@ -44,6 +44,7 @@ function validateInput(req, res, next) {
         sleep_disorder: {
             type: "string",
             enum: ["None", "Insomnia", "Sleep Apnea"],
+            maxLength: 11
         },
     }
 
@@ -64,7 +65,7 @@ function validateInput(req, res, next) {
                 (validValues && !validateEnum(value, validValues)) ||
                 (custom && !custom(value))
             ) {
-                return res.status(400).json({ error: `Invalid ${field}` })
+                return res.status(400).json({ error: `Invalid ${field}, ${field} must be a ${validationRules[field].type} with a maximum length of [${validationRules[field].max}]. Received: '${value}' of type: '${typeof value}'` })
             }
         }
     }
@@ -146,7 +147,7 @@ async function create(req, res, next) {
       
         console.error(error.stack)
 
-        res.status(500).json({ error: 'Error creating health data' })
+        res.status(500).json({ error: `Error creating health data: ${error}` })
     }
 }
 

@@ -1,57 +1,56 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import {
-    readUserById,
-    readAveragesById,
-    readCompanyMetrics,
+    loadAllData
 } from '../utils/api'
 import Spinner from '../utils/Spinner'
-import ActivityLogModal from './ActivityLog/ActivityLogModal'
+import Modal from './Modal/Modal'
 import AdminProgressCharts from './AdminProgressCharts/AdminProgressCharts'
-import AdminSidebar from './AdminSidebar/AdminSidebar'
 import AdminEmployeesTable from './AdminEmployeesTable/AdminEmployeesTable'
 import UserRecordsTable from './UserRecordsTable/UserRecordsTable'
+import UserProgressCharts from './UserProgressCharts/UserProgressCharts'
+import DashboardSidebar from './DashboardSidebar/DashboardSidebar'
 
 export default function AdminHome() {
     const { userId } = useParams()
-    const [isModalOpen, setIsModalOpen] = useState(false) // State to control modal visibility
     const [user, setUser] = useState(null)
+    const [isModalOpen, setIsModalOpen] = useState({
+        state: false,
+        option: "activity"
+    })
     const [averages, setAverages] = useState({
         sleep_duration_average: 0,
         daily_steps_average: 0,
         stress_level_average: 0,
         heart_rate_average: 0,
         bmi_category_average: 'N/A',
+        loaded: false,
     })
     const [companyMetrics, setCompanyMetrics] = useState({
         sleep_duration_total: 0,
         quality_of_sleep_average: 0,
     })
-    const [admin, setAdmin] = useState(false)
+    const [view, setView] = useState('user')
+    const [employees, setEmployees] = useState(null)
+    const [entries, setEntries] = useState(null)
 
-
-    // Fetches user from the API along with lastMonthAverages for that user and company-wide lastMonthAverages for admin purposes
+    // Fetches user from the API along with that user's entries, lastMonthAverages for that user, and company-wide lastMonthAverages for admin purposes (if user is an admin)
     const loadData = useCallback(async () => {
         const abortController = new AbortController()
 
         try {
-            const readUserResponse = await readUserById(
-                userId,
-                abortController.signal
-            )
-            const readAveragesResponse = await readAveragesById(
-                userId,
-                abortController.signal
-            )
-            setAverages(readAveragesResponse)
-            setUser(readUserResponse)
-            if (readUserResponse.admin) {
-                const readCompanyMetricsResponse = await readCompanyMetrics(
-                    abortController.signal
-                )
-                setCompanyMetrics(readCompanyMetricsResponse)
-                setAdmin(true)
-            }
+
+           const data = await loadAllData(userId, abortController.signal)
+
+           setUser(data.user)
+           setEntries(data.entries)
+           setAverages({
+                ...data.averages,
+                loaded: true,
+           })
+           setCompanyMetrics(data.companyMetrics)
+           setEmployees(data.employees)
+           
         } catch (error) {
             console.error(error)
         } finally {
@@ -61,55 +60,68 @@ export default function AdminHome() {
 
     useEffect(() => {
         loadData()
-    }, [loadData, userId])
+    }, [])
 
     function renderConditionsMet() {
-        if (user && averages.sleep_duration_average) {
+        if (user) {
             return true
         } else {
             return false
         }
     }
 
-    const openModal = () => {
-        setIsModalOpen(true)
+    const openModal = (option) => {
+        setIsModalOpen({
+            state: true,
+            option: option
+        })
     }
 
-    if (renderConditionsMet()) {
-        if (admin) {
+
+    const renderContent = () => {
+        if (!renderConditionsMet()) {
             return (
-                <>
-                    <section className="bg-slate-100 py-5">
-                        <AdminProgressCharts companyMetrics={companyMetrics}/>
-                        <div className=" flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[50vh] rounded-lg shadow-md overflow-hidden ">
-                            <AdminSidebar openModal={openModal} />
-                            <AdminEmployeesTable />
-                        </div>
-                    </section>
-                    {isModalOpen && <ActivityLogModal setIsModalOpen={setIsModalOpen}/>}
-                </>
-            )
-        } else {
-            return (
-                <>
-                    <section className="bg-slate-100 py-5">
-                        <AdminProgressCharts companyMetrics={companyMetrics}/>
-                        <div className="flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[50vh] rounded-lg shadow-md overflow-hidden ">
-                            <AdminSidebar openModal={openModal} />
-                            <UserRecordsTable userId={userId} />
-                        </div>
-                    </section>
-                    {isModalOpen && <ActivityLogModal setIsModalOpen={setIsModalOpen}/>}
-                </>
+                <div className="py-20">
+                    <Spinner />
+                </div>
             )
         }
-    } else {
+    
         return (
             <>
-            <div className='py-20'>
-                <Spinner />
-            </div>
+                <section className="bg-slate-100 py-5">
+                    {view === 'admin' ? (
+                        <AdminProgressCharts companyMetrics={companyMetrics} />
+                    ) : (
+                        <UserProgressCharts averages={averages} />
+                    )
+                    }
+                    <div className="flex flex-row w-full mx-auto mt-5 max-w-5xl max-h-[80vh] rounded-lg shadow-md overflow-hidden ">
+                        <DashboardSidebar
+                            openModal={openModal}
+                            userIsAdmin={user.admin}
+                            view={view}
+                            setView={setView}
+                        />
+                        {view === 'admin' ? (
+                            <AdminEmployeesTable employees={employees} setEmployees={setEmployees} />
+                        ) : (
+                            <UserRecordsTable userId={userId} entries={entries} setEntries={setEntries} />
+                        )}
+                    </div>
+                </section>
+                {isModalOpen.state && (
+                    <Modal
+                        setIsModalOpen={setIsModalOpen}
+                        option={isModalOpen.option}
+                        loadData={loadData}
+                        userId={userId}
+                        setEmployees={setEmployees}
+                    />
+                )}
             </>
         )
     }
+    
+    return renderContent()
 }

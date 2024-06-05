@@ -1,31 +1,9 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React from 'react'
 import Spinner from '../../utils/Spinner'
-import { listUsers } from '../../utils/api'
 import { Table } from 'flowbite-react'
 import EmployeeCardNew from './EmployeeCardNew'
 
-export default function EmployeesList() {
-    const [employees, setEmployees] = useState(null)
-    const [error, setError] = useState(null)
-
-    // Fetches all users from the API
-    const loadUsers = useCallback(async () => {
-        const abortController = new AbortController()
-
-        try {
-            const response = await listUsers(abortController.signal)
-            setEmployees(response)
-        } catch (error) {
-            setError(error)
-        } finally {
-            abortController.abort()
-        }
-    }, [])
-
-    useEffect(() => {
-        loadUsers()
-    }, [loadUsers])
-
+export default function EmployeesList({ employees, setEmployees }) {
     if (employees) {
         return (
             <>
@@ -36,8 +14,7 @@ export default function EmployeesList() {
                     >
                         <EmployeeCardNew
                             employee={employee}
-                            setError={setError}
-                            loadUsers={loadUsers}
+                            setEmployees={setEmployees}
                             imgNumber={employee.person_id}
                         />
                     </Table.Row>
@@ -45,6 +22,14 @@ export default function EmployeesList() {
             </>
         )
     } else {
-        return <Spinner />
+        return (
+            <Table.Row>
+                <Table.Cell colSpan="8" className="h-80 p-0">
+                    <div className="flex items-center justify-center h-full">
+                        <Spinner />
+                    </div>
+                </Table.Cell>
+            </Table.Row>
+        )
     }
 }
