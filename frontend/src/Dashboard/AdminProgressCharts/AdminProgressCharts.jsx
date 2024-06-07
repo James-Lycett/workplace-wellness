@@ -39,31 +39,31 @@ export default function AdminProgressCharts({ companyMetrics }) {
                     progress={70}
                     color="blue"
                     progressLabelPosition="inside"
-                    className="mt-10 mb-5 max-w-4xl mx-auto "
+                    className="mt-10 mb-5 w-3/4 max-w-4xl mx-auto"
                     size="xl"
                     labelProgress
                 />
             </div>
             <div className="flex flex-row justify-between my-5 mx-auto max-w-5xl font-light">
-                <div className="flex flex-col justify-center bg-white me-5 rounded-lg shadow-md">
+                <div className="flex flex-col justify-center bg-white me-5 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                     <RadialBar
                         series={[calculateSleepHoursProgress()]}
-                        labels={['Sleep Hours']}
                         colors={['#7AEB7F']}
+                        label="Avg Sleep Hours"
                     />
                 </div>
-                <div className="flex flex-col justify-center bg-white mx-10 rounded-lg shadow-md">
+                <div className="flex flex-col justify-center bg-white mx-10 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                     <RadialBar
                         series={[calculateSleepQualityProgress()]}
-                        labels={['Sleep Quality']}
                         colors={['#EB897A']}
+                        label="Avg Sleep Quality"
                     />
                 </div>
-                <div className="flex flex-col justify-center bg-white ms-5 rounded-lg shadow-md">
+                <div className="flex flex-col justify-center bg-white ms-5 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                     <RadialBar
                         series={[45]}
-                        labels={['Tasks Completed']}
                         colors={['#E8EA8B']}
+                        label="Tasks Completed"
                     />
                 </div>
             </div>
