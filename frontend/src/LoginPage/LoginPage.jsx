@@ -8,6 +8,7 @@ import { initFlowbite } from 'flowbite'
 export default function LoginPage() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [isPopoverVisible, setIsPopoverVisible] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -46,10 +47,12 @@ export default function LoginPage() {
     const loginAsAdmin = () => {
         setUsername('blanfer0')
         setPassword('12345')
+        setIsPopoverVisible(false)
     }
     const loginAsUser = () => {
         setUsername('jtuminelli1')
         setPassword('12345')
+        setIsPopoverVisible(false)
     }
 
     return (
@@ -83,40 +86,54 @@ export default function LoginPage() {
                             onChange={handlePasswordChange}
                         />
                         <div className="flex flex-col items-center justify-center mt-4 mb-8">
-                            <a
-                                href="#"
-                                data-popover-target="popover-default"
+                            <button
+                                type="button"
                                 className="underline hover:text-blue-500"
+                                onClick={() => {
+                                    setIsPopoverVisible(true)
+                                }}
                             >
                                 <p>Looking for a demo?</p>
-                                <div
-                                    data-popover
-                                    id="popover-default"
-                                    role="tooltip"
-                                    class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800"
-                                >
-                                    <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
-                                        <h3 class="font-semibold text-gray-900 dark:text-white">
-                                            Demo Credentials
-                                        </h3>
+                            </button>
+                            {isPopoverVisible && (
+                                <>
+                                    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 z-9"></div>
+                                    <div
+                                        data-popover
+                                        id="popover-default"
+                                        role="tooltip"
+                                        className="absolute z-10 inline-block w-2/3 md:w-1/4 text-sm text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800"
+                                    >
+                                        <div class="flex justify-between px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
+                                            <h3 class="font-semibold text-gray-900 dark:text-white">
+                                                Demo Credentials
+                                            </h3>
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    setIsPopoverVisible(false)
+                                                }
+                                            >
+                                                x
+                                            </button>
+                                        </div>
+                                        <div class="flex flex-col items-center px-3 py-2">
+                                            <p
+                                                onClick={loginAsAdmin}
+                                                className="cursor-pointer underline hover:text-blue-500 my-1"
+                                            >
+                                                Fill-in Admin Login
+                                            </p>
+                                            <p
+                                                onClick={loginAsUser}
+                                                className="cursor-pointer underline hover:text-blue-500 my-1"
+                                            >
+                                                Fill-in User Login
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="px-3 py-2">
-                                        <p
-                                            onClick={loginAsAdmin}
-                                            className="cursor-pointer underline hover:text-blue-500"
-                                        >
-                                            Fill-in Admin Login
-                                        </p>
-                                        <p
-                                            onClick={loginAsUser}
-                                            className="cursor-pointer underline hover:text-blue-500"
-                                        >
-                                            Fill-in User Login
-                                        </p>
-                                    </div>
-                                    <div data-popper-arrow></div>
-                                </div>
-                            </a>
+                                </>
+                            )}
                         </div>
                         {/* Sign in button */}
                         <div className="flex flex-col items-center justify-center max-w-52">

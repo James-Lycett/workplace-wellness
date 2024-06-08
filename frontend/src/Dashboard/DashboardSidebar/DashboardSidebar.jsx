@@ -28,15 +28,20 @@ export default function DashboardSidebar({
     return (
         <>
             <div>
-                <Sidebar aria-label="Default sidebar example">
+                <Sidebar
+                    className="w-full flex flex-col justify-center"
+                    aria-label="Default sidebar example"
+                >
                     <Sidebar.Logo
                         href="#"
                         img={logo}
                         imgAlt="Workplace Wellness logo"
                     >
-                        Workplace Wellness
+                        <span className="text-base sm:text-xl">
+                            Workplace Wellness
+                        </span>
                     </Sidebar.Logo>
-                    <Sidebar.Items className="flex flex-col justify-between h-[43vh]">
+                    <Sidebar.Items className="flex flex-col justify-between ">
                         <div>
                             <Sidebar.ItemGroup>
                                 {userIsAdmin ? (
@@ -44,6 +49,7 @@ export default function DashboardSidebar({
                                         <Sidebar.Item
                                             href="#"
                                             icon={HiOutlineIdentification}
+                                            className="text-sm md:text-base"
                                             onClick={(e) =>
                                                 handleNavigation(e, 'user')
                                             }
@@ -53,6 +59,7 @@ export default function DashboardSidebar({
                                         <Sidebar.Item
                                             href="#"
                                             icon={HiTable}
+                                            className="text-sm md:text-base"
                                             onClick={(e) =>
                                                 handleNavigation(e, 'admin')
                                             }
@@ -69,17 +76,20 @@ export default function DashboardSidebar({
                                                 openModal('activity')
                                             }
                                             icon={HiDocumentReport}
+                                            className="text-sm md:text-base"
                                         >
                                             LOG NEW ACTIVITY
                                         </Sidebar.Item>
                                         <Sidebar.Collapse
                                             icon={HiAcademicCap}
                                             label="Resources"
+                                            className="text-sm md:text-base"
                                         >
                                             <Sidebar.Item
                                                 href="/tips/sleep"
                                                 target="_blank"
                                                 icon={HiEmojiSad}
+                                                className="text-sm md:text-base"
                                             >
                                                 Sleep Disorders Guide
                                             </Sidebar.Item>
@@ -87,6 +97,7 @@ export default function DashboardSidebar({
                                                 href="/tips/fitness"
                                                 target="_blank"
                                                 icon={HiSpeakerphone}
+                                                className="text-sm md:text-base"
                                             >
                                                 Physical Fitness Guide
                                             </Sidebar.Item>
@@ -94,6 +105,7 @@ export default function DashboardSidebar({
                                                 href="/tips/meditation"
                                                 target="_blank"
                                                 icon={HiLightBulb}
+                                                className="text-sm md:text-base"
                                             >
                                                 Meditation Guide
                                             </Sidebar.Item>
@@ -104,13 +116,18 @@ export default function DashboardSidebar({
                                     <Sidebar.Item
                                         href="#"
                                         icon={HiOutlinePlus}
+                                        className="text-sm md:text-base"
                                         onClick={() => openModal('employee')}
                                     >
                                         Add A New Employee
                                     </Sidebar.Item>
                                 ) : null}
                                 <Sidebar.ItemGroup>
-                                    <Sidebar.Item href="/" icon={HiLogout}>
+                                    <Sidebar.Item
+                                        href="/"
+                                        icon={HiLogout}
+                                        className="text-sm md:text-base"
+                                    >
                                         Sign Out
                                     </Sidebar.Item>
                                 </Sidebar.ItemGroup>

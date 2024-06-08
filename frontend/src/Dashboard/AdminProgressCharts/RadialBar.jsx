@@ -9,13 +9,32 @@ class RadialBar extends Component {
             series: this.props.series || [70],
             options: {
                 chart: {
-                    height: 350,
+                    height: '100%',
+                    width: '100%',
                     type: 'radialBar',
                 },
                 plotOptions: {
                     radialBar: {
                         hollow: {
                             size: '60%',
+                        },
+                        dataLabels: {
+                            show: true,
+                            name: {
+                                show: true,
+                                fontSize: '16px',
+                                fontFamily: undefined,
+                                color: undefined,
+                                offsetY: -20,
+                            },
+                            value: {
+                                show: true,
+                                fontSize: '14px',
+                                fontFamily: undefined,
+                                color: undefined,
+                                offsetY: -5,
+                                formatter: (val) => `${val}%`,
+                            },
                         },
                     },
                 },
@@ -46,14 +65,20 @@ class RadialBar extends Component {
 
     render() {
         return (
-            <div id="chart">
+            <div
+                id="chart"
+                className="flex flex-col justify-center items-center w-full h-full relative"
+            >
                 <Chart
                     options={this.state.options}
                     series={this.state.series}
                     type="radialBar"
-                    height={275}
-                    width={275}
+                    height="100%"
+                    width="100%"
                 />
+                <p className="absolute bottom-0 w-full text-center mb-2 text-reg sm:text-xl">
+                    {this.props.label}
+                </p>
             </div>
         )
     }
