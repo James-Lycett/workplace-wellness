@@ -23,7 +23,10 @@ export default function AdminEmployeesTable({ employees, setEmployees }) {
                         </Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
-                        <EmployeesListNew employees={employees} setEmployees={setEmployees} />
+                        <EmployeesListNew
+                            employees={employees}
+                            setEmployees={setEmployees}
+                        />
                     </Table.Body>
                 </Table>
             </div>

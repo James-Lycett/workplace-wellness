@@ -12,9 +12,7 @@ import Careers from '../Boilerplate/Careers'
 import Contact from '../Boilerplate/Contact'
 import Terms from '../Boilerplate/Terms'
 import PrivacyPolicy from '../Boilerplate/Privacy'
-import TipsSleep from '../Tips/TipsSleep'
-import TipsMed from '../Tips/TipsMed'
-import TipsFit from '../Tips/TipsFit'
+import { TipsSleep, TipsMed, TipsFit } from '../Tips/TipsPages'
 
 export default function RoutesComponent() {
     return (
@@ -24,13 +22,13 @@ export default function RoutesComponent() {
             <Route path="/register" element={<CreateAccount />} />
             <Route path="/user">
                 <Route path="account" element={<CreateUserAccount />} />
+                <Route path=":userId/home" element={<Dashboard />} />
             </Route>
             <Route path="/admin">
-                <Route path="/admin/account" element={<CreateAdminAccount />} />
-                <Route path="/admin/:userId/home" element={<Dashboard />} />
+                <Route path="account" element={<CreateAdminAccount />} />
+                <Route path=":userId/home" element={<Dashboard />} />
             </Route>
             <Route path="/tips">
-                <Route path="options" element={<TipsPage />} />
                 <Route path="sleep" element={<TipsSleep />} />
                 <Route path="fitness" element={<TipsFit />} />
                 <Route path="meditation" element={<TipsMed />} />
