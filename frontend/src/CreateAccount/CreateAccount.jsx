@@ -1,4 +1,3 @@
-
 import React, { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createUser } from '../utils/api'
@@ -15,7 +14,6 @@ export default function CreateAccount() {
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
     const [ein, setEin] = useState('')
-    //const [formProgress, setFormProgress] = useState(1)
 
     function handleChange({ target: { name, value } }) {
         if (name === 'dropdown') {
@@ -24,7 +22,6 @@ export default function CreateAccount() {
                 ...previousUser,
                 admin: value === 'admin' ? true : false,
             }))
-            //setFormProgress(1)
         } else if (name === 'password') {
             setPassword(value)
         } else if (name === 'confirm-password') {
@@ -53,18 +50,8 @@ export default function CreateAccount() {
                 abortController.abort()
             }
         },
-        [user]
+        []
     )
-
-    /*
-    const handleContinue = () => {
-        setFormProgress(2)
-    }
-
-    const handleBack = () => {
-        setFormProgress(1)
-    }
-    */
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -77,7 +64,7 @@ export default function CreateAccount() {
                 navigate(`/admin/${response.person_id}/home`)
             } else {
                 // Navigate to Create user account page
-                navigate(`/user/${response.person_id}/home`)
+                navigate(`/admin/${response.person_id}/home`)
             }
         } catch (error) {
             console.error(error)

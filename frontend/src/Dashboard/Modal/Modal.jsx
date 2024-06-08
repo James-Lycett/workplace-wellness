@@ -10,7 +10,6 @@ export default function Modal({
     loadData,
     userId,
 }) {
-
     const [entry, setEntry] = useState({
         person_id: userId,
         sleep_duration: '',
@@ -112,7 +111,7 @@ export default function Modal({
                     <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
                         <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                             <div className="flex-grow"></div>{' '}
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
                                 {option === 'activity'
                                     ? 'Log New Activity'
                                     : 'Add New Employee'}
