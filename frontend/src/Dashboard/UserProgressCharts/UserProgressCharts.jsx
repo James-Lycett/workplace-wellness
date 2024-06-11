@@ -53,7 +53,7 @@ export default function UserProgressCharts({ averages }) {
                             label="Avg Sleep Hours"
                         />
                     </div>
-                    <div className="flex flex-col justify-center bg-white mx-10 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
+                    <div className="flex flex-col justify-center bg-white mx-0 md:mx-10 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                         <RadialBar
                             series={[calculateSleepQualityProgress()]}
                             colors={['#EB897A']}
