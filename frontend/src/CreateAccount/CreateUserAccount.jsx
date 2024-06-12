@@ -1,6 +1,6 @@
 
 import React, { useCallback, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { createUser } from '../utils/api'
 
 export default function CreateUserAccount() {
@@ -41,7 +41,7 @@ export default function CreateUserAccount() {
                 abortController.abort()
             }
         },
-        [user]
+        []
     )
 
     const handleSubmit = async (e) => {

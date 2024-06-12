@@ -15,6 +15,7 @@ export default function AdminHome() {
     const [isModalOpen, setIsModalOpen] = useState({
         state: false,
         option: 'activity',
+        employeeFromEdit: {},
     })
     const [averages, setAverages] = useState({
         sleep_duration_average: 0,
@@ -56,7 +57,7 @@ export default function AdminHome() {
 
     useEffect(() => {
         loadData()
-    }, [])
+    }, [loadData])
 
     function renderConditionsMet() {
         if (user) {
@@ -66,10 +67,11 @@ export default function AdminHome() {
         }
     }
 
-    const openModal = (option) => {
+    const openModal = (option, employee) => {
         setIsModalOpen({
             state: true,
             option: option,
+            employeeFromEdit: employee
         })
     }
 
@@ -99,6 +101,7 @@ export default function AdminHome() {
                         />
                         {view === 'admin' ? (
                             <AdminEmployeesTable
+                                openModal={openModal}
                                 employees={employees}
                                 setEmployees={setEmployees}
                             />
@@ -114,7 +117,7 @@ export default function AdminHome() {
                 {isModalOpen.state && (
                     <Modal
                         setIsModalOpen={setIsModalOpen}
-                        option={isModalOpen.option}
+                        isModalOpen={isModalOpen}
                         loadData={loadData}
                         userId={userId}
                         setEmployees={setEmployees}

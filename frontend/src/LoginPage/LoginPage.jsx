@@ -80,7 +80,7 @@ export default function LoginPage() {
                             className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl"
                             type="password"
                             id="password"
-                            autocomplete="new-password"
+                            autoComplete="new-password"
                             value={password}
                             placeholder="........"
                             onChange={handlePasswordChange}
@@ -104,8 +104,8 @@ export default function LoginPage() {
                                         role="tooltip"
                                         className="absolute z-10 inline-block w-2/3 md:w-1/4 text-sm text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800"
                                     >
-                                        <div class="flex justify-between px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
-                                            <h3 class="font-semibold text-gray-900 dark:text-white">
+                                        <div className="flex justify-between px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
+                                            <h3 className="font-semibold text-gray-900 dark:text-white">
                                                 Demo Credentials
                                             </h3>
                                             <button
@@ -117,7 +117,7 @@ export default function LoginPage() {
                                                 x
                                             </button>
                                         </div>
-                                        <div class="flex flex-col items-center px-3 py-2">
+                                        <div className="flex flex-col items-center px-3 py-2">
                                             <p
                                                 onClick={loginAsAdmin}
                                                 className="cursor-pointer underline hover:text-blue-500 my-1"
