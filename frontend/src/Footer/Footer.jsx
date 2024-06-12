@@ -92,6 +92,7 @@ export default function Footer() {
                     <Link
                         to="/"
                         className="flex justify-center md:justify-start"
+                        onClick={scrollToTop}
                     >
                         <img
                             src={logo}
@@ -107,18 +108,21 @@ export default function Footer() {
                         <Link
                             to="/bp/about"
                             className=" dark:text-neutral-200 hover:text-blue-500 dark:hover:text-blue-400"
+                            onClick={scrollToTop}
                         >
                             About
                         </Link>
                         <Link
                             to="/bp/careers"
                             className="dark:text-neutral-200 hover:text-blue-500 dark:hover:text-blue-400"
+                            onClick={scrollToTop}
                         >
                             Careers
                         </Link>
                         <Link
                             to="/bp/contact"
                             className="dark:text-neutral-200 hover:text-blue-500 dark:hover:text-blue-400"
+                            onClick={scrollToTop}
                         >
                             Contact us
                         </Link>
