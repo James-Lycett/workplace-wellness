@@ -9,6 +9,7 @@ export default function FeaturesBlock() {
             <div className="flex lg:flex-col flex-row items-center flex-1 lg:m-0 m-4">
                 <img
                     src={sleepingGraphic}
+                    alt=''
                     className="lg:w-full w-1/3 max-w-full"
                 />
                 <p className="lg:mt-5">
@@ -20,6 +21,7 @@ export default function FeaturesBlock() {
             <div className="flex lg:flex-col flex-row-reverse items-center flex-1 lg:m-0 m-4">
                 <img
                     src={meditatingGraphic}
+                    alt=''
                     className="lg:w-full w-1/3 max-w-full"
                 />
                 <p className="lg:mt-5">
@@ -30,6 +32,7 @@ export default function FeaturesBlock() {
             <div className="flex lg:flex-col flex-row items-center flex-1 lg:m-0 m-4">
                 <img
                     src={stretchingGraphic}
+                    alt=''
                     className="lg:w-full w-1/3 max-w-full"
                 />
                 <p className="lg:mt-5">

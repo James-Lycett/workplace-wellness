@@ -3,7 +3,7 @@ import Spinner from '../../utils/Spinner'
 import { Table } from 'flowbite-react'
 import EmployeeCardNew from './EmployeeCardNew'
 
-export default function EmployeesList({ employees, setEmployees }) {
+export default function EmployeesList({ employees, setEmployees, openModal }) {
     if (employees) {
         return (
             <>
@@ -13,6 +13,7 @@ export default function EmployeesList({ employees, setEmployees }) {
                         key={employee.person_id}
                     >
                         <EmployeeCardNew
+                            openModal={openModal}
                             employee={employee}
                             setEmployees={setEmployees}
                             imgNumber={employee.person_id}
