@@ -8,9 +8,6 @@ export default function AdminEmployeesTable({ employees, setEmployees, openModal
             <div className="overflow-auto">
                 <Table hoverable>
                     <Table.Head className="sticky top-0 bg-white z-10">
-                        <Table.HeadCell>
-                            <Checkbox />
-                        </Table.HeadCell>
                         <Table.HeadCell>User</Table.HeadCell>
                         <Table.HeadCell>Age</Table.HeadCell>
                         <Table.HeadCell>Stress Level</Table.HeadCell>

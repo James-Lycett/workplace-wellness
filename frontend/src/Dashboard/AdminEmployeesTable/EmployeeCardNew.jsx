@@ -59,9 +59,6 @@ export default function EmployeeCardNew({
 
     return (
         <>
-            <Table.Cell>
-                <Checkbox />
-            </Table.Cell>
             <Table.Cell
                 id="user"
                 className="flex justify-start items-center whitespace-nowrap font-medium text-gray-900 dark:text-white"
