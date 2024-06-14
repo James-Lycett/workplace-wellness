@@ -8,9 +8,6 @@ export default function UserRecordsTable({ userId, entries, setEntries }) {
             <div className="overflow-auto">
                 <Table hoverable>
                     <Table.Head className="sticky top-0 bg-white z-10">
-                        <Table.HeadCell>
-                            <Checkbox />
-                        </Table.HeadCell>
                         <Table.HeadCell>Date</Table.HeadCell>
                         <Table.HeadCell>Steps</Table.HeadCell>
                         <Table.HeadCell>Heart Rate</Table.HeadCell>

@@ -4,9 +4,6 @@ import LandingPage from '../LandingPage/LandingPage'
 import Dashboard from '../Dashboard/Dashboard'
 import LoginPage from '../LoginPage/LoginPage'
 import CreateAccount from '../CreateAccount/CreateAccount'
-import CreateUserAccount from '../CreateAccount/CreateUserAccount'
-import CreateAdminAccount from '../CreateAccount/CreateAdminAccount'
-import TipsPage from '../Tips/TipsPage'
 import About from '../Boilerplate/About'
 import Careers from '../Boilerplate/Careers'
 import Contact from '../Boilerplate/Contact'
@@ -21,11 +18,9 @@ export default function RoutesComponent() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<CreateAccount />} />
             <Route path="/user">
-                <Route path="account" element={<CreateUserAccount />} />
                 <Route path=":userId/home" element={<Dashboard />} />
             </Route>
             <Route path="/admin">
-                <Route path="account" element={<CreateAdminAccount />} />
                 <Route path=":userId/home" element={<Dashboard />} />
             </Route>
             <Route path="/tips">

@@ -11,9 +11,9 @@ export default function EmployeeCardNew({
     employee,
     setEmployees,
     imgNumber,
+    openModal
 }) {
-    const [hidden, setHidden] = useState(false)
-    const [openModal, setOpenModal] = useState(false)
+    const [openDeleteModal, setOpenDeleteModal] = useState(false)
 
         // Fetches all users from the API
         const loadUsers = useCallback(async () => {
@@ -27,7 +27,7 @@ export default function EmployeeCardNew({
             } finally {
                 abortController.abort()
             }
-        }, [])
+        }, [setEmployees])
 
     // RemoveEmployeeButton functionality, deletes employee
     async function handleDelete() {
@@ -38,7 +38,7 @@ export default function EmployeeCardNew({
         } catch (error) {
             console.error(error)
         } finally {
-            setOpenModal(false)
+            setOpenDeleteModal(false)
             loadUsers()
         }
         return () => abortController.abort()
@@ -59,9 +59,6 @@ export default function EmployeeCardNew({
 
     return (
         <>
-            <Table.Cell>
-                <Checkbox />
-            </Table.Cell>
             <Table.Cell
                 id="user"
                 className="flex justify-start items-center whitespace-nowrap font-medium text-gray-900 dark:text-white"
@@ -72,7 +69,7 @@ export default function EmployeeCardNew({
                         style={{
                             width: '50px',
                             margin: '0 1rem 0 0 ',
-                            'border-radius': '50%',
+                            'borderRadius': '50%',
                             border: '1px solid gray',
                         }}
                         alt={`Employee ${imgNumber}`}
@@ -83,7 +80,7 @@ export default function EmployeeCardNew({
                         style={{
                             width: '50px',
                             margin: '0 1rem 0 0 ',
-                            'border-radius': '50%',
+                            'borderRadius': '50%',
                             border: '1px solid gray',
                         }}
                         alt="sleeping person"
@@ -92,22 +89,23 @@ export default function EmployeeCardNew({
                 {employee.username}
             </Table.Cell>
             <Table.Cell id="age">{employee.age}</Table.Cell>
-            <Table.Cell id="stress-lvl">{employee.stress_level}</Table.Cell>
-            <Table.Cell id="sleep-hours">{employee.sleep_duration}</Table.Cell>
+            <Table.Cell id="occupation">{employee.occupation}</Table.Cell>
+            <Table.Cell id="sleep-hours">{employee.sleep_disorder}</Table.Cell>
             <Table.Cell>
-                <a
-                    href="#"
+                <button
+                    onClick={() => openModal('editEmployee', employee)
+                    }
                     className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
                 >
                     Edit
-                </a>
+                </button>
             </Table.Cell>
             <Table.Cell>
                 <RemoveCardButton
-                    openModal={openModal}
-                    setOpenModal={setOpenModal}
+                    openModal={openDeleteModal}
+                    setOpenModal={setOpenDeleteModal}
                     handleDelete={handleDelete}
-                    option={'employee'}
+                    option={'newEmployee'}
                 />
             </Table.Cell>
         </>

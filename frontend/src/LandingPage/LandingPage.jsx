@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import '../index.css'
 import IntroBlock from './IntroBlock'
 import FeaturesBlock from './FeaturesBlock'

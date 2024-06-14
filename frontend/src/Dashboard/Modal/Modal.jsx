@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ActivityLogForm from './ActivityLogForm'
 import AddNewEmployeeForm from './AddNewEmployeeForm'
-import { createEntry, createUser, listUsers } from '../../utils/api'
+import EditEmployeeForm from './EditEmployeeForm'
+import { createEntry, createUser, listUsers, updateUser } from '../../utils/api'
 
 export default function Modal({
     setIsModalOpen,
-    option,
+    isModalOpen,
     setEmployees,
     loadData,
     userId,
@@ -19,6 +20,21 @@ export default function Modal({
         heart_rate: '',
         date: new Date().toISOString(),
     })
+
+    
+    const [employee, setEmployee] = useState({
+        username: '',
+        age: '',
+        gender: '',
+        sleep_disorder: '',
+        occupation: '',
+    })
+
+    useEffect(() => {
+        if (isModalOpen.option === "editEmployee") {
+            setEmployee(isModalOpen.employeeFromEdit)
+        }
+    }, [isModalOpen.employeeFromEdit, isModalOpen.option])
 
     function convertStringsToNumbers(object, propsToConvert) {
         for (let prop in object) {
@@ -60,14 +76,6 @@ export default function Modal({
         }
     }
 
-    const [employee, setEmployee] = useState({
-        username: '',
-        age: '',
-        gender: '',
-        sleep_disorder: '',
-        occupation: '',
-    })
-
     const handleEmployeeChange = (e) => {
         const { name, value } = e.target
         setEmployee({
@@ -82,7 +90,14 @@ export default function Modal({
         employee.age = Number(employee.age)
 
         try {
-            await createUser(employee, abortController.signal)
+            if (isModalOpen.option === "newEmployee") {
+                await createUser(employee, abortController.signal)
+            }
+
+            if (isModalOpen.option === "editEmployee") {
+                await updateUser(employee.person_id, employee, abortController.signal)
+            }
+            
         } catch (error) {
             console.error(error)
         } finally {
@@ -99,6 +114,46 @@ export default function Modal({
         setIsModalOpen(false)
     }
 
+    function whichFormToUse(option) {
+        switch (option) {
+            case 'activity':
+                return {
+                    title: "Log New Activity",
+                    form: (
+                        <ActivityLogForm
+                            entry={entry}
+                            handleChange={handleEntryChange}
+                            handleSubmit={handleEntrySubmit}
+                        />
+                    )
+                }
+            case 'newEmployee':
+                return {
+                    title: "Add New Employee",
+                    form: (
+                        <AddNewEmployeeForm
+                            employee={employee}
+                            handleChange={handleEmployeeChange}
+                            handleSubmit={handleEmployeeSubmit}
+                        />
+                    )
+                }
+            case 'editEmployee':
+                return {
+                    title: "Edit Employee",
+                    form: (
+                    <EditEmployeeForm 
+                        employee={employee}
+                        handleChange={handleEmployeeChange}
+                        handleSubmit={handleEmployeeSubmit}
+                    />
+                    )
+                }
+            default:
+                console.error(`Modal option '${option}' is not valid`)
+        }
+    }
+
     return (
         <>
             <div
@@ -112,9 +167,7 @@ export default function Modal({
                         <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                             <div className="flex-grow"></div>{' '}
                             <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                                {option === 'activity'
-                                    ? 'Log New Activity'
-                                    : 'Add New Employee'}
+                                {whichFormToUse(isModalOpen.option).title}
                             </h3>
                             <div className="flex-grow flex justify-end">
                                 <button
@@ -143,19 +196,7 @@ export default function Modal({
                         </div>
 
                         <div className="p-4 md:p-5">
-                            {option === 'activity' ? (
-                                <ActivityLogForm
-                                    entry={entry}
-                                    handleChange={handleEntryChange}
-                                    handleSubmit={handleEntrySubmit}
-                                />
-                            ) : (
-                                <AddNewEmployeeForm
-                                    employee={employee}
-                                    handleChange={handleEmployeeChange}
-                                    handleSubmit={handleEmployeeSubmit}
-                                />
-                            )}
+                            {whichFormToUse(isModalOpen.option).form}
                         </div>
                     </div>
                 </div>
