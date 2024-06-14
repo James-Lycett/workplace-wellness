@@ -2,10 +2,14 @@ import React from 'react'
 import { Table, Checkbox } from 'flowbite-react'
 import EmployeesListNew from './EmployeesListNew'
 
-export default function AdminEmployeesTable({ employees, setEmployees, openModal }) {
+export default function AdminEmployeesTable({
+    employees,
+    setEmployees,
+    openModal,
+}) {
     return (
         <>
-            <div className="overflow-auto">
+            <div className="overflow-x-auto max-h-96 md:max-h-full overflow-y-auto">
                 <Table hoverable>
                     <Table.Head className="sticky top-0 bg-white z-10">
                         <Table.HeadCell>User</Table.HeadCell>
