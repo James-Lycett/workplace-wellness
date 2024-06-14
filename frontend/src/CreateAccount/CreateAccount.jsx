@@ -89,11 +89,13 @@ export default function CreateAccount() {
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <h1 className="mt-8 text-3xl font-bold">
-                You're On the Journey to Better Mental Health
-            </h1>
+            <div className="flex items-center justify-center">
+                <h1 className="mt-8 mx-5 text-3xl font-bold text-center">
+                    You're On the Journey to Better Mental Health
+                </h1>
+            </div>
             <div
-                className="mt-5 mb-2 block w-1/2 px-6 pb-[6px] pt-2 text-s font-medium leading-normal text-primary"
+                className="mt-5 mb-2 block w-full sm: px-0 sm:w-3/4 px-6 pb-[6px] pt-2 text-s font-medium leading-normal text-primary"
                 data-te-ripple-init
             >
                 <form onSubmit={handleSubmit}>
