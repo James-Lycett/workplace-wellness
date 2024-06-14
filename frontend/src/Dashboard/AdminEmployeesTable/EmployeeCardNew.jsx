@@ -59,9 +59,6 @@ export default function EmployeeCardNew({
 
     return (
         <>
-            <Table.Cell>
-                <Checkbox />
-            </Table.Cell>
             <Table.Cell
                 id="user"
                 className="flex justify-start items-center whitespace-nowrap font-medium text-gray-900 dark:text-white"
@@ -92,8 +89,8 @@ export default function EmployeeCardNew({
                 {employee.username}
             </Table.Cell>
             <Table.Cell id="age">{employee.age}</Table.Cell>
-            <Table.Cell id="stress-lvl">{employee.stress_level}</Table.Cell>
-            <Table.Cell id="sleep-hours">{employee.sleep_duration}</Table.Cell>
+            <Table.Cell id="occupation">{employee.occupation}</Table.Cell>
+            <Table.Cell id="sleep-hours">{employee.sleep_disorder}</Table.Cell>
             <Table.Cell>
                 <button
                     onClick={() => openModal('editEmployee', employee)

@@ -26,9 +26,6 @@ export default function ActivityCard({ entry, userId, setEntries }) {
 
     return (
         <>
-            <Table.Cell>
-                <Checkbox />
-            </Table.Cell>
             <Table.Cell id="date">{moment(entry.date).format("L")}</Table.Cell>
             <Table.Cell id="steps">{entry.daily_steps}</Table.Cell>
             <Table.Cell id="stress-lvl">{entry.heart_rate}</Table.Cell>
