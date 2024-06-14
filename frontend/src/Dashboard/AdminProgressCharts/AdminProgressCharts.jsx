@@ -3,9 +3,7 @@ import RadialBar from './RadialBar'
 import { Progress } from 'flowbite-react'
 
 export default function AdminProgressCharts({ companyMetrics }) {
-    // Placeholder admin goals data:
     const goals = {
-        // sleepHoursThisMonth: 1545, now getting this straight from the db, see "companyMetrics"
         sleepHoursGoal: 1200,
         tasksMet: 80,
         tasksGoal: 128,
@@ -18,7 +16,7 @@ export default function AdminProgressCharts({ companyMetrics }) {
             (companyMetrics.sleep_duration_total / goals.sleepHoursGoal) * 100
         const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
 
-        return Math.floor(boundedProgressValue) // Return the progress value
+        return Math.floor(boundedProgressValue)
     }
 
     function calculateSleepQualityProgress() {
@@ -49,21 +47,21 @@ export default function AdminProgressCharts({ companyMetrics }) {
                     <RadialBar
                         series={[calculateSleepHoursProgress()]}
                         colors={['#7AEB7F']}
-                        label="Avg Sleep Hours"
+                        labels={['Avg Sleep Hours']}
                     />
                 </div>
                 <div className="flex flex-col justify-center bg-white mx-10 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                     <RadialBar
                         series={[calculateSleepQualityProgress()]}
                         colors={['#EB897A']}
-                        label="Avg Sleep Quality"
+                        labels={['Avg Sleep Quality']}
                     />
                 </div>
                 <div className="flex flex-col justify-center bg-white ms-5 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                     <RadialBar
                         series={[45]}
                         colors={['#E8EA8B']}
-                        label="Tasks Completed"
+                        labels={['Tasks Completed']}
                     />
                 </div>
             </div>
