@@ -117,7 +117,7 @@ export default function DashboardSidebar({
                                         href="#"
                                         icon={HiOutlinePlus}
                                         className="text-sm md:text-base"
-                                        onClick={() => openModal('employee')}
+                                        onClick={() => openModal('newEmployee')}
                                     >
                                         Add A New Employee
                                     </Sidebar.Item>

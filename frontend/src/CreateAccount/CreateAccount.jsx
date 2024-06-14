@@ -37,7 +37,19 @@ export default function CreateAccount() {
 
     const submitUser = useCallback(async (user) => {
         const abortController = new AbortController()
+        const submitUser = useCallback(async (user) => {
+            const abortController = new AbortController()
 
+            try {
+                const response = await createUser(user, abortController.signal)
+                return response
+            } catch (error) {
+                console.error(error)
+                throw error
+            } finally {
+                abortController.abort()
+            }
+        }, [])
         try {
             const response = await createUser(user, abortController.signal)
             return response
@@ -51,6 +63,7 @@ export default function CreateAccount() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        user.age = Number(user.age)
 
         try {
             const response = await submitUser(user)

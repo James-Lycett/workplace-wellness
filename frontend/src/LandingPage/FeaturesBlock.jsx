@@ -9,6 +9,7 @@ export default function FeaturesBlock() {
             <div className="flex flex-col lg:flex-col sm:flex-row items-center flex-1 lg:m-0 m-4">
                 <img
                     src={sleepingGraphic}
+                    alt=''
                     className="lg:w-full sm:w-1/3 w-full px-5 sm:p-0 max-w-full"
                 />
                 <p className="lg:mt-5 pt-5">
@@ -21,6 +22,7 @@ export default function FeaturesBlock() {
                 <img
                     src={meditatingGraphic}
                     className="lg:w-full sm:w-1/3 w-full px-5 sm:p-0 max-w-full"
+                    alt=''
                 />
                 <p className="lg:mt-5 pt-5">
                     Also meditation is good for your brain, and your brain is
@@ -31,6 +33,7 @@ export default function FeaturesBlock() {
                 <img
                     src={stretchingGraphic}
                     className="lg:w-full sm:w-1/3 w-full px-5 sm:p-0 max-w-full"
+                    alt=''
                 />
                 <p className="lg:mt-5 pt-5">
                     Exercise is good, but gyms aren't particularly inspiring so
