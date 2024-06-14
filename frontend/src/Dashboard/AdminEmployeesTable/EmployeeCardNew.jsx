@@ -89,8 +89,8 @@ export default function EmployeeCardNew({
                 {employee.username}
             </Table.Cell>
             <Table.Cell id="age">{employee.age}</Table.Cell>
-            <Table.Cell id="stress-lvl">{employee.stress_level}</Table.Cell>
-            <Table.Cell id="sleep-hours">{employee.sleep_duration}</Table.Cell>
+            <Table.Cell id="occupation">{employee.occupation}</Table.Cell>
+            <Table.Cell id="sleep-hours">{employee.sleep_disorder}</Table.Cell>
             <Table.Cell>
                 <button
                     onClick={() => openModal('editEmployee', employee)
