@@ -92,7 +92,6 @@ export default function Footer() {
                     <Link
                         to="/"
                         className="flex justify-center md:justify-start"
-                        onClick={scrollToTop}
                     >
                         <img
                             src={logo}
@@ -101,28 +100,25 @@ export default function Footer() {
                         />
                     </Link>
                 </div>
-                <div className="sm:flex sm:flex-col md:flex-row hidden gap-10 md:text-sm lg:text-base">
+                <div className="md:flex md:flex-row hidden gap-10 md:text-sm lg:text-base">
                     {/* Company Links */}
                     <div className="flex flex-col md:gap-5 gap-3 text-blue-800">
                         <h5 className="font-bold lg:mb-6">Company</h5>
                         <Link
                             to="/bp/about"
                             className=" dark:text-neutral-200 hover:text-blue-500 dark:hover:text-blue-400"
-                            onClick={scrollToTop}
                         >
                             About
                         </Link>
                         <Link
                             to="/bp/careers"
                             className="dark:text-neutral-200 hover:text-blue-500 dark:hover:text-blue-400"
-                            onClick={scrollToTop}
                         >
                             Careers
                         </Link>
                         <Link
                             to="/bp/contact"
                             className="dark:text-neutral-200 hover:text-blue-500 dark:hover:text-blue-400"
-                            onClick={scrollToTop}
                         >
                             Contact us
                         </Link>
