@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { readEntriesByPerson, deleteEntry } from '../../utils/api'
 import RemoveCardButton from '../../utils/RemoveCardButton'
-import { Checkbox, Table } from 'flowbite-react'
+import { Table } from 'flowbite-react'
 import moment from 'moment'
 
 

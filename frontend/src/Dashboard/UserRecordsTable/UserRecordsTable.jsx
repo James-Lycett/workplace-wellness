@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Checkbox } from 'flowbite-react'
+import { Table } from 'flowbite-react'
 import UserActivitiesList from './UserActivitiesList'
 
 export default function UserRecordsTable({ userId, entries, setEntries }) {

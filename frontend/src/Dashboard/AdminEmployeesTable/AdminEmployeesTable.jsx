@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Checkbox } from 'flowbite-react'
+import { Table } from 'flowbite-react'
 import EmployeesListNew from './EmployeesListNew'
 
 export default function AdminEmployeesTable({
