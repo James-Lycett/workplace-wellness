@@ -5,7 +5,7 @@ export default function IntroBlock() {
     return (
         <div className="flex lg:flex-row flex-col-reverse gap-10 lg:w-4/5 lg:p-4">
             <div className="flex lg:items-center flex-1">
-                <p className="lg:text-xl font-normal lg:px-3">
+                <p className="lg:text-xl font-normal px-8 lg:px-3">
                     At Workplace Wellness, we are dedicated to guiding you on a
                     journey towards improved sleep quality and enhanced mental
                     wellness. Whether you're dealing with stress, anxiety,

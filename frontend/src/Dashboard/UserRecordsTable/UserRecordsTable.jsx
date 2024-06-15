@@ -5,7 +5,7 @@ import UserActivitiesList from './UserActivitiesList'
 export default function UserRecordsTable({ userId, entries, setEntries }) {
     return (
         <>
-            <div className="overflow-auto">
+            <div className="overflow-x-auto max-h-96 md:max-h-full overflow-y-auto">
                 <Table hoverable>
                     <Table.Head className="sticky top-0 bg-white z-10">
                         <Table.HeadCell>Date</Table.HeadCell>
@@ -19,7 +19,11 @@ export default function UserRecordsTable({ userId, entries, setEntries }) {
                         </Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
-                        <UserActivitiesList userId={userId} entries={entries} setEntries={setEntries} />
+                        <UserActivitiesList
+                            userId={userId}
+                            entries={entries}
+                            setEntries={setEntries}
+                        />
                     </Table.Body>
                 </Table>
             </div>

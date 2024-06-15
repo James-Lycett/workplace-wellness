@@ -71,7 +71,7 @@ export default function AdminHome() {
         setIsModalOpen({
             state: true,
             option: option,
-            employeeFromEdit: employee
+            employeeFromEdit: employee,
         })
     }
 

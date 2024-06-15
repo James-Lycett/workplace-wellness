@@ -13,7 +13,7 @@ const About = () => {
                         </span>
                         . The team was comprised of three software engineers, a
                         UI/UX designer, a data analyst, and a senior advisor.
-                        The repo you are looking at is the product of two of the
+                        The site you are looking at is the product of two of the
                         team engineers' (
                         <span className="font-bold">
                             James Lycett and Greg Topscher

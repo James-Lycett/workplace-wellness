@@ -100,7 +100,7 @@ export default function Footer() {
                         />
                     </Link>
                 </div>
-                <div className="sm:flex sm:flex-col md:flex-row hidden gap-10 md:text-sm lg:text-base">
+                <div className="md:flex md:flex-row hidden gap-10 md:text-sm lg:text-base">
                     {/* Company Links */}
                     <div className="flex flex-col md:gap-5 gap-3 text-blue-800">
                         <h5 className="font-bold lg:mb-6">Company</h5>
