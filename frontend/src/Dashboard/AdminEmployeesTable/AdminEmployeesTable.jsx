@@ -13,7 +13,7 @@ export default function AdminEmployeesTable({ employees, openModal }) {
 
     return (
         <>
-            <div className="overflow-x-auto max-h-96 md:max-h-full overflow-y-auto">
+            <div className="overflow-x-auto max-h-96 md:max-h-full md:w-full overflow-y-auto">
                 <Table hoverable>
                     <Table.Head>
                         <Table.HeadCell colSpan={6}>
