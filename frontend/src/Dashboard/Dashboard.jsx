@@ -67,13 +67,13 @@ export default function AdminHome() {
         }
     }
 
-    const openModal = (option, employee) => {
+    const openModal = useCallback((option, employee) => {
         setIsModalOpen({
             state: true,
             option: option,
             employeeFromEdit: employee,
         })
-    }
+    }, [])
 
     const renderContent = () => {
         if (!renderConditionsMet()) {

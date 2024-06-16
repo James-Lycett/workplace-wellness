@@ -11,7 +11,7 @@ export default function AddNewEmployeeForm({
                 <div className="flex items-center justify-between my-2 h-10">
                     <label htmlFor="username">Username *</label>
                     <input
-                        type="text"
+                        type="string"
                         id="username"
                         name="username"
                         value={employee.username}
@@ -84,7 +84,7 @@ export default function AddNewEmployeeForm({
                 <div className="flex items-center justify-between my-2 h-10">
                     <label htmlFor="occupation">Occupation *</label>
                     <input
-                        type="text"
+                        type="string"
                         id="occupation"
                         name="occupation"
                         value={employee.occupation}
