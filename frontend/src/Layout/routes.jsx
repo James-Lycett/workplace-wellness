@@ -17,12 +17,7 @@ export default function RoutesComponent() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<CreateAccount />} />
-            <Route path="/user">
-                <Route path=":userId/home" element={<Dashboard />} />
-            </Route>
-            <Route path="/admin">
-                <Route path=":userId/home" element={<Dashboard />} />
-            </Route>
+            <Route path="/dashboard/:userId" element={<Dashboard />}/>
             <Route path="/tips">
                 <Route path="sleep" element={<TipsSleep />} />
                 <Route path="fitness" element={<TipsFit />} />
