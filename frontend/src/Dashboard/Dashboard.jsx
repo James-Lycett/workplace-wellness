@@ -103,7 +103,6 @@ export default function AdminHome() {
                             <AdminEmployeesTable
                                 openModal={openModal}
                                 employees={employees}
-                                setEmployees={setEmployees}
                             />
                         ) : (
                             <UserRecordsTable
