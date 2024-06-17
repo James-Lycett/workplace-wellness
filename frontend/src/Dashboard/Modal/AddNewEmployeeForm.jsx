@@ -38,7 +38,7 @@ export default function AddNewEmployeeForm({
                 <div className="flex items-center justify-between my-2 h-10">
                     <label htmlFor="password">Password</label>
                     <input
-                        type="string"
+                        type="password"
                         id="password"
                         name="password"
                         value={employee.password}
