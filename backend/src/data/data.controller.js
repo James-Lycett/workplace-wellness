@@ -90,6 +90,11 @@ async function healthDataExists(req, res, next) {
 }
 
 async function list(req, res) {
+    // List is only available to admins
+    if (!req.user.adminFromToken) {
+        return res.status(403).json({ message: "Forbidden: You do not have access to this user's data (update)" })
+    }
+
     try {
         const data = await service.list()
         res.json({ data })
@@ -200,7 +205,7 @@ async function deleteHealthData(req, res, next) {
 }
 
 module.exports = {
-    list: asyncErrorBoundary(list),
+    list: [authenticateToken, asyncErrorBoundary(list)],
     create: [validateInput, asyncErrorBoundary(duplicateUsernameExists), asyncErrorBoundary(create)],
     read: [authenticateToken, asyncErrorBoundary(healthDataExists), read],
     update: [

@@ -131,16 +131,6 @@ async function personExists(req, res, next) {
     }
 }
 
-async function list(req, res) {
-    try {
-        const data = await service.list()
-        res.json({ data })
-    } catch (error) {
-        console.error(error)
-        res.status(500).json({ error: "Error accessing log entry" })
-    }
-}
-
 async function create(req, res, next) {
     const requestEntryData = req.body.data
     const newEntryData = { ...requestEntryData }
@@ -270,7 +260,6 @@ async function lastMonthCompanyMetrics(req, res, next) {
 }
 
 module.exports = {
-    list: asyncErrorBoundary(list),
     create: [validateInput, asyncErrorBoundary(create)],
     readEntry: [
         authenticateToken,

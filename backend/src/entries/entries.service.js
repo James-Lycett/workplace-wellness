@@ -1,8 +1,5 @@
 const knex = require("../db/connection")
 
-function list() {
-    return knex("entries").select("*").orderBy("entry_id")
-}
 
 function create(newEntryData) {
 
@@ -160,7 +157,6 @@ function lastMonthBMI(personId) {
 }
 
 module.exports = {
-    list,
     create,
     readPerson,
     readEntry,
