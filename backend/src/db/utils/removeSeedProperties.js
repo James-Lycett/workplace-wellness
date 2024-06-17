@@ -7,7 +7,7 @@ const seeds = require("../seeds/modifiedUserSeeds.json")
 // Loops through seeds array and copies it into a new array of user objects with only the desired properties
 async function removeSeedProperties(seeds) {
 
-    const propsToKeep = ["username", "admin", "age", "gender", "occupation", "password_hash"]
+    const propsToKeep = ["username", "admin", "age", "gender", "occupation", "sleep_disorder", "password_hash"]
 
     const modifiedSeeds = seeds.map((seed) => {
         const newUserObject = {}

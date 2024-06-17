@@ -11,6 +11,7 @@ exports.up = function (knex) {
         table.string("gender", 10).nullable()
         table.integer("age", 3).nullable()
         table.string("occupation", 40).nullable()
+        table.string("sleep_disorder", 11).nullable()
     })
 }
 
