@@ -1,6 +1,7 @@
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary")
 const service = require("./data.service")
 const bcrypt = require("bcrypt")
+const authenticateToken = require("../authentication/authenticateToken")
 
 function validateField(value, type, criteria) {
     switch (type) {
@@ -150,7 +151,6 @@ async function duplicateUsernameExists(req, res, next) {
     }
 }
 
-
 async function create(req, res, next) {
     const { username, password, age, occupation, admin } = req.body.data
 
@@ -215,14 +215,16 @@ async function deleteHealthData(req, res, next) {
 module.exports = {
     list: asyncErrorBoundary(list),
     create: [validateInput, asyncErrorBoundary(duplicateUsernameExists), asyncErrorBoundary(create)],
-    read: [asyncErrorBoundary(healthDataExists), read],
-    readByUsername: [asyncErrorBoundary(healthDataExists), read],
+    read: [authenticateToken, asyncErrorBoundary(healthDataExists), read],
+    readByUsername: [authenticateToken, asyncErrorBoundary(healthDataExists), read],
     update: [
+        authenticateToken,
         validateInput,
         asyncErrorBoundary(healthDataExists),
         asyncErrorBoundary(update),
     ],
     deleteHealthData: [
+        authenticateToken,
         asyncErrorBoundary(healthDataExists),
         asyncErrorBoundary(deleteHealthData),
     ],
