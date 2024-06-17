@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 // import UserHome from "./UserHome";
-import { readUserByUsername } from '../utils/api'
+import { userLogin } from '../utils/api'
 import '../index.css'
 import { initFlowbite } from 'flowbite'
 
@@ -28,17 +28,13 @@ export default function LoginPage() {
         const abortController = new AbortController()
 
         try {
-            const responseFromApi = await readUserByUsername(
+            const responseFromApi = await userLogin(
                 username,
+                password,
                 abortController.signal
             )
-            const userId = responseFromApi.person_id
-            const admin = responseFromApi.admin
-            if (admin) {
-                navigate(`/admin/${userId}/home`)
-            } else {
-                navigate(`/user/${userId}/home`)
-            }
+            const { userId } = responseFromApi.user
+            navigate(`/dashboard/${userId}`)
         } catch (e) {
             console.error(e)
         }
@@ -46,12 +42,12 @@ export default function LoginPage() {
 
     const loginAsAdmin = () => {
         setUsername('blanfer0')
-        setPassword('12345')
+        setPassword('1')
         setIsPopoverVisible(false)
     }
     const loginAsUser = () => {
         setUsername('jtuminelli1')
-        setPassword('12345')
+        setPassword('2')
         setIsPopoverVisible(false)
     }
 
