@@ -98,15 +98,6 @@ async function entryExists(req, res, next) {
     // Makes sure that the user requesting this data is the user that is logged in
     const { person_id } = data
     const { personIdFromToken } = req.user
-
-    console.log(
-        `
-        entryExists
-        person_id: ${person_id} type: ${typeof person_id}
-        personIdFromToken: ${personIdFromToken} type: ${typeof personIdFromToken}
-        `
-    )
-
     if (Number(personIdFromToken) !== person_id) {
         return res.status(403).json({ message: "Forbidden: You do not have access to this user's data" })
     }
