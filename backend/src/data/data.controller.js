@@ -136,8 +136,23 @@ async function list(req, res) {
     }
 }
 
+// Checks if username is already taken before create()
+async function duplicateUsernameExists(req, res, next) {
+    const { username } = req.body.data
+    const data = await service.readByUsername(username)
+    if (data) {
+        return next({
+            status: 400,
+            message: `Username '${username}' already exists`
+        })
+    } else {
+        next()
+    }
+}
+
+
 async function create(req, res, next) {
-    const { username, password, age, occupation } = req.body.data
+    const { username, password, age, occupation, admin } = req.body.data
 
     // Encrypts the user's password before storing in db
     const salt = await bcrypt.genSalt(10)
@@ -147,6 +162,7 @@ async function create(req, res, next) {
         username,
         age,
         occupation,
+        admin,
         password_hash: passwordHash,
     }
 
@@ -198,7 +214,7 @@ async function deleteHealthData(req, res, next) {
 
 module.exports = {
     list: asyncErrorBoundary(list),
-    create: [validateInput, asyncErrorBoundary(create)],
+    create: [validateInput, asyncErrorBoundary(duplicateUsernameExists), asyncErrorBoundary(create)],
     read: [asyncErrorBoundary(healthDataExists), read],
     readByUsername: [asyncErrorBoundary(healthDataExists), read],
     update: [

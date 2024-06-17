@@ -1,4 +1,4 @@
-const seeds = require("./00-healthData.json")
+const seeds = require("./seeds/00-healthData.json")
 const bcrypt = require("bcrypt")
 const fs = require('fs');
 
