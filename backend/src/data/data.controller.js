@@ -69,12 +69,6 @@ async function healthDataExists(req, res, next) {
     if (req.params.personId) {
         // For personId validation
         const { personId } = req.params
-        const { personIdFromToken } = req.user
-
-        // Makes sure that the user requesting this data is the user that is logged in
-        if (personIdFromToken !== personId) {
-            return res.status(403).json({ message: "Forbidden: You do not have access to this user's data" })
-        }
 
         const data = await service.read(personId)
 
@@ -85,26 +79,6 @@ async function healthDataExists(req, res, next) {
             })
         } else {
             res.locals.healthData = data
-            next()
-        }
-    } else if (req.params.username) {
-        // For username validation
-        const { username } = req.params
-        const { usernameFromToken } = req.user
-        // Makes sure that the user requesting this data is the user that is logged in
-        if (usernameFromToken !== username) {
-            return res.status(403).json({ message: "Forbidden: You do not have access to this user's data" })
-        }
-
-        const userData = await service.readByUsername(username)
-
-        if (!userData) {
-            return next({
-                status: 404,
-                message: `User with username "${username}" not found`,
-            })
-        } else {
-            res.locals.healthData = userData
             next()
         }
     } else {
@@ -172,6 +146,13 @@ function read(req, res, next) {
     try {
         const data = res.locals.healthData
 
+        // Makes sure that the user requesting this data is the user that is logged in
+        const { personIdFromUser } = data.person_id
+        const { personIdFromToken } = req.user
+        if (personIdFromToken !== personIdFromUser) {
+            return res.status(403).json({ message: "Forbidden: You do not have access to this user's data (read)" })
+        }
+
         res.json({ data })
     } catch (error) {
         console.error(error)
@@ -182,6 +163,12 @@ function read(req, res, next) {
 async function update(req, res) {
     try {
         const { person_id } = res.locals.healthData
+
+        // Makes sure that the user requesting this data is the user that is logged in, or is an admin
+        const { personIdFromToken } = req.user
+        if (personIdFromToken !== person_id && !req.user.adminFromToken) {
+            return res.status(403).json({ message: "Forbidden: You do not have access to this user's data (update)" })
+        }
 
         const updatedHealthData = { ...req.body.data, person_id }
         // console.log("Updated Health Data:", updatedHealthData)
@@ -197,6 +184,12 @@ async function deleteHealthData(req, res, next) {
     try {
         const { personId } = req.params
 
+        // Makes sure that the user requesting this data is the user that is logged in, or is an admin
+        const { personIdFromToken } = req.user
+        if (personIdFromToken !== personId && !req.user.adminFromToken) {
+            return res.status(403).json({ message: "Forbidden: You do not have access to this user's data (delete)" })
+        }
+
         await service.deleteHealthData(personId)
 
         res.sendStatus(204)
@@ -210,7 +203,6 @@ module.exports = {
     list: asyncErrorBoundary(list),
     create: [validateInput, asyncErrorBoundary(duplicateUsernameExists), asyncErrorBoundary(create)],
     read: [authenticateToken, asyncErrorBoundary(healthDataExists), read],
-    readByUsername: [authenticateToken, asyncErrorBoundary(healthDataExists), read],
     update: [
         authenticateToken,
         validateInput,

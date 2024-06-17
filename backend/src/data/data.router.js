@@ -9,11 +9,6 @@ router
     .all(methodNotAllowed)
 
 router
-    .route("/user/:username")
-    .get(controller.readByUsername)
-    .all(methodNotAllowed)
-
-router
     .route("/:personId")
     .get(controller.read)
     .put(controller.update)

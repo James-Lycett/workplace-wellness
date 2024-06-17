@@ -18,7 +18,7 @@ function authenticateToken(req, res, next) {
         }
 
         // Stores the user's ID and username which the token has encoded so the ID and username can be used by downstream middleware
-        req.user = { personIdFromToken: decodedToken.personId.toString(), usernameFromToken: decodedToken.username };
+        req.user = { personIdFromToken: decodedToken.personId.toString(), adminFromToken: decodedToken.admin };
         next();
     });
 }
