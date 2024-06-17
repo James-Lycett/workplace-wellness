@@ -1,5 +1,6 @@
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary")
 const service = require("./data.service")
+const bcrypt = require("bcrypt")
 
 function validateField(value, type, criteria) {
     switch (type) {
@@ -136,8 +137,18 @@ async function list(req, res) {
 }
 
 async function create(req, res, next) {
-    const requestHealthData = req.body.data
-    const newHealthData = { ...requestHealthData }
+    const { username, password, age, occupation } = req.body.data
+
+    // Encrypts the user's password before storing in db
+    const salt = await bcrypt.genSalt(10)
+    const passwordHash = await bcrypt.hash(password, salt)
+
+    const newHealthData = {
+        username,
+        age,
+        occupation,
+        password_hash: passwordHash,
+    }
 
     try {
         const data = await service.create(newHealthData)

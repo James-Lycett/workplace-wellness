@@ -6,6 +6,7 @@ exports.up = function (knex) {
     return knex.schema.createTable("health_data", function (table) {
         table.increments("person_id").primary()
         table.string("username", 50)
+        table.string("password_hash")
         table.boolean("admin")
         table.integer("dept_id", 3).nullable()
         table.string("gender", 10).nullable()

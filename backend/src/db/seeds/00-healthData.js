@@ -1,4 +1,5 @@
-const healthData = require("./00-healthData.json")
+//const healthData = require("./00-healthData.json") **old seeds*
+const healthData = require("./modifiedUserSeeds.json")
 
 exports.seed = function (knex) {
     return knex
