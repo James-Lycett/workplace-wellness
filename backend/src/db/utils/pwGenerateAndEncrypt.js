@@ -1,10 +1,14 @@
-const seeds = require("./seeds/00-healthData.json")
 const bcrypt = require("bcrypt")
 const fs = require('fs');
 
+// Input
+const seeds = require("../seeds/00-healthData.json")
+
+
 let salt = ""
 
-async function modifySeeds(seeds) {
+// Generates passwords that match userId, encrypts them, and adds the encrypted password to each user object as password_hash
+async function pwGenerateAndEncrypt(seeds) {
     let password = "1"
 
     salt = await bcrypt.genSalt(10)
@@ -18,11 +22,14 @@ async function modifySeeds(seeds) {
     return seeds
 }
 
+// Saves the updated seeds in a new .json file
 async function main() {
-    const modifiedSeeds = await modifySeeds(seeds)
-    const filePath = "./modifiedUserSeeds.json"
+    const modifiedSeeds = await pwGenerateAndEncrypt(seeds)
+
+    // Output
+    const filePath = "../seeds/modifiedUserSeeds.json"
     
-    fs.writeFile(filePath, JSON.stringify(modifiedSeeds, null, 2), (error) => {
+    fs.writeFile(filePath, JSON.stringify(modifiedSeeds, null, 4), (error) => {
         if (error) {
             console.error('Error creating file:', error)
         } else {
