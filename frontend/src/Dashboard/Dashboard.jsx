@@ -59,24 +59,16 @@ export default function AdminHome() {
         loadData()
     }, [loadData])
 
-    function renderConditionsMet() {
-        if (user) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    const openModal = useCallback((option, employee) => {
+    const openModal = (option, employee) => {
         setIsModalOpen({
             state: true,
             option: option,
             employeeFromEdit: employee,
         })
-    }, [])
+    }
 
     const renderContent = () => {
-        if (!renderConditionsMet()) {
+        if (!user) {
             return (
                 <div className="py-20">
                     <Spinner />

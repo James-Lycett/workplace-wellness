@@ -33,8 +33,8 @@ export default function LoginPage() {
                 password,
                 abortController.signal
             )
-            const { userId } = responseFromApi.user
-            navigate(`/dashboard/${userId}`)
+            const { person_id } = responseFromApi
+            navigate(`/dashboard/${person_id}`)
         } catch (e) {
             console.error(e)
         }

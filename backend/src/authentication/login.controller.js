@@ -42,7 +42,7 @@ async function login(req, res) {
         )
 
         // Sends user info back to frontend
-        res.status(200).json({ token, user })
+        res.status(200).json({ data: { token, user } })
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Internal server error" })

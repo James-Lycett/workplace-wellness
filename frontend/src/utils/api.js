@@ -11,7 +11,6 @@ async function fetchJson(url, options, onCancel) {
 
     if (!options.headers) {
         options.headers = new Headers()
-        headers.append("Content-Type", "application/json")
     }
 
     if (token) {
@@ -67,7 +66,9 @@ export async function userLogin(username, password, signal) {
         signal,
     };
 
-    const { token, user } = await fetchJson(url, options);
+    const { token, user } = await fetchJson(url, options)
+
+    console.log(JSON.stringify(user))
 
     localStorage.setItem('token', token);
 
