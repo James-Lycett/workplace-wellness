@@ -57,12 +57,10 @@ function validateInput(req, res, next) {
     const validationRules = {
         sleep_duration: { type: 'number', min: 0, max: 24 },
         stress_level: { type: 'number', min: 1, max: 10 },
-        /*
         bmi_category: {
             type: "string",
             enum: ["Underweight", "Normal", "Overweight"],
         },
-        */
         heart_rate: { type: 'number', min: 20, max: 600 },
         daily_steps: { type: 'number', min: 0, max: 100000 },
         // date: { type: 'string', custom: validateDate },

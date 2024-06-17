@@ -32,17 +32,7 @@ function validateInput(req, res, next) {
         admin: { type: "boolean" },
         gender: { type: "string", enum: ["Male", "Female"], maxLength: 6 },
         age: { type: "number", min: 0, max: 200 },
-        sleep_duration: { type: "number", min: 0, max: 24 },
-        quality_of_sleep: { type: "number", min: 1, max: 10 },
-        physical_activity_level: { type: "number", min: 0, max: 1440 },
-        stress_level: { type: "number", min: 1, max: 10 },
-        bmi_category: {
-            type: "string",
-            enum: ["Underweight", "Normal", "Overweight"],
-        },
-        blood_pressure: { type: "string" },
-        heart_rate: { type: "number", min: 20, max: 600 },
-        daily_steps: { type: "number", min: 0, max: 100000 },
+        occupation: { type: "string", maxLength: 40},
         sleep_disorder: {
             type: "string",
             enum: ["None", "Insomnia", "Sleep Apnea"],
@@ -150,7 +140,7 @@ async function duplicateUsernameExists(req, res, next) {
 }
 
 async function create(req, res, next) {
-    const { username, password, age, occupation, admin } = req.body.data
+    const { username, password, age, occupation, admin, gender, sleep_disorder } = req.body.data
 
     // Encrypts the user's password before storing in db
     const salt = await bcrypt.genSalt(10)
@@ -161,6 +151,8 @@ async function create(req, res, next) {
         age,
         occupation,
         admin,
+        gender,
+        sleep_disorder,
         password_hash: passwordHash,
     }
 

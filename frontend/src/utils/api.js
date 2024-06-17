@@ -68,8 +68,6 @@ export async function userLogin(username, password, signal) {
 
     const { token, user } = await fetchJson(url, options)
 
-    console.log(JSON.stringify(user))
-
     localStorage.setItem('token', token);
 
     return user;

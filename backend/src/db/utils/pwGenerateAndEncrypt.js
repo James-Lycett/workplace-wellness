@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt")
 const fs = require('fs');
 
 // Input
-const seeds = require("../seeds/00-healthData.json")
+const seeds = require("../seeds/modifiedUserSeeds2.json")
 
 
 let salt = ""
@@ -27,7 +27,7 @@ async function main() {
     const modifiedSeeds = await pwGenerateAndEncrypt(seeds)
 
     // Output
-    const filePath = "../seeds/modifiedUserSeeds.json"
+    const filePath = "../seeds/modifiedUserSeeds2.json"
     
     fs.writeFile(filePath, JSON.stringify(modifiedSeeds, null, 4), (error) => {
         if (error) {

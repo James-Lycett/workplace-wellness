@@ -28,6 +28,8 @@ export default function Modal({
         gender: '',
         sleep_disorder: '',
         occupation: '',
+        password: '',
+        admin: false,
     })
 
     useEffect(() => {
@@ -78,9 +80,13 @@ export default function Modal({
 
     const handleEmployeeChange = (e) => {
         const { name, value } = e.target
+        let valueCopy = value
+        if (name === "admin") {
+            valueCopy = (value === "true")
+        }
         setEmployee({
             ...employee,
-            [name]: value,
+            [name]: valueCopy,
         })
     }
 
