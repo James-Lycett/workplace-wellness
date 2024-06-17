@@ -25,34 +25,6 @@ function validateEnum(value, validValues) {
     return validValues.includes(value)
 }
 
-// const { isValid, parseISO } = require('date-fns')
-
-// function validateDate (value) {
-//     try {
-//         const currentDate = new Date()
-//         console.log('current date:', currentDate)
-
-//         const inputDate = parseISO(value)
-//         console.log('input date:', inputDate)
-
-//         if (!isValid(inputDate)) {
-//             console.error('Invalid inputDate:', value)
-//             return false
-//         }
-
-//         // Check if the inputDate is not in the future
-//         if (inputDate > currentDate) {
-//             console.error('Input date is in the future:', value)
-//             return false
-//         }
-
-//         return true
-//     } catch (error) {
-//         console.error('Error parsing date:', error)
-//         return false
-//     }
-// }
-
 function validateInput(req, res, next) {
     const validationRules = {
         sleep_duration: { type: 'number', min: 0, max: 24 },
@@ -60,10 +32,10 @@ function validateInput(req, res, next) {
         bmi_category: {
             type: "string",
             enum: ["Underweight", "Normal", "Overweight"],
+            maxLength: 11
         },
         heart_rate: { type: 'number', min: 20, max: 600 },
         daily_steps: { type: 'number', min: 0, max: 100000 },
-        // date: { type: 'string', custom: validateDate },
     }
 
     for (const field in validationRules) {
