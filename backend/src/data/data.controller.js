@@ -76,24 +76,16 @@ function validateInput(req, res, next) {
 }
 
 async function healthDataExists(req, res, next) {
-    const { personId } = req.params
-    const data = await service.read(personId)
-
-    if (!data) {
-        return next({
-            status: 404,
-            message: `Health data for Person ID "${personId}" does not exist`,
-        })
-    } else {
-        res.locals.healthData = data
-        next()
-    }
-}
-
-async function healthDataExists(req, res, next) {
     if (req.params.personId) {
         // For personId validation
         const { personId } = req.params
+        const { personIdFromToken } = req.user
+
+        // Makes sure that the user requesting this data is the user that is logged in
+        if (personIdFromToken !== personId) {
+            return res.status(403).json({ message: "Forbidden: You do not have access to this user's data" })
+        }
+
         const data = await service.read(personId)
 
         if (!data) {
@@ -108,6 +100,12 @@ async function healthDataExists(req, res, next) {
     } else if (req.params.username) {
         // For username validation
         const { username } = req.params
+        const { usernameFromToken } = req.user
+        // Makes sure that the user requesting this data is the user that is logged in
+        if (usernameFromToken !== username) {
+            return res.status(403).json({ message: "Forbidden: You do not have access to this user's data" })
+        }
+
         const userData = await service.readByUsername(username)
 
         if (!userData) {
@@ -181,6 +179,7 @@ async function create(req, res, next) {
 function read(req, res, next) {
     try {
         const data = res.locals.healthData
+
         res.json({ data })
     } catch (error) {
         console.error(error)
@@ -191,6 +190,7 @@ function read(req, res, next) {
 async function update(req, res) {
     try {
         const { person_id } = res.locals.healthData
+
         const updatedHealthData = { ...req.body.data, person_id }
         // console.log("Updated Health Data:", updatedHealthData)
         const result = await service.update(updatedHealthData)
@@ -204,7 +204,9 @@ async function update(req, res) {
 async function deleteHealthData(req, res, next) {
     try {
         const { personId } = req.params
+
         await service.deleteHealthData(personId)
+
         res.sendStatus(204)
     } catch (error) {
         console.error(error)

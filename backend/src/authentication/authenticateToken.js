@@ -17,8 +17,8 @@ function authenticateToken(req, res, next) {
                 .json({ message: "Unauthorized token" });
         }
 
-        // Stores the user's ID that the token carried so the ID can be used by downstream middleware
-        req.user = { personId: decodedToken.personId };
+        // Stores the user's ID and username which the token has encoded so the ID and username can be used by downstream middleware
+        req.user = { personIdFromToken: decodedToken.personId.toString(), usernameFromToken: decodedToken.username };
         next();
     });
 }

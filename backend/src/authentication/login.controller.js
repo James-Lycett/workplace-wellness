@@ -36,7 +36,7 @@ async function login(req, res) {
 
         // Creates an auth token which includes (in encrypted form) the user's id and a key used to unencrypt the token
         const token = jwt.sign(
-            { personId: user.person_id },
+            { personId: user.person_id, username: user.username },
             process.env.API_SECRET_KEY,
             { expiresIn: "1h" }
         )

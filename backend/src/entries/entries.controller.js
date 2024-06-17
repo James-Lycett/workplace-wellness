@@ -1,5 +1,6 @@
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary")
 const service = require("./entries.service")
+const authenticateToken = require("../authentication/authenticateToken")
 
 function validateField(value, type, criteria) {
     switch (type) {
@@ -94,6 +95,22 @@ async function entryExists(req, res, next) {
     const { entryId } = req.params
     const data = await service.readEntry(entryId)
 
+    // Makes sure that the user requesting this data is the user that is logged in
+    const { person_id } = data
+    const { personIdFromToken } = req.user
+
+    console.log(
+        `
+        entryExists
+        person_id: ${person_id} type: ${typeof person_id}
+        personIdFromToken: ${personIdFromToken} type: ${typeof personIdFromToken}
+        `
+    )
+
+    if (Number(personIdFromToken) !== person_id) {
+        return res.status(403).json({ message: "Forbidden: You do not have access to this user's data" })
+    }
+
     if (!data) {
         return next({
             status: 404,
@@ -108,6 +125,11 @@ async function entryExists(req, res, next) {
 async function personExists(req, res, next) {
     const { personId } = req.params
     const data = await service.readPerson(personId)
+
+    const { personIdFromToken } = req.user
+    if (personIdFromToken !== personId) {
+        return res.status(403).json({ message: "Forbidden: You do not have access to this user's data" })
+    }
 
     if (!data) {
         return next({
@@ -207,6 +229,12 @@ async function deleteEntry(req, res, next) {
 async function lastMonthAverages(req, res, next) {
     const { personId } = req.params
 
+    // Makes sure that the user requesting this data is the user that is logged in
+    const { personIdFromToken } = req.user
+    if (personIdFromToken !== personId) {
+        return res.status(403).json({ message: "Forbidden: You do not have access to this user's data" })
+    }
+
     try {
         const numericalAverages = await service.lastMonthAverages(personId)
         const bmiAverage = await service.lastMonthBMI(personId)
@@ -255,18 +283,32 @@ async function lastMonthCompanyMetrics(req, res, next) {
 module.exports = {
     list: asyncErrorBoundary(list),
     create: [validateInput, asyncErrorBoundary(create)],
-    readEntry: [asyncErrorBoundary(entryExists), readEntry],
-    readPerson: [asyncErrorBoundary(personExists), readPerson],
+    readEntry: [
+        authenticateToken,
+        asyncErrorBoundary(entryExists),
+        readEntry
+    ],
+    readPerson: [
+        authenticateToken,
+        asyncErrorBoundary(personExists),
+        readPerson
+    ],
     update: [
+        authenticateToken,
         validateInput,
         asyncErrorBoundary(entryExists),
         asyncErrorBoundary(update),
     ],
     deleteEntry: [
+        authenticateToken,
         asyncErrorBoundary(entryExists),
         asyncErrorBoundary(deleteEntry),
     ],
-    readLastMonthAverages: [asyncErrorBoundary(personExists), asyncErrorBoundary(lastMonthAverages)],
+    readLastMonthAverages: [
+        authenticateToken,
+        asyncErrorBoundary(personExists),
+        asyncErrorBoundary(lastMonthAverages)
+    ],
     readLastMonthCompanyMetrics: [asyncErrorBoundary(lastMonthCompanyMetrics)],
     lastMonthCompanyMetrics
 }
