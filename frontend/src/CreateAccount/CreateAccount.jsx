@@ -56,13 +56,7 @@ export default function CreateAccount() {
         try {
             const response = await submitUser(user)
 
-            if (userType === 'admin') {
-                // If admin is selected, navigate to Create admin account page
-                navigate(`/admin/${response.person_id}/home`)
-            } else {
-                // Navigate to Create user account page
-                navigate(`/admin/${response.person_id}/home`)
-            }
+            navigate(`/dashboard/${response.person_id}`)
         } catch (error) {
             console.error(error)
         }
@@ -95,7 +89,7 @@ export default function CreateAccount() {
                 </h1>
             </div>
             <div
-                className="mt-5 mb-2 block w-full sm: px-0 sm:w-3/4 px-6 pb-[6px] pt-2 text-s font-medium leading-normal text-primary"
+                className="mt-5 mb-2 block w-full sm:px-0 sm:w-3/4 px-6 pb-[6px] pt-2 text-s font-medium leading-normal text-primary"
                 data-te-ripple-init
             >
                 <form onSubmit={handleSubmit}>

@@ -33,12 +33,7 @@ export default function LoginPage() {
                 abortController.signal
             )
             const userId = responseFromApi.person_id
-            const admin = responseFromApi.admin
-            if (admin) {
-                navigate(`/admin/${userId}/home`)
-            } else {
-                navigate(`/user/${userId}/home`)
-            }
+            navigate(`/dashboard/${userId}`)
         } catch (e) {
             console.error(e)
         }
