@@ -1,12 +1,18 @@
-const dataController = require("../data/data.controller")
 const entriesController = require("../entries/entries.controller")
 const dataService = require("../data/data.service")
 const entriesService = require("../entries/entries.service")
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary")
+const authenticateToken = require("../authentication/authenticateToken")
 
 
 async function loadUserData(req, res, next) {
     const { userId } = req.params
+
+    const { personIdFromToken, adminFromToken } = req.user
+    if (personIdFromToken !== userId && !adminFromToken) {
+        return res.status(403).json({ message: "Forbidden: You do not have access to this user's data (loadUserData)" })
+    }
+
     const user = await dataService.read(userId)
     const entries = await entriesService.readPerson(userId)
     const averages = await entriesService.lastMonthAverages(userId)
@@ -18,6 +24,10 @@ async function loadUserData(req, res, next) {
     }
 
     if (user.admin) {
+        // lastMonthCompanyMetrics is only available to admins
+        if (!req.user.adminFromToken) {
+            return res.status(403).json({ message: "Forbidden: You do not have access to this user's data (lastMonthCompanyMetrics)" })
+        }
         const companyMetrics = await entriesController.lastMonthCompanyMetrics()
         const employees = await dataService.list()
 
@@ -31,4 +41,6 @@ async function loadUserData(req, res, next) {
     res.json({ data })
 }
 
-module.exports = { loadUserData }
+module.exports = {
+    loadUserData: [authenticateToken, asyncErrorBoundary(loadUserData)]
+}

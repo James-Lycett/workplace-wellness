@@ -242,7 +242,6 @@ async function lastMonthAverages(req, res, next) {
     }
 */
 async function lastMonthCompanyMetrics(req, res, next) {
-
     try {
         const totalHoursOfSleep = await service.lastMonthCompanyTotalSleep()
         const averageQualityOfSleep = await service.lastMonthCompanySleepQualityAverage()
@@ -287,6 +286,9 @@ module.exports = {
         asyncErrorBoundary(personExists),
         asyncErrorBoundary(lastMonthAverages)
     ],
-    readLastMonthCompanyMetrics: [asyncErrorBoundary(lastMonthCompanyMetrics)],
+    readLastMonthCompanyMetrics: [
+        authenticateToken,
+        asyncErrorBoundary(lastMonthCompanyMetrics)
+    ],
     lastMonthCompanyMetrics
 }
