@@ -68,9 +68,10 @@ export async function userLogin(username, password, signal) {
 
     const { token, user } = await fetchJson(url, options)
 
+
     localStorage.setItem("token", token)
 
-    return user;
+    return user
 }
 
 export function userLogout(signal) {

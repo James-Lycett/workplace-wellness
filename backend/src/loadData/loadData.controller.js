@@ -8,9 +8,12 @@ const authenticateToken = require("../authentication/authenticateToken")
 async function loadUserData(req, res, next) {
     const { userId } = req.params
 
-    const { personIdFromToken, adminFromToken } = req.user
-    if (personIdFromToken !== userId && !adminFromToken) {
-        return res.status(403).json({ message: "Forbidden: You do not have access to this user's data (loadUserData)" })
+    const { personIdFromToken } = req.user
+    if (personIdFromToken !== userId ) {
+        return next({ 
+            status: 403,
+            message: "Forbidden: You do not have access to this user's data"
+        })
     }
 
     const user = await dataService.read(userId)
@@ -26,7 +29,10 @@ async function loadUserData(req, res, next) {
     if (user.admin) {
         // lastMonthCompanyMetrics is only available to admins
         if (!req.user.adminFromToken) {
-            return res.status(403).json({ message: "Forbidden: You do not have access to this user's data (lastMonthCompanyMetrics)" })
+            return next({ 
+                status: 403,
+                message: "Forbidden: You do not have access to this user's data"
+            })
         }
         const companyMetrics = await entriesController.lastMonthCompanyMetrics()
         const employees = await dataService.list()

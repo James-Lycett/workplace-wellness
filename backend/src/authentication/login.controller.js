@@ -11,15 +11,16 @@ const service = require("../data/data.service");
 5. sends token back to the frontend, where it'll be stored in localStorage to be sent on subsequent requests
 
 */
-async function login(req, res) {
+async function login(req, res, next) {
     try {
         const { username, password } = req.body.data
 
         const user = await service.readByUsername(username)
         if (!user) {
-            return res
-                .status(401)
-                .json({ message: "Invalid username or password" })
+            return next({
+                status: 401,
+                message: "Invalid username or password" 
+            })
         }
 
         // Compares the encrypted password from the db with the password sent from the frontend form
@@ -29,9 +30,10 @@ async function login(req, res) {
         );
 
         if (!isPasswordValid) {
-            return res
-                .status(401)
-                .json({ message: "Invalid username or password" })
+            return next({
+                status: 401,
+                message: "Invalid username or password" 
+            })
         }
 
         // Creates an auth token which includes (in encrypted form) the user's id and a key used to unencrypt the token

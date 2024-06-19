@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import { userLogin } from '../utils/api'
 import '../index.css'
 import { initFlowbite } from 'flowbite'
+import ErrorAlert from '../utils/ErrorAlert'
 
 export default function LoginPage() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [isPopoverVisible, setIsPopoverVisible] = useState(false)
+    const [error, setError] = useState(null)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -33,10 +35,10 @@ export default function LoginPage() {
                 password,
                 abortController.signal
             )
-            const { person_id } = responseFromApi
+            const { person_id } = responseFromApi.user
             navigate(`/dashboard/${person_id}`)
         } catch (e) {
-            console.error(e)
+            setError(e)
         }
     }
 
@@ -131,8 +133,9 @@ export default function LoginPage() {
                                 </>
                             )}
                         </div>
+                        <ErrorAlert error={error}/>
                         {/* Sign in button */}
-                        <div className="flex flex-col items-center justify-center max-w-52">
+                        <div className="flex flex-col items-center justify-center max-w-52 mt-3">
                             <button
                                 type="submit"
                                 className="w-full text-xl font-bold mx-20 button-light-blue"
