@@ -147,7 +147,7 @@ export default function Modal({
                 }
             case 'editEmployee':
                 return {
-                    title: "Edit Employee",
+                    title: `Edit Employee: ${employee.username}`,
                     form: (
                     <EditEmployeeForm 
                         employee={employee}

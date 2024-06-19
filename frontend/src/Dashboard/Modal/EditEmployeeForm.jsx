@@ -11,18 +11,6 @@ export default function EditEmployeeForm({
         <div className="text-xl">
             <form onSubmit={handleSubmit} className="flex flex-col">
                 <div className="flex items-center justify-between my-2 h-10">
-                    <label htmlFor="username">Username *</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        value={employee.username}
-                        placeholder="Username"
-                        onChange={handleChange}
-                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5 text-xl text-accent-1"
-                    />
-                </div>
-                <div className="flex items-center justify-between my-2 h-10">
                     <label htmlFor="age">Age *</label>
                     <input
                         type="number"
