@@ -20,8 +20,6 @@ export default function Modal({
         heart_rate: '',
         date: new Date().toISOString(),
     })
-
-    
     const [employee, setEmployee] = useState({
         username: '',
         age: '',
@@ -31,6 +29,7 @@ export default function Modal({
         password: '',
         admin: false,
     })
+    const [error, setError] = useState(null)
 
     useEffect(() => {
         if (isModalOpen.option === "editEmployee") {
@@ -68,7 +67,7 @@ export default function Modal({
         try {
             await createEntry(entry, abortController.signal)
         } catch (error) {
-            console.error(error)
+            setError(error)
         } finally {
             // Refresh entries list and recalculate averages
             loadData()
@@ -105,7 +104,7 @@ export default function Modal({
             }
             
         } catch (error) {
-            console.error(error)
+            setError(error)
         } finally {
             // Refresh employees list
             const listUsersResponse = await listUsers(abortController.signal)
@@ -130,6 +129,7 @@ export default function Modal({
                             entry={entry}
                             handleChange={handleEntryChange}
                             handleSubmit={handleEntrySubmit}
+                            error={error}
                         />
                     )
                 }
@@ -141,6 +141,7 @@ export default function Modal({
                             employee={employee}
                             handleChange={handleEmployeeChange}
                             handleSubmit={handleEmployeeSubmit}
+                            error={error}
                         />
                     )
                 }
@@ -152,6 +153,7 @@ export default function Modal({
                         employee={employee}
                         handleChange={handleEmployeeChange}
                         handleSubmit={handleEmployeeSubmit}
+                        error={error}
                     />
                     )
                 }

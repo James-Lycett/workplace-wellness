@@ -1,9 +1,11 @@
 import React from 'react'
+import ErrorAlert from '../../utils/ErrorAlert'
 
 export default function AddNewEmployeeForm({
     employee,
     handleChange,
     handleSubmit,
+    error
 }) {
     return (
         <div className="text-xl">
@@ -109,6 +111,7 @@ export default function AddNewEmployeeForm({
                 <div className="my-3 text-lg">
                     <small>* Required Entry</small>
                 </div>
+                <ErrorAlert error={error} />
                 <div className="flex flex-col items-center justify-center my-2 ">
                     <button
                         onSubmit={handleSubmit}
