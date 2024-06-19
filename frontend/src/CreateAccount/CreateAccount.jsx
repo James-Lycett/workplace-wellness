@@ -1,24 +1,27 @@
 import React, { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createUser, userLogin } from '../utils/api'
+import ErrorAlert from '../utils/ErrorAlert'
 
 export default function CreateAccount() {
     const navigate = useNavigate() // Initialize useHistory hook
+    const [error, setError] = useState(null)
     const [user, setUser] = useState({
-        admin: false,
-        username: "",
-        password: "",
-        passwordConfirm: "",
-        age: "",
-        gender: "",
-        sleep_disorder: "",
-        occupation: "",
+        admin: 'unselected',
+        username: '',
+        password: '',
+        passwordConfirm: '',
+        age: '',
+        gender: '',
+        sleep_disorder: '',
+        occupation: '',
     })
 
     function handleChange({ target: { name, value } }) {
         let valueCopy = value
+        // Converts string value from form to a boolean
         if (name === 'admin') {
-            valueCopy = (value === 'true')
+            valueCopy = value === 'true'
         }
         setUser((previousUser) => ({
             ...previousUser,
@@ -29,17 +32,26 @@ export default function CreateAccount() {
     const submitUser = useCallback(async (user) => {
         const abortController = new AbortController()
 
-        try {
-            const response = await createUser(user, abortController.signal)
-            
-            await userLogin(user.username, user.password, abortController.signal)
+        if (user.password !== user.passwordConfirm) {
+            setError({ message: 'Passwords do not match' })
+        } else if (user.admin === "unselected") {
+            setError({ message: 'Please select type of account'})
+        } else {
+            try {
+                const response = await createUser(user, abortController.signal)
 
-            return response
-        } catch (error) {
-            console.error(error)
-            throw error
-        } finally {
-            abortController.abort()
+                await userLogin(
+                    user.username,
+                    user.password,
+                    abortController.signal
+                )
+
+                return response
+            } catch (error) {
+                setError(error)
+            } finally {
+                abortController.abort()
+            }
         }
     }, [])
 
@@ -74,13 +86,14 @@ export default function CreateAccount() {
                             className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl text-accent-1"
                             name="admin"
                             id="admin"
+                            required={true}
                             onChange={handleChange}
                         >
                             <option value="unselected">
                                 Select Type of Account
                             </option>
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
+                            <option value="true">Admin</option>
+                            <option value="false">User</option>
                         </select>
                         {/* Username input */}
                         <input
@@ -99,6 +112,7 @@ export default function CreateAccount() {
                             type="password"
                             id="password"
                             name="password"
+                            required={true}
                             value={user.password}
                             placeholder="Password"
                             onChange={handleChange}
@@ -109,8 +123,9 @@ export default function CreateAccount() {
                             type="password"
                             id="passwordConfim"
                             name="passwordConfirm"
+                            required={true}
                             value={user.passwordConfirm}
-                            placeholder='Confirm Password'
+                            placeholder="Confirm Password"
                             onChange={handleChange}
                         />
                         {/* Age input */}
@@ -131,6 +146,7 @@ export default function CreateAccount() {
                         <select
                             name="gender"
                             id="gender"
+                            required={true}
                             value={user.gender}
                             onChange={handleChange}
                             className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl text-accent-1"
@@ -145,6 +161,7 @@ export default function CreateAccount() {
                         <select
                             name="sleep_disorder"
                             id="sleep_disorder"
+                            required={true}
                             value={user.sleep_disorder}
                             onChange={handleChange}
                             className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl text-accent-1"
@@ -159,12 +176,14 @@ export default function CreateAccount() {
                             type="string"
                             id="occupation"
                             name="occupation"
+                            required={true}
                             value={user.occupation}
                             placeholder="Occupation"
                             onChange={handleChange}
                             className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl"
                         />
                         {/* Register button */}
+                        <ErrorAlert error={error} />
                         <div className="flex flex-col items-center justify-center max-w-52 mt-5">
                             <button
                                 type="submit"
