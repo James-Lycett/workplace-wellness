@@ -64,13 +64,17 @@ export async function userLogin(username, password, signal) {
             data: { username: username, password: password },
         }),
         signal,
-    };
+    }
 
     const { token, user } = await fetchJson(url, options)
 
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token)
 
     return user;
+}
+
+export function userLogout(signal) {
+    localStorage.removeItem("token")
 }
 
 // Returns an array of all users
