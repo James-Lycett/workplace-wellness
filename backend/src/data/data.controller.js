@@ -67,7 +67,6 @@ function validateInput(req, res, next) {
 
 async function healthDataExists(req, res, next) {
     if (req.params.personId) {
-        // For personId validation
         const { personId } = req.params
 
         const data = await service.read(personId)
@@ -176,7 +175,6 @@ async function update(req, res) {
         }
 
         const updatedHealthData = { ...req.body.data, person_id }
-        // console.log("Updated Health Data:", updatedHealthData)
         const result = await service.update(updatedHealthData)
         res.json({ data: result[0] })
     } catch (error) {

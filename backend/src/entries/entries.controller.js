@@ -140,7 +140,6 @@ async function update(req, res) {
     try {
         const { entry_id } = res.locals.entryData
         const updatedEntry = { ...req.body.data, entry_id }
-        // console.log("Updated Entry:", updatedEntry)
         const result = await service.update(updatedEntry)
         res.json({ data: result[0] })
     } catch (error) {
@@ -163,7 +162,7 @@ async function deleteEntry(req, res, next) {
 
 /*
     lastMonthAverages calls both the query functions (service.lastMonthBMI handles bmi_category 
-    string data differently than lastMonthAverages, which only handles numerical data) 
+    string data differently than service.lastMonthAverages, which only handles numerical data) 
     from entries.service for the average of last month's kpi metrics and mashes them together in a 
     single object that looks like this:
     {
@@ -204,7 +203,7 @@ async function lastMonthAverages(req, res, next) {
 
 
 /*
-    Gets sleep duration total hours and average quality of sleep, combine them into a single object
+    Gets sleep duration total hours and average quality of sleep, combines them into a single object
     returns (in JSON):
     {
         data: {

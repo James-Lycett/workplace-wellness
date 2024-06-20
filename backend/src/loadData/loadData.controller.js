@@ -44,7 +44,7 @@ async function loadUserData(req, res, next) {
         }
     }
 
-    res.json({ data })
+    res.status(200).json({ data })
 }
 
 module.exports = {
