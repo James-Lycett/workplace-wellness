@@ -70,7 +70,7 @@ export default function LoginPage() {
                             type="string"
                             id="username"
                             value={username}
-                            placeholder="Username or Email"
+                            placeholder="Username"
                             onChange={handleUsernameChange}
                         />
                         {/* Password input */}
