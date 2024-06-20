@@ -1,51 +1,57 @@
 import React, { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { createUser } from '../utils/api'
+import { createUser, userLogin } from '../utils/api'
+import ErrorAlert from '../utils/ErrorAlert'
 
 export default function CreateAccount() {
-    const [userType, setUserType] = useState('unselected')
     const navigate = useNavigate() // Initialize useHistory hook
-
+    const [error, setError] = useState(null)
     const [user, setUser] = useState({
+        admin: 'unselected',
         username: '',
-        admin: true,
+        password: '',
+        passwordConfirm: '',
+        age: '',
+        gender: '',
+        sleep_disorder: '',
+        occupation: '',
     })
-    const [password, setPassword] = useState('')
-    const [passwordConfirm, setPasswordConfirm] = useState('')
-    const [ein, setEin] = useState('')
 
     function handleChange({ target: { name, value } }) {
-        if (name === 'dropdown') {
-            setUserType(value)
-            setUser((previousUser) => ({
-                ...previousUser,
-                admin: value === 'admin' ? true : false,
-            }))
-        } else if (name === 'password') {
-            setPassword(value)
-        } else if (name === 'confirm-password') {
-            setPasswordConfirm(value)
-        } else if (name === 'ein') {
-            setEin(value)
-        } else {
-            setUser((previousUser) => ({
-                ...previousUser,
-                [name]: value,
-            }))
+        let valueCopy = value
+        // Converts string value from form to a boolean
+        if (name === 'admin') {
+            valueCopy = value === 'true'
         }
+        setUser((previousUser) => ({
+            ...previousUser,
+            [name]: valueCopy,
+        }))
     }
 
     const submitUser = useCallback(async (user) => {
         const abortController = new AbortController()
 
-        try {
-            const response = await createUser(user, abortController.signal)
-            return response
-        } catch (error) {
-            console.error(error)
-            throw error
-        } finally {
-            abortController.abort()
+        if (user.password !== user.passwordConfirm) {
+            setError({ message: 'Passwords do not match' })
+        } else if (user.admin === "unselected") {
+            setError({ message: 'Please select type of account'})
+        } else {
+            try {
+                const response = await createUser(user, abortController.signal)
+
+                await userLogin(
+                    user.username,
+                    user.password,
+                    abortController.signal
+                )
+
+                return response
+            } catch (error) {
+                setError(error)
+            } finally {
+                abortController.abort()
+            }
         }
     }, [])
 
@@ -56,35 +62,10 @@ export default function CreateAccount() {
         try {
             const response = await submitUser(user)
 
-            if (userType === 'admin') {
-                // If admin is selected, navigate to Create admin account page
-                navigate(`/admin/${response.person_id}/home`)
-            } else {
-                // Navigate to Create user account page
-                navigate(`/admin/${response.person_id}/home`)
-            }
+            navigate(`/dashboard/${response.person_id}`)
         } catch (error) {
             console.error(error)
         }
-    }
-
-    // Form field conditional renders
-    let eidField = ''
-    if (userType === 'admin') {
-        eidField = (
-            <>
-                <label htmlFor="ein"></label>
-                <input
-                    className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl"
-                    type="text"
-                    id="ein"
-                    name="ein"
-                    value={ein}
-                    placeholder="Employer Identification Number"
-                    onChange={handleChange}
-                />
-            </>
-        )
     }
 
     return (
@@ -95,27 +76,26 @@ export default function CreateAccount() {
                 </h1>
             </div>
             <div
-                className="mt-5 mb-2 block w-full sm: px-0 sm:w-3/4 px-6 pb-[6px] pt-2 text-s font-medium leading-normal text-primary"
+                className="mt-5 mb-2 block w-full sm:px-0 sm:w-3/4 px-6 pb-[6px] pt-2 text-s font-medium leading-normal text-primary"
                 data-te-ripple-init
             >
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-col items-center justify-center">
                         {/* Select user type */}
-                        <label htmlFor="userType"></label>
                         <select
-                            className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl"
-                            name="dropdown"
-                            id="userType"
+                            className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl text-accent-1"
+                            name="admin"
+                            id="admin"
+                            required={true}
                             onChange={handleChange}
                         >
                             <option value="unselected">
                                 Select Type of Account
                             </option>
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
+                            <option value="true">Admin</option>
+                            <option value="false">User</option>
                         </select>
                         {/* Username input */}
-                        <label htmlFor="username"></label>
                         <input
                             className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl"
                             type="text"
@@ -123,44 +103,87 @@ export default function CreateAccount() {
                             name="username"
                             required={true}
                             value={user.username}
-                            placeholder={
-                                userType === 'user' || userType === 'unselected'
-                                    ? 'Enter Username'
-                                    : 'Legal First and Last Name'
-                            }
+                            placeholder="Enter Username"
                             onChange={handleChange}
                         />
-                        {eidField}
                         {/* Password input */}
-                        <label htmlFor="password"></label>
                         <input
                             className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl"
                             type="password"
                             id="password"
                             name="password"
-                            value={password}
-                            placeholder={
-                                userType === 'admin'
-                                    ? 'Location Password'
-                                    : 'Password'
-                            }
+                            required={true}
+                            value={user.password}
+                            placeholder="Password"
                             onChange={handleChange}
                         />
-                        {userType === 'user' && (
-                            <>
-                                <label htmlFor="confirm-password"></label>
-                                <input
-                                    className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl"
-                                    type="password"
-                                    id="confirm-password"
-                                    name="confirm-password"
-                                    value={passwordConfirm}
-                                    placeholder={'Confirm Password'}
-                                    onChange={handleChange}
-                                />
-                            </>
-                        )}
+                        {/* Confirm password */}
+                        <input
+                            className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl"
+                            type="password"
+                            id="passwordConfim"
+                            name="passwordConfirm"
+                            required={true}
+                            value={user.passwordConfirm}
+                            placeholder="Confirm Password"
+                            onChange={handleChange}
+                        />
+                        {/* Age input */}
+                        <input
+                            type="number"
+                            name="age"
+                            id="age"
+                            value={user.age}
+                            onChange={handleChange}
+                            placeholder="Age"
+                            required={true}
+                            step="1"
+                            min="0"
+                            max="200"
+                            className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl"
+                        />
+                        {/* Gender input */}
+                        <select
+                            name="gender"
+                            id="gender"
+                            required={true}
+                            value={user.gender}
+                            onChange={handleChange}
+                            className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl text-accent-1"
+                        >
+                            <option className="" value="/">
+                                Gender
+                            </option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        {/* Sleep disorder input */}
+                        <select
+                            name="sleep_disorder"
+                            id="sleep_disorder"
+                            required={true}
+                            value={user.sleep_disorder}
+                            onChange={handleChange}
+                            className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl text-accent-1"
+                        >
+                            <option value="">Sleep Disorder</option>
+                            <option value="None">None</option>
+                            <option value="Insomnia">Insomnia</option>
+                            <option value="Sleep Apnea">Sleep Apnea</option>
+                        </select>
+                        {/* Occupation input */}
+                        <input
+                            type="string"
+                            id="occupation"
+                            name="occupation"
+                            required={true}
+                            value={user.occupation}
+                            placeholder="Occupation"
+                            onChange={handleChange}
+                            className="relative border-0 bg-slate-100 my-4 py-3 px-2 w-full rounded max-w-2xl"
+                        />
                         {/* Register button */}
+                        <ErrorAlert error={error} />
                         <div className="flex flex-col items-center justify-center max-w-52 mt-5">
                             <button
                                 type="submit"

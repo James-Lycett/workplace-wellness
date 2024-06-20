@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { loadAllData } from '../utils/api'
 import Spinner from '../utils/Spinner'
@@ -10,6 +11,7 @@ import UserProgressCharts from './UserProgressCharts/UserProgressCharts'
 import DashboardSidebar from './DashboardSidebar/DashboardSidebar'
 
 export default function AdminHome() {
+    const navigate = useNavigate()
     const { userId } = useParams()
     const [user, setUser] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState({
@@ -49,23 +51,18 @@ export default function AdminHome() {
             setCompanyMetrics(data.companyMetrics)
             setEmployees(data.employees)
         } catch (error) {
+            if (error.message === "Forbidden: You do not have access to this user's data" || error.message === "No auth token") {
+                navigate("/login", { state: { message: "You must be logged in" }})
+            }
             console.error(error)
         } finally {
             abortController.abort()
         }
-    }, [userId])
+    }, [userId, navigate])
 
     useEffect(() => {
         loadData()
     }, [loadData])
-
-    function renderConditionsMet() {
-        if (user) {
-            return true
-        } else {
-            return false
-        }
-    }
 
     const openModal = (option, employee) => {
         setIsModalOpen({
@@ -76,7 +73,7 @@ export default function AdminHome() {
     }
 
     const renderContent = () => {
-        if (!renderConditionsMet()) {
+        if (!user) {
             return (
                 <div className="py-20">
                     <Spinner />
@@ -103,7 +100,6 @@ export default function AdminHome() {
                             <AdminEmployeesTable
                                 openModal={openModal}
                                 employees={employees}
-                                setEmployees={setEmployees}
                             />
                         ) : (
                             <UserRecordsTable

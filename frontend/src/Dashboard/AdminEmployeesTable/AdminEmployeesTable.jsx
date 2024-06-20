@@ -1,16 +1,28 @@
-import React from 'react'
-import { Table, Checkbox } from 'flowbite-react'
+import React, { useState, useEffect } from 'react'
+import { Table } from 'flowbite-react'
 import EmployeesListNew from './EmployeesListNew'
+import SearchBar from './SearchBar'
 
-export default function AdminEmployeesTable({
-    employees,
-    setEmployees,
-    openModal,
-}) {
+export default function AdminEmployeesTable({ employees, openModal }) {
+    const [filteredEmployees, setFilteredEmployees] = useState(null)
+
+    // Create a copy of employees array to mutate leaving original employees array untouched
+    useEffect(() => {
+        setFilteredEmployees(employees)
+    }, [employees])
+
     return (
         <>
-            <div className="overflow-x-auto max-h-96 md:max-h-full overflow-y-auto">
+            <div className="overflow-x-auto max-h-96 md:max-h-full md:w-full overflow-y-auto">
                 <Table hoverable>
+                    <Table.Head>
+                        <Table.HeadCell colSpan={6}>
+                            <SearchBar
+                                employees={employees}
+                                setFilteredEmployees={setFilteredEmployees}
+                            />
+                        </Table.HeadCell>
+                    </Table.Head>
                     <Table.Head className="sticky top-0 bg-white z-10">
                         <Table.HeadCell>User</Table.HeadCell>
                         <Table.HeadCell>Age</Table.HeadCell>
@@ -26,8 +38,8 @@ export default function AdminEmployeesTable({
                     <Table.Body className="divide-y">
                         <EmployeesListNew
                             openModal={openModal}
-                            employees={employees}
-                            setEmployees={setEmployees}
+                            employees={filteredEmployees}
+                            setEmployees={setFilteredEmployees}
                         />
                     </Table.Body>
                 </Table>

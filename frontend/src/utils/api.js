@@ -7,8 +7,22 @@ const headers = new Headers()
 headers.append("Content-Type", "application/json")
 
 async function fetchJson(url, options, onCancel) {
+    const token = localStorage.getItem('token')
+
+    if (!options.headers) {
+        options.headers = new Headers()
+    }
+
+    if (token) {
+        options.headers.set("Authorization", `Bearer ${token}`)
+    }
+
+
     try {
-        const response = await fetch(url, options)
+        const response = await fetch(url, {
+            ...options,
+            credentials: "include"
+        })
 
         if (response.status === 204) {
             return null
@@ -29,6 +43,39 @@ async function fetchJson(url, options, onCancel) {
 
         return Promise.resolve(onCancel)
     }
+}
+
+/*
+    How to call userLogin function:
+    const responseFromAPI = await userLogin(username, password, signal)
+    Where username and password are strings and signal is an abortController.signal
+
+    ...or nothing if the credentials are wrong
+
+    A token will be sent back in the response body, stored here in localStorage, and automatically sent with subsequent requests.
+    Make sure you're logged in to the user that you're requesting!
+*/
+export async function userLogin(username, password, signal) {
+    const url = `${API_BASE_URL}/login`;
+    const options = {
+        method: "POST",
+        headers,
+        body: JSON.stringify({
+            data: { username: username, password: password },
+        }),
+        signal,
+    }
+
+    const { token, user } = await fetchJson(url, options)
+
+
+    localStorage.setItem("token", token)
+
+    return user
+}
+
+export function userLogout(signal) {
+    localStorage.removeItem("token")
 }
 
 // Returns an array of all users

@@ -20,15 +20,16 @@ export default function Modal({
         heart_rate: '',
         date: new Date().toISOString(),
     })
-
-    
     const [employee, setEmployee] = useState({
         username: '',
         age: '',
         gender: '',
         sleep_disorder: '',
         occupation: '',
+        password: '',
+        admin: false,
     })
+    const [error, setError] = useState(null)
 
     useEffect(() => {
         if (isModalOpen.option === "editEmployee") {
@@ -66,7 +67,7 @@ export default function Modal({
         try {
             await createEntry(entry, abortController.signal)
         } catch (error) {
-            console.error(error)
+            setError(error)
         } finally {
             // Refresh entries list and recalculate averages
             loadData()
@@ -78,9 +79,13 @@ export default function Modal({
 
     const handleEmployeeChange = (e) => {
         const { name, value } = e.target
+        let valueCopy = value
+        if (name === "admin") {
+            valueCopy = (value === "true")
+        }
         setEmployee({
             ...employee,
-            [name]: value,
+            [name]: valueCopy,
         })
     }
 
@@ -99,7 +104,7 @@ export default function Modal({
             }
             
         } catch (error) {
-            console.error(error)
+            setError(error)
         } finally {
             // Refresh employees list
             const listUsersResponse = await listUsers(abortController.signal)
@@ -124,6 +129,7 @@ export default function Modal({
                             entry={entry}
                             handleChange={handleEntryChange}
                             handleSubmit={handleEntrySubmit}
+                            error={error}
                         />
                     )
                 }
@@ -135,17 +141,19 @@ export default function Modal({
                             employee={employee}
                             handleChange={handleEmployeeChange}
                             handleSubmit={handleEmployeeSubmit}
+                            error={error}
                         />
                     )
                 }
             case 'editEmployee':
                 return {
-                    title: "Edit Employee",
+                    title: `Edit Employee: ${employee.username}`,
                     form: (
                     <EditEmployeeForm 
                         employee={employee}
                         handleChange={handleEmployeeChange}
                         handleSubmit={handleEmployeeSubmit}
+                        error={error}
                     />
                     )
                 }

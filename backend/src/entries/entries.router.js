@@ -2,11 +2,7 @@ const router = require('express').Router({ mergeParams: true })
 const controller = require('./entries.controller')
 const methodNotAllowed = require('../errors/methodNotAllowed')
 
-router
-    .route('/')
-    .get(controller.list)
-    .post(controller.create)
-    .all(methodNotAllowed)
+router.route('/').post(controller.create).all(methodNotAllowed)
 
 router.route('/user/:personId').get(controller.readPerson).all(methodNotAllowed)
 
