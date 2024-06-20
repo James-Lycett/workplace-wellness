@@ -21,9 +21,14 @@ function update (updatedGoalsData) {
         .update(updatedGoalsData, '*')
 }
 
+function destroy (personId) {
+    return knex('goals').where({ person_id: personId }).del()
+}
+
 module.exports = {
     list,
     create,
     read,
     update,
+    destroy,
 }
