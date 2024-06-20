@@ -11,8 +11,10 @@ import Terms from '../Boilerplate/Terms'
 import PrivacyPolicy from '../Boilerplate/Privacy'
 import NotFound from '../NotFound/NotFound'
 import { TipsSleep, TipsMed, TipsFit } from '../Tips/TipsPages'
+import useScrollToTop from './useScrollToTop'
 
 export default function RoutesComponent() {
+    useScrollToTop()
     return (
         <Routes>
             <Route path="/" element={<LandingPage />} />
