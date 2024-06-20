@@ -1,15 +1,15 @@
-const router = require("express").Router({ mergeParams: true })
-const controller = require("./data.controller")
-const methodNotAllowed = require("../errors/methodNotAllowed")
+const router = require('express').Router({ mergeParams: true })
+const controller = require('./data.controller')
+const methodNotAllowed = require('../errors/methodNotAllowed')
 
 router
-    .route("/")
+    .route('/')
     .get(controller.list)
     .post(controller.create)
     .all(methodNotAllowed)
 
 router
-    .route("/:personId")
+    .route('/:personId')
     .get(controller.read)
     .put(controller.update)
     .delete(controller.deleteHealthData)

@@ -9,9 +9,12 @@ import Careers from '../Boilerplate/Careers'
 import Contact from '../Boilerplate/Contact'
 import Terms from '../Boilerplate/Terms'
 import PrivacyPolicy from '../Boilerplate/Privacy'
+import NotFound from '../NotFound/NotFound'
 import { TipsSleep, TipsMed, TipsFit } from '../Tips/TipsPages'
+import useScrollToTop from './useScrollToTop'
 
 export default function RoutesComponent() {
+    useScrollToTop()
     return (
         <Routes>
             <Route path="/" element={<LandingPage />} />
@@ -30,6 +33,7 @@ export default function RoutesComponent() {
                 <Route path="terms" element={<Terms />} />
                 <Route path="privacy" element={<PrivacyPolicy />} />
             </Route>
+            <Route path="*" element={<NotFound />}/>
         </Routes>
     )
 }

@@ -1,7 +1,7 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
-const service = require("../data/data.service");
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const asyncErrorBoundary = require('../errors/asyncErrorBoundary')
+const service = require('../data/data.service')
 
 /* This function 
 1. receives the username and password sent from a form on the frontend
@@ -19,7 +19,7 @@ async function login(req, res, next) {
         if (!user) {
             return next({
                 status: 401,
-                message: "Invalid username or password" 
+                message: 'Invalid username or password',
             })
         }
 
@@ -27,12 +27,12 @@ async function login(req, res, next) {
         const isPasswordValid = await bcrypt.compare(
             password,
             user.password_hash
-        );
+        )
 
         if (!isPasswordValid) {
             return next({
                 status: 401,
-                message: "Invalid username or password" 
+                message: 'Invalid username or password',
             })
         }
 
@@ -40,17 +40,20 @@ async function login(req, res, next) {
         const token = jwt.sign(
             { personId: user.person_id, admin: user.admin },
             process.env.API_SECRET_KEY,
-            { expiresIn: "1h" }
+            { expiresIn: '1h' }
         )
 
         // Sends user info back to frontend
         res.status(200).json({ data: { token, user } })
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Internal server error" })
+        console.error(error)
+        return next({
+            status: 500,
+            message: 'Error logging user in',
+        })
     }
 }
 
 module.exports = {
     login: [asyncErrorBoundary(login)],
-};
+}
