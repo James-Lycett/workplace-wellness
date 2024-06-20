@@ -79,7 +79,8 @@ async function entryExists(req, res, next) {
         if (Number(personIdFromToken) !== person_id) {
             return next({
                 status: 403,
-                message: "Forbidden: You do not have access to this user's data",
+                message:
+                    "Forbidden: You do not have access to this user's data",
             })
         }
 

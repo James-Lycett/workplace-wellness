@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken")
+const jwt = require('jsonwebtoken')
 
 // This function is to be used when the frontend requests private resources from the backend
 function authenticateToken(req, res, next) {
@@ -8,7 +8,7 @@ function authenticateToken(req, res, next) {
     if (!token) {
         return next({
             status: 401,
-            message: "No auth token"
+            message: 'No auth token',
         })
     }
 
@@ -17,12 +17,15 @@ function authenticateToken(req, res, next) {
         if (err) {
             return next({
                 statu: 401,
-                message: "Unauthorized token"
+                message: 'Unauthorized token',
             })
         }
 
         // Stores the user's ID and username which the token has encoded so the ID and username can be used by downstream middleware
-        req.user = { personIdFromToken: decodedToken.personId.toString(), adminFromToken: decodedToken.admin }
+        req.user = {
+            personIdFromToken: decodedToken.personId.toString(),
+            adminFromToken: decodedToken.admin,
+        }
         next()
     })
 }
