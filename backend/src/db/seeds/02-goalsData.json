@@ -1,0 +1,10 @@
+[
+    {
+        "person_id": 1,
+        "sleep_duration": 8,
+        "quality_of_sleep": 7,
+        "physical_activity_level": 7,
+        "stress_level": 4,
+        "daily_steps": 7000
+    }
+]
