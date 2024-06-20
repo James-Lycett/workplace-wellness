@@ -9,6 +9,7 @@ import Careers from '../Boilerplate/Careers'
 import Contact from '../Boilerplate/Contact'
 import Terms from '../Boilerplate/Terms'
 import PrivacyPolicy from '../Boilerplate/Privacy'
+import NotFound from '../NotFound/NotFound'
 import { TipsSleep, TipsMed, TipsFit } from '../Tips/TipsPages'
 
 export default function RoutesComponent() {
@@ -30,6 +31,7 @@ export default function RoutesComponent() {
                 <Route path="terms" element={<Terms />} />
                 <Route path="privacy" element={<PrivacyPolicy />} />
             </Route>
+            <Route path="*" element={<NotFound />}/>
         </Routes>
     )
 }
