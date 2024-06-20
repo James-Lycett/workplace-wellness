@@ -130,7 +130,7 @@ async function duplicateUsernameExists(req, res, next) {
     const data = await service.readByUsername(username)
     if (data) {
         return next({
-            status: 400,
+            status: 409,
             message: `Username '${username}' already exists`,
         })
     } else {
