@@ -51,8 +51,8 @@ export default function AdminHome() {
             setCompanyMetrics(data.companyMetrics)
             setEmployees(data.employees)
         } catch (error) {
-            if (error.message === "Forbidden: You do not have access to this user's data") {
-                navigate("/login")
+            if (error.message === "Forbidden: You do not have access to this user's data" || error.message === "No auth token") {
+                navigate("/login", { state: { message: "You must be logged in" }})
             }
             console.error(error)
         } finally {

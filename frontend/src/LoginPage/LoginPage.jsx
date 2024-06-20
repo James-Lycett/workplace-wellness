@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 // import UserHome from "./UserHome";
 import { userLogin } from '../utils/api'
 import '../index.css'
@@ -7,10 +7,11 @@ import { initFlowbite } from 'flowbite'
 import ErrorAlert from '../utils/ErrorAlert'
 
 export default function LoginPage() {
+    const location = useLocation()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [isPopoverVisible, setIsPopoverVisible] = useState(false)
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(location.state || null)
     const navigate = useNavigate()
 
     useEffect(() => {
