@@ -1,5 +1,6 @@
 const asyncErrorBoundary = require('../errors/asyncErrorBoundary')
 const service = require('./goals.service')
+const authenticateToken = require('../authentication/authenticateToken')
 
 function validateField (value, type, criteria) {
     switch (type) {
@@ -26,16 +27,11 @@ function validateEnum (value, validValues) {
 
 function validateInput (req, res, next) {
     const validationRules = {
-        username: { type: 'string', maxLength: 50 },
-        admin: { type: 'boolean' },
-        gender: { type: 'string', enum: ['Male', 'Female'], maxLength: 6 },
-        age: { type: 'number', min: 0, max: 200 },
-        occupation: { type: 'string', maxLength: 40 },
-        sleep_disorder: {
-            type: 'string',
-            enum: ['None', 'Insomnia', 'Sleep Apnea'],
-            maxLength: 11,
-        },
+        sleep_duration: { type: 'number', min: 0, max: 24 },
+        quality_of_sleep: { type: 'number', min: 1, max: 10 },
+        physical_activity_level: { type: 'number', min: 1, max: 10 },
+        stress_level: { type: 'number', min: 1, max: 10 },
+        daily_steps: { type: 'number', min: 1, max: 30000 },
     }
 
     for (const field in validationRules) {
@@ -83,7 +79,7 @@ async function goalsDataExists (req, res, next) {
                     message: `Goals for "${personId}" do not exist`,
                 })
             } else {
-                res.locals.healthData = data
+                res.locals.goalsData = data
                 next()
             }
         } else {
@@ -122,8 +118,35 @@ async function goalsDataExists (req, res, next) {
             })
         }
     }
+
+    function read (req, res, next) {
+        try {
+            const data = res.locals.goalsData
+
+            // Makes sure that the user requesting this data is the user that is logged in
+            const { personIdFromUser } = data.person_id
+            const { personIdFromToken } = req.user
+            if (personIdFromToken !== personIdFromUser) {
+                return next({
+                    status: 403,
+                    message:
+                        "Forbidden: You do not have access to this user's data",
+                })
+            }
+
+            res.json({ data })
+        } catch (error) {
+            console.error(error)
+            return next({
+                status: 500,
+                message: 'Error reading health data',
+            })
+        }
+    }
 }
 
 module.exports = {
     list: asyncErrorBoundary(list),
+    read: [authenticateToken, asyncErrorBoundary(goalsDataExists), read],
+    create: [validateInput, asyncErrorBoundary(create)],
 }
