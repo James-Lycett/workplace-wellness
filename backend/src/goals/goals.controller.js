@@ -159,10 +159,30 @@ async function goalsDataExists (req, res, next) {
             })
         }
     }
+
+    async function update (req, res) {
+        try {
+            const { person_id } = res.locals.goalsData
+            const updatedGoals = { ...req.body.data, person_id }
+            const result = await service.update(updatedGoals)
+            res.json({ data: result[0] })
+        } catch (error) {
+            console.error(error)
+            return next({
+                status: 500,
+                message: 'Error updating Goals',
+            })
+        }
+    }
 }
 
 module.exports = {
     list: asyncErrorBoundary(list),
     read: [authenticateToken, asyncErrorBoundary(goalsDataExists), read],
     create: [validateInput, asyncErrorBoundary(create)],
+    update: [
+        authenticateToken,
+        asyncErrorBoundary(goalsDataExists),
+        asyncErrorBoundary(update),
+    ],
 }
