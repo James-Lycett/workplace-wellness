@@ -174,6 +174,19 @@ async function goalsDataExists (req, res, next) {
             })
         }
     }
+    async function deleteGoals (req, res, next) {
+        try {
+            const { personId } = req.params
+            await service.deleteEntry(personId)
+            res.sendStatus(204)
+        } catch (error) {
+            console.error(error)
+            return next({
+                status: 500,
+                message: 'Error deleting goals',
+            })
+        }
+    }
 }
 
 module.exports = {
@@ -184,5 +197,10 @@ module.exports = {
         authenticateToken,
         asyncErrorBoundary(goalsDataExists),
         asyncErrorBoundary(update),
+    ],
+    deletGoals: [
+        authenticateToken,
+        asyncErrorBoundary(goalsDataExists),
+        asyncErrorBoundary(deletGoals),
     ],
 }
