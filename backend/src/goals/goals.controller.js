@@ -1,0 +1,129 @@
+const asyncErrorBoundary = require('../errors/asyncErrorBoundary')
+const service = require('./goals.service')
+
+function validateField (value, type, criteria) {
+    switch (type) {
+        case 'string':
+            return (
+                typeof value === 'string' && value.length <= criteria.maxLength
+            )
+        case 'boolean':
+            return typeof value === 'boolean'
+        case 'number':
+            return (
+                typeof value === 'number' &&
+                value >= criteria.min &&
+                value <= criteria.max
+            )
+        default:
+            return false
+    }
+}
+
+function validateEnum (value, validValues) {
+    return validValues.includes(value)
+}
+
+function validateInput (req, res, next) {
+    const validationRules = {
+        username: { type: 'string', maxLength: 50 },
+        admin: { type: 'boolean' },
+        gender: { type: 'string', enum: ['Male', 'Female'], maxLength: 6 },
+        age: { type: 'number', min: 0, max: 200 },
+        occupation: { type: 'string', maxLength: 40 },
+        sleep_disorder: {
+            type: 'string',
+            enum: ['None', 'Insomnia', 'Sleep Apnea'],
+            maxLength: 11,
+        },
+    }
+
+    for (const field in validationRules) {
+        const value = req.body.data[field]
+        const {
+            type,
+            maxLength,
+            enum: validValues,
+            min,
+            max,
+            custom,
+        } = validationRules[field]
+
+        if (value !== null && value !== undefined) {
+            if (
+                !validateField(value, type, { maxLength, min, max }) ||
+                (validValues && !validateEnum(value, validValues)) ||
+                (custom && !custom(value))
+            ) {
+                return next({
+                    status: 400,
+                    message: `Invalid ${field}, ${field} must be a ${
+                        validationRules[field].type
+                    } with a maximum length of [${
+                        validationRules[field].max
+                    }]. Received: '${value}' of type: '${typeof value}'`,
+                })
+            }
+        }
+    }
+
+    next()
+}
+
+async function goalsDataExists (req, res, next) {
+    try {
+        if (req.params.personId) {
+            const { personId } = req.params
+
+            const data = await service.read(personId)
+
+            if (!data) {
+                return next({
+                    status: 404,
+                    message: `Goals for "${personId}" do not exist`,
+                })
+            } else {
+                res.locals.healthData = data
+                next()
+            }
+        } else {
+            return next({
+                status: 400,
+                message: 'Invalid route. Missing parameter.',
+            })
+        }
+    } catch (error) {
+        console.error(error)
+        return next({
+            status: 500,
+            message: 'Error validating user exists',
+        })
+    }
+
+    async function list (req, res) {
+        // List is only available to admins?
+        if (!req.user.adminFromToken) {
+            return next({
+                status: 403,
+                //does this message make sense in this use case?
+                message:
+                    "Forbidden: You do not have access to this user's data",
+            })
+        }
+
+        try {
+            const data = await service.list()
+            res.json({ data })
+        } catch (error) {
+            console.error(error)
+            return next({
+                status: 500,
+                message: 'Error accessing goals',
+            })
+        }
+    }
+}
+
+module.exports = {
+    list: asyncErrorBoundary(list),
+}
