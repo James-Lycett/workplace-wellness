@@ -143,6 +143,22 @@ async function goalsDataExists (req, res, next) {
             })
         }
     }
+
+    async function create (req, res, next) {
+        const requestGoalsData = req.body.data
+        const newGoalsData = { ...requestGoalsData }
+
+        try {
+            const data = await service.create(newGoalsData)
+            res.status(201).json({ data })
+        } catch (error) {
+            console.error(error)
+            return next({
+                status: 500,
+                message: 'Error creating goals',
+            })
+        }
+    }
 }
 
 module.exports = {
