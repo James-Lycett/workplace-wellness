@@ -12,7 +12,7 @@ export default function TipsPage({ title, tips }) {
                     {tips.map((tip, index) => (
                         <div key={index}>
                             <div className="relative overflow-hidden">
-                                <a href={tip.url} target="_blank">
+                                <a href={tip.url} target="_blank" rel="noreferrer">
                                     <img
                                         src={tip.image}
                                         className="object-contain rounded-lg"
