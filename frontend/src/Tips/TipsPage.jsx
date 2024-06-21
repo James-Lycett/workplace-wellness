@@ -12,11 +12,13 @@ export default function TipsPage({ title, tips }) {
                     {tips.map((tip, index) => (
                         <div key={index}>
                             <div className="relative overflow-hidden">
-                                <img
-                                    src={tip.image}
-                                    className="object-contain rounded-lg"
-                                    alt={tip.alt}
-                                />
+                                <a href={tip.url} target="_blank">
+                                    <img
+                                        src={tip.image}
+                                        className="object-contain rounded-lg"
+                                        alt={tip.alt}
+                                    />
+                                </a>
                                 <p className="text-xl text-center mt-2 mb-10">
                                     {tip.caption}
                                 </p>
