@@ -1,39 +1,15 @@
 import React from 'react'
+import ErrorAlert from '../../utils/ErrorAlert'
 
 export default function EditEmployeeForm({
     employee,
     handleChange,
     handleSubmit,
+    error
 }) {
     return (
         <div className="text-xl">
             <form onSubmit={handleSubmit} className="flex flex-col">
-                <div className="flex items-center justify-between my-2 h-10">
-                    <label htmlFor="username">Username *</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        value={employee.username}
-                        placeholder="Username"
-                        onChange={handleChange}
-                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5"
-                    />
-                </div>
-                {/* Need to add a password column to db. Don't forget to add {password: ""} property to employee default state
-        <div className="flex items-center justify-between my-2 h-10">
-            <label htmlFor="password">Password</label>
-            <input
-                type="string"
-                id="password"
-                name="password"
-                value={employee.password}
-                placeholder="Password"
-                onChange={handleChange}
-                className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5"
-            />
-        </div>
-        */}
                 <div className="flex items-center justify-between my-2 h-10">
                     <label htmlFor="age">Age *</label>
                     <input
@@ -90,12 +66,13 @@ export default function EditEmployeeForm({
                         value={employee.occupation}
                         placeholder="Occupation"
                         onChange={handleChange}
-                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5"
+                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl py-1.5 text-xl text-accent-1"
                     />
                 </div>
                 <div className="my-3 text-lg">
                     <small>* Required Entry</small>
                 </div>
+                <ErrorAlert error={error} />
                 <div className="flex flex-col items-center justify-center my-2 ">
                     <button
                         onSubmit={handleSubmit}

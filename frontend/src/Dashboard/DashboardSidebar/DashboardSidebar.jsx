@@ -12,6 +12,7 @@ import {
     HiLightBulb,
 } from 'react-icons/hi'
 import logo from './circle.svg'
+import { userLogout } from '../../utils/api'
 
 export default function DashboardSidebar({
     openModal,
@@ -233,6 +234,7 @@ export default function DashboardSidebar({
                                 <Sidebar.ItemGroup>
                                     <Sidebar.Item
                                         href="/"
+                                        onClick={() => userLogout()}
                                         icon={HiLogout}
                                         className="text-sm md:text-base"
                                     >

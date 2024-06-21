@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 // import UserHome from "./UserHome";
-import { readUserByUsername } from '../utils/api'
+import { userLogin } from '../utils/api'
 import '../index.css'
 import { initFlowbite } from 'flowbite'
+import ErrorAlert from '../utils/ErrorAlert'
 
 export default function LoginPage() {
+    const location = useLocation()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [isPopoverVisible, setIsPopoverVisible] = useState(false)
+    const [error, setError] = useState(location.state || null)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -28,25 +31,26 @@ export default function LoginPage() {
         const abortController = new AbortController()
 
         try {
-            const responseFromApi = await readUserByUsername(
+            const responseFromApi = await userLogin(
                 username,
+                password,
                 abortController.signal
             )
-            const userId = responseFromApi.person_id
-            navigate(`/dashboard/${userId}`)
+            const { person_id } = responseFromApi
+            navigate(`/dashboard/${person_id}`)
         } catch (e) {
-            console.error(e)
+            setError(e)
         }
     }
 
     const loginAsAdmin = () => {
         setUsername('blanfer0')
-        setPassword('12345')
+        setPassword('1')
         setIsPopoverVisible(false)
     }
     const loginAsUser = () => {
         setUsername('jtuminelli1')
-        setPassword('12345')
+        setPassword('2')
         setIsPopoverVisible(false)
     }
 
@@ -66,7 +70,7 @@ export default function LoginPage() {
                             type="string"
                             id="username"
                             value={username}
-                            placeholder="Username or Email"
+                            placeholder="Username"
                             onChange={handleUsernameChange}
                         />
                         {/* Password input */}
@@ -130,8 +134,9 @@ export default function LoginPage() {
                                 </>
                             )}
                         </div>
+                        <ErrorAlert error={error}/>
                         {/* Sign in button */}
-                        <div className="flex flex-col items-center justify-center max-w-52">
+                        <div className="flex flex-col items-center justify-center max-w-52 mt-3">
                             <button
                                 type="submit"
                                 className="w-full text-xl font-bold mx-20 button-light-blue"

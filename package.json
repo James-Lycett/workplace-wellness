@@ -44,5 +44,13 @@
             "email": "jrlycett@gmail.com"
         }
     ],
-    "license": "UNLICENSED"
+    "license": "UNLICENSED",
+    "dependencies": {
+        "core-js": "^3.37.1",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1"
+    },
+    "devDependencies": {
+        "@svgr/webpack": "^8.1.0"
+    }
 }

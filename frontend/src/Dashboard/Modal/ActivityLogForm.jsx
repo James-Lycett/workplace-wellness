@@ -1,6 +1,7 @@
 import React from 'react'
+import ErrorAlert from '../../utils/ErrorAlert'
 
-export default function ActivityLogForm({ entry, handleChange, handleSubmit }) {
+export default function ActivityLogForm({ entry, handleChange, handleSubmit, error }) {
     return (
         <div className="text-xl">
             <form onSubmit={handleSubmit} className="flex flex-col">
@@ -79,6 +80,7 @@ export default function ActivityLogForm({ entry, handleChange, handleSubmit }) {
                 <div className="my-3 text-lg">
                     <small>* Required Entry</small>
                 </div>
+                <ErrorAlert error={error} />
                 <div className="flex flex-col items-center justify-center my-2 ">
                     <button
                         onSubmit={handleSubmit}
