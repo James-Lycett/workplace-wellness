@@ -1,6 +1,7 @@
 import React from 'react'
 import RadialBar from './RadialBar'
 import { Progress } from 'flowbite-react'
+import { Link } from 'react-router-dom'
 
 export default function AdminProgressCharts({ companyMetrics, goals }) {
     const providedGoals = {
@@ -30,13 +31,19 @@ export default function AdminProgressCharts({ companyMetrics, goals }) {
         return Math.floor(boundedProgressValue)
     }
 
+    // GOALS
+    // goals.sleep_duration
+    // goals.quality_of_sleep
+    // goals.physical_activity_level
+    // goals.stress_level
+    // goals.daily_steps
+
     return (
         <>
             <div className="flex flex-col justify-center bg-white w-full max-w-5xl mx-auto rounded-md shadow-md">
                 <h2 className="text-v2-drkblue font-semibold self-center mt-5">
                     Department Goals
                 </h2>
-                <p>{goals.sleep_duration}</p>
                 <Progress
                     progress={70}
                     color="blue"
@@ -53,6 +60,10 @@ export default function AdminProgressCharts({ companyMetrics, goals }) {
                         colors={['#7AEB7F']}
                         label="Avg Sleep Hours"
                     />
+                    <hr />
+                    <Link className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400">
+                        <p>Edit Goal</p>
+                    </Link>
                 </div>
                 <div className="flex flex-col justify-center bg-white mx-10 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                     <RadialBar
@@ -60,6 +71,10 @@ export default function AdminProgressCharts({ companyMetrics, goals }) {
                         colors={['#EB897A']}
                         label="Avg Sleep Quality"
                     />
+                    <hr />
+                    <Link className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400">
+                        <p>Edit Goal</p>
+                    </Link>
                 </div>
                 <div className="flex flex-col justify-center bg-white ms-5 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                     <RadialBar
@@ -67,6 +82,10 @@ export default function AdminProgressCharts({ companyMetrics, goals }) {
                         colors={['#E8EA8B']}
                         label="Tasks Completed"
                     />
+                    <hr />
+                    <Link className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400">
+                        <p>Edit Goal</p>
+                    </Link>
                 </div>
             </div>
         </>
