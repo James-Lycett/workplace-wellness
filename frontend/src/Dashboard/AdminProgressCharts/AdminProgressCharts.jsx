@@ -2,8 +2,8 @@ import React from 'react'
 import RadialBar from './RadialBar'
 import { Progress } from 'flowbite-react'
 
-export default function AdminProgressCharts({ companyMetrics }) {
-    const goals = {
+export default function AdminProgressCharts({ companyMetrics, goals }) {
+    const providedGoals = {
         sleepHoursGoal: 1200,
         tasksMet: 80,
         tasksGoal: 128,
@@ -13,7 +13,9 @@ export default function AdminProgressCharts({ companyMetrics }) {
 
     function calculateSleepHoursProgress() {
         const progressValue =
-            (companyMetrics.sleep_duration_total / goals.sleepHoursGoal) * 100
+            (companyMetrics.sleep_duration_total /
+                providedGoals.sleepHoursGoal) *
+            100
         const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
 
         return Math.floor(boundedProgressValue)
@@ -21,7 +23,8 @@ export default function AdminProgressCharts({ companyMetrics }) {
 
     function calculateSleepQualityProgress() {
         const progressValue =
-            (companyMetrics.quality_of_sleep_average / goals.sleepQualityGoal) *
+            (companyMetrics.quality_of_sleep_average /
+                providedGoals.sleepQualityGoal) *
             100
         const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
         return Math.floor(boundedProgressValue)
@@ -33,6 +36,7 @@ export default function AdminProgressCharts({ companyMetrics }) {
                 <h2 className="text-v2-drkblue font-semibold self-center mt-5">
                     Department Goals
                 </h2>
+                <p>{goals.sleep_duration}</p>
                 <Progress
                     progress={70}
                     color="blue"

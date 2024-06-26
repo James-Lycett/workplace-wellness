@@ -95,97 +95,96 @@ async function goalsDataExists (req, res, next) {
             message: 'Error validating user exists',
         })
     }
+}
 
-    async function list (req, res) {
-        // List is only available to admins?
-        if (!req.user.adminFromToken) {
+async function list (req, res) {
+    // List is only available to admins?
+    if (!req.user.adminFromToken) {
+        return next({
+            status: 403,
+            //does this message make sense in this use case?
+            message: "Forbidden: You do not have access to this user's data",
+        })
+    }
+
+    try {
+        const data = await service.list()
+        res.json({ data })
+    } catch (error) {
+        console.error(error)
+        return next({
+            status: 500,
+            message: 'Error accessing goals',
+        })
+    }
+}
+
+function read (req, res, next) {
+    try {
+        const data = res.locals.goalsData
+
+        // Makes sure that the user requesting this data is the user that is logged in
+        const { personIdFromUser } = data.person_id
+        const { personIdFromToken } = req.user
+        if (personIdFromToken !== personIdFromUser) {
             return next({
                 status: 403,
-                //does this message make sense in this use case?
                 message:
                     "Forbidden: You do not have access to this user's data",
             })
         }
 
-        try {
-            const data = await service.list()
-            res.json({ data })
-        } catch (error) {
-            console.error(error)
-            return next({
-                status: 500,
-                message: 'Error accessing goals',
-            })
-        }
+        res.json({ data })
+    } catch (error) {
+        console.error(error)
+        return next({
+            status: 500,
+            message: 'Error reading health data',
+        })
     }
+}
 
-    function read (req, res, next) {
-        try {
-            const data = res.locals.goalsData
+async function create (req, res, next) {
+    const requestGoalsData = req.body.data
+    const newGoalsData = { ...requestGoalsData }
 
-            // Makes sure that the user requesting this data is the user that is logged in
-            const { personIdFromUser } = data.person_id
-            const { personIdFromToken } = req.user
-            if (personIdFromToken !== personIdFromUser) {
-                return next({
-                    status: 403,
-                    message:
-                        "Forbidden: You do not have access to this user's data",
-                })
-            }
-
-            res.json({ data })
-        } catch (error) {
-            console.error(error)
-            return next({
-                status: 500,
-                message: 'Error reading health data',
-            })
-        }
+    try {
+        const data = await service.create(newGoalsData)
+        res.status(201).json({ data })
+    } catch (error) {
+        console.error(error)
+        return next({
+            status: 500,
+            message: 'Error creating goals',
+        })
     }
+}
 
-    async function create (req, res, next) {
-        const requestGoalsData = req.body.data
-        const newGoalsData = { ...requestGoalsData }
-
-        try {
-            const data = await service.create(newGoalsData)
-            res.status(201).json({ data })
-        } catch (error) {
-            console.error(error)
-            return next({
-                status: 500,
-                message: 'Error creating goals',
-            })
-        }
+async function update (req, res) {
+    try {
+        const { person_id } = res.locals.goalsData
+        const updatedGoals = { ...req.body.data, person_id }
+        const result = await service.update(updatedGoals)
+        res.json({ data: result[0] })
+    } catch (error) {
+        console.error(error)
+        return next({
+            status: 500,
+            message: 'Error updating Goals',
+        })
     }
-
-    async function update (req, res) {
-        try {
-            const { person_id } = res.locals.goalsData
-            const updatedGoals = { ...req.body.data, person_id }
-            const result = await service.update(updatedGoals)
-            res.json({ data: result[0] })
-        } catch (error) {
-            console.error(error)
-            return next({
-                status: 500,
-                message: 'Error updating Goals',
-            })
-        }
-    }
-    async function deleteGoals (req, res, next) {
-        try {
-            const { personId } = req.params
-            await service.deleteEntry(personId)
-            res.sendStatus(204)
-        } catch (error) {
-            console.error(error)
-            return next({
-                status: 500,
-                message: 'Error deleting goals',
-            })
-        }
+}
+async function deleteGoals (req, res, next) {
+    try {
+        const { personId } = req.params
+        await service.deleteEntry(personId)
+        res.sendStatus(204)
+    } catch (error) {
+        console.error(error)
+        return next({
+            status: 500,
+            message: 'Error deleting goals',
+        })
     }
 }
 
