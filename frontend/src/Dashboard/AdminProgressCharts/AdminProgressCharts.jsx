@@ -47,21 +47,21 @@ export default function AdminProgressCharts({ companyMetrics }) {
                     <RadialBar
                         series={[calculateSleepHoursProgress()]}
                         colors={['#7AEB7F']}
-                        labels={['Avg Sleep Hours']}
+                        label="Avg Sleep Hours"
                     />
                 </div>
                 <div className="flex flex-col justify-center bg-white mx-10 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                     <RadialBar
                         series={[calculateSleepQualityProgress()]}
                         colors={['#EB897A']}
-                        labels={['Avg Sleep Quality']}
+                        label="Avg Sleep Quality"
                     />
                 </div>
                 <div className="flex flex-col justify-center bg-white ms-5 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                     <RadialBar
                         series={[45]}
                         colors={['#E8EA8B']}
-                        labels={['Tasks Completed']}
+                        label="Tasks Completed"
                     />
                 </div>
             </div>

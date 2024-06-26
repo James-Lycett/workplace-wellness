@@ -198,9 +198,9 @@ module.exports = {
         asyncErrorBoundary(goalsDataExists),
         asyncErrorBoundary(update),
     ],
-    deletGoals: [
+    deleteGoals: [
         authenticateToken,
         asyncErrorBoundary(goalsDataExists),
-        asyncErrorBoundary(deletGoals),
+        asyncErrorBoundary(deleteGoals),
     ],
 }

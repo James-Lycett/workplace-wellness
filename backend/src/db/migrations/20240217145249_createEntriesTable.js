@@ -28,14 +28,6 @@ exports.up = function (knex) {
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-
-exports.down = async function (knex) {
-    // Drop the foreign key constraints in 'entries' table first
-    const hasEntriesTable = await knex.schema.hasTable('entries')
-    if (hasEntriesTable) {
-        await knex.schema.table('entries', function (table) {
-            table.dropForeign('person_id')
-        })
-        await knex.schema.dropTable('entries')
-    }
+exports.down = function (knex) {
+    return knex.schema.dropTable('entries')
 }
