@@ -65,7 +65,16 @@ export default function AdminProgressCharts({
                         label="Avg Sleep Hours"
                     />
                     <hr />
-                    <Link className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400">
+                    <Link
+                        onClick={() =>
+                            openModal(
+                                'editGoal',
+                                goals.sleep_duration,
+                                'Avg Sleep Hours'
+                            )
+                        }
+                        className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400"
+                    >
                         <p>Edit Goal</p>
                     </Link>
                 </div>
@@ -76,7 +85,16 @@ export default function AdminProgressCharts({
                         label="Avg Sleep Quality"
                     />
                     <hr />
-                    <Link className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400">
+                    <Link
+                        onClick={() =>
+                            openModal(
+                                'editGoal',
+                                goals.quality_of_sleep,
+                                'Avg Sleep Quality'
+                            )
+                        }
+                        className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400"
+                    >
                         <p>Edit Goal</p>
                     </Link>
                 </div>
@@ -87,7 +105,10 @@ export default function AdminProgressCharts({
                         label="Tasks Completed"
                     />
                     <hr />
-                    <Link className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400">
+                    <Link
+                        onClick={() => openModal('editGoal')}
+                        className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400"
+                    >
                         <p>Edit Goal</p>
                     </Link>
                 </div>

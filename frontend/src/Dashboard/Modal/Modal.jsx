@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ActivityLogForm from './ActivityLogForm'
 import AddNewEmployeeForm from './AddNewEmployeeForm'
 import EditEmployeeForm from './EditEmployeeForm'
-// import EditGoal from './EditGoal'
+import EditGoal from './EditGoal'
 import { createEntry, createUser, listUsers, updateUser } from '../../utils/api'
 
 export default function Modal({
@@ -30,11 +30,17 @@ export default function Modal({
         password: '',
         admin: false,
     })
+    const [goal, setGoal] = useState(0)
+    const [label, setLabel] = useState('')
     const [error, setError] = useState(null)
 
     useEffect(() => {
         if (isModalOpen.option === 'editEmployee') {
             setEmployee(isModalOpen.employeeFromEdit)
+        }
+        if (isModalOpen.option === 'editGoal') {
+            setGoal(isModalOpen.goal)
+            setLabel(isModalOpen.label)
         }
     }, [isModalOpen.employeeFromEdit, isModalOpen.option])
 
@@ -161,17 +167,11 @@ export default function Modal({
                         />
                     ),
                 }
-            // case 'editGoal':
-            //     return {
-            //         title: 'Edit Goal',
-            //         form: (
-            //             <EditGoal
-            //                 goal={isModalOpen.goal}
-            //                 onSave={handleSaveGoal}
-            //                 error={error}
-            //             />
-            //         ),
-            //     }
+            case 'editGoal':
+                return {
+                    title: 'Edit Goal',
+                    form: <EditGoal error={error} />,
+                }
             default:
                 console.error(`Modal option '${option}' is not valid`)
         }
