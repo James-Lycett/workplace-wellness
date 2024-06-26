@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ActivityLogForm from './ActivityLogForm'
 import AddNewEmployeeForm from './AddNewEmployeeForm'
 import EditEmployeeForm from './EditEmployeeForm'
+// import EditGoal from './EditGoal'
 import { createEntry, createUser, listUsers, updateUser } from '../../utils/api'
 
 export default function Modal({
@@ -32,7 +33,7 @@ export default function Modal({
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        if (isModalOpen.option === "editEmployee") {
+        if (isModalOpen.option === 'editEmployee') {
             setEmployee(isModalOpen.employeeFromEdit)
         }
     }, [isModalOpen.employeeFromEdit, isModalOpen.option])
@@ -80,8 +81,8 @@ export default function Modal({
     const handleEmployeeChange = (e) => {
         const { name, value } = e.target
         let valueCopy = value
-        if (name === "admin") {
-            valueCopy = (value === "true")
+        if (name === 'admin') {
+            valueCopy = value === 'true'
         }
         setEmployee({
             ...employee,
@@ -95,14 +96,17 @@ export default function Modal({
         employee.age = Number(employee.age)
 
         try {
-            if (isModalOpen.option === "newEmployee") {
+            if (isModalOpen.option === 'newEmployee') {
                 await createUser(employee, abortController.signal)
             }
 
-            if (isModalOpen.option === "editEmployee") {
-                await updateUser(employee.person_id, employee, abortController.signal)
+            if (isModalOpen.option === 'editEmployee') {
+                await updateUser(
+                    employee.person_id,
+                    employee,
+                    abortController.signal
+                )
             }
-            
         } catch (error) {
             setError(error)
         } finally {
@@ -123,7 +127,7 @@ export default function Modal({
         switch (option) {
             case 'activity':
                 return {
-                    title: "Log New Activity",
+                    title: 'Log New Activity',
                     form: (
                         <ActivityLogForm
                             entry={entry}
@@ -131,11 +135,11 @@ export default function Modal({
                             handleSubmit={handleEntrySubmit}
                             error={error}
                         />
-                    )
+                    ),
                 }
             case 'newEmployee':
                 return {
-                    title: "Add New Employee",
+                    title: 'Add New Employee',
                     form: (
                         <AddNewEmployeeForm
                             employee={employee}
@@ -143,20 +147,31 @@ export default function Modal({
                             handleSubmit={handleEmployeeSubmit}
                             error={error}
                         />
-                    )
+                    ),
                 }
             case 'editEmployee':
                 return {
                     title: `Edit Employee: ${employee.username}`,
                     form: (
-                    <EditEmployeeForm 
-                        employee={employee}
-                        handleChange={handleEmployeeChange}
-                        handleSubmit={handleEmployeeSubmit}
-                        error={error}
-                    />
-                    )
+                        <EditEmployeeForm
+                            employee={employee}
+                            handleChange={handleEmployeeChange}
+                            handleSubmit={handleEmployeeSubmit}
+                            error={error}
+                        />
+                    ),
                 }
+            // case 'editGoal':
+            //     return {
+            //         title: 'Edit Goal',
+            //         form: (
+            //             <EditGoal
+            //                 goal={isModalOpen.goal}
+            //                 onSave={handleSaveGoal}
+            //                 error={error}
+            //             />
+            //         ),
+            //     }
             default:
                 console.error(`Modal option '${option}' is not valid`)
         }

@@ -94,6 +94,7 @@ export default function AdminHome() {
                 <section className="bg-slate-100 py-5 ">
                     {view === 'admin' ? (
                         <AdminProgressCharts
+                            openModal={openModal}
                             companyMetrics={companyMetrics}
                             goals={goals}
                         />

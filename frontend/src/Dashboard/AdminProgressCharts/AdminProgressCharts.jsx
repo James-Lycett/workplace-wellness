@@ -3,7 +3,11 @@ import RadialBar from './RadialBar'
 import { Progress } from 'flowbite-react'
 import { Link } from 'react-router-dom'
 
-export default function AdminProgressCharts({ companyMetrics, goals }) {
+export default function AdminProgressCharts({
+    companyMetrics,
+    goals,
+    openModal,
+}) {
     const providedGoals = {
         sleepHoursGoal: 1200,
         tasksMet: 80,
