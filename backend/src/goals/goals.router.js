@@ -14,3 +14,5 @@ router
     .put(controller.update)
     .delete(controller.deleteGoals)
     .all(methodNotAllowed)
+
+module.exports = router

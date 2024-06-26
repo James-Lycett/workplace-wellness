@@ -36,7 +36,7 @@ export default function AdminHome() {
     const [entries, setEntries] = useState(null)
     const [goals, setGoals] = useState(null)
 
-    // Fetches user from the API along with that user's entries, lastMonthAverages for that user, and company-wide lastMonthAverages for admin purposes (if user is an admin)
+    // Fetches user from the API along with that user's entries, goals if admin, lastMonthAverages for that user, and company-wide lastMonthAverages for admin purposes (if user is an admin)
     const loadData = useCallback(async () => {
         const abortController = new AbortController()
 
