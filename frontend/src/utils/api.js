@@ -266,3 +266,14 @@ export async function readGoalsByPerson (personId, signal) {
 
     return await fetchJson(url, options)
 }
+export async function updateGoals (personId, updatedGoals, signal) {
+    const url = `${API_BASE_URL}/goals/${personId}`
+    const options = {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify({ data: updatedGoals }),
+        signal,
+    }
+
+    return await fetchJson(url, options)
+}

@@ -3,7 +3,13 @@ import ActivityLogForm from './ActivityLogForm'
 import AddNewEmployeeForm from './AddNewEmployeeForm'
 import EditEmployeeForm from './EditEmployeeForm'
 import EditGoal from './EditGoal'
-import { createEntry, createUser, listUsers, updateUser } from '../../utils/api'
+import {
+    createEntry,
+    createUser,
+    listUsers,
+    updateGoals,
+    updateUser,
+} from '../../utils/api'
 
 export default function Modal({
     setIsModalOpen,
@@ -49,6 +55,40 @@ export default function Modal({
             if (propsToConvert.includes(prop)) {
                 object[prop] = Number(object[prop])
             }
+        }
+    }
+
+    const labelToFieldMap = {
+        'Avg Sleep Hours': 'sleep_duration',
+        'Avg Sleep Quality': 'quality_of_sleep',
+        'Physical Activity Level': 'physical_activity_level',
+        'Stress Level': 'stress_level',
+        'Daily Steps': 'daily_steps',
+    }
+
+    const handleGoalChange = (e) => {
+        const { value } = e.target
+        setGoal(value)
+    }
+
+    const handleGoalSubmit = async (e) => {
+        e.preventDefault()
+        const abortController = new AbortController()
+
+        try {
+            const updatedGoals = {
+                ...goals,
+                [labelToFieldMap[label]]: goal, // Update only the specified goal
+            }
+
+            await updateGoals(userId, updatedGoals, abortController.signal)
+        } catch (error) {
+            setError(error)
+        } finally {
+            loadData()
+
+            setIsModalOpen(false)
+            abortController.abort()
         }
     }
 
@@ -170,7 +210,15 @@ export default function Modal({
             case 'editGoal':
                 return {
                     title: 'Edit Goal',
-                    form: <EditGoal error={error} />,
+                    form: (
+                        <EditGoal
+                            goal={goal}
+                            label={label}
+                            handleChange={handleGoalChange}
+                            handleSubmit={handleGoalSubmit}
+                            error={error}
+                        />
+                    ),
                 }
             default:
                 console.error(`Modal option '${option}' is not valid`)
