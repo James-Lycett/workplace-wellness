@@ -69,6 +69,7 @@ export default function AdminProgressCharts({
                         onClick={() =>
                             openModal(
                                 'editGoal',
+                                null,
                                 goals.sleep_duration,
                                 'Avg Sleep Hours'
                             )
@@ -89,6 +90,7 @@ export default function AdminProgressCharts({
                         onClick={() =>
                             openModal(
                                 'editGoal',
+                                null,
                                 goals.quality_of_sleep,
                                 'Avg Sleep Quality'
                             )

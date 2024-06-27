@@ -72,11 +72,13 @@ export default function AdminHome() {
         loadData()
     }, [loadData])
 
-    const openModal = (option, employee) => {
+    const openModal = (option, employee = null, goal = null, label = null) => {
         setIsModalOpen({
             state: true,
             option: option,
             employeeFromEdit: employee,
+            goal: goal,
+            label: label,
         })
     }
 
