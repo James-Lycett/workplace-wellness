@@ -71,8 +71,8 @@ export default function AdminProgressCharts({
                             openModal(
                                 'editGoal',
                                 null,
-                                goals.sleep_duration,
-                                'Avg Sleep Hours'
+                                'Avg Sleep Hours',
+                                goals
                             )
                         }
                         className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400"
@@ -92,8 +92,8 @@ export default function AdminProgressCharts({
                             openModal(
                                 'editGoal',
                                 null,
-                                goals.quality_of_sleep,
-                                'Avg Sleep Quality'
+                                'Avg Sleep Quality',
+                                goals
                             )
                         }
                         className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400"

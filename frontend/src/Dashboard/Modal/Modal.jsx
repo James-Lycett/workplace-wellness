@@ -37,6 +37,7 @@ export default function Modal({
         admin: false,
     })
     const [goal, setGoal] = useState(0)
+    const [allGoals, setAllGoals] = useState({})
     const [label, setLabel] = useState('')
     const [error, setError] = useState(null)
 
@@ -45,8 +46,11 @@ export default function Modal({
             setEmployee(isModalOpen.employeeFromEdit)
         }
         if (isModalOpen.option === 'editGoal') {
-            setGoal(isModalOpen.goal)
             setLabel(isModalOpen.label)
+            setAllGoals(isModalOpen.goals)
+            const specificGoal =
+                isModalOpen.goals[labelToFieldMap[isModalOpen.label]]
+            setGoal(specificGoal)
         }
     }, [isModalOpen.employeeFromEdit, isModalOpen.option])
 
@@ -66,19 +70,17 @@ export default function Modal({
         'Daily Steps': 'daily_steps',
     }
 
-    const handleGoalChange = (e) => {
-        const { value } = e.target
-        setGoal(value)
+    const handleGoalChange = (newGoal) => {
+        setGoal(newGoal)
     }
 
-    const handleGoalSubmit = async (e) => {
-        e.preventDefault()
+    const handleGoalSubmit = async (newGoal) => {
         const abortController = new AbortController()
 
         try {
             const updatedGoals = {
-                ...goals,
-                [labelToFieldMap[label]]: goal, // Update only the specified goal
+                ...allGoals,
+                [labelToFieldMap[label]]: newGoal, // Update only the specified goal
             }
 
             await updateGoals(userId, updatedGoals, abortController.signal)
@@ -86,7 +88,6 @@ export default function Modal({
             setError(error)
         } finally {
             loadData()
-
             setIsModalOpen(false)
             abortController.abort()
         }
