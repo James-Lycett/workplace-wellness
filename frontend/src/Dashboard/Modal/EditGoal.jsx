@@ -9,6 +9,7 @@ export default function EditGoal({
 }) {
     const [newGoal, setNewGoal] = useState(goal)
 
+    //updated starting value of newGoal whenever goal is updated elsewhere
     useEffect(() => {
         setNewGoal(goal)
     }, [goal])
