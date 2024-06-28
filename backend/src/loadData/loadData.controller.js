@@ -39,13 +39,13 @@ async function loadUserData (req, res, next) {
                         "Forbidden: You do not have access to this user's data",
                 })
             }
-            const companyMetrics =
-                await entriesController.lastMonthCompanyMetrics()
+            const companyAverages =
+                await entriesController.lastMonthCompanyAverages()
             const employees = await dataService.list()
 
             data = {
                 ...data,
-                companyMetrics: companyMetrics,
+                companyAverages: companyAverages,
                 employees: employees,
             }
         }

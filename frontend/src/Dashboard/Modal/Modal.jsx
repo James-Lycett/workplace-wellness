@@ -52,7 +52,7 @@ export default function Modal({
                 isModalOpen.goals[labelToFieldMap[isModalOpen.label]]
             setGoal(specificGoal)
         }
-    }, [isModalOpen.employeeFromEdit, isModalOpen.option])
+    }, [isModalOpen])
 
     function convertStringsToNumbers(object, propsToConvert) {
         for (let prop in object) {
