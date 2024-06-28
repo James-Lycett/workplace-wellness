@@ -14,40 +14,52 @@ export default function AdminProgressCharts({
         daily_steps: 0,
     })
 
-    const calculateProgress = useCallback((option) => {
-        const { sleep_duration_average, stress_level_average, daily_steps_average } = companyAverages;
-        const { sleep_duration, stress_level, daily_steps } = goals;
+    const calculateProgress = useCallback(
+        (option) => {
+            const {
+                sleep_duration_average,
+                stress_level_average,
+                daily_steps_average,
+            } = companyAverages
+            const { sleep_duration, stress_level, daily_steps } = goals
 
-        let progressValue = 0
+            let progressValue = 0
 
-        switch (option) {
-            case "sleep_hours":
-                progressValue = (sleep_duration_average / sleep_duration) * 100
-                break;
-            case "stress_level":
-                progressValue = (stress_level_average / stress_level) * 100
-                break;
-            case "daily_steps":
-                progressValue = (daily_steps_average / daily_steps) * 100
-                break;
-            default:
-                throw new Error(`Invalid calculateProgress option: ${option}`);
-        }
+            switch (option) {
+                case 'sleep_hours':
+                    progressValue =
+                        (sleep_duration_average / sleep_duration) * 100
+                    break
+                case 'stress_level':
+                    progressValue = (stress_level_average / stress_level) * 100
+                    break
+                case 'daily_steps':
+                    progressValue = (daily_steps_average / daily_steps) * 100
+                    break
+                default:
+                    throw new Error(
+                        `Invalid calculateProgress option: ${option}`
+                    )
+            }
 
-        const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100);
-        return Math.floor(boundedProgressValue);
-    }, [goals, companyAverages]);
+            const boundedProgressValue = Math.min(
+                Math.max(progressValue, 0),
+                100
+            )
+            return Math.floor(boundedProgressValue)
+        },
+        [goals, companyAverages]
+    )
 
     useEffect(() => {
         const calculatedProgress = {
-            sleep_hours: calculateProgress("sleep_hours"),
-            stress_level: calculateProgress("stress_level"),
-            daily_steps: calculateProgress("daily_steps"),
+            sleep_hours: calculateProgress('sleep_hours'),
+            stress_level: calculateProgress('stress_level'),
+            daily_steps: calculateProgress('daily_steps'),
         }
 
         setProgress(calculatedProgress)
-    }, [calculateSleepHoursProgress, calculateStressLevelProgress, calculateDailyStepsProgress])
-
+    }, [calculateProgress])
 
     return (
         <>
@@ -95,12 +107,7 @@ export default function AdminProgressCharts({
                     <hr />
                     <Link
                         onClick={() =>
-                            openModal(
-                                'editGoal',
-                                null,
-                                'Stress Level',
-                                goals
-                            )
+                            openModal('editGoal', null, 'Stress Level', goals)
                         }
                         className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400"
                     >
@@ -115,12 +122,8 @@ export default function AdminProgressCharts({
                     />
                     <hr />
                     <Link
-                        onClick={() => openModal(
-                                'editGoal',
-                                null,
-                                'Daily Steps',
-                                goals
-                            )
+                        onClick={() =>
+                            openModal('editGoal', null, 'Daily Steps', goals)
                         }
                         className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400"
                     >
