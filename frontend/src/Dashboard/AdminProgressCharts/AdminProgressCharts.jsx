@@ -14,30 +14,37 @@ export default function AdminProgressCharts({
         daily_steps: 0,
     })
 
-    const calculateSleepHoursProgress = useCallback(() => {
-        const progressValue = (companyAverages.sleep_duration_average / goals.sleep_duration) * 100
-        const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
-        return Math.floor(boundedProgressValue)
-    }, [goals, companyAverages])
+    const calculateProgress = useCallback((option) => {
+        const { sleep_duration_average, stress_level_average, daily_steps_average } = companyAverages;
+        const { sleep_duration, stress_level, daily_steps } = goals;
 
-    const calculateStressLevelProgress = useCallback(() => {
-        const progressValue = (companyAverages.stress_level_average / goals.stress_level) * 100
-        const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
-        return Math.floor(boundedProgressValue)
-    }, [goals, companyAverages])
+        let progressValue = 0
 
-    const calculateDailyStepsProgress = useCallback(() => {
-        const progressValue = (companyAverages.daily_steps_average / goals.daily_steps) * 100
-        const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
-        return Math.floor(boundedProgressValue)
-    }, [goals, companyAverages])
+        switch (option) {
+            case "sleep_hours":
+                progressValue = (sleep_duration_average / sleep_duration) * 100
+                break;
+            case "stress_level":
+                progressValue = (stress_level_average / stress_level) * 100
+                break;
+            case "daily_steps":
+                progressValue = (daily_steps_average / daily_steps) * 100
+                break;
+            default:
+                throw new Error(`Invalid calculateProgress option: ${option}`);
+        }
+
+        const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100);
+        return Math.floor(boundedProgressValue);
+    }, [goals, companyAverages]);
 
     useEffect(() => {
         const calculatedProgress = {
-            sleep_hours: calculateSleepHoursProgress(),
-            stress_level: calculateStressLevelProgress(),
-            daily_steps: calculateDailyStepsProgress(),
+            sleep_hours: calculateProgress("sleep_hours"),
+            stress_level: calculateProgress("stress_level"),
+            daily_steps: calculateProgress("daily_steps"),
         }
+
         setProgress(calculatedProgress)
     }, [calculateSleepHoursProgress, calculateStressLevelProgress, calculateDailyStepsProgress])
 
