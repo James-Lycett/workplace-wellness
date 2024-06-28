@@ -1,10 +1,11 @@
 const entriesController = require('../entries/entries.controller')
 const dataService = require('../data/data.service')
 const entriesService = require('../entries/entries.service')
+const goalsService = require('../goals/goals.service')
 const asyncErrorBoundary = require('../errors/asyncErrorBoundary')
 const authenticateToken = require('../authentication/authenticateToken')
 
-async function loadUserData(req, res, next) {
+async function loadUserData (req, res, next) {
     const { userId } = req.params
 
     const { personIdFromToken } = req.user
@@ -18,13 +19,16 @@ async function loadUserData(req, res, next) {
     try {
         const user = await dataService.read(userId)
         const entries = await entriesService.readPerson(userId)
+        const goals = await goalsService.read(userId)
         const averages = await entriesService.lastMonthAverages(userId)
 
         let data = {
             user: user,
             averages: averages,
             entries: entries,
+            goals: goals,
         }
+        console.log(data.goals)
 
         if (user.admin) {
             // lastMonthCompanyMetrics is only available to admins

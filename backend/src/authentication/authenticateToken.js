@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 // This function is to be used when the frontend requests private resources from the backend
-function authenticateToken(req, res, next) {
+function authenticateToken (req, res, next) {
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
 
@@ -16,7 +16,7 @@ function authenticateToken(req, res, next) {
     jwt.verify(token, process.env.API_SECRET_KEY, (err, decodedToken) => {
         if (err) {
             return next({
-                statu: 401,
+                status: 401,
                 message: 'Unauthorized token',
             })
         }
