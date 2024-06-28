@@ -35,13 +35,6 @@ export default function AdminProgressCharts({
         return Math.floor(boundedProgressValue)
     }
 
-    const goalNAMES = [
-        goals.sleep_duration,
-        goals.quality_of_sleep,
-        goals.physical_activity_level,
-        goals.stress_level,
-        goals.daily_steps,
-    ]
 
     return (
         <>
