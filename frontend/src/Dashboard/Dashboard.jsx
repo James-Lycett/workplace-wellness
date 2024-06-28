@@ -34,8 +34,10 @@ export default function AdminHome() {
     const [view, setView] = useState('user')
     const [employees, setEmployees] = useState(null)
     const [entries, setEntries] = useState(null)
+    const [goals, setGoals] = useState(null)
 
-    // Fetches user from the API along with that user's entries, lastMonthAverages for that user, and company-wide lastMonthAverages for admin purposes (if user is an admin)
+    /* Fetches user from the API along with that user's entries, goals which are only accessible if admin, 
+     lastMonthAverages for that user, and company-wide lastMonthAverages for admin purposes (if user is an admin) */
     const loadData = useCallback(async () => {
         const abortController = new AbortController()
 
@@ -44,6 +46,7 @@ export default function AdminHome() {
 
             setUser(data.user)
             setEntries(data.entries)
+            setGoals(data.goals)
             setAverages({
                 ...data.averages,
                 loaded: true,
@@ -51,8 +54,14 @@ export default function AdminHome() {
             setCompanyMetrics(data.companyMetrics)
             setEmployees(data.employees)
         } catch (error) {
-            if (error.message === "Forbidden: You do not have access to this user's data" || error.message === "No auth token") {
-                navigate("/login", { state: { message: "You must be logged in" }})
+            if (
+                error.message ===
+                    "Forbidden: You do not have access to this user's data" ||
+                error.message === 'No auth token'
+            ) {
+                navigate('/login', {
+                    state: { message: 'You must be logged in' },
+                })
             }
             console.error(error)
         } finally {
@@ -64,11 +73,13 @@ export default function AdminHome() {
         loadData()
     }, [loadData])
 
-    const openModal = (option, employee) => {
+    const openModal = (option, employee = null, label = null, goals = null) => {
         setIsModalOpen({
             state: true,
             option: option,
             employeeFromEdit: employee,
+            label: label,
+            goals: goals,
         })
     }
 
@@ -85,7 +96,11 @@ export default function AdminHome() {
             <>
                 <section className="bg-slate-100 py-5 ">
                     {view === 'admin' ? (
-                        <AdminProgressCharts companyMetrics={companyMetrics} />
+                        <AdminProgressCharts
+                            openModal={openModal}
+                            companyMetrics={companyMetrics}
+                            goals={goals}
+                        />
                     ) : (
                         <UserProgressCharts averages={averages} />
                     )}
