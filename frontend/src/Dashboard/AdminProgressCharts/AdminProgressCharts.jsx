@@ -1,39 +1,45 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import RadialBar from './RadialBar'
 import { Progress } from 'flowbite-react'
 import { Link } from 'react-router-dom'
 
 export default function AdminProgressCharts({
-    companyMetrics,
+    companyAverages,
     goals,
     openModal,
 }) {
-    const providedGoals = {
-        sleepHoursGoal: 1200,
-        tasksMet: 80,
-        tasksGoal: 128,
-        companyMood: 'Decent',
-        sleepQualityGoal: 8,
-    }
+    const [progress, setProgress] = useState({
+        sleep_hours: 0,
+        stress_level: 0,
+        daily_steps: 0,
+    })
 
-    function calculateSleepHoursProgress() {
-        const progressValue =
-            (companyMetrics.sleep_duration_total /
-                providedGoals.sleepHoursGoal) *
-            100
-        const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
-
-        return Math.floor(boundedProgressValue)
-    }
-
-    function calculateSleepQualityProgress() {
-        const progressValue =
-            (companyMetrics.quality_of_sleep_average /
-                providedGoals.sleepQualityGoal) *
-            100
+    const calculateSleepHoursProgress = useCallback(() => {
+        const progressValue = (companyAverages.sleep_duration_average / goals.sleep_duration) * 100
         const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
         return Math.floor(boundedProgressValue)
-    }
+    }, [goals, companyAverages])
+
+    const calculateStressLevelProgress = useCallback(() => {
+        const progressValue = (companyAverages.stress_level_average / goals.stress_level) * 100
+        const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
+        return Math.floor(boundedProgressValue)
+    }, [goals, companyAverages])
+
+    const calculateDailyStepsProgress = useCallback(() => {
+        const progressValue = (companyAverages.daily_steps_average / goals.daily_steps) * 100
+        const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
+        return Math.floor(boundedProgressValue)
+    }, [goals, companyAverages])
+
+    useEffect(() => {
+        const calculatedProgress = {
+            sleep_hours: calculateSleepHoursProgress(),
+            stress_level: calculateStressLevelProgress(),
+            daily_steps: calculateDailyStepsProgress(),
+        }
+        setProgress(calculatedProgress)
+    }, [calculateSleepHoursProgress, calculateStressLevelProgress, calculateDailyStepsProgress])
 
 
     return (
@@ -54,7 +60,7 @@ export default function AdminProgressCharts({
             <div className="flex flex-row justify-between my-5 mx-auto max-w-5xl font-light">
                 <div className="flex flex-col justify-center bg-white me-5 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                     <RadialBar
-                        series={[calculateSleepHoursProgress()]}
+                        series={[progress.sleep_hours]}
                         colors={['#7AEB7F']}
                         label="Avg Sleep Hours"
                     />
@@ -75,9 +81,9 @@ export default function AdminProgressCharts({
                 </div>
                 <div className="flex flex-col justify-center bg-white mx-10 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                     <RadialBar
-                        series={[calculateSleepQualityProgress()]}
+                        series={[progress.stress_level]}
                         colors={['#EB897A']}
-                        label="Avg Sleep Quality"
+                        label="Stress Level"
                     />
                     <hr />
                     <Link
@@ -85,7 +91,7 @@ export default function AdminProgressCharts({
                             openModal(
                                 'editGoal',
                                 null,
-                                'Avg Sleep Quality',
+                                'Stress Level',
                                 goals
                             )
                         }
@@ -96,13 +102,19 @@ export default function AdminProgressCharts({
                 </div>
                 <div className="flex flex-col justify-center bg-white ms-5 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                     <RadialBar
-                        series={[45]}
+                        series={[progress.daily_steps]}
                         colors={['#E8EA8B']}
-                        label="Tasks Completed"
+                        label="Daily Steps"
                     />
                     <hr />
                     <Link
-                        onClick={() => openModal('editGoal')}
+                        onClick={() => openModal(
+                                'editGoal',
+                                null,
+                                'Daily Steps',
+                                goals
+                            )
+                        }
                         className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400"
                     >
                         <p>Edit Goal</p>

@@ -27,7 +27,7 @@ export default function AdminHome() {
         bmi_category_average: 'N/A',
         loaded: false,
     })
-    const [companyMetrics, setCompanyMetrics] = useState({
+    const [companyAverages, setCompanyAverages] = useState({
         sleep_duration_total: 0,
         quality_of_sleep_average: 0,
     })
@@ -51,7 +51,8 @@ export default function AdminHome() {
                 ...data.averages,
                 loaded: true,
             })
-            setCompanyMetrics(data.companyMetrics)
+            setCompanyAverages(data.companyAverages)
+            console.log(data.companyAverages)
             setEmployees(data.employees)
         } catch (error) {
             if (
@@ -98,7 +99,7 @@ export default function AdminHome() {
                     {view === 'admin' ? (
                         <AdminProgressCharts
                             openModal={openModal}
-                            companyMetrics={companyMetrics}
+                            companyAverages={companyAverages}
                             goals={goals}
                         />
                     ) : (

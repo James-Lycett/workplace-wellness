@@ -31,7 +31,7 @@ export default function EditGoal({
                 <div className="flex items-center justify-between mb-4">
                     <input
                         type="number"
-                        step={0.5}
+                        step={label === "Daily Steps" ? 100 : 0.5}
                         value={newGoal}
                         onChange={handleInputChange}
                         className="w-20 text-center border-b-2 border-gray-300 focus:outline-none"
