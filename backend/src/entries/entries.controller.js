@@ -251,26 +251,10 @@ async function lastMonthAverages(req, res, next) {
     }
 }
 
-/*
-    Gets sleep duration total hours and average quality of sleep, combines them into a single object
-    returns (in JSON):
-    {
-        data: {
-            sleep_duration_total: n,
-            quality_of_sleep_average: n
-        }
-    }
-*/
-async function lastMonthCompanyMetrics(req, res, next) {
-    try {
-        const totalHoursOfSleep = await service.lastMonthCompanyTotalSleep()
-        const averageQualityOfSleep =
-            await service.lastMonthCompanySleepQualityAverage()
 
-        const data = {
-            ...totalHoursOfSleep,
-            ...averageQualityOfSleep,
-        }
+async function lastMonthCompanyAverages(req, res, next) {
+    try {
+        const data = await service.lastMonthCompanyAverages()
 
         return data
     } catch (error) {
@@ -306,9 +290,9 @@ module.exports = {
         asyncErrorBoundary(personExists),
         asyncErrorBoundary(lastMonthAverages),
     ],
-    readLastMonthCompanyMetrics: [
+    readLastMonthCompanyAverages: [
         authenticateToken,
-        asyncErrorBoundary(lastMonthCompanyMetrics),
+        asyncErrorBoundary(lastMonthCompanyAverages),
     ],
-    lastMonthCompanyMetrics,
+    lastMonthCompanyAverages,
 }

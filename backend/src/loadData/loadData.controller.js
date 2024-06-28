@@ -40,7 +40,7 @@ async function loadUserData (req, res, next) {
                 })
             }
             const companyMetrics =
-                await entriesController.lastMonthCompanyMetrics()
+                await entriesController.lastMonthCompanyAverages()
             const employees = await dataService.list()
 
             data = {

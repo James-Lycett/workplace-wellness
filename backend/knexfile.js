@@ -1,6 +1,5 @@
+// Update with your config settings.
 require('dotenv').config()
-const fs = require('fs')
-const path = require('path')
 
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
@@ -10,13 +9,10 @@ module.exports = {
         client: 'postgresql',
         connection: {
             host: process.env.SQL_CREDENTIALS_HOST,
-            user: process.env.SQL_CREDENTIALS_USERNAME,
+            user: process.env.SQL_CREDENTIALS_USER_DB,
             password: process.env.SQL_CREDENTIALS_PASSWORD,
             database: process.env.SQL_CREDENTIALS_USER_DB,
-            port: process.env.SQL_CREDENTIALS_PORT,
-            ssl: {
-                ca: fs.readFileSync(path.join(__dirname, './prod-ca-2021.crt')).toString(),
-            },
+            ssl: true, // Enable SSL for secure connections
         },
         migrations: {
             tableName: 'knex_migrations',
@@ -30,13 +26,10 @@ module.exports = {
         client: 'postgresql',
         connection: {
             host: process.env.SQL_CREDENTIALS_HOST,
-            user: process.env.SQL_CREDENTIALS_USERNAME,
+            user: process.env.SQL_CREDENTIALS_USER_DB,
             password: process.env.SQL_CREDENTIALS_PASSWORD,
             database: process.env.SQL_CREDENTIALS_USER_DB,
-            port: process.env.SQL_CREDENTIALS_PORT,
-            ssl: {
-                ca: fs.readFileSync(path.join(__dirname, './prod-ca-2021.crt')).toString(),
-            },
+            ssl: true, // Enable SSL for secure connections
         },
         migrations: {
             tableName: 'knex_migrations',

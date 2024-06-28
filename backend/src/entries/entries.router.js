@@ -12,12 +12,6 @@ router
     .get(controller.readLastMonthAverages)
     .all(methodNotAllowed)
 
-// Special route just to get kpi averages over the past thirty days for *all* users
-router
-    .route('/all/metrics')
-    .get(controller.readLastMonthCompanyMetrics)
-    .all(methodNotAllowed)
-
 router
     .route('/:entryId')
     .get(controller.readEntry)
