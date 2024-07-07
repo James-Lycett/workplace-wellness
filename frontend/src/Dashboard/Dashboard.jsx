@@ -52,7 +52,6 @@ export default function AdminHome() {
                 loaded: true,
             })
             setCompanyAverages(data.companyAverages)
-            console.log(data.companyAverages)
             setEmployees(data.employees)
         } catch (error) {
             if (
