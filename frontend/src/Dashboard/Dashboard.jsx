@@ -47,7 +47,6 @@ export default function AdminHome() {
             setUser(data.user)
             setEntries(data.entries)
             setGoals(data.goals)
-            console.log(data.goals)
             setAverages({
                 ...data.averages,
                 loaded: true,

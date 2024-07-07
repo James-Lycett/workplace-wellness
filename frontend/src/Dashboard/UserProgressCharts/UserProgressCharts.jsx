@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import RadialBar from '../AdminProgressCharts/RadialBar'
-import { Progress } from 'flowbite-react'
 import Spinner from '../../utils/Spinner'
 import useIsMobile from '../AdminProgressCharts/useIsMobile'
 
@@ -80,19 +79,6 @@ export default function UserProgressCharts({ averages, goals }) {
     if (averages.loaded) {
         return (
             <>
-                <div className="flex flex-col justify-center bg-white w-full max-w-5xl mx-auto rounded-md shadow-md">
-                    <h2 className="text-v2-drkblue font-semibold self-center mt-5">
-                        Department Goals
-                    </h2>
-                    <Progress
-                        progress={70}
-                        color="blue"
-                        progressLabelPosition="inside"
-                        className="mt-10 mb-5 w-3/4 max-w-4xl mx-auto"
-                        size="xl"
-                        labelProgress
-                    />
-                </div>
                 <div className="flex flex-row justify-between my-5 mx-3 md:mx-auto max-w-5xl font-light">
                     <div className="flex flex-col justify-center bg-white me-5 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                         {renderRadialBarOrAlternative(
