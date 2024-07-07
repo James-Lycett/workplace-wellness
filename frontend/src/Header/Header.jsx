@@ -43,6 +43,11 @@ function Header() {
                                 Sign In
                             </Link>
                         </li>
+                        <li className="hover:text-blue-500 dark:hover:text-blue-400">
+                            <Link to="/bp/careers" onClick={scrollToTop}>
+                                Careers
+                            </Link>
+                        </li>
                     </ul>
                     <FontAwesomeIcon
                         icon={faBars}
