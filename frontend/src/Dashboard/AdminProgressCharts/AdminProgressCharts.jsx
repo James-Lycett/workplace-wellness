@@ -76,7 +76,7 @@ export default function AdminProgressCharts({
         ) : (
             <div className="flex flex-col items-center justify-center h-full">
                 <h3>{label}</h3>
-                <p>{progress[progressKey]}%</p>
+                <p  className="font-bold">{progress[progressKey]}%</p>
             </div>
         )
     }
@@ -96,10 +96,10 @@ export default function AdminProgressCharts({
                     labelProgress
                 />
             </div>
-            <div className="flex flex-row justify-between my-5 mx-auto max-w-5xl font-light">
+            <div className="flex flex-row justify-between my-5 mx-3 md:mx-auto max-w-5xl font-light">
                 <div className="flex flex-col justify-center bg-white me-5 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                     {renderRadialBarOrAlternative(
-                        'Avg Sleep Hours',
+                        'Sleep Hours',
                         'sleep_hours',
                         '#7AEB7F'
                     )}
@@ -113,12 +113,12 @@ export default function AdminProgressCharts({
                                 goals
                             )
                         }
-                        className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400"
+                        className="flex md:justify-end justify-center my-1 md:me-5 hover:text-blue-500 dark:hover:text-blue-400"
                     >
                         <p>Edit Goal</p>
                     </Link>
                 </div>
-                <div className="flex flex-col justify-center bg-white mx-10 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
+                <div className="flex flex-col justify-center bg-white mx-auto rounded-lg shadow-md w-full md:w-1/3 aspect-square">
                     {renderRadialBarOrAlternative(
                         'Stress Level',
                         'stress_level',
@@ -129,7 +129,7 @@ export default function AdminProgressCharts({
                         onClick={() =>
                             openModal('editGoal', null, 'Stress Level', goals)
                         }
-                        className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400"
+                        className="flex md:justify-end justify-center my-1 md:me-5 hover:text-blue-500 dark:hover:text-blue-400"
                     >
                         <p>Edit Goal</p>
                     </Link>
@@ -145,7 +145,7 @@ export default function AdminProgressCharts({
                         onClick={() =>
                             openModal('editGoal', null, 'Daily Steps', goals)
                         }
-                        className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400"
+                        className="flex md:justify-end justify-center my-1 md:me-5 hover:text-blue-500 dark:hover:text-blue-400"
                     >
                         <p>Edit Goal</p>
                     </Link>

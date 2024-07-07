@@ -1,32 +1,80 @@
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import RadialBar from '../AdminProgressCharts/RadialBar'
 import { Progress } from 'flowbite-react'
 import Spinner from '../../utils/Spinner'
+import useIsMobile from '../AdminProgressCharts/useIsMobile'
 
-export default function UserProgressCharts({ averages }) {
-    // Placeholder admin goals data:
-    const goals = {
-        // sleepHoursThisMonth: 1545, now getting this straight from the db, see "companyMetrics"
-        sleepHoursGoal: 8,
-        tasksMet: 80,
-        tasksGoal: 128,
-        companyMood: 'Decent',
-        sleepQualityGoal: 8,
-    }
+export default function UserProgressCharts({ averages, goals }) {
+    const [progress, setProgress] = useState({
+        sleep_hours: 0,
+        stress_level: 0,
+        daily_steps: 0,
+    })
+    const isMobile = useIsMobile()
 
-    function calculateSleepHoursProgress() {
-        const progressValue =
-            (averages.sleep_duration_average / goals.sleepHoursGoal) * 100
-        const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
+    const calculateProgress = useCallback(
+        (option) => {
+            const {
+                sleep_duration_average,
+                stress_level_average,
+                daily_steps_average,
+            } = averages
+            const { sleep_duration, stress_level, daily_steps } = goals
 
-        return Math.floor(boundedProgressValue) // Return the progress value
-    }
+            let progressValue = 0
 
-    function calculateSleepQualityProgress() {
-        const progressValue =
-            (averages.quality_of_sleep_average / goals.sleepQualityGoal) * 100
-        const boundedProgressValue = Math.min(Math.max(progressValue, 0), 100)
-        return Math.floor(boundedProgressValue)
+            switch (option) {
+                case 'sleep_hours':
+                    progressValue =
+                        (sleep_duration_average / sleep_duration) * 100
+                    break
+                case 'stress_level':
+                    progressValue = (stress_level_average / stress_level) * 100
+                    break
+                case 'daily_steps':
+                    progressValue = (daily_steps_average / daily_steps) * 100
+                    break
+                default:
+                    throw new Error(
+                        `Invalid calculateProgress option: ${option}`
+                    )
+            }
+
+            const boundedProgressValue = Math.min(
+                Math.max(progressValue, 0),
+                100
+            )
+            return Math.floor(boundedProgressValue)
+        },
+        [goals, averages]
+    )
+
+    useEffect(() => {
+        const calculatedProgress = {
+            sleep_hours: calculateProgress('sleep_hours'),
+            stress_level: calculateProgress('stress_level'),
+            daily_steps: calculateProgress('daily_steps'),
+        }
+
+        setProgress(calculatedProgress)
+    }, [calculateProgress])
+
+    const renderRadialBarOrAlternative = (label, progressKey, color) => {
+        if (isMobile === null) {
+            return <Spinner />
+        }
+        return !isMobile ? (
+            <RadialBar
+                series={[progress[progressKey]]}
+                colors={[color]}
+                label={label}
+            />
+        ) : (
+            <div className="flex flex-col items-center justify-center h-full">
+                <h3>{label}</h3>
+                <p className="font-bold">{progress[progressKey]}%</p>
+            </div>
+        )
     }
 
     if (averages.loaded) {
@@ -45,27 +93,27 @@ export default function UserProgressCharts({ averages }) {
                         labelProgress
                     />
                 </div>
-                <div className="flex flex-row justify-between my-5 mx-auto max-w-5xl font-light">
+                <div className="flex flex-row justify-between my-5 mx-3 md:mx-auto max-w-5xl font-light">
                     <div className="flex flex-col justify-center bg-white me-5 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
-                        <RadialBar
-                            series={[calculateSleepHoursProgress()]}
-                            colors={['#7AEB7F']}
-                            label="Avg Sleep Hours"
-                        />
+                        {renderRadialBarOrAlternative(
+                            'Sleep Hours',
+                            'sleep_hours',
+                            '#7AEB7F'
+                        )}
                     </div>
                     <div className="flex flex-col justify-center bg-white mx-0 md:mx-10 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
-                        <RadialBar
-                            series={[calculateSleepQualityProgress()]}
-                            colors={['#EB897A']}
-                            label="Avg Sleep Quality"
-                        />
+                        {renderRadialBarOrAlternative(
+                            'Stress Level',
+                            'stress_level',
+                            '#EB897A'
+                        )}
                     </div>
                     <div className="flex flex-col justify-center bg-white ms-5 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
-                        <RadialBar
-                            series={[45]}
-                            colors={['#E8EA8B']}
-                            label="Tasks Completed"
-                        />
+                        {renderRadialBarOrAlternative(
+                            'Daily Steps',
+                            'daily_steps',
+                            '#E8EA8B'
+                        )}
                     </div>
                 </div>
             </>
