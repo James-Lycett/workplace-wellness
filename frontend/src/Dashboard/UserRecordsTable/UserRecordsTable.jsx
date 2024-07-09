@@ -88,7 +88,7 @@ export default function UserRecordsTable({ userId, entries, setEntries }) {
                                 </button>
                         </Table.HeadCell>
                         <Table.HeadCell>
-                            <span aria-label="Delete entry" className="sr-only">X</span>
+                            <span className="sr-only">X</span>
                         </Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
