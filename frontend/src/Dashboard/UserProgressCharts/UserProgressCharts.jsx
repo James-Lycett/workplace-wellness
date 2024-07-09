@@ -70,8 +70,8 @@ export default function UserProgressCharts({ averages, goals }) {
             />
         ) : (
             <div className="flex flex-col items-center justify-center h-full">
-                <h3>{label}</h3>
-                <p className="font-bold">{progress[progressKey]}%</p>
+                <h3 className='text-reg sm:text-xl custom-heading'>{label}</h3>
+                <p  className="font-bold text-xl sm:text-3xl mt-2">{progress[progressKey]}%</p>
             </div>
         )
     }
