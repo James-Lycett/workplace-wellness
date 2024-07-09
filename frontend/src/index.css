@@ -103,8 +103,9 @@ p {
         text-center
         border-2
         border-v2-ltblue
-        hover:bg-v2-ltblue
+        hover:bg-v2-drkblue
         hover:text-white
+        hover:border-v2-drkblue
         focus:ring-2
         focus:ring-blue-300 
         font-semibold rounded-lg text-sm px-5 py-4 
