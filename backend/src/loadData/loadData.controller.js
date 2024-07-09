@@ -19,16 +19,15 @@ async function loadUserData (req, res, next) {
     try {
         const user = await dataService.read(userId)
         const entries = await entriesService.readPerson(userId)
-        const goals = await goalsService.read(userId)
+        const goals = await goalsService.list()
         const averages = await entriesService.lastMonthAverages(userId)
 
         let data = {
             user: user,
             averages: averages,
             entries: entries,
-            goals: goals,
+            goals: goals[0],
         }
-        console.log(data.goals)
 
         if (user.admin) {
             // lastMonthCompanyMetrics is only available to admins

@@ -66,7 +66,7 @@ export default function LoginPage() {
                         {/* Username input */}
                         <label htmlFor="username"></label>
                         <input
-                            className="relative border-0 bg-slate-100 my-4 py-3 md:px-2 w-full rounded max-w-2xl"
+                            className="relative border-0 bg-slate-100 my-4 py-3 md:px-2 px-2 w-full rounded max-w-2xl"
                             type="string"
                             id="username"
                             value={username}

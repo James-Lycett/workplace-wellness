@@ -52,7 +52,6 @@ export default function AdminHome() {
                 loaded: true,
             })
             setCompanyAverages(data.companyAverages)
-            console.log(data.companyAverages)
             setEmployees(data.employees)
         } catch (error) {
             if (
@@ -103,7 +102,7 @@ export default function AdminHome() {
                             goals={goals}
                         />
                     ) : (
-                        <UserProgressCharts averages={averages} />
+                        <UserProgressCharts averages={averages} goals={goals}/>
                     )}
                     <div className="flex flex-col md:flex-row  w-full mx-auto mt-5 max-w-5xl md:max-h-[56vh] rounded-lg shadow-md overflow-hidden ">
                         <DashboardSidebar

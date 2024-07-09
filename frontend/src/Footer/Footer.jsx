@@ -100,7 +100,7 @@ export default function Footer() {
                         />
                     </Link>
                 </div>
-                <div className="md:flex md:flex-row hidden gap-10 md:text-sm lg:text-base">
+                <div className="md:flex md:flex-row hidden gap-10  lg:text-base">
                     {/* Company Links */}
                     <div className="flex flex-col md:gap-5 gap-3 text-blue-800">
                         <h5 className="font-bold lg:mb-6">Company</h5>
@@ -124,8 +124,8 @@ export default function Footer() {
                         </Link>
                     </div>
                     {/* Support Links */}
-                    <div className="flex flex-col md:gap-5 gap-3 text-blue-800 md:mt-0 mt-6">
-                        <h5 className="font-bold lg:mb-6 self-center">
+                    <div className="flex flex-col md:gap-5 gap-3 text-black md:mt-0 mt-6">
+                        <h5 className="font-bold lg:mb-6 self-center text-blue-800">
                             Support
                         </h5>
                         <p className="dark:text-neutral-200">Help center</p>
@@ -134,8 +134,8 @@ export default function Footer() {
                         <p className="dark:text-neutral-200">Chat support</p>
                     </div>
                     {/* Contact */}
-                    <div className="flex flex-col items-center md:items-start lg:gap-6 gap-3 lg:my-0 my-6 md:mt-0 mt-6 text-blue-800">
-                        <h5 className="font-bold self-center lg:mb-6">
+                    <div className="flex flex-col items-center md:items-start lg:gap-6 gap-3 lg:my-0 my-6 md:mt-0 mt-6 text-black">
+                        <h5 className="font-bold self-center lg:mb-6 text-blue-800">
                             Contact Us
                         </h5>
                         <div className="flex items-center">
@@ -288,7 +288,7 @@ export default function Footer() {
                     className="hidden"
                     aria-labelledby="accordion-collapse-heading-1"
                 >
-                    <div className="p-5 flex flex-col  gap-5">
+                    <div className="p-5 flex flex-col gap-5">
                         <div className="flex items-center">
                             <p className="text-3xl me-3">
                                 <FiPhone />

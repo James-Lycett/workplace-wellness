@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import RadialBar from './RadialBar'
-import { Progress } from 'flowbite-react'
+import { Spinner } from 'flowbite-react'
 import { Link } from 'react-router-dom'
+import useIsMobile from './useIsMobile'
 
 export default function AdminProgressCharts({
     companyAverages,
@@ -13,6 +14,7 @@ export default function AdminProgressCharts({
         stress_level: 0,
         daily_steps: 0,
     })
+    const isMobile = useIsMobile()
 
     const calculateProgress = useCallback(
         (option) => {
@@ -61,28 +63,33 @@ export default function AdminProgressCharts({
         setProgress(calculatedProgress)
     }, [calculateProgress])
 
+    const renderRadialBarOrAlternative = (label, progressKey, color) => {
+        if (isMobile === null) {
+            return <Spinner />
+        }
+        return !isMobile ? (
+            <RadialBar
+                series={[progress[progressKey]]}
+                colors={[color]}
+                label={label}
+            />
+        ) : (
+            <div className="flex flex-col items-center justify-center h-full">
+                <h3 className='text-reg sm:text-xl custom-heading'>{label}</h3>
+                <p  className="font-bold text-xl sm:text-3xl mt-2">{progress[progressKey]}%</p>
+            </div>
+        )
+    }
+
     return (
         <>
-            <div className="flex flex-col justify-center bg-white w-full max-w-5xl mx-auto rounded-md shadow-md">
-                <h2 className="text-v2-drkblue font-semibold self-center mt-5">
-                    Department Goals
-                </h2>
-                <Progress
-                    progress={70}
-                    color="blue"
-                    progressLabelPosition="inside"
-                    className="mt-10 mb-5 w-3/4 max-w-4xl mx-auto"
-                    size="xl"
-                    labelProgress
-                />
-            </div>
-            <div className="flex flex-row justify-between my-5 mx-auto max-w-5xl font-light">
+            <div className="flex flex-row justify-between my-5 mx-3 md:mx-auto max-w-5xl font-light">
                 <div className="flex flex-col justify-center bg-white me-5 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
-                    <RadialBar
-                        series={[progress.sleep_hours]}
-                        colors={['#7AEB7F']}
-                        label="Avg Sleep Hours"
-                    />
+                    {renderRadialBarOrAlternative(
+                        'Sleep Hours',
+                        'sleep_hours',
+                        '#7AEB7F'
+                    )}
                     <hr />
                     <Link
                         onClick={() =>
@@ -93,39 +100,39 @@ export default function AdminProgressCharts({
                                 goals
                             )
                         }
-                        className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400"
+                        className="flex md:justify-end justify-center my-1 md:me-5 hover:text-blue-500 dark:hover:text-blue-400"
                     >
                         <p>Edit Goal</p>
                     </Link>
                 </div>
-                <div className="flex flex-col justify-center bg-white mx-10 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
-                    <RadialBar
-                        series={[progress.stress_level]}
-                        colors={['#EB897A']}
-                        label="Stress Level"
-                    />
+                <div className="flex flex-col justify-center bg-white mx-auto rounded-lg shadow-md w-full md:w-1/3 aspect-square">
+                    {renderRadialBarOrAlternative(
+                        'Stress Level',
+                        'stress_level',
+                        '#EB897A'
+                    )}
                     <hr />
                     <Link
                         onClick={() =>
                             openModal('editGoal', null, 'Stress Level', goals)
                         }
-                        className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400"
+                        className="flex md:justify-end justify-center my-1 md:me-5 hover:text-blue-500 dark:hover:text-blue-400"
                     >
                         <p>Edit Goal</p>
                     </Link>
                 </div>
                 <div className="flex flex-col justify-center bg-white ms-5 rounded-lg shadow-md w-full md:w-1/3 aspect-square">
-                    <RadialBar
-                        series={[progress.daily_steps]}
-                        colors={['#E8EA8B']}
-                        label="Daily Steps"
-                    />
+                    {renderRadialBarOrAlternative(
+                        'Daily Steps',
+                        'daily_steps',
+                        '#E8EA8B'
+                    )}
                     <hr />
                     <Link
                         onClick={() =>
                             openModal('editGoal', null, 'Daily Steps', goals)
                         }
-                        className="flex justify-end my-1 me-5 hover:text-blue-500 dark:hover:text-blue-400"
+                        className="flex md:justify-end justify-center my-1 md:me-5 hover:text-blue-500 dark:hover:text-blue-400"
                     >
                         <p>Edit Goal</p>
                     </Link>
