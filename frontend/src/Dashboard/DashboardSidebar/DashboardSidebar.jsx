@@ -31,7 +31,7 @@ export default function DashboardSidebar({
             <div className="md:hidden">
                 <Sidebar
                     className="w-full flex flex-col justify-center list-none"
-                    aria-label="Default sidebar example"
+                    aria-label="Small Screen Sidebar"
                 >
                     <Sidebar.Collapse
                         label={
@@ -139,7 +139,7 @@ export default function DashboardSidebar({
             <div className="hidden md:block">
                 <Sidebar
                     className="w-full flex flex-col justify-center"
-                    aria-label="Default sidebar example"
+                    aria-label={view === 'admin' ? 'Admin Sidebar' : 'User Sidebar'}
                 >
                     <Sidebar.Logo
                         href="#"
