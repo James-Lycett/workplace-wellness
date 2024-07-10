@@ -146,7 +146,7 @@ export default function DashboardSidebar({
                         img={logo}
                         imgAlt="Workplace Wellness logo"
                     >
-                        <span className="text-base sm:text-xl">
+                        <span className="text-base sm:font-bold">
                             Workplace Wellness
                         </span>
                     </Sidebar.Logo>

@@ -91,7 +91,7 @@ export default function UserRecordsTable({ userId, entries, setEntries }) {
                             <span className="sr-only">X</span>
                         </Table.HeadCell>
                     </Table.Head>
-                    <Table.Body className="divide-y">
+                    <Table.Body className="divide-y scroller">
                         <UserActivitiesList
                             userId={userId}
                             entries={sortedEntries}
