@@ -48,7 +48,7 @@ export default function UserRecordsTable({ userId, entries, setEntries }) {
 
     return (
         <>
-            <div className="overflow-x-auto max-h-96 md:max-h-full overflow-y-auto">
+            <div className="overflow-x-auto max-h-96 md:max-h-full overflow-y-auto snap-y snap-mandatory">
                 <Table hoverable>
                     <Table.Head className="sticky top-0 bg-white z-10">
                         <Table.HeadCell>
