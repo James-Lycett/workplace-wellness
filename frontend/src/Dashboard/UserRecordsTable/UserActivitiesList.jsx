@@ -10,7 +10,7 @@ export default function UserActivitiesList({ userId, entries, setEntries }) {
             <>
                 {entries.map((entry) => (
                     <Table.Row
-                        className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                        className="bg-white dark:border-gray-700 dark:bg-gray-800 snap-start"
                         key={entry.entry_id}
                     >
                         <ActivityCard
