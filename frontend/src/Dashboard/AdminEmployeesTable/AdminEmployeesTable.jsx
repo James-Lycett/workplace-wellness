@@ -59,16 +59,15 @@ export default function AdminEmployeesTable({ employees, openModal }) {
 
     return (
         <>
-            <div className="overflow-x-auto max-h-96 md:max-h-full md:w-full overflow-y-auto">
+        <div className="flex flex-col">
+            <div className="ps-3 py-3">
+                <SearchBar
+                    employees={employees}
+                    setFilteredEmployees={setFilteredEmployees}
+                />
+            </div>
+            <div className="overflow-x-auto max-h-96 md:max-h-full md:w-full overflow-y-auto snap-y snap-mandatory scroll-py-14">
                 <Table hoverable>
-                    <Table.Head>
-                        <Table.HeadCell colSpan={6}>
-                            <SearchBar
-                                employees={employees}
-                                setFilteredEmployees={setFilteredEmployees}
-                            />
-                        </Table.HeadCell>
-                    </Table.Head>
                     <Table.Head className="sticky top-0 bg-white z-10">
                         <Table.HeadCell>
                             <div className="flex flex-row gap-1">
@@ -118,6 +117,7 @@ export default function AdminEmployeesTable({ employees, openModal }) {
                     </Table.Body>
                 </Table>
             </div>
+        </div>
         </>
     )
 }
