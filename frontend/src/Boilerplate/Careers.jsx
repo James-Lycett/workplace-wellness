@@ -3,7 +3,7 @@ import React from 'react'
 const Careers = () => {
     return (
         <>
-            <section className='max-w-screen-md mx-auto mt-8 p-6 bg-white shadow-md'>
+            <section className='max-w-screen-md mx-auto my-10 p-6 bg-white'>
                 <h1 className='text-2xl text-center font-bold mb-4'>
                     Join Our Team at Workspace Wellness
                 </h1>

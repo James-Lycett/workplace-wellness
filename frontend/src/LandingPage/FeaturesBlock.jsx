@@ -12,7 +12,7 @@ export default function FeaturesBlock() {
                     alt=''
                     className="lg:w-full sm:w-1/3 w-full px-5 sm:p-0 max-w-full"
                 />
-                <p className="lg:mt-5 pt-5">
+                <p className="m-5 lg:mt-5 pt-5">
                     We can help you sleep if you are interested in that.
                     Probably you are, cause you sleep a lot like a third of your
                     life or something.
@@ -24,7 +24,7 @@ export default function FeaturesBlock() {
                     className="lg:w-full sm:w-1/3 w-full px-5 sm:p-0 max-w-full"
                     alt=''
                 />
-                <p className="lg:mt-5 pt-5">
+                <p className="m-2 lg:mt-5 pt-5">
                     Also meditation is good for your brain, and your brain is
                     pretty important, and therefore handy to pay attention to.
                 </p>
@@ -35,7 +35,7 @@ export default function FeaturesBlock() {
                     className="lg:w-full sm:w-1/3 w-full px-5 sm:p-0 max-w-full"
                     alt=''
                 />
-                <p className="lg:mt-5 pt-5">
+                <p className="m-5 lg:mt-5 pt-5">
                     Exercise is good, but gyms aren't particularly inspiring so
                     we're showing you yoga. I dunno.
                 </p>
