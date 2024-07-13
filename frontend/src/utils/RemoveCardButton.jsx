@@ -7,7 +7,7 @@ export default function RemoveEmployeeButton({ openModal, setOpenModal, handleDe
 
     return (
         <>
-        <button onClick={() => setOpenModal(true)}><FaX /></button>
+        <button aria-label="Delete Entry" onClick={() => setOpenModal(true)}><FaX /></button>
         <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
           <Modal.Header />
           <Modal.Body>

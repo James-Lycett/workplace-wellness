@@ -103,7 +103,7 @@ export default function Footer() {
                 <div className="md:flex md:flex-row hidden gap-10  lg:text-base">
                     {/* Company Links */}
                     <div className="flex flex-col md:gap-5 gap-3 text-blue-800">
-                        <h5 className="font-bold lg:mb-6">Company</h5>
+                        <p className="font-bold lg:mb-6">Company</p>
                         <Link
                             to="/bp/about"
                             className=" dark:text-neutral-200 hover:text-blue-500 dark:hover:text-blue-400"
@@ -125,9 +125,9 @@ export default function Footer() {
                     </div>
                     {/* Support Links */}
                     <div className="flex flex-col md:gap-5 gap-3 text-black md:mt-0 mt-6">
-                        <h5 className="font-bold lg:mb-6 self-center text-blue-800">
+                        <p className="font-bold lg:mb-6 self-center text-blue-800">
                             Support
-                        </h5>
+                        </p>
                         <p className="dark:text-neutral-200">Help center</p>
                         <p className="dark:text-neutral-200">Getting started</p>
                         <p className="dark:text-neutral-200">Report a bug</p>
@@ -135,9 +135,9 @@ export default function Footer() {
                     </div>
                     {/* Contact */}
                     <div className="flex flex-col items-center md:items-start lg:gap-6 gap-3 lg:my-0 my-6 md:mt-0 mt-6 text-black">
-                        <h5 className="font-bold self-center lg:mb-6 text-blue-800">
+                        <p className="font-bold self-center lg:mb-6 text-blue-800">
                             Contact Us
-                        </h5>
+                        </p>
                         <div className="flex items-center">
                             <p className="text-2xl me-3">
                                 <FaRegEnvelope />
