@@ -11,7 +11,7 @@ export default function UserRecordsTable({ userId, entries, setEntries }) {
 
     /* 
         Click handler for sort buttons
-        When button is clicked it sends its unique key (e.g., "date") to onSort which sets the
+        When button aria-label="Sort by "is clicked it sends its unique key (e.g., "date") to onSort which sets the
         sortConfig state with that key (aka "which column/property are we working with?") and
         toggles sort order (ascending/descending)
         Setting the sortConfig state triggers the sortedEntries callback to sort the entries according to the info in sortConfig state
@@ -52,58 +52,46 @@ export default function UserRecordsTable({ userId, entries, setEntries }) {
                 <Table hoverable>
                     <Table.Head className="sticky top-0 bg-white z-10">
                         <Table.HeadCell>
-                            <div className="flex flex-row gap-1">
-                                <p>Date</p>
-                                <button onClick={() => onSort("date")}>
+                                <button aria-label="Sort by Date"className="flex flex-row gap-1" onClick={() => onSort("date")}>
+                                    <p>DATE</p>
                                     {getSortIcon("date")}
                                 </button>
-                            </div>
                         </Table.HeadCell>
                         <Table.HeadCell>
-                            <div className="flex flex-row gap-1">
-                                <p>Steps</p>
-                                <button onClick={() => onSort("daily_steps")}>
+                                <button aria-label="Sort by Steps"className="flex flex-row gap-1" onClick={() => onSort("daily_steps")}>
+                                    <p>STEPS</p>
                                     {getSortIcon("daily_steps")}
                                 </button>
-                            </div>
                         </Table.HeadCell>
                         <Table.HeadCell>
-                            <div className="flex flex-row gap-1">
-                                <p>Heart Rate</p>
-                                <button onClick={() => onSort("heart_rate")}>
+                                <button aria-label="Sort by Heart Rate"className="flex flex-row gap-1" onClick={() => onSort("heart_rate")}>
+                                    <p>HEART RATE</p>
                                     {getSortIcon("heart_rate")}
                                 </button>
-                            </div>
                         </Table.HeadCell>
                         <Table.HeadCell>
-                            <div className="flex flex-row gap-1">
-                                <p>BMI Category</p>
-                                <button onClick={() => onSort("bmi_category")}>
+                                <button aria-label="Sort by BMI Category"className="flex flex-row gap-1" onClick={() => onSort("bmi_category")}>
+                                    <p>BMI CATEGORY</p> 
                                     {getSortIcon("bmi_category")}
                                 </button>
-                            </div>
                         </Table.HeadCell>
                         <Table.HeadCell>
-                            <div className="flex flex-row gap-1">
-                                <p>Stress Level</p>
-                                <button onClick={() => onSort("stress_level")}>
+                                <button aria-label="Sort by Stress Level"className="flex flex-row gap-1" onClick={() => onSort("stress_level")}>
+                                    <p>STRESS LEVEL</p>
                                     {getSortIcon("stress_level")}
                                 </button>
-                            </div>
                         </Table.HeadCell>
                         <Table.HeadCell>
-                            <div className="flex flex-row gap-1">
-                                <p>Sleep Hours</p>
-                                <button onClick={() => onSort("sleep_duration")}>
+                                <button aria-label="Sort by Sleep Hours"className="flex flex-row gap-1" onClick={() => onSort("sleep_duration")}>
+                                <p>SLEEP HOURS</p>
                                     {getSortIcon("sleep_duration")}
                                 </button>
-                            </div>
                         </Table.HeadCell>
                         <Table.HeadCell>
                             <span className="sr-only">X</span>
                         </Table.HeadCell>
                     </Table.Head>
-                    <Table.Body className="divide-y">
+                    <Table.Body className="divide-y scroller">
                         <UserActivitiesList
                             userId={userId}
                             entries={sortedEntries}
