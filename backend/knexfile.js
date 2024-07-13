@@ -23,7 +23,9 @@ module.exports = {
         client: 'postgresql',
         connection: {
             connectionString: process.env.DATABASE_URL_INTERNAL,
-            ssl: true,
+            ssl: {
+                rejectUnauthorized: false,
+            },
         },
         migrations: {
             tableName: 'knex_migrations',
