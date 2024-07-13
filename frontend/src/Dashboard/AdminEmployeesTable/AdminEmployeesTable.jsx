@@ -70,27 +70,35 @@ export default function AdminEmployeesTable({ employees, openModal }) {
                 <Table hoverable>
                     <Table.Head className="sticky top-0 bg-white z-10">
                         <Table.HeadCell>
-                                <button aria-label='Sort by Username' className="flex flex-row gap-1" onClick={() => onSort("username")}>
+                                <button aria-label='Sort by Username' className="flex flex-row items-center gap-1" onClick={() => onSort("username")}>
                                     <p>USER</p>
-                                    {getSortIcon("username")}
+                                    <div>
+                                        {getSortIcon("username")}
+                                    </div>
                                 </button>
                         </Table.HeadCell>
                         <Table.HeadCell>
-                                <button aria-label='Sort by Age' className="flex flex-row gap-1" onClick={() => onSort("age")}>
+                                <button aria-label='Sort by Age' className="flex flex-row items-center gap-1" onClick={() => onSort("age")}>
                                     <p>AGE</p>
-                                    {getSortIcon("age")}
+                                    <div>
+                                        {getSortIcon("age")}
+                                    </div>
                                 </button>
                         </Table.HeadCell>
                         <Table.HeadCell>
-                                <button aria-label='Sort by Occupation' className="flex flex-row gap-1" onClick={() => onSort("occupation")}>
+                                <button aria-label='Sort by Occupation' className="flex flex-row items-center gap-1" onClick={() => onSort("occupation")}>
                                     <p>OCCUPATION</p>
-                                    {getSortIcon("occupation")}
+                                    <div>
+                                        {getSortIcon("occupation")}
+                                    </div>
                                 </button>
                         </Table.HeadCell>
                         <Table.HeadCell>
-                                <button aria-label='Sort by Sleep Disorder' className="flex flex-row gap-1" onClick={() => onSort("sleep_disorder")}>
+                                <button aria-label='Sort by Sleep Disorder' className="flex flex-row items-center gap-1" onClick={() => onSort("sleep_disorder")}>
                                 <p>SLEEP DISORDER</p>
+                                <div>
                                     {getSortIcon("sleep_disorder")}
+                                </div>
                                 </button>
                         </Table.HeadCell>
                         <Table.HeadCell>
