@@ -104,7 +104,7 @@ export default function AdminHome() {
                     ) : (
                         <UserProgressCharts averages={averages} goals={goals}/>
                     )}
-                    <div className="flex flex-col md:flex-row  w-full mx-auto mt-5 max-w-5xl md:max-h-[75vh] rounded-lg shadow-md overflow-hidden ">
+                    <div className="flex flex-col md:flex-row  w-full mx-auto mt-5 max-w-5xl min-h-[50vh] md:max-h-[75vh] rounded-lg shadow-md overflow-hidden ">
                         <DashboardSidebar
                             openModal={openModal}
                             userIsAdmin={user.admin}
