@@ -92,11 +92,24 @@ export default function UserRecordsTable({ userId, entries, setEntries }) {
                         </Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y scroller">
-                        <UserActivitiesList
-                            userId={userId}
-                            entries={sortedEntries}
-                            setEntries={setEntries}
-                        />
+                        {entries.length ? 
+                            <UserActivitiesList
+                                userId={userId}
+                                entries={sortedEntries}
+                                setEntries={setEntries}
+                            />
+                            :
+                            <Table.Row>
+                                <Table.Cell colSpan="6">
+                                    
+                            <h3
+                                className="text-center text-xl p-20 span-6"
+                            >
+                                You Haven't Made Any Entries Yet
+                            </h3>
+                            </Table.Cell>
+                            </Table.Row>
+                        }
                     </Table.Body>
                 </Table>
             </div>
