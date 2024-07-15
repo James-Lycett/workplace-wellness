@@ -52,7 +52,7 @@ export default function UserRecordsTable({ userId, entries, setEntries }) {
 
     return (
         <>
-            <div className="overflow-x-auto max-h-96 md:max-h-full overflow-y-auto snap-y snap-mandatory">
+            <div className="overflow-x-auto max-h-96 md:max-h-full overflow-y-auto snap-y snap-mandatory scroll-py-14">
                 <Table hoverable>
                     <Table.Head className="sticky top-0 bg-white z-10">
                         <Table.HeadCell>
@@ -114,6 +114,7 @@ export default function UserRecordsTable({ userId, entries, setEntries }) {
                                 <p>SLEEP HOURS</p>
                                 {getSortIcon('sleep_duration')}
                             </button>
+
                         </Table.HeadCell>
                         <Table.HeadCell>
                             <span className="sr-only">X</span>
@@ -125,6 +126,16 @@ export default function UserRecordsTable({ userId, entries, setEntries }) {
                             entries={sortedEntries}
                             setEntries={setEntries}
                         />
+                            <Table.Row>
+                                <Table.Cell colSpan="6">
+                                    
+                            <h3
+                                className="text-center text-xl p-20 span-6"
+                            >
+                                You Haven't Made Any Entries Yet
+                            </h3>
+                            </Table.Cell>
+                            </Table.Row>
                     </Table.Body>
                 </Table>
             </div>

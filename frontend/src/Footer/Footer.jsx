@@ -25,7 +25,7 @@ export default function Footer() {
                     '#accordion-collapse-heading-1 button'
                 ),
                 targetEl: document.querySelector('#accordion-collapse-body-1'),
-                active: true,
+                active: false,
             },
             {
                 id: 'accordion-collapse-heading-2',

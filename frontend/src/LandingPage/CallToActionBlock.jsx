@@ -12,7 +12,7 @@ export default function CallToActionBlock() {
             <div className="py-3">
                 <Link
                     to="/register"
-                    className="button-light-blue text-xl md:text-base px-10 py-5 md:px-8 md:px-4"
+                    className="button-light-blue text-xl md:text-base px-10 py-5 md:px-8"
                 >
                     Get Started
                 </Link>
