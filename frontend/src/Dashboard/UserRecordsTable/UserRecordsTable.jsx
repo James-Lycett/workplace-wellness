@@ -48,43 +48,55 @@ export default function UserRecordsTable({ userId, entries, setEntries }) {
 
     return (
         <>
-            <div className="overflow-x-auto max-h-96 md:max-h-full overflow-y-auto snap-y snap-mandatory">
+            <div className="overflow-x-auto max-h-96 md:max-h-full overflow-y-auto snap-y snap-mandatory scroll-py-14">
                 <Table hoverable>
                     <Table.Head className="sticky top-0 bg-white z-10">
                         <Table.HeadCell>
-                                <button aria-label="Sort by Date"className="flex flex-row gap-1" onClick={() => onSort("date")}>
+                                <button aria-label="Sort by Date"className="flex flex-row items-center gap-1" onClick={() => onSort("date")}>
                                     <p>DATE</p>
-                                    {getSortIcon("date")}
+                                    <div>
+                                        {getSortIcon("date")}
+                                    </div>
                                 </button>
                         </Table.HeadCell>
                         <Table.HeadCell>
-                                <button aria-label="Sort by Steps"className="flex flex-row gap-1" onClick={() => onSort("daily_steps")}>
+                                <button aria-label="Sort by Steps"className="flex flex-row items-center gap-1" onClick={() => onSort("daily_steps")}>
                                     <p>STEPS</p>
-                                    {getSortIcon("daily_steps")}
+                                    <div>
+                                        {getSortIcon("daily_steps")}
+                                    </div>
                                 </button>
                         </Table.HeadCell>
                         <Table.HeadCell>
-                                <button aria-label="Sort by Heart Rate"className="flex flex-row gap-1" onClick={() => onSort("heart_rate")}>
+                                <button aria-label="Sort by Heart Rate"className="flex flex-row items-center gap-1" onClick={() => onSort("heart_rate")}>
                                     <p>HEART RATE</p>
-                                    {getSortIcon("heart_rate")}
+                                    <div>
+                                        {getSortIcon("heart_rate")}
+                                    </div>
                                 </button>
                         </Table.HeadCell>
                         <Table.HeadCell>
-                                <button aria-label="Sort by BMI Category"className="flex flex-row gap-1" onClick={() => onSort("bmi_category")}>
-                                    <p>BMI CATEGORY</p> 
-                                    {getSortIcon("bmi_category")}
+                                <button aria-label="Sort by BMI Category"className="flex flex-row items-center gap-1" onClick={() => onSort("bmi_category")}>
+                                    <p>BMI CATEGORY</p>
+                                    <div>
+                                        {getSortIcon("bmi_category")}
+                                    </div>
                                 </button>
                         </Table.HeadCell>
                         <Table.HeadCell>
-                                <button aria-label="Sort by Stress Level"className="flex flex-row gap-1" onClick={() => onSort("stress_level")}>
+                                <button aria-label="Sort by Stress Level"className="flex flex-row items-center gap-1" onClick={() => onSort("stress_level")}>
                                     <p>STRESS LEVEL</p>
-                                    {getSortIcon("stress_level")}
+                                    <div>
+                                        {getSortIcon("stress_level")}
+                                    </div>
                                 </button>
                         </Table.HeadCell>
                         <Table.HeadCell>
-                                <button aria-label="Sort by Sleep Hours"className="flex flex-row gap-1" onClick={() => onSort("sleep_duration")}>
-                                <p>SLEEP HOURS</p>
-                                    {getSortIcon("sleep_duration")}
+                                <button aria-label="Sort by Sleep Hours"className="flex flex-row items-center gap-1" onClick={() => onSort("sleep_duration")}>
+                                    <p>SLEEP HOURS</p>
+                                    <div>
+                                        {getSortIcon("sleep_duration")}
+                                    </div>
                                 </button>
                         </Table.HeadCell>
                         <Table.HeadCell>
@@ -92,11 +104,24 @@ export default function UserRecordsTable({ userId, entries, setEntries }) {
                         </Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y scroller">
-                        <UserActivitiesList
-                            userId={userId}
-                            entries={sortedEntries}
-                            setEntries={setEntries}
-                        />
+                        {entries.length ? 
+                            <UserActivitiesList
+                                userId={userId}
+                                entries={sortedEntries}
+                                setEntries={setEntries}
+                            />
+                            :
+                            <Table.Row>
+                                <Table.Cell colSpan="6">
+                                    
+                            <h3
+                                className="text-center text-xl p-20 span-6"
+                            >
+                                You Haven't Made Any Entries Yet
+                            </h3>
+                            </Table.Cell>
+                            </Table.Row>
+                        }
                     </Table.Body>
                 </Table>
             </div>

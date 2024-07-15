@@ -9,7 +9,7 @@ export default function EmployeesList({ employees, setEmployees, openModal }) {
             <>
                 {employees.map((employee) => (
                     <Table.Row
-                        className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                        className="bg-white dark:border-gray-700 dark:bg-gray-800 snap-start"
                         key={employee.person_id}
                     >
                         <EmployeeCardNew
