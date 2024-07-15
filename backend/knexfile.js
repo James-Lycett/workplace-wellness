@@ -8,11 +8,8 @@ module.exports = {
     development: {
         client: 'postgresql',
         connection: {
-            host: process.env.SQL_CREDENTIALS_HOST,
-            user: process.env.SQL_CREDENTIALS_USER_DB,
-            password: process.env.SQL_CREDENTIALS_PASSWORD,
-            database: process.env.SQL_CREDENTIALS_USER_DB,
-            ssl: true, // Enable SSL for secure connections
+            connectionString: process.env.DATABASE_URL,
+            ssl: true,
         },
         migrations: {
             tableName: 'knex_migrations',
@@ -25,11 +22,10 @@ module.exports = {
     production: {
         client: 'postgresql',
         connection: {
-            host: process.env.SQL_CREDENTIALS_HOST,
-            user: process.env.SQL_CREDENTIALS_USER_DB,
-            password: process.env.SQL_CREDENTIALS_PASSWORD,
-            database: process.env.SQL_CREDENTIALS_USER_DB,
-            ssl: true, // Enable SSL for secure connections
+            connectionString: process.env.DATABASE_URL_INTERNAL,
+            ssl: {
+                rejectUnauthorized: false,
+            },
         },
         migrations: {
             tableName: 'knex_migrations',
