@@ -9,6 +9,7 @@ import AdminEmployeesTable from './AdminEmployeesTable/AdminEmployeesTable'
 import UserRecordsTable from './UserRecordsTable/UserRecordsTable'
 import UserProgressCharts from './UserProgressCharts/UserProgressCharts'
 import DashboardSidebar from './DashboardSidebar/DashboardSidebar'
+import SummaryBar from './SummaryBar/SummaryBar'
 
 export default function AdminHome() {
     const navigate = useNavigate()
@@ -95,6 +96,7 @@ export default function AdminHome() {
         return (
             <>
                 <section className="bg-slate-100 py-5 ">
+                    <SummaryBar user={user} averages={averages}/>
                     {view === 'admin' ? (
                         <AdminProgressCharts
                             openModal={openModal}
