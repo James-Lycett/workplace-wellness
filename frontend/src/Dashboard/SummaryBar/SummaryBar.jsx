@@ -22,14 +22,17 @@ export default function SummaryBar({ user, averages }) {
     return (
         <>
             <div className="flex flex-row md:flex-col bg-white rounded-lg shadow-md md:h-44 my-5 mx-3 md:mx-auto max-w-5xl">
-                <div className="flex flex-row md:w-full md:self-center md:h-28 p-2.5">
-                    <img src={profilePic} className="rounded-full size-24" />
-                    <div className="flex flex-col justify-center font-semibold text-reg md:text-xl">
+                <div className="flex flex-col md:flex-row w-1/2 md:w-full md:self-center p-2.5">
+                    <img
+                        src={profilePic}
+                        className="rounded-full object-contain self-center size-24"
+                    />
+                    <div className="flex flex-col justify-center font-semibold text-sm p-3 md:text-xl">
                         <h2>{user.username}</h2>
                         <h3 className="text-v2-drkblue">{user.occupation}</h3>
                     </div>
                 </div>
-                <div className="flex flex-col py-5 px-12  md:p-0 md:flex-row items-center justify-between gap-5 md:gap-16 w-full px-2.5 md:h-24">
+                <div className="flex flex-col py-5 px-3 sm:px-8 md:p-0 md:flex-row items-center justify-between gap-5 md:gap-16 w-full px-2.5 md:h-24">
                     <div className="flex items-center justify-center bg-white w-full rounded-full shadow-md h-9">
                         <h3 className="text-sm md:text-lg">
                             Average Sleep Hours:{' '}
