@@ -7,8 +7,8 @@ import { HiChevronDown, HiChevronUp, HiSelector } from 'react-icons/hi'
 export default function AdminEmployeesTable({ employees, openModal }) {
     const [filteredEmployees, setFilteredEmployees] = useState(null)
     const [sortConfig, setSortConfig] = useState({
-        key: "",
-        direction: "descending",
+        key: '',
+        direction: 'descending',
     })
 
     /* 
@@ -19,9 +19,9 @@ export default function AdminEmployeesTable({ employees, openModal }) {
         Setting the sortConfig state triggers the sortedEntries callback to sort the entries according to the info in sortConfig state
     */
     const onSort = (key) => {
-        let direction = "descending"
-        if (sortConfig.key === key && sortConfig.direction === "descending") {
-            direction = "ascending"
+        let direction = 'descending'
+        if (sortConfig.key === key && sortConfig.direction === 'descending') {
+            direction = 'ascending'
         }
         setSortConfig({ key, direction })
     }
@@ -34,10 +34,10 @@ export default function AdminEmployeesTable({ employees, openModal }) {
         if (sortConfig.key) {
             return [...filteredEmployees].sort((a, b) => {
                 if (a[sortConfig.key] < b[sortConfig.key]) {
-                    return sortConfig.direction === "ascending" ? -1 : 1
+                    return sortConfig.direction === 'ascending' ? -1 : 1
                 }
                 if (a[sortConfig.key] > b[sortConfig.key]) {
-                    return sortConfig.direction === "ascending" ? 1 : -1
+                    return sortConfig.direction === 'ascending' ? 1 : -1
                 }
                 return 0
             })
@@ -49,7 +49,11 @@ export default function AdminEmployeesTable({ employees, openModal }) {
         if (sortConfig.key !== key) {
             return <HiSelector />
         }
-        return sortConfig.direction === "ascending" ? (<HiChevronUp />) : (<HiChevronDown />)
+        return sortConfig.direction === 'ascending' ? (
+            <HiChevronUp />
+        ) : (
+            <HiChevronDown />
+        )
     }
 
     // Create a copy of employees array to mutate leaving original employees array untouched
@@ -59,65 +63,73 @@ export default function AdminEmployeesTable({ employees, openModal }) {
 
     return (
         <>
-        <div className="flex flex-col">
-            <div className="ps-3 py-3">
-                <SearchBar
-                    employees={employees}
-                    setFilteredEmployees={setFilteredEmployees}
-                />
-            </div>
-            <div className="overflow-x-auto max-h-96 md:max-h-full md:w-full overflow-y-auto snap-y snap-mandatory scroll-py-14">
-                <Table hoverable>
-                    <Table.Head className="sticky top-0 bg-white z-10">
-                        <Table.HeadCell>
-                                <button aria-label='Sort by Username' className="flex flex-row items-center gap-1" onClick={() => onSort("username")}>
+            <div className="flex flex-col">
+                <div className="ps-3 py-3 bg-white/50 border-b-2 border-l-2 border-slate-100">
+                    <SearchBar
+                        employees={employees}
+                        setFilteredEmployees={setFilteredEmployees}
+                    />
+                </div>
+                <div className="overflow-x-auto max-h-96 md:max-h-full md:w-full overflow-y-auto snap-y snap-mandatory scroll-py-14">
+                    <Table hoverable>
+                        <Table.Head className="sticky top-0 bg-white z-10">
+                            <Table.HeadCell>
+                                <button
+                                    aria-label="Sort by Username"
+                                    className="flex flex-row items-center gap-1"
+                                    onClick={() => onSort('username')}
+                                >
                                     <p>USER</p>
-                                    <div>
-                                        {getSortIcon("username")}
-                                    </div>
+                                    <div>{getSortIcon('username')}</div>
                                 </button>
-                        </Table.HeadCell>
-                        <Table.HeadCell>
-                                <button aria-label='Sort by Age' className="flex flex-row items-center gap-1" onClick={() => onSort("age")}>
+                            </Table.HeadCell>
+                            <Table.HeadCell>
+                                <button
+                                    aria-label="Sort by Age"
+                                    className="flex flex-row items-center gap-1"
+                                    onClick={() => onSort('age')}
+                                >
                                     <p>AGE</p>
-                                    <div>
-                                        {getSortIcon("age")}
-                                    </div>
+                                    <div>{getSortIcon('age')}</div>
                                 </button>
-                        </Table.HeadCell>
-                        <Table.HeadCell>
-                                <button aria-label='Sort by Occupation' className="flex flex-row items-center gap-1" onClick={() => onSort("occupation")}>
+                            </Table.HeadCell>
+                            <Table.HeadCell>
+                                <button
+                                    aria-label="Sort by Occupation"
+                                    className="flex flex-row items-center gap-1"
+                                    onClick={() => onSort('occupation')}
+                                >
                                     <p>OCCUPATION</p>
-                                    <div>
-                                        {getSortIcon("occupation")}
-                                    </div>
+                                    <div>{getSortIcon('occupation')}</div>
                                 </button>
-                        </Table.HeadCell>
-                        <Table.HeadCell>
-                                <button aria-label='Sort by Sleep Disorder' className="flex flex-row items-center gap-1" onClick={() => onSort("sleep_disorder")}>
-                                <p>SLEEP DISORDER</p>
-                                <div>
-                                    {getSortIcon("sleep_disorder")}
-                                </div>
+                            </Table.HeadCell>
+                            <Table.HeadCell>
+                                <button
+                                    aria-label="Sort by Sleep Disorder"
+                                    className="flex flex-row items-center gap-1"
+                                    onClick={() => onSort('sleep_disorder')}
+                                >
+                                    <p>SLEEP DISORDER</p>
+                                    <div>{getSortIcon('sleep_disorder')}</div>
                                 </button>
-                        </Table.HeadCell>
-                        <Table.HeadCell>
-                            <span className="sr-only">Edit</span>
-                        </Table.HeadCell>
-                        <Table.HeadCell>
-                            <span className="sr-only">X</span>
-                        </Table.HeadCell>
-                    </Table.Head>
-                    <Table.Body className="divide-y">
-                        <EmployeesListNew
-                            openModal={openModal}
-                            employees={sortedEmployees}
-                            setEmployees={setFilteredEmployees}
-                        />
-                    </Table.Body>
-                </Table>
+                            </Table.HeadCell>
+                            <Table.HeadCell>
+                                <span className="sr-only">Edit</span>
+                            </Table.HeadCell>
+                            <Table.HeadCell>
+                                <span className="sr-only">X</span>
+                            </Table.HeadCell>
+                        </Table.Head>
+                        <Table.Body className="divide-y">
+                            <EmployeesListNew
+                                openModal={openModal}
+                                employees={sortedEmployees}
+                                setEmployees={setFilteredEmployees}
+                            />
+                        </Table.Body>
+                    </Table>
+                </div>
             </div>
-        </div>
         </>
     )
 }
