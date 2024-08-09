@@ -9,6 +9,7 @@ import AdminEmployeesTable from './AdminEmployeesTable/AdminEmployeesTable'
 import UserRecordsTable from './UserRecordsTable/UserRecordsTable'
 import UserProgressCharts from './UserProgressCharts/UserProgressCharts'
 import DashboardSidebar from './DashboardSidebar/DashboardSidebar'
+import SummaryBar from './SummaryBar/SummaryBar'
 
 export default function AdminHome() {
     const navigate = useNavigate()
@@ -95,14 +96,21 @@ export default function AdminHome() {
         return (
             <>
                 <section className="bg-slate-100 py-5 ">
+                    <SummaryBar user={user} averages={averages}/>
                     {view === 'admin' ? (
+                        <>
+                        <h3 className="text-center text-2xl py-4 md:mx-auto rounded-lg shadow-md max-w-5xl bg-white">Company Goals Met This Month:</h3>
                         <AdminProgressCharts
                             openModal={openModal}
                             companyAverages={companyAverages}
                             goals={goals}
                         />
+                        </>
                     ) : (
+                        <>
+                        <h3 className="text-center text-2xl py-4 md:mx-auto rounded-lg shadow-md max-w-5xl bg-white">Your Goals Met This Month:</h3>
                         <UserProgressCharts averages={averages} goals={goals}/>
+                        </>
                     )}
                     <div className="flex flex-col md:flex-row  w-full mx-auto mt-5 max-w-5xl min-h-[50vh] md:max-h-[75vh] rounded-lg shadow-md overflow-hidden ">
                         <DashboardSidebar
