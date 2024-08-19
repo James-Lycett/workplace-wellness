@@ -11,7 +11,7 @@ import {
     HiSpeakerphone,
     HiLightBulb,
 } from 'react-icons/hi'
-import logo from './circle.svg'
+import logo from '../../images/circle.svg'
 import { userLogout } from '../../utils/api'
 
 export default function DashboardSidebar({
@@ -139,7 +139,9 @@ export default function DashboardSidebar({
             <div className="hidden md:block">
                 <Sidebar
                     className="w-full flex flex-col justify-center"
-                    aria-label={view === 'admin' ? 'Admin Sidebar' : 'User Sidebar'}
+                    aria-label={
+                        view === 'admin' ? 'Admin Sidebar' : 'User Sidebar'
+                    }
                 >
                     <Sidebar.Logo
                         href="#"
