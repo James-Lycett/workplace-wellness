@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { FaRegEnvelope } from 'react-icons/fa' // Import the icons
 import { FiPhone } from 'react-icons/fi'
 import { SlLocationPin } from 'react-icons/sl'
-import logo from './logo.png'
+import logo from '../images/logo.png'
 import { Link } from 'react-router-dom'
 import { Accordion } from 'flowbite'
 

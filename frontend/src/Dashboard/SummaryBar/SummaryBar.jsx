@@ -1,7 +1,7 @@
 import React from 'react'
-import profilePic1 from '../AdminEmployeesTable/images/1.png'
-import profilePic2 from '../AdminEmployeesTable/images/2.png'
-import profilePic3 from '../AdminEmployeesTable/images/3.png'
+import profilePic1 from '../../images/profile1.png'
+import profilePic2 from '../../images/profile2.png'
+import profilePic3 from '../../images/profile3.png'
 
 export default function SummaryBar({ user, averages }) {
     let profilePic

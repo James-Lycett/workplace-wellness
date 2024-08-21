@@ -1,17 +1,17 @@
 import React from 'react'
 import TipsPage from './TipsPage'
-import sleep1 from './Images/sleep1.jpg'
-import sleep2 from './Images/sleep2.jpg'
-import sleep3 from './Images/sleep3.jpg'
-import sleep4 from './Images/sleep4.jpg'
-import fitness1 from './Images/fitness1.jpg'
-import fitness2 from './Images/fitness2.jpg'
-import fitness3 from './Images/fitness3.jpg'
-import fitness4 from './Images/fitness4.jpg'
-import meditation1 from './Images/meditation1.jpg'
-import meditation2 from './Images/meditation2.jpg'
-import meditation3 from './Images/meditation3.jpg'
-import meditation4 from './Images/meditation4.jpg'
+import sleep1 from '../images/sleep1.jpg'
+import sleep2 from '../images/sleep2.jpg'
+import sleep3 from '../images/sleep3.jpg'
+import sleep4 from '../images/sleep4.jpg'
+import fitness1 from '../images/fitness1.jpg'
+import fitness2 from '../images/fitness2.jpg'
+import fitness3 from '../images/fitness3.jpg'
+import fitness4 from '../images/fitness4.jpg'
+import meditation1 from '../images/meditation1.jpg'
+import meditation2 from '../images/meditation2.jpg'
+import meditation3 from '../images/meditation3.jpg'
+import meditation4 from '../images/meditation4.jpg'
 
 const sleepTips = [
     {
@@ -36,7 +36,7 @@ const sleepTips = [
         image: sleep4,
         alt: 'Sleep 4',
         caption: 'Sleep Disorder Self Help Modules',
-        url: 'https://www.calm.com/blog/insomnia-self-care'
+        url: 'https://www.calm.com/blog/insomnia-self-care',
     },
 ]
 
@@ -51,7 +51,7 @@ const fitnessTips = [
         image: fitness2,
         alt: 'Fitness 2',
         caption: 'The Link Between Physical Activity and Mental Health',
-        url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9902068/'
+        url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9902068/',
     },
     {
         image: fitness3,
@@ -63,7 +63,7 @@ const fitnessTips = [
         image: fitness4,
         alt: 'Fitness 4',
         caption: 'Nutrition Tips and Mindful Meals',
-        url: 'https://www.sleepfoundation.org/nutrition'
+        url: 'https://www.sleepfoundation.org/nutrition',
     },
 ]
 
@@ -78,19 +78,19 @@ const meditationTips = [
         image: meditation2,
         alt: 'meditation 2',
         caption: 'Setup Deep Breathing Reminders',
-        url: 'https://insighttimer.com/ellenmouton/guided-meditations/one-minute-break-reminder-number-1-take-a-deep-breath'
+        url: 'https://insighttimer.com/ellenmouton/guided-meditations/one-minute-break-reminder-number-1-take-a-deep-breath',
     },
     {
         image: meditation3,
         alt: 'meditation 3',
         caption: 'In Depth Mood Tracker',
-        url: 'https://www.verywellmind.com/best-mood-tracker-apps-5212922'
+        url: 'https://www.verywellmind.com/best-mood-tracker-apps-5212922',
     },
     {
         image: meditation4,
         alt: 'meditation 4',
         caption: "Sights & Sounds for A Better Night's Sleep",
-        url: 'https://www.youtube.com/watch?v=ebaZ3OQoNZ4'
+        url: 'https://www.youtube.com/watch?v=ebaZ3OQoNZ4',
     },
 ]
 
