@@ -33,7 +33,7 @@ export default function AdminProgressCharts({
                         (sleep_duration_average / sleep_duration) * 100
                     break
                 case 'stress_level':
-                    progressValue = (stress_level_average / stress_level) * 100
+                    progressValue = ((10 - stress_level_average) / (10 - stress_level)) * 100
                     break
                 case 'daily_steps':
                     progressValue = (daily_steps_average / daily_steps) * 100
