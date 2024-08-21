@@ -1,33 +1,33 @@
 import React, { useState, useCallback } from 'react'
 import { deleteUser, listUsers } from '../../utils/api'
-import sleepingPersonImage from './images/sleep.png'
+import sleepingPersonImage from '../../images/sleep.png'
 import RemoveCardButton from '../../utils/RemoveCardButton'
 import { Table } from 'flowbite-react'
-import img1 from './images/1.png'
-import img2 from './images/2.png'
-import img3 from './images/3.png'
+import img1 from '../../images/profile1.png'
+import img2 from '../../images/profile2.png'
+import img3 from '../../images/profile3.png'
 
 export default function EmployeeCardNew({
     employee,
     setEmployees,
     imgNumber,
-    openModal
+    openModal,
 }) {
     const [openDeleteModal, setOpenDeleteModal] = useState(false)
 
-        // Fetches all users from the API
-        const loadUsers = useCallback(async () => {
-            const abortController = new AbortController()
-    
-            try {
-                const response = await listUsers(abortController.signal)
-                setEmployees(response)
-            } catch (error) {
-                console.error(error)
-            } finally {
-                abortController.abort()
-            }
-        }, [setEmployees])
+    // Fetches all users from the API
+    const loadUsers = useCallback(async () => {
+        const abortController = new AbortController()
+
+        try {
+            const response = await listUsers(abortController.signal)
+            setEmployees(response)
+        } catch (error) {
+            console.error(error)
+        } finally {
+            abortController.abort()
+        }
+    }, [setEmployees])
 
     // RemoveEmployeeButton functionality, deletes employee
     async function handleDelete() {
@@ -69,7 +69,7 @@ export default function EmployeeCardNew({
                         style={{
                             width: '50px',
                             margin: '0 1rem 0 0 ',
-                            'borderRadius': '50%',
+                            borderRadius: '50%',
                             border: '1px solid gray',
                         }}
                         alt={`Employee ${imgNumber}`}
@@ -80,7 +80,7 @@ export default function EmployeeCardNew({
                         style={{
                             width: '50px',
                             margin: '0 1rem 0 0 ',
-                            'borderRadius': '50%',
+                            borderRadius: '50%',
                             border: '1px solid gray',
                         }}
                         alt="sleeping person"
@@ -93,8 +93,7 @@ export default function EmployeeCardNew({
             <Table.Cell id="sleep-hours">{employee.sleep_disorder}</Table.Cell>
             <Table.Cell>
                 <button
-                    onClick={() => openModal('editEmployee', employee)
-                    }
+                    onClick={() => openModal('editEmployee', employee)}
                     className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
                 >
                     Edit

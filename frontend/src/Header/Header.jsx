@@ -1,18 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import logo from './logo.png'
+import logo from '../images/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 function Header() {
     const [showMenu, setShowMenu] = useState(false)
+    const mobileMenuRef = useRef(null)
 
     function scrollToTop() {
         window.scrollTo({
             top: 0,
-            behavior: 'smooth', // Smooth scroll animation
+            behavior: 'smooth',
         })
     }
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (
+                mobileMenuRef.current &&
+                !mobileMenuRef.current.contains(event.target)
+            ) {
+                setShowMenu(false)
+            }
+        }
+
+        // detect clicks outside of the mobile menu
+        document.addEventListener('mousedown', handleClickOutside)
+
+        // Cleanup
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [mobileMenuRef])
 
     return (
         <header className="bg-white text-center text-neutral-600 border-b dark:bg-neutral-600 dark:text-neutral-200">
@@ -58,6 +78,7 @@ function Header() {
                         }}
                     />
                     <div
+                        ref={mobileMenuRef}
                         className="mobile-menu text-v2-drkblue"
                         style={{ display: showMenu ? 'flex' : 'none' }}
                     >

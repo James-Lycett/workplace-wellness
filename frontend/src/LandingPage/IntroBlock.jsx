@@ -1,5 +1,5 @@
 import React from 'react'
-import purpleLadyGraphic from './purpleLadyGraphic.png'
+import purpleLadyGraphic from '../images/purpleLadyGraphic.png'
 
 export default function IntroBlock() {
     return (
@@ -18,7 +18,7 @@ export default function IntroBlock() {
             <div className="flex flex-col items-center flex-1">
                 <img
                     src={purpleLadyGraphic}
-                    alt=''
+                    alt=""
                     className="lg:w-4/5 w-3/5 max-w-full"
                 />
             </div>
