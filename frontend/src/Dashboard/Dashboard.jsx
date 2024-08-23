@@ -96,7 +96,7 @@ export default function AdminHome() {
         return (
             <>
                 <section className="bg-slate-100 py-5 ">
-                    <SummaryBar user={user} averages={averages}/>
+                    <SummaryBar user={user} averages={averages} goals={goals}/>
                     {view === 'admin' ? (
                         <AdminProgressCharts
                             openModal={openModal}

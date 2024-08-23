@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import profilePic1 from '../../images/profile1.png'
 import profilePic2 from '../../images/profile2.png'
 import profilePic3 from '../../images/profile3.png'
 
-export default function SummaryBar({ user, averages }) {
+export default function SummaryBar({ user, averages, goals }) {
     let profilePic
     switch (user.userId) {
         case 1:
@@ -18,6 +18,28 @@ export default function SummaryBar({ user, averages }) {
         default:
             profilePic = profilePic1
     }
+
+    console.log(averages)
+    console.log(goals)
+
+    const calculatePercentOfDeptGoals = useCallback(() => {
+        const {
+            sleep_duration_average,
+            stress_level_average,
+            daily_steps_average,
+        } = averages
+        const { sleep_duration, stress_level, daily_steps } = goals
+
+        const sleepProgress = (sleep_duration_average / sleep_duration) * 100
+        const stressProgress = ((10 - stress_level_average) / (10 - stress_level)) * 100
+        const stepsProgress = (daily_steps_average / daily_steps) * 100
+
+        const combinedProgress = (sleepProgress + stressProgress + stepsProgress) / 3
+
+        const boundedProgressValue = Math.min(Math.max(combinedProgress, 0), 100)
+
+        return Math.floor(boundedProgressValue)
+    })
 
     return (
         <>
@@ -45,16 +67,14 @@ export default function SummaryBar({ user, averages }) {
                         <h3 className="text-sm md:text-lg">
                             % of Dept Goals:{' '}
                             <span className="font-semibold ps-2 md:text-2xl">
-                                81%
+                                {calculatePercentOfDeptGoals()}%
                             </span>
                         </h3>
                     </div>
                     <div className="flex items-center justify-center bg-white w-full rounded-3xl shadow-lg h-20">
                         <h3 className="text-sm md:text-lg">
                             Longest Goal Streak:{' '}
-                            <span className="font-semibold ps-2 md:text-2xl">
-                                
-                            </span>
+                            <span className="font-semibold ps-2 md:text-2xl"></span>
                         </h3>
                     </div>
                 </div>
