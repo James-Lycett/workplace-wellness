@@ -19,9 +19,6 @@ export default function SummaryBar({ user, averages, goals }) {
             profilePic = profilePic1
     }
 
-    console.log(averages)
-    console.log(goals)
-
     const calculatePercentOfDeptGoals = useCallback(() => {
         const {
             sleep_duration_average,
@@ -55,27 +52,30 @@ export default function SummaryBar({ user, averages, goals }) {
                     </div>
                 </div>
                 <div className="flex flex-col py-5 px-3 sm:px-8 md:p-0 md:mx-2 md:flex-row items-center justify-between gap-5 md:gap-10 w-100% md:h-24">
-                    <div className="flex items-center justify-center bg-white w-full rounded-3xl shadow-lg h-20">
-                        <h3 className="text-sm md:text-lg">
+                    <div className="flex items-center justify-center bg-white w-full rounded-3xl shadow-lg h-24">
+                        <p className="text-sm md:text-lg">
                             Monthly Goals Met:{' '}
                             <span className="font-semibold ps-2 md:text-2xl">
                                 3/6
                             </span>
-                        </h3>
+                        </p>
                     </div>
-                    <div className="flex items-center justify-center bg-white w-full rounded-3xl shadow-lg h-20">
-                        <h3 className="text-sm md:text-lg">
+                    <div className="flex items-center justify-center bg-white w-full rounded-3xl shadow-lg h-24">
+                        <p className="text-sm md:text-lg">
                             % of Dept Goals:{' '}
                             <span className="font-semibold ps-2 md:text-2xl">
                                 {calculatePercentOfDeptGoals()}%
                             </span>
-                        </h3>
+                        </p>
                     </div>
-                    <div className="flex items-center justify-center bg-white w-full rounded-3xl shadow-lg h-20">
-                        <h3 className="text-sm md:text-lg">
+                    <div className="flex flex-row items-center bg-white w-full rounded-3xl shadow-lg h-24">
+                        <p className="text-sm md:text-lg w-1/2 ps-5">
                             Longest Goal Streak:{' '}
-                            <span className="font-semibold ps-2 md:text-2xl"></span>
-                        </h3>
+                        </p>
+                        <div className='font-semibold md:text-xl w-1/2'>
+                            <p>Daily Steps</p>
+                            <p>(3 months)</p>
+                        </div>
                     </div>
                 </div>
             </div>
