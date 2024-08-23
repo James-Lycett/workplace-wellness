@@ -32,7 +32,7 @@ export default function SummaryBar({ user, averages }) {
                         <h3 className="text-v2-drkblue">{user.occupation}</h3>
                     </div>
                 </div>
-                <div className="flex flex-col py-5 px-3 sm:px-8 md:p-0 md:flex-row items-center justify-between gap-5 md:gap-16 w-full px-2.5 md:h-24">
+                <div className="flex flex-col py-5 px-3 sm:px-8 md:p-0 md:flex-row items-center justify-between gap-5 md:gap-16 w-full md:h-24">
                     <div className="flex items-center justify-center bg-white w-full rounded-full shadow-md h-9">
                         <h3 className="text-sm md:text-lg">
                             Average Sleep Hours:{' '}
