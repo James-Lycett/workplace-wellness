@@ -68,8 +68,8 @@ export default function SummaryBar({ user, averages, goals, view }) {
                         <p className="text-reg">{date}</p>
                     </div>
                 </div>
-                <div className="flex flex-col py-5 px-3 sm:px-8 md:p-0 md:mx-2 md:flex-row items-center justify-between gap-5 md:gap-10 w-100% md:h-24">
-                    <div className="flex items-center justify-center bg-white w-full rounded-3xl shadow-lg h-20">
+                <div className="flex flex-col py-5 px-3 sm:px-8 md:p-0 md:mx-5 md:flex-row items-center justify-between gap-5 md:gap-6 w-100% md:h-24">
+                    <div className="flex items-center justify-center bg-white w-full rounded-3xl shadow-inset-lg h-20">
                         <p className="text-sm md:text-base">
                             Monthly Goals Met:{' '}
                             <span className="font-semibold ps-2 md:text-2xl">
@@ -77,7 +77,7 @@ export default function SummaryBar({ user, averages, goals, view }) {
                             </span>
                         </p>
                     </div>
-                    <div className="flex items-center justify-center bg-white w-full rounded-3xl shadow-lg h-20">
+                    <div className="flex items-center justify-center bg-white w-full rounded-3xl shadow-inset-lg h-20">
                         <p className="text-sm md:text-base">
                             % of Dept Goals:{' '}
                             <span className="font-semibold ps-2 md:text-2xl">
@@ -85,7 +85,7 @@ export default function SummaryBar({ user, averages, goals, view }) {
                             </span>
                         </p>
                     </div>
-                    <div className="flex flex-row items-center bg-white w-full rounded-3xl shadow-lg h-20">
+                    <div className="flex flex-row items-center bg-white w-full rounded-3xl shadow-inset-lg h-20">
                         <p className="text-sm md:text-base w-1/2 ps-5">
                             Longest Goal Streak:{' '}
                         </p>
