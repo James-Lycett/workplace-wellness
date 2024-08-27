@@ -43,7 +43,7 @@ export default function SummaryBar({ user, averages, goals, view }) {
         )
 
         return Math.floor(boundedProgressValue)
-    })
+    }, [goals, averages])
 
     return (
         <>
@@ -52,6 +52,7 @@ export default function SummaryBar({ user, averages, goals, view }) {
                     <div className="flex flex-col md:flex-row w-1/2 md:w-full md:self-center p-2.5">
                         <img
                             src={profilePic}
+                            alt='profile pic'
                             className="rounded-full object-contain self-center size-24"
                         />
                         <div className="flex flex-col justify-center font-semibold text-sm p-3 md:text-xl">
