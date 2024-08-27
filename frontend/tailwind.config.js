@@ -53,7 +53,7 @@ module.exports = {
                 },
             },
             boxShadow: {
-                'inset-lg': 'inset 0 2px 8px regba(0, 0, 0, 0.25)',
+                'inset-lg': ' 3px 3px 6px 2px rgba(0, 0, 0, 0.25)',
             },
         },
     },
