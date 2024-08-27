@@ -19,6 +19,7 @@ export default function AdminHome() {
         state: false,
         option: 'activity',
         employeeFromEdit: {},
+        entryFromEdit: {},
     })
     const [averages, setAverages] = useState({
         sleep_duration_average: 0,
@@ -74,13 +75,14 @@ export default function AdminHome() {
         loadData()
     }, [loadData])
 
-    const openModal = (option, employee = null, label = null, goals = null) => {
+    const openModal = (option, employee = null, label = null, goals = null, entry = null) => {
         setIsModalOpen({
             state: true,
             option: option,
             employeeFromEdit: employee,
             label: label,
             goals: goals,
+            entryFromEdit: entry,
         })
     }
 
@@ -123,6 +125,7 @@ export default function AdminHome() {
                                 userId={userId}
                                 entries={entries}
                                 setEntries={setEntries}
+                                openModal={openModal}
                             />
                         )}
                     </div>

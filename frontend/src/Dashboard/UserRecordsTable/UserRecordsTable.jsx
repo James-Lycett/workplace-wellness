@@ -3,7 +3,7 @@ import { Table } from 'flowbite-react'
 import { HiChevronDown, HiChevronUp, HiSelector } from 'react-icons/hi'
 import UserActivitiesList from './UserActivitiesList'
 
-export default function UserRecordsTable({ userId, entries, setEntries }) {
+export default function UserRecordsTable({ userId, entries, setEntries, openModal }) {
     const [sortConfig, setSortConfig] = useState({
         key: '',
         direction: 'descending',
@@ -117,6 +117,9 @@ export default function UserRecordsTable({ userId, entries, setEntries }) {
 
                         </Table.HeadCell>
                         <Table.HeadCell>
+                            <span className="sr-only"></span>
+                        </Table.HeadCell>
+                        <Table.HeadCell>
                             <span className="sr-only">X</span>
                         </Table.HeadCell>
                     </Table.Head>
@@ -125,12 +128,13 @@ export default function UserRecordsTable({ userId, entries, setEntries }) {
                             userId={userId}
                             entries={sortedEntries}
                             setEntries={setEntries}
+                            openModal={openModal}
                         />
                             <Table.Row>
-                                <Table.Cell colSpan="6">
+                                <Table.Cell colSpan="7">
                                     
                             <h3
-                                className="text-center text-xl p-20 span-6"
+                                className="text-center text-xl p-20 span-7"
                             >
                                 You Haven't Made Any Entries Yet
                             </h3>

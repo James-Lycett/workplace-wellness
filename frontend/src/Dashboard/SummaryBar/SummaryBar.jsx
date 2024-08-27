@@ -5,7 +5,7 @@ import profilePic3 from '../../images/profile3.png'
 import moment from 'moment'
 
 export default function SummaryBar({ user, averages, goals, view }) {
-    const date = moment().format('dddd, MMMM Do')
+    const date = moment().format('YYYY, dddd, MMMM Do')
     let profilePic
     switch (user.userId) {
         case 1:

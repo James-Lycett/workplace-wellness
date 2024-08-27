@@ -7,6 +7,7 @@ export default function ActivityLogForm({
     handleSubmit,
     error,
 }) {
+    console.log("entry at ActivityLogForm", entry)
     return (
         <div className="text-xl">
             <form onSubmit={handleSubmit} className="flex flex-col">

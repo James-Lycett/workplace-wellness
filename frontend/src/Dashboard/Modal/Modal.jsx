@@ -5,11 +5,13 @@ import EditEmployeeForm from './EditEmployeeForm'
 import EditGoal from './EditGoal'
 import {
     createEntry,
+    updateEntry,
     createUser,
     listUsers,
     updateGoals,
     updateUser,
 } from '../../utils/api'
+import moment from 'moment'
 
 export default function Modal({
     setIsModalOpen,
@@ -41,9 +43,18 @@ export default function Modal({
     const [label, setLabel] = useState('')
     const [error, setError] = useState(null)
 
+    // On Modal opening, sets internal state with recieved external state
+    // Example: clicking the "edit" button way over in EmployeeCardNew.jsx will pass that specific employee's info (recieved as a prop over there) as an arg to openModal(),
+    // which then passes the info into isModalOpen state, and here it is set to Modal's internal employee state
     useEffect(() => {
         if (isModalOpen.option === 'editEmployee') {
             setEmployee(isModalOpen.employeeFromEdit)
+        }
+        if (isModalOpen.option === 'editActivity') {
+            setEntry({
+                ...isModalOpen.entryFromEdit,
+                date: moment(isModalOpen.entryFromEdit.date).format('YYYY-MM-DD')
+            })
         }
         if (isModalOpen.option === 'editGoal') {
             setLabel(isModalOpen.label)
@@ -113,7 +124,13 @@ export default function Modal({
         ])
 
         try {
-            await createEntry(entry, abortController.signal)
+            if (isModalOpen.option === "activity") {
+                await createEntry(entry, abortController.signal)
+            }
+
+            if (isModalOpen.option === "editActivity") {
+                await updateEntry(entry.entry_id, entry, abortController.signal)
+            }
         } catch (error) {
             setError(error)
         } finally {
@@ -175,6 +192,18 @@ export default function Modal({
             case 'activity':
                 return {
                     title: 'Log New Activity',
+                    form: (
+                        <ActivityLogForm
+                            entry={entry}
+                            handleChange={handleEntryChange}
+                            handleSubmit={handleEntrySubmit}
+                            error={error}
+                        />
+                    ),
+                }
+            case 'editActivity':
+                return {
+                    title: 'Edit Activity',
                     form: (
                         <ActivityLogForm
                             entry={entry}

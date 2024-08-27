@@ -178,6 +178,19 @@ export async function readEntryById (entryId, signal) {
     return await fetchJson(url, options)
 }
 
+// Returns a single entry with the matching entryId
+export async function updateEntry (entryId, entry, signal) {
+    const url = `${API_BASE_URL}/entries/${entryId}`
+    const options = {
+        method: 'PUT',
+        body: JSON.stringify({ data: entry }),
+        headers,
+        signal,
+    }
+
+    return await fetchJson(url, options)
+}
+
 export async function readEntriesByPerson (userId, signal) {
     const url = `${API_BASE_URL}/entries/user/${userId}`
     const options = {

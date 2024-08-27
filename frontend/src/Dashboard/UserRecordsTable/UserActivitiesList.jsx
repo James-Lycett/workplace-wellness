@@ -3,7 +3,7 @@ import Spinner from '../../utils/Spinner'
 import { Table } from 'flowbite-react'
 import ActivityCard from './ActivityCard'
 
-export default function UserActivitiesList({ userId, entries, setEntries }) {
+export default function UserActivitiesList({ userId, entries, setEntries, openModal }) {
 
     if (entries) {
         return (
@@ -17,6 +17,7 @@ export default function UserActivitiesList({ userId, entries, setEntries }) {
                             entry={entry}
                             setEntries={setEntries}
                             userId={userId}
+                            openModal={openModal}
                         />
                     </Table.Row>
                 ))}
