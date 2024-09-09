@@ -92,7 +92,6 @@ export default function AdminHome() {
                     <div className="flex flex-col md:flex-row  w-full mx-auto mt-5 max-w-5xl min-h-[50vh] md:max-h-[75vh] rounded-lg shadow-md overflow-hidden ">
                         <LoadDataContext.Provider value={loadData}>
                             <DashboardSidebar
-                                openModal={openModal}
                                 userIsAdmin={user.admin}
                                 view={view}
                                 setView={setView}
@@ -100,7 +99,6 @@ export default function AdminHome() {
                         </LoadDataContext.Provider>
                         {view === 'admin' ? (
                             <AdminEmployeesTable
-                                openModal={openModal}
                                 employees={employees}
                             />
                         ) : (
