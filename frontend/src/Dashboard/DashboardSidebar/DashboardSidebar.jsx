@@ -17,7 +17,6 @@ import NewModal from '../Modal/newModal'
 import ActivityLogForm from '../Modal/ActivityLogForm'
 
 export default function DashboardSidebar({
-    //openModal,
     userIsAdmin,
     view,
     setView,
@@ -84,7 +83,7 @@ export default function DashboardSidebar({
                                 <>
                                     <Sidebar.Item
                                         href="#"
-                                        onClick={() => openModal('activity')}
+                                        onClick={() => openModal()}
                                         icon={HiDocumentReport}
                                         className="text-sm md:text-base"
                                     >
