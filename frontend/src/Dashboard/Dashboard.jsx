@@ -10,6 +10,7 @@ import UserRecordsTable from './UserRecordsTable/UserRecordsTable'
 import UserProgressCharts from './UserProgressCharts/UserProgressCharts'
 import DashboardSidebar from './DashboardSidebar/DashboardSidebar'
 import SummaryBar from './SummaryBar/SummaryBar'
+import { LoadDataContext } from '../utils/contexts'
 
 export default function AdminHome() {
     const navigate = useNavigate()
@@ -109,12 +110,14 @@ export default function AdminHome() {
                         <UserProgressCharts averages={averages} goals={goals}/>
                     )}
                     <div className="flex flex-col md:flex-row  w-full mx-auto mt-5 max-w-5xl min-h-[50vh] md:max-h-[75vh] rounded-lg shadow-md overflow-hidden ">
-                        <DashboardSidebar
-                            openModal={openModal}
-                            userIsAdmin={user.admin}
-                            view={view}
-                            setView={setView}
-                        />
+                        <LoadDataContext.Provider value={loadData}>
+                            <DashboardSidebar
+                                openModal={openModal}
+                                userIsAdmin={user.admin}
+                                view={view}
+                                setView={setView}
+                            />
+                        </LoadDataContext.Provider>
                         {view === 'admin' ? (
                             <AdminEmployeesTable
                                 openModal={openModal}

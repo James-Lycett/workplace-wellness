@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Sidebar } from 'flowbite-react'
 import {
     HiLogout,
@@ -13,17 +13,24 @@ import {
 } from 'react-icons/hi'
 import logo from '../../images/circle.svg'
 import { userLogout } from '../../utils/api'
+import NewModal from '../Modal/newModal'
+import ActivityLogForm from '../Modal/ActivityLogForm'
 
 export default function DashboardSidebar({
-    openModal,
+    //openModal,
     userIsAdmin,
     view,
     setView,
 }) {
+    const [isModalOpen, setIsModalOpen] = useState(false)
     // Necessary to keep page from jumping to top when view is toggled
     const handleNavigation = (e, newView) => {
         e.preventDefault()
         setView(newView)
+    }
+
+    const openModal = () => {
+        setIsModalOpen(true)
     }
 
     return (
@@ -184,7 +191,7 @@ export default function DashboardSidebar({
                                         <Sidebar.Item
                                             href="#"
                                             onClick={() =>
-                                                openModal('activity')
+                                                openModal()
                                             }
                                             icon={HiDocumentReport}
                                             className="text-sm md:text-base"
@@ -249,6 +256,7 @@ export default function DashboardSidebar({
                     </Sidebar.Items>
                 </Sidebar>
             </div>
+            {isModalOpen && <NewModal setIsModalOpen={setIsModalOpen} title={'Log New Activity'} form={ActivityLogForm}/>}
         </>
     )
 }

@@ -27,6 +27,7 @@ function validateEnum(value, validValues) {
 
 function validateInput(req, res, next) {
     const validationRules = {
+        date: {type: 'string', maxLength: 10},
         sleep_duration: { type: 'number', min: 0, max: 24 },
         stress_level: { type: 'number', min: 1, max: 10 },
         bmi_category: {

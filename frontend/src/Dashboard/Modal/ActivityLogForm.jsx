@@ -1,13 +1,57 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import convertStringsToNumbers from "./convertStringsToNumbers"
+import { createEntry } from '../../utils/api'
+import { LoadDataContext } from '../../utils/contexts'
 import ErrorAlert from '../../utils/ErrorAlert'
+import { useParams } from 'react-router-dom'
 
-export default function ActivityLogForm({
-    entry,
-    handleChange,
-    handleSubmit,
-    error,
-}) {
-    console.log("entry at ActivityLogForm", entry)
+export default function ActivityLogForm({ setIsModalOpen }) {
+    const { userId } = useParams()
+    const [entry, setEntry] = useState({
+        person_id: userId,
+        sleep_duration: '',
+        bmi_category: 'Normal',
+        daily_steps: '',
+        stress_level: '',
+        heart_rate: '',
+        date: new Date().toISOString(),
+    })
+    const [error, setError] = useState(null)
+
+    const loadData = useContext(LoadDataContext)
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setEntry({
+            ...entry,
+            [name]: value,
+        })
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const abortController = new AbortController()
+
+        convertStringsToNumbers(entry, [
+            'sleep_duration',
+            'daily_steps',
+            'stress_level',
+            'heart_rate',
+        ])
+
+        try {
+            await createEntry(entry, abortController.signal)
+        } catch (error) {
+            setError(error)
+        } finally {
+            // Refresh entries list and recalculate averages
+            loadData()
+
+            setIsModalOpen(false)
+            abortController.abort()
+        }
+    }
+
     return (
         <div className="text-xl">
             <form onSubmit={handleSubmit} className="flex flex-col">
@@ -45,6 +89,8 @@ export default function ActivityLogForm({
                     <select
                         id="bmi_category"
                         name="bmi_category"
+                        value={entry.bmi_category}
+                        onChange={handleChange}
                         className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl"
                     >
                         <option value={'Normal'}>Normal</option>
