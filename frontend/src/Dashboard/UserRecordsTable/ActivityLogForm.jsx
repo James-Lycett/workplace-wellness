@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import convertStringsToNumbers from "./convertStringsToNumbers"
+import convertStringsToNumbers from '../../utils/convertStringsToNumbers'
 import { createEntry } from '../../utils/api'
 import { LoadDataContext } from '../../utils/contexts'
 import ErrorAlert from '../../utils/ErrorAlert'

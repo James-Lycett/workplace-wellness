@@ -1,12 +1,46 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import ErrorAlert from '../../utils/ErrorAlert'
+import { EmployeeContext } from '../../utils/contexts'
+import { updateUser, listUsers } from '../../utils/api'
 
-export default function EditEmployeeForm({
-    employee,
-    handleChange,
-    handleSubmit,
-    error
-}) {
+export default function EditEmployeeForm({ setIsModalOpen }) {
+    const contextData = useContext(EmployeeContext)
+    const [employee, setEmployee] = useState(contextData.employee)
+    const [error, setError] = useState(null)
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+
+        // This lil bit is just an easy way to convert admin string to a boolean and leave everything else untouched
+        let valueCopy = value
+        if (name === 'admin') {
+            valueCopy = value === 'true'
+        }
+
+        setEmployee({
+            ...employee,
+            [name]: valueCopy,
+        })
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const abortController = new AbortController()
+        employee.age = Number(employee.age)
+
+        try {
+                await updateUser(employee.person_id, employee, abortController.signal)
+        } catch (error) {
+            setError(error)
+        } finally {
+            // Refresh employees list
+            const listUsersResponse = await listUsers(abortController.signal)
+            contextData.setEmployees(listUsersResponse)
+
+            setIsModalOpen(false)
+            abortController.abort()
+        }
+    }
     return (
         <div className="text-xl">
             <form onSubmit={handleSubmit} className="flex flex-col">

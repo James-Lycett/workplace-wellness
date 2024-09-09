@@ -14,7 +14,7 @@ import {
 import logo from '../../images/circle.svg'
 import { userLogout } from '../../utils/api'
 import NewModal from '../Modal/newModal'
-import ActivityLogForm from '../Modal/ActivityLogForm'
+import ActivityLogForm from '../UserRecordsTable/ActivityLogForm'
 
 export default function DashboardSidebar({
     userIsAdmin,

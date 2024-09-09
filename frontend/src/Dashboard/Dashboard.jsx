@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { loadAllData } from '../utils/api'
 import Spinner from '../utils/Spinner'
-import Modal from './Modal/Modal'
+//import Modal from './Modal/Modal'
 import AdminProgressCharts from './AdminProgressCharts/AdminProgressCharts'
 import AdminEmployeesTable from './AdminEmployeesTable/AdminEmployeesTable'
 import UserRecordsTable from './UserRecordsTable/UserRecordsTable'
@@ -16,12 +16,12 @@ export default function AdminHome() {
     const navigate = useNavigate()
     const { userId } = useParams()
     const [user, setUser] = useState(null)
-    const [isModalOpen, setIsModalOpen] = useState({
+    /*const [isModalOpen, setIsModalOpen] = useState({
         state: false,
         option: 'activity',
         employeeFromEdit: {},
         entryFromEdit: {},
-    })
+    })*/
     const [averages, setAverages] = useState({
         sleep_duration_average: 0,
         daily_steps_average: 0,
@@ -77,14 +77,7 @@ export default function AdminHome() {
     }, [loadData])
 
     const openModal = (option, employee = null, label = null, goals = null, entry = null) => {
-        setIsModalOpen({
-            state: true,
-            option: option,
-            employeeFromEdit: employee,
-            label: label,
-            goals: goals,
-            entryFromEdit: entry,
-        })
+        // don't do shit
     }
 
     const renderContent = () => {
@@ -132,7 +125,7 @@ export default function AdminHome() {
                         )}
                     </div>
                 </section>
-                {isModalOpen.state && (
+                {/*isModalOpen.state && (
                     <Modal
                         setIsModalOpen={setIsModalOpen}
                         isModalOpen={isModalOpen}
@@ -140,7 +133,7 @@ export default function AdminHome() {
                         userId={userId}
                         setEmployees={setEmployees}
                     />
-                )}
+                )*/}
             </>
         )
     }

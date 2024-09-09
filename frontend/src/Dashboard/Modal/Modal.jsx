@@ -1,7 +1,8 @@
+/*
 import React, { useEffect, useState } from 'react'
 import ActivityLogForm from './ActivityLogForm'
 import AddNewEmployeeForm from './AddNewEmployeeForm'
-import EditEmployeeForm from './EditEmployeeForm'
+import EditEmployeeForm from '../AdminEmployeesTable/EditEmployeeForm'
 import EditGoal from './EditGoal'
 import {
     createEntry,
@@ -305,3 +306,4 @@ export default function Modal({
         </>
     )
 }
+*/
