@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Table } from 'flowbite-react'
 import { HiChevronDown, HiChevronUp, HiSelector } from 'react-icons/hi'
 import UserActivitiesList from './UserActivitiesList'
+import { EntryContext } from '../../utils/contexts'
 
-export default function UserRecordsTable({ userId, entries, setEntries, openModal }) {
+export default function UserRecordsTable() {
     const [sortConfig, setSortConfig] = useState({
         key: '',
         direction: 'descending',
     })
+    const { entries } = useContext(EntryContext)
 
     /* 
         Click handler for sort buttons
-        When button aria-label="Sort by "is clicked it sends its unique key (e.g., "date") to onSort which sets the
+        When button aria-label="Sort by" is clicked it sends its unique key (e.g., "date") to onSort which sets the
         sortConfig state with that key (aka "which column/property are we working with?") and
         toggles sort order (ascending/descending)
         Setting the sortConfig state triggers the sortedEntries callback to sort the entries according to the info in sortConfig state
@@ -125,10 +127,7 @@ export default function UserRecordsTable({ userId, entries, setEntries, openModa
                     </Table.Head>
                     <Table.Body className="divide-y">
                         <UserActivitiesList
-                            userId={userId}
                             entries={sortedEntries}
-                            setEntries={setEntries}
-                            openModal={openModal}
                         />
                             <Table.Row>
                                 <Table.Cell colSpan="7">

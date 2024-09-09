@@ -10,7 +10,7 @@ import UserRecordsTable from './UserRecordsTable/UserRecordsTable'
 import UserProgressCharts from './UserProgressCharts/UserProgressCharts'
 import DashboardSidebar from './DashboardSidebar/DashboardSidebar'
 import SummaryBar from './SummaryBar/SummaryBar'
-import { LoadDataContext } from '../utils/contexts'
+import { LoadDataContext, EntryContext } from '../utils/contexts'
 
 export default function AdminHome() {
     const navigate = useNavigate()
@@ -124,12 +124,11 @@ export default function AdminHome() {
                                 employees={employees}
                             />
                         ) : (
-                            <UserRecordsTable
-                                userId={userId}
-                                entries={entries}
-                                setEntries={setEntries}
-                                openModal={openModal}
-                            />
+                            <LoadDataContext.Provider value={{ loadData, userId}}>
+                                <EntryContext.Provider value={{ entries, setEntries }}>
+                                    <UserRecordsTable/>
+                                </EntryContext.Provider>
+                            </LoadDataContext.Provider>
                         )}
                     </div>
                 </section>
