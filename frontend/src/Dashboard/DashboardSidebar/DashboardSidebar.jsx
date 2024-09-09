@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Sidebar } from 'flowbite-react'
 import {
     HiLogout,
@@ -15,6 +15,7 @@ import logo from '../../images/circle.svg'
 import { userLogout } from '../../utils/api'
 import NewModal from '../Modal/newModal'
 import ActivityLogForm from '../UserRecordsTable/ActivityLogForm'
+import AddNewEmployeeForm from '../AdminEmployeesTable/AddNewEmployeeForm'
 
 export default function DashboardSidebar({
     userIsAdmin,
@@ -31,6 +32,20 @@ export default function DashboardSidebar({
     const openModal = () => {
         setIsModalOpen(true)
     }
+
+    const modalSelector = useCallback(() => {
+        if (isModalOpen) {
+            if (view === "admin") {
+                return (
+                    <NewModal setIsModalOpen={setIsModalOpen} title={'Add New Employee'} form={AddNewEmployeeForm}/>
+                )
+            } else {
+                return (
+                    <NewModal setIsModalOpen={setIsModalOpen} title={'Log New Activity'} form={ActivityLogForm}/>
+                )
+            }
+        }
+    }, [view, isModalOpen])
 
     return (
         <>
@@ -126,7 +141,7 @@ export default function DashboardSidebar({
                                     href="#"
                                     icon={HiOutlinePlus}
                                     className="text-sm md:text-base"
-                                    onClick={() => openModal('newEmployee')}
+                                    onClick={() => openModal()}
                                 >
                                     Add A New Employee
                                 </Sidebar.Item>
@@ -255,7 +270,7 @@ export default function DashboardSidebar({
                     </Sidebar.Items>
                 </Sidebar>
             </div>
-            {isModalOpen && <NewModal setIsModalOpen={setIsModalOpen} title={'Log New Activity'} form={ActivityLogForm}/>}
+            {modalSelector()}
         </>
     )
 }
