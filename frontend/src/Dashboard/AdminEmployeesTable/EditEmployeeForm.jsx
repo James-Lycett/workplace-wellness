@@ -41,6 +41,7 @@ export default function EditEmployeeForm({ setIsModalOpen }) {
             abortController.abort()
         }
     }
+
     return (
         <div className="text-xl">
             <form onSubmit={handleSubmit} className="flex flex-col">

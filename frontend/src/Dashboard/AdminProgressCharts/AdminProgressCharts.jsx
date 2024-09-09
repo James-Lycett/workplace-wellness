@@ -1,20 +1,26 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import RadialBar from './RadialBar'
 import { Spinner } from 'flowbite-react'
 import { Link } from 'react-router-dom'
 import useIsMobile from './useIsMobile'
+import NewModal from '../Modal/newModal'
+import { GoalContext, LoadDataContext } from '../../utils/contexts'
+import EditGoal from './EditGoal'
 
-export default function AdminProgressCharts({
-    companyAverages,
-    goals,
-    openModal,
-}) {
+export default function AdminProgressCharts({ goals }) {
     const [progress, setProgress] = useState({
         sleep_hours: 0,
         stress_level: 0,
         daily_steps: 0,
     })
     const isMobile = useIsMobile()
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [whichGoalToEdit, setWhichGoalToEdit] = useState(null)
+    const { companyAverages } = useContext(LoadDataContext)
+
+    const openModal = () => {
+        setIsModalOpen(true)
+    }
 
     const calculateProgress = useCallback(
         (option) => {
@@ -92,13 +98,10 @@ export default function AdminProgressCharts({
                     )}
                     <hr />
                     <Link
-                        onClick={() =>
-                            openModal(
-                                'editGoal',
-                                null,
-                                'Avg Sleep Hours',
-                                goals
-                            )
+                        onClick={() => {
+                                openModal()
+                                setWhichGoalToEdit("sleep_duration")
+                            }
                         }
                         className="flex md:justify-end justify-center my-1 md:me-5 hover:text-blue-500 dark:hover:text-blue-400"
                     >
@@ -113,8 +116,10 @@ export default function AdminProgressCharts({
                     )}
                     <hr />
                     <Link
-                        onClick={() =>
-                            openModal('editGoal', null, 'Stress Level', goals)
+                        onClick={() => {
+                                openModal()
+                                setWhichGoalToEdit("stress_level")
+                            }
                         }
                         className="flex md:justify-end justify-center my-1 md:me-5 hover:text-blue-500 dark:hover:text-blue-400"
                     >
@@ -129,8 +134,10 @@ export default function AdminProgressCharts({
                     )}
                     <hr />
                     <Link
-                        onClick={() =>
-                            openModal('editGoal', null, 'Daily Steps', goals)
+                        onClick={() => {
+                                openModal()
+                                setWhichGoalToEdit("daily_steps")
+                            }
                         }
                         className="flex md:justify-end justify-center my-1 md:me-5 hover:text-blue-500 dark:hover:text-blue-400"
                     >
@@ -138,6 +145,9 @@ export default function AdminProgressCharts({
                     </Link>
                 </div>
             </div>
+            <GoalContext.Provider value={{ goals, whichGoalToEdit }}>
+                {isModalOpen && <NewModal setIsModalOpen={setIsModalOpen} title={'Edit Goal'} form={EditGoal}/>}
+            </GoalContext.Provider>
         </>
     )
 }
