@@ -8,7 +8,11 @@ import login1 from '../images/login1.png'
 import login2 from '../images/login2.png'
 import login3 from '../images/login3.png'
 import dash1 from '../images/dash1.png'
+import dash1a from '../images/dash1a.png'
+import dash1b from '../images/dash1b.png'
+import dash1c from '../images/dash1c.png'
 import dash2 from '../images/dash2.png'
+import dash2a from '../images/dash2a.png'
 
 export default function LandingPage() {
     return (
@@ -84,7 +88,7 @@ export default function LandingPage() {
                 <h3 className="text-2xl text-center my-10 border-bottom">
                     Using the Dashboard
                 </h3>
-                <div className="flex flex-col gap-5 mx-20 px-10">
+                <div className="flex flex-col gap-10 mx-20 px-10">
                     <div className="flex gap-5 items-center">
                         <p>
                             You're in! The Dashboard is where all the muscle of
@@ -100,11 +104,72 @@ export default function LandingPage() {
                         />
                     </div>
                     <div className="flex gap-5 items-center">
+                        <div>
+                            <p className="mb-3">
+                                First let's look at the top bar. Here we have
+                                some details for your account and an overview of
+                                your department.
+                            </p>
+                            <p>
+                                1. Your Username and occupation as well as your
+                                profile picture
+                            </p>
+                            <p>
+                                2. Tells you whether you are in Admin view or
+                                looking at your personal logs.
+                            </p>
+                            <p>
+                                3. Some generated stats from your team's health
+                                and sleep logs
+                            </p>
+                        </div>
+                        <img
+                            src={dash1a}
+                            alt="screenshot of login page"
+                            className="border border-v2-drkblue w-1/2"
+                        />
+                    </div>
+                    <div className="flex gap-5 items-center">
                         <p>
-                            Feel free to register a new account (we recommend
-                            chosing admin to see all of the features WW has to
-                            offer). But for now, we're going to sign in using
-                            the demo credentials
+                            Next we'll look at the goals display. The name and
+                            percentage of your team's efforts towards their goal
+                            are displayed in a radial bar graph. To edit the
+                            goal, simply click edit in the bottom right of the
+                            tile for the goal you want to change.
+                        </p>
+                        <img
+                            src={dash1b}
+                            alt="screenshot of login page"
+                            className="border border-v2-drkblue w-1/2"
+                        />
+                    </div>
+                    <div className="flex gap-5 items-center">
+                        <div>
+                            <p className="mb-3">
+                                Last, we'll look at the users table. Here is
+                                where you can manage your team.
+                            </p>
+                            <p>
+                                1. Switch between Admin (Employees) and Personal
+                                (Profile) view
+                            </p>
+                            <p>2. Add a new employee to your team</p>
+                            <p>3. Search for employees</p>
+                            <p>4. Sort employees by any category</p>
+                            <p>5. Edit or delete employees</p>
+                        </div>
+                        <img
+                            src={dash1c}
+                            alt="screenshot of login page"
+                            className="border border-v2-drkblue w-1/2"
+                        />
+                    </div>
+                    <div className="flex gap-5 items-center">
+                        <p>
+                            Now let's look at the personal view by clicking
+                            "Profile" in the sidebar. Everything should still
+                            look familiar, except instead of employees you
+                            should now see your health logs listed in the table.
                         </p>
                         <img
                             src={dash2}
@@ -112,30 +177,29 @@ export default function LandingPage() {
                             className="border border-v2-drkblue w-1/2"
                         />
                     </div>
-                    {/* <div className="flex gap-5 items-center">
-                        <p>
-                            Click on the "Looking for a demo?" link to open a
-                            pop-up with the Demo Credentials. We're going to
-                            choose Admin so click "Fill-in Admin Login".
-                        </p>
+                    <div className="flex gap-5 items-center">
+                        <div>
+                            <p className="mb-3">
+                                Last, we'll look at the users table. Here is
+                                where you can manage your team.
+                            </p>
+                            <p>1. Log new physical and sleep activity</p>
+                            <p>
+                                2. Read more about mental, physical, and sleep
+                                health
+                            </p>
+                            <p>3. Sort your logs to help see patterns</p>
+                            <p>
+                                4. Edit or delete logs you forgot or put in by
+                                error
+                            </p>
+                        </div>
                         <img
-                            src={login2}
+                            src={dash2a}
                             alt="screenshot of login page"
                             className="border border-v2-drkblue w-1/2"
                         />
                     </div>
-                    <div className="flex gap-5 items-center">
-                        <p>
-                            The username and password (encripted) should now be
-                            provided for you, so just click the "Sign In"
-                            button.
-                        </p>
-                        <img
-                            src={login3}
-                            alt="screenshot of login page"
-                            className="border border-v2-drkblue w-1/2"
-                        />
-                    </div> */}
                 </div>
             </div>
         </div>
