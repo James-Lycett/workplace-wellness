@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../index.css'
 import IntroBlock from './IntroBlock'
 import FeaturesBlock from './FeaturesBlock'
@@ -15,6 +15,14 @@ import dash2 from '../images/dash2.png'
 import dash2a from '../images/dash2a.png'
 
 export default function LandingPage() {
+    const [modalImage, setModalImage] = useState(null)
+    const openModal = (image) => {
+        setModalImage(image)
+    }
+    const closeModal = (image) => {
+        setModalImage(null)
+    }
+
     return (
         <div className="flex flex-col items-center lg:px-10">
             <h1 className="lg:text-4xl text-3xl text-center font-extrabold tracking-tight my-12 lg:py-12 lg:w-4/5">
@@ -26,6 +34,26 @@ export default function LandingPage() {
             </h2>
             <FeaturesBlock />
             <CallToActionBlock />
+            <hr />
+
+            {modalImage && (
+                <div className="fixed inset-0 z-50 bg-black bg-opacity-80 flex justify-center items-center">
+                    <div className="relative">
+                        <img
+                            src={modalImage}
+                            alt="Enlarged view"
+                            className="max-w-full max-h-screen"
+                        />
+                        <button
+                            onClick={closeModal}
+                            className="absolute top-2 right-2 bg-white text-black px-3 py-1 rounded-full border-2"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
+
             <div>
                 <h2 className="text-3xl text-center my-10">
                     How to Use Workplace Wellness
@@ -43,6 +71,7 @@ export default function LandingPage() {
                         </p>
                         <img
                             src={login0}
+                            onClick={() => openModal(login0)}
                             alt="screenshot of login page"
                             className="border border-v2-drkblue w-1/2"
                         />
@@ -56,6 +85,7 @@ export default function LandingPage() {
                         </p>
                         <img
                             src={login1}
+                            onClick={() => openModal(login1)}
                             alt="screenshot of login page"
                             className="border border-v2-drkblue w-1/2"
                         />
@@ -68,6 +98,7 @@ export default function LandingPage() {
                         </p>
                         <img
                             src={login2}
+                            onClick={() => openModal(login2)}
                             alt="screenshot of login page"
                             className="border border-v2-drkblue w-1/2"
                         />
@@ -80,6 +111,7 @@ export default function LandingPage() {
                         </p>
                         <img
                             src={login3}
+                            onClick={() => openModal(login3)}
                             alt="screenshot of login page"
                             className="border border-v2-drkblue w-1/2"
                         />
@@ -99,6 +131,7 @@ export default function LandingPage() {
                         </p>
                         <img
                             src={dash1}
+                            onClick={() => openModal(dash1)}
                             alt="screenshot of login page"
                             className="border border-v2-drkblue w-1/2"
                         />
@@ -125,6 +158,7 @@ export default function LandingPage() {
                         </div>
                         <img
                             src={dash1a}
+                            onClick={() => openModal(dash1a)}
                             alt="screenshot of login page"
                             className="border border-v2-drkblue w-1/2"
                         />
@@ -139,6 +173,7 @@ export default function LandingPage() {
                         </p>
                         <img
                             src={dash1b}
+                            onClick={() => openModal(dash1b)}
                             alt="screenshot of login page"
                             className="border border-v2-drkblue w-1/2"
                         />
@@ -160,6 +195,7 @@ export default function LandingPage() {
                         </div>
                         <img
                             src={dash1c}
+                            onClick={() => openModal(dash1c)}
                             alt="screenshot of login page"
                             className="border border-v2-drkblue w-1/2"
                         />
@@ -173,6 +209,7 @@ export default function LandingPage() {
                         </p>
                         <img
                             src={dash2}
+                            onClick={() => openModal(dash2)}
                             alt="screenshot of login page"
                             className="border border-v2-drkblue w-1/2"
                         />
@@ -196,6 +233,7 @@ export default function LandingPage() {
                         </div>
                         <img
                             src={dash2a}
+                            onClick={() => openModal(dash2a)}
                             alt="screenshot of login page"
                             className="border border-v2-drkblue w-1/2"
                         />
