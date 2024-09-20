@@ -37,10 +37,14 @@ export default function LandingPage() {
             <hr />
 
             {modalImage && (
-                <div className="fixed inset-0 z-50 bg-black bg-opacity-80 flex justify-center items-center">
+                <div
+                    onClick={closeModal}
+                    className="fixed inset-0 z-50 bg-black bg-opacity-80 flex justify-center items-center"
+                >
                     <div className="relative">
                         <img
                             src={modalImage}
+                            onClick={(e) => e.stopPropagation()}
                             alt="Enlarged view"
                             className="max-w-full max-h-screen"
                         />
@@ -54,14 +58,14 @@ export default function LandingPage() {
                 </div>
             )}
 
-            <div>
+            <div className="bg-slate-50 mb-20 mx-20 pb-10">
                 <h2 className="text-3xl text-center my-10">
                     How to Use Workplace Wellness
                 </h2>
                 <h3 className="text-2xl text-center my-10 border-bottom">
                     Signing In / Registering
                 </h3>
-                <div className="flex flex-col gap-5 mx-20 px-10">
+                <div className="flex flex-col gap-5 px-10">
                     <div className="flex gap-5 items-center">
                         <p>
                             To sign in simply click the "Get Started" button
