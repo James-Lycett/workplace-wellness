@@ -47,7 +47,7 @@ function Header() {
                     </Link>
                 </div>
                 <nav className="font-normal flex items-center ">
-                    <ul className="hidden sm:flex flex-row gap-3 lg:flex lg:flex-row lg:gap-6 text-blue-800 dark:text-neutral-200">
+                    <ul className="hidden md:flex flex-row gap-3 lg:flex lg:flex-row lg:gap-6 text-blue-800 dark:text-neutral-200">
                         <li className=" hover:text-blue-500 dark:hover:text-blue-400 ">
                             <Link to="/bp/contact" onClick={scrollToTop}>
                                 Contact
@@ -71,10 +71,9 @@ function Header() {
                     </ul>
                     <FontAwesomeIcon
                         icon={faBars}
-                        className="burger text-2xl sm:hidden"
+                        className="burger text-2xl md:hidden"
                         onClick={() => {
                             setShowMenu(!showMenu)
-                            scrollToTop()
                         }}
                     />
                     <div

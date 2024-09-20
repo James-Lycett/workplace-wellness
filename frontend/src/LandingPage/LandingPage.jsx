@@ -58,7 +58,7 @@ export default function LandingPage() {
                 </div>
             )}
 
-            <div className="bg-slate-50 mb-20 mx-20 pb-10">
+            <div className="bg-slate-50 mb-20 mx-5 lg:mx-20 pb-10">
                 <h2 className="text-3xl text-center my-10">
                     How to Use Workplace Wellness
                 </h2>
