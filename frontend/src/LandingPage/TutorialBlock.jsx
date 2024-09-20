@@ -43,7 +43,11 @@ export default function TutorialBlock() {
                 </div>
             )}
 
-            <div className="bg-slate-50 mb-20 mx-5 lg:mx-20 pb-10">
+            <div
+                id="tutorial"
+                name="tutorial"
+                className="bg-slate-50 mb-20 mx-5 lg:mx-20 pb-10"
+            >
                 <h2 className="text-3xl text-center my-10">
                     How to Use Workplace Wellness
                 </h2>
@@ -228,6 +232,11 @@ export default function TutorialBlock() {
                         />
                     </div>
                 </div>
+                <h3 className="text-2xl text-center my-20 border-bottom">
+                    That's the basic rundown of Workplace Wellness and how to
+                    use it. Feel free to play around and let us know what you
+                    think.
+                </h3>
             </div>
         </>
     )

@@ -8,11 +8,18 @@ function Header() {
     const [showMenu, setShowMenu] = useState(false)
     const mobileMenuRef = useRef(null)
 
-    function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        })
+    function scrollToSection(sectionId) {
+        if (sectionId) {
+            const section = document.querySelector(sectionId)
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' })
+            }
+        } else {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            })
+        }
     }
 
     useEffect(() => {
@@ -48,23 +55,28 @@ function Header() {
                 </div>
                 <nav className="font-normal flex items-center ">
                     <ul className="hidden md:flex flex-row gap-3 lg:flex lg:flex-row lg:gap-6 text-blue-800 dark:text-neutral-200">
+                        <li className="text-red-800 hover:text-blue-500 dark:hover:text-blue-400 font-bold">
+                            <Link to="/" state={{ sectionId: 'tutorial' }}>
+                                Tutorial
+                            </Link>
+                        </li>
                         <li className=" hover:text-blue-500 dark:hover:text-blue-400 ">
-                            <Link to="/bp/contact" onClick={scrollToTop}>
+                            <Link to="/bp/contact" onClick={scrollToSection}>
                                 Contact
                             </Link>
                         </li>
                         <li className="hover:text-blue-500 dark:hover:text-blue-400">
-                            <Link to="/bp/about" onClick={scrollToTop}>
+                            <Link to="/bp/about" onClick={scrollToSection}>
                                 About
                             </Link>
                         </li>
                         <li className="hover:text-blue-500 dark:hover:text-blue-400">
-                            <Link to="/bp/careers" onClick={scrollToTop}>
+                            <Link to="/bp/careers" onClick={scrollToSection}>
                                 Careers
                             </Link>
                         </li>
                         <li className="hover:text-blue-500 dark:hover:text-blue-400">
-                            <Link to="/login" onClick={scrollToTop}>
+                            <Link to="/login" onClick={scrollToSection}>
                                 Sign In
                             </Link>
                         </li>
@@ -82,11 +94,21 @@ function Header() {
                         style={{ display: showMenu ? 'flex' : 'none' }}
                     >
                         <Link
+                            to="/"
+                            className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white text-red-800 font-bold"
+                            state={{ sectionId: 'tutorial' }}
+                            onClick={(e) => {
+                                setShowMenu(false)
+                            }}
+                        >
+                            Tutorial
+                        </Link>
+                        <Link
                             to="/bp/contact"
                             className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white"
                             onClick={() => {
                                 setShowMenu(!showMenu)
-                                scrollToTop()
+                                scrollToSection()
                             }}
                         >
                             Contact
@@ -96,17 +118,27 @@ function Header() {
                             className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white"
                             onClick={() => {
                                 setShowMenu(!showMenu)
-                                scrollToTop()
+                                scrollToSection()
                             }}
                         >
                             About
+                        </Link>
+                        <Link
+                            to="/bp/careers"
+                            className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white"
+                            onClick={() => {
+                                setShowMenu(!showMenu)
+                                scrollToSection()
+                            }}
+                        >
+                            Careers
                         </Link>
                         <Link
                             to="/login"
                             className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white"
                             onClick={() => {
                                 setShowMenu(!showMenu)
-                                scrollToTop()
+                                scrollToSection()
                             }}
                         >
                             Sign In
