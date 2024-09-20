@@ -1,10 +1,28 @@
 import React from 'react'
 import ErrorAlert from '../../utils/ErrorAlert'
 
-export default function ActivityLogForm({ entry, handleChange, handleSubmit, error }) {
+export default function ActivityLogForm({
+    entry,
+    handleChange,
+    handleSubmit,
+    error,
+}) {
+    console.log("entry at ActivityLogForm", entry)
     return (
         <div className="text-xl">
             <form onSubmit={handleSubmit} className="flex flex-col">
+                <div className="flex items-center justify-between my-2 h-10">
+                    <label htmlFor="date">Date *</label>
+                    <input
+                        type="date"
+                        name="date"
+                        id="date"
+                        value={entry.date}
+                        onChange={handleChange}
+                        required={true}
+                        className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl"
+                    />
+                </div>
                 <div className="flex items-center justify-between my-2 h-10">
                     <label htmlFor="sleep_duration">
                         Sleep Duration &#40;Hours&#41; *

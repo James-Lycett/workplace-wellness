@@ -5,7 +5,7 @@ import profilePic3 from '../../images/profile3.png'
 import moment from 'moment'
 
 export default function SummaryBar({ user, averages, goals, view }) {
-    const date = moment().format('dddd, MMMM Do')
+    const date = moment().format('YYYY, dddd, MMMM Do')
     let profilePic
     switch (user.userId) {
         case 1:
@@ -43,7 +43,7 @@ export default function SummaryBar({ user, averages, goals, view }) {
         )
 
         return Math.floor(boundedProgressValue)
-    })
+    }, [goals, averages])
 
     return (
         <>
@@ -52,6 +52,7 @@ export default function SummaryBar({ user, averages, goals, view }) {
                     <div className="flex flex-col md:flex-row w-1/2 md:w-full md:self-center p-2.5">
                         <img
                             src={profilePic}
+                            alt='profile pic'
                             className="rounded-full object-contain self-center size-24"
                         />
                         <div className="flex flex-col justify-center font-semibold text-sm p-3 md:text-xl">
@@ -68,8 +69,8 @@ export default function SummaryBar({ user, averages, goals, view }) {
                         <p className="text-reg">{date}</p>
                     </div>
                 </div>
-                <div className="flex flex-col py-5 px-3 sm:px-8 md:p-0 md:mx-2 md:flex-row items-center justify-between gap-5 md:gap-10 w-100% md:h-24">
-                    <div className="flex items-center justify-center bg-white w-full rounded-3xl shadow-lg h-20">
+                <div className="flex flex-col py-5 px-3 sm:px-8 md:p-0 md:mx-5 md:flex-row items-center justify-between gap-5 md:gap-6 w-100% md:h-24">
+                    <div className="flex items-center justify-center bg-white w-full rounded-3xl shadow-inset-lg h-20">
                         <p className="text-sm md:text-base">
                             Monthly Goals Met:{' '}
                             <span className="font-semibold ps-2 md:text-2xl">
@@ -77,7 +78,7 @@ export default function SummaryBar({ user, averages, goals, view }) {
                             </span>
                         </p>
                     </div>
-                    <div className="flex items-center justify-center bg-white w-full rounded-3xl shadow-lg h-20">
+                    <div className="flex items-center justify-center bg-white w-full rounded-3xl shadow-inset-lg h-20">
                         <p className="text-sm md:text-base">
                             % of Dept Goals:{' '}
                             <span className="font-semibold ps-2 md:text-2xl">
@@ -85,7 +86,7 @@ export default function SummaryBar({ user, averages, goals, view }) {
                             </span>
                         </p>
                     </div>
-                    <div className="flex flex-row items-center bg-white w-full rounded-3xl shadow-lg h-20">
+                    <div className="flex flex-row items-center bg-white w-full rounded-3xl shadow-inset-lg h-20">
                         <p className="text-sm md:text-base w-1/2 ps-5">
                             Longest Goal Streak:{' '}
                         </p>
