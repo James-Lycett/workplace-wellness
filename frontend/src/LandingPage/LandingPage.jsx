@@ -76,7 +76,7 @@ export default function LandingPage() {
                         <img
                             src={login0}
                             onClick={() => openModal(login0)}
-                            alt="screenshot of login page"
+                            alt="screenshot of the homepage with links to sign in circled"
                             className="border border-v2-drkblue w-1/2"
                         />
                     </div>
@@ -90,7 +90,7 @@ export default function LandingPage() {
                         <img
                             src={login1}
                             onClick={() => openModal(login1)}
-                            alt="screenshot of login page"
+                            alt="screenshot of login page with demo link circled"
                             className="border border-v2-drkblue w-1/2"
                         />
                     </div>
@@ -103,7 +103,7 @@ export default function LandingPage() {
                         <img
                             src={login2}
                             onClick={() => openModal(login2)}
-                            alt="screenshot of login page"
+                            alt="screenshot of the demo credentials modal"
                             className="border border-v2-drkblue w-1/2"
                         />
                     </div>
@@ -136,7 +136,7 @@ export default function LandingPage() {
                         <img
                             src={dash1}
                             onClick={() => openModal(dash1)}
-                            alt="screenshot of login page"
+                            alt="screenshot of the Admin dashboard"
                             className="border border-v2-drkblue w-1/2"
                         />
                     </div>
@@ -163,7 +163,7 @@ export default function LandingPage() {
                         <img
                             src={dash1a}
                             onClick={() => openModal(dash1a)}
-                            alt="screenshot of login page"
+                            alt="screenshot of admin header bar"
                             className="border border-v2-drkblue w-1/2"
                         />
                     </div>
@@ -178,7 +178,7 @@ export default function LandingPage() {
                         <img
                             src={dash1b}
                             onClick={() => openModal(dash1b)}
-                            alt="screenshot of login page"
+                            alt="screenshot of team goal graphs"
                             className="border border-v2-drkblue w-1/2"
                         />
                     </div>
@@ -200,7 +200,7 @@ export default function LandingPage() {
                         <img
                             src={dash1c}
                             onClick={() => openModal(dash1c)}
-                            alt="screenshot of login page"
+                            alt="screenshot of employee table"
                             className="border border-v2-drkblue w-1/2"
                         />
                     </div>
@@ -214,7 +214,7 @@ export default function LandingPage() {
                         <img
                             src={dash2}
                             onClick={() => openModal(dash2)}
-                            alt="screenshot of login page"
+                            alt="screenshot of personal profile view"
                             className="border border-v2-drkblue w-1/2"
                         />
                     </div>
@@ -238,7 +238,7 @@ export default function LandingPage() {
                         <img
                             src={dash2a}
                             onClick={() => openModal(dash2a)}
-                            alt="screenshot of login page"
+                            alt="screenshot of fitness logs"
                             className="border border-v2-drkblue w-1/2"
                         />
                     </div>
