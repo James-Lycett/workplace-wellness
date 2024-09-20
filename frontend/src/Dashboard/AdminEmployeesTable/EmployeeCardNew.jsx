@@ -2,20 +2,27 @@ import React, { useState, useCallback } from 'react'
 import { deleteUser, listUsers } from '../../utils/api'
 import sleepingPersonImage from '../../images/sleep.png'
 import RemoveCardButton from '../../utils/RemoveCardButton'
+import NewModal from '../Modal/newModal'
+import EditEmployeeForm from './EditEmployeeForm'
 import { Table } from 'flowbite-react'
 import img1 from '../../images/profile1.png'
 import img2 from '../../images/profile2.png'
 import img3 from '../../images/profile3.png'
+import { EmployeeContext } from '../../utils/contexts'
 
 export default function EmployeeCardNew({
     employee,
     setEmployees,
     imgNumber,
-    openModal,
 }) {
+    const [isModalOpen, setIsModalOpen] = useState(false)
     const [openDeleteModal, setOpenDeleteModal] = useState(false)
 
-    // Fetches all users from the API
+    const openModal = () => {
+        setIsModalOpen(true)
+    }
+
+    // Fetches all users from the API to refresh list
     const loadUsers = useCallback(async () => {
         const abortController = new AbortController()
 
@@ -93,7 +100,7 @@ export default function EmployeeCardNew({
             <Table.Cell id="sleep-hours">{employee.sleep_disorder}</Table.Cell>
             <Table.Cell>
                 <button
-                    onClick={() => openModal('editEmployee', employee)}
+                    onClick={() => openModal()}
                     className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
                 >
                     Edit
@@ -107,6 +114,9 @@ export default function EmployeeCardNew({
                     option={'newEmployee'}
                 />
             </Table.Cell>
+            <EmployeeContext.Provider value={{ employee, setEmployees }}>
+                {isModalOpen && <NewModal setIsModalOpen={setIsModalOpen} title={'Edit Employee'} form={EditEmployeeForm}/>}
+            </EmployeeContext.Provider>
         </>
     )
 }

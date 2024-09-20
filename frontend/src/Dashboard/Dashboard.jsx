@@ -3,24 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { loadAllData } from '../utils/api'
 import Spinner from '../utils/Spinner'
-import Modal from './Modal/Modal'
 import AdminProgressCharts from './AdminProgressCharts/AdminProgressCharts'
 import AdminEmployeesTable from './AdminEmployeesTable/AdminEmployeesTable'
 import UserRecordsTable from './UserRecordsTable/UserRecordsTable'
 import UserProgressCharts from './UserProgressCharts/UserProgressCharts'
 import DashboardSidebar from './DashboardSidebar/DashboardSidebar'
 import SummaryBar from './SummaryBar/SummaryBar'
+import { LoadDataContext, EntryContext } from '../utils/contexts'
 
 export default function AdminHome() {
     const navigate = useNavigate()
     const { userId } = useParams()
     const [user, setUser] = useState(null)
-    const [isModalOpen, setIsModalOpen] = useState({
-        state: false,
-        option: 'activity',
-        employeeFromEdit: {},
-        entryFromEdit: {},
-    })
     const [averages, setAverages] = useState({
         sleep_duration_average: 0,
         daily_steps_average: 0,
@@ -75,17 +69,6 @@ export default function AdminHome() {
         loadData()
     }, [loadData])
 
-    const openModal = (option, employee = null, label = null, goals = null, entry = null) => {
-        setIsModalOpen({
-            state: true,
-            option: option,
-            employeeFromEdit: employee,
-            label: label,
-            goals: goals,
-            entryFromEdit: entry,
-        })
-    }
-
     const renderContent = () => {
         if (!user) {
             return (
@@ -100,45 +83,33 @@ export default function AdminHome() {
                 <section className="bg-slate-100 py-5 ">
                     <SummaryBar user={user} averages={averages} goals={goals} view={view}/>
                     {view === 'admin' ? (
-                        <AdminProgressCharts
-                            openModal={openModal}
-                            companyAverages={companyAverages}
-                            goals={goals}
-                        />
+                        <LoadDataContext.Provider value={{ loadData, companyAverages, userId }}>
+                                <AdminProgressCharts goals={goals} />
+                        </LoadDataContext.Provider>
                     ) : (
                         <UserProgressCharts averages={averages} goals={goals}/>
                     )}
                     <div className="flex flex-col md:flex-row  w-full mx-auto mt-5 max-w-5xl min-h-[50vh] md:max-h-[75vh] rounded-lg shadow-md overflow-hidden ">
-                        <DashboardSidebar
-                            openModal={openModal}
-                            userIsAdmin={user.admin}
-                            view={view}
-                            setView={setView}
-                        />
+                        <LoadDataContext.Provider value={loadData}>
+                            <DashboardSidebar
+                                userIsAdmin={user.admin}
+                                view={view}
+                                setView={setView}
+                            />
+                        </LoadDataContext.Provider>
                         {view === 'admin' ? (
                             <AdminEmployeesTable
-                                openModal={openModal}
                                 employees={employees}
                             />
                         ) : (
-                            <UserRecordsTable
-                                userId={userId}
-                                entries={entries}
-                                setEntries={setEntries}
-                                openModal={openModal}
-                            />
+                            <LoadDataContext.Provider value={{ loadData, userId}}>
+                                <EntryContext.Provider value={{ entries, setEntries }}>
+                                    <UserRecordsTable/>
+                                </EntryContext.Provider>
+                            </LoadDataContext.Provider>
                         )}
                     </div>
                 </section>
-                {isModalOpen.state && (
-                    <Modal
-                        setIsModalOpen={setIsModalOpen}
-                        isModalOpen={isModalOpen}
-                        loadData={loadData}
-                        userId={userId}
-                        setEmployees={setEmployees}
-                    />
-                )}
             </>
         )
     }

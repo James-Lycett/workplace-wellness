@@ -1,13 +1,47 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import convertStringsToNumbers from '../../utils/convertStringsToNumbers'
+import { updateEntry } from '../../utils/api'
+import { LoadDataContext, EntryContext } from '../../utils/contexts'
 import ErrorAlert from '../../utils/ErrorAlert'
 
-export default function ActivityLogForm({
-    entry,
-    handleChange,
-    handleSubmit,
-    error,
-}) {
-    console.log("entry at ActivityLogForm", entry)
+export default function EditActivityForm({ setIsModalOpen }) {
+    const [entry, setEntry] = useState(useContext(EntryContext))
+    const [error, setError] = useState(null)
+
+    const { loadData } = useContext(LoadDataContext)
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setEntry({
+            ...entry,
+            [name]: value,
+        })
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const abortController = new AbortController()
+
+        convertStringsToNumbers(entry, [
+            'sleep_duration',
+            'daily_steps',
+            'stress_level',
+            'heart_rate',
+        ])
+
+        try {
+            await updateEntry(entry.entry_id ,entry, abortController.signal)
+        } catch (error) {
+            setError(error)
+        } finally {
+            // Refresh entries list and recalculate averages
+            loadData()
+
+            setIsModalOpen(false)
+            abortController.abort()
+        }
+    }
+
     return (
         <div className="text-xl">
             <form onSubmit={handleSubmit} className="flex flex-col">
@@ -17,7 +51,7 @@ export default function ActivityLogForm({
                         type="date"
                         name="date"
                         id="date"
-                        value={entry.date}
+                        value={entry.date ? entry.date.substring(0, 10) : ""}
                         onChange={handleChange}
                         required={true}
                         className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl"
@@ -45,6 +79,8 @@ export default function ActivityLogForm({
                     <select
                         id="bmi_category"
                         name="bmi_category"
+                        value={entry.bmi_category}
+                        onChange={handleChange}
                         className="relative border-0 bg-slate-100 my-4 md:px-2 w-1/2 rounded max-w-xl"
                     >
                         <option value={'Normal'}>Normal</option>
