@@ -66,8 +66,8 @@ export default function LandingPage() {
                     Signing In / Registering
                 </h3>
                 <div className="flex flex-col gap-5 px-10">
-                    <div className="flex gap-5 items-center">
-                        <p>
+                    <div className="flex flex-col lg:flex-row gap-5 items-center">
+                        <p className="order-2 lg:order-1">
                             To sign in simply click the "Get Started" button
                             above, or Sign in in the far right of the header
                             links. You will be directed to the sign in page
@@ -77,11 +77,11 @@ export default function LandingPage() {
                             src={login0}
                             onClick={() => openModal(login0)}
                             alt="screenshot of the homepage with links to sign in circled"
-                            className="border border-v2-drkblue w-1/2"
+                            className="border border-v2-drkblue w-full lg:w-1/2 cursor-pointer order-1 lg:order-2"
                         />
                     </div>
-                    <div className="flex gap-5 items-center">
-                        <p>
+                    <div className="flex flex-col lg:flex-row gap-5 items-center">
+                        <p className="order-2 lg:order-1">
                             Feel free to register a new account (we recommend
                             chosing admin to see all of the features WW has to
                             offer). But for now, we're going to sign in using
@@ -91,11 +91,11 @@ export default function LandingPage() {
                             src={login1}
                             onClick={() => openModal(login1)}
                             alt="screenshot of login page with demo link circled"
-                            className="border border-v2-drkblue w-1/2"
+                            className="border border-v2-drkblue w-full lg:w-1/2 cursor-pointer order-1 lg:order-2"
                         />
                     </div>
-                    <div className="flex gap-5 items-center">
-                        <p>
+                    <div className="flex flex-col justify-center lg:flex-row gap-5 items-center">
+                        <p className="order-2 lg:order-1">
                             Click on the "Looking for a demo?" link to open a
                             pop-up with the Demo Credentials. We're going to
                             choose Admin so click "Fill-in Admin Login".
@@ -104,11 +104,11 @@ export default function LandingPage() {
                             src={login2}
                             onClick={() => openModal(login2)}
                             alt="screenshot of the demo credentials modal"
-                            className="border border-v2-drkblue w-1/2"
+                            className="border border-v2-drkblue w-full lg:w-1/2 cursor-pointer order-1 lg:order-2"
                         />
                     </div>
-                    <div className="flex gap-5 items-center">
-                        <p>
+                    <div className="flex flex-col lg:flex-row gap-5 items-center">
+                        <p className="order-2 lg:order-1">
                             The username and password (encripted) should now be
                             provided for you, so just click the "Sign In"
                             button.
@@ -117,16 +117,16 @@ export default function LandingPage() {
                             src={login3}
                             onClick={() => openModal(login3)}
                             alt="screenshot of login page"
-                            className="border border-v2-drkblue w-1/2"
+                            className="border border-v2-drkblue w-full lg:w-1/2 cursor-pointer order-1 lg:order-2"
                         />
                     </div>
                 </div>
                 <h3 className="text-2xl text-center my-10 border-bottom">
                     Using the Dashboard
                 </h3>
-                <div className="flex flex-col gap-10 mx-20 px-10">
-                    <div className="flex gap-5 items-center">
-                        <p>
+                <div className="flex flex-col gap-10 px-10">
+                    <div className="flex flex-col lg:flex-row gap-5 items-center">
+                        <p className="order-2 lg:order-1">
                             You're in! The Dashboard is where all the muscle of
                             workplace Wellness gets flexed. Here you can see
                             department statistics, manage employees, set goals,
@@ -137,11 +137,11 @@ export default function LandingPage() {
                             src={dash1}
                             onClick={() => openModal(dash1)}
                             alt="screenshot of the Admin dashboard"
-                            className="border border-v2-drkblue w-1/2"
+                            className="border border-v2-drkblue w-full lg:w-1/2 cursor-pointer order-1 lg:order-2"
                         />
                     </div>
-                    <div className="flex gap-5 items-center">
-                        <div>
+                    <div className="flex flex-col lg:flex-row gap-5 items-center">
+                        <div className="order-2 lg:order-1">
                             <p className="mb-3">
                                 First let's look at the top bar. Here we have
                                 some details for your account and an overview of
@@ -164,11 +164,11 @@ export default function LandingPage() {
                             src={dash1a}
                             onClick={() => openModal(dash1a)}
                             alt="screenshot of admin header bar"
-                            className="border border-v2-drkblue w-1/2"
+                            className="border border-v2-drkblue w-full lg:w-1/2 cursor-pointer order-1 lg:order-2"
                         />
                     </div>
-                    <div className="flex gap-5 items-center">
-                        <p>
+                    <div className="flex flex-col lg:flex-row gap-5 items-center">
+                        <p className="order-2 lg:order-1">
                             Next we'll look at the goals display. The name and
                             percentage of your team's efforts towards their goal
                             are displayed in a radial bar graph. To edit the
@@ -179,11 +179,11 @@ export default function LandingPage() {
                             src={dash1b}
                             onClick={() => openModal(dash1b)}
                             alt="screenshot of team goal graphs"
-                            className="border border-v2-drkblue w-1/2"
+                            className="border border-v2-drkblue w-full lg:w-1/2 cursor-pointer order-1 lg:order-2"
                         />
                     </div>
-                    <div className="flex gap-5 items-center">
-                        <div>
+                    <div className="flex flex-col lg:flex-row gap-5 items-center">
+                        <div className="order-2 lg:order-1">
                             <p className="mb-3">
                                 Last, we'll look at the users table. Here is
                                 where you can manage your team.
@@ -201,11 +201,11 @@ export default function LandingPage() {
                             src={dash1c}
                             onClick={() => openModal(dash1c)}
                             alt="screenshot of employee table"
-                            className="border border-v2-drkblue w-1/2"
+                            className="border border-v2-drkblue w-full lg:w-1/2 cursor-pointer order-1 lg:order-2"
                         />
                     </div>
-                    <div className="flex gap-5 items-center">
-                        <p>
+                    <div className="flex flex-col lg:flex-row gap-5 items-center">
+                        <p className="order-2 lg:order-1">
                             Now let's look at the personal view by clicking
                             "Profile" in the sidebar. Everything should still
                             look familiar, except instead of employees you
@@ -215,11 +215,11 @@ export default function LandingPage() {
                             src={dash2}
                             onClick={() => openModal(dash2)}
                             alt="screenshot of personal profile view"
-                            className="border border-v2-drkblue w-1/2"
+                            className="border border-v2-drkblue w-full lg:w-1/2 cursor-pointer order-1 lg:order-2"
                         />
                     </div>
-                    <div className="flex gap-5 items-center">
-                        <div>
+                    <div className="flex flex-col lg:flex-row gap-5 items-center">
+                        <div className="order-2 lg:order-1">
                             <p className="mb-3">
                                 Last, we'll look at the users table. Here is
                                 where you can manage your team.
@@ -239,7 +239,7 @@ export default function LandingPage() {
                             src={dash2a}
                             onClick={() => openModal(dash2a)}
                             alt="screenshot of fitness logs"
-                            className="border border-v2-drkblue w-1/2"
+                            className="border border-v2-drkblue w-full lg:w-1/2 cursor-pointer order-1 lg:order-2"
                         />
                     </div>
                 </div>
