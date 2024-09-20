@@ -46,7 +46,7 @@ function Header() {
                         />
                     </Link>
                 </div>
-                <nav className="font-semibold flex items-center ">
+                <nav className="font-normal flex items-center ">
                     <ul className="hidden sm:flex flex-row gap-3 lg:flex lg:flex-row lg:gap-6 text-blue-800 dark:text-neutral-200">
                         <li className=" hover:text-blue-500 dark:hover:text-blue-400 ">
                             <Link to="/bp/contact" onClick={scrollToTop}>
