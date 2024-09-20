@@ -35,7 +35,7 @@ function Header() {
     }, [mobileMenuRef])
 
     return (
-        <header className="bg-white text-center text-neutral-600 border-b dark:bg-neutral-600 dark:text-neutral-200">
+        <header className=" sticky top-0 z-20 bg-white text-center text-neutral-600 border-b dark:bg-neutral-600 dark:text-neutral-200">
             <div className="flex flex-row justify-between pe-16 ">
                 <div className="flex flex-col mx-12">
                     <Link to="/">

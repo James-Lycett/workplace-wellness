@@ -3,9 +3,12 @@ import '../index.css'
 import IntroBlock from './IntroBlock'
 import FeaturesBlock from './FeaturesBlock'
 import CallToActionBlock from './CallToActionBlock'
-import screen1 from '../images/screen1.png'
-import screen2 from '../images/screen2.png'
-import screen3 from '../images/screen3.png'
+import login0 from '../images/login0.png'
+import login1 from '../images/login1.png'
+import login2 from '../images/login2.png'
+import login3 from '../images/login3.png'
+import dash1 from '../images/dash1.png'
+import dash2 from '../images/dash2.png'
 
 export default function LandingPage() {
     return (
@@ -24,9 +27,9 @@ export default function LandingPage() {
                     How to Use Workplace Wellness
                 </h2>
                 <h3 className="text-2xl text-center my-10 border-bottom">
-                    Logging In / Registering
+                    Signing In / Registering
                 </h3>
-                <div className="flex flex-col gap-5 mx-10 px-10">
+                <div className="flex flex-col gap-5 mx-20 px-10">
                     <div className="flex gap-5 items-center">
                         <p>
                             To sign in simply click the "Get Started" button
@@ -35,7 +38,7 @@ export default function LandingPage() {
                             pictured here.
                         </p>
                         <img
-                            src={screen1}
+                            src={login0}
                             alt="screenshot of login page"
                             className="border border-v2-drkblue w-1/2"
                         />
@@ -48,7 +51,7 @@ export default function LandingPage() {
                             the demo credentials
                         </p>
                         <img
-                            src={screen1}
+                            src={login1}
                             alt="screenshot of login page"
                             className="border border-v2-drkblue w-1/2"
                         />
@@ -60,23 +63,79 @@ export default function LandingPage() {
                             choose Admin so click "Fill-in Admin Login".
                         </p>
                         <img
-                            src={screen2}
+                            src={login2}
                             alt="screenshot of login page"
                             className="border border-v2-drkblue w-1/2"
                         />
                     </div>
                     <div className="flex gap-5 items-center">
                         <p>
-                            To sign in simply click the "Get Started" button
-                            above, or Sign in in the far right of the header
-                            links.{' '}
+                            The username and password (encripted) should now be
+                            provided for you, so just click the "Sign In"
+                            button.
                         </p>
                         <img
-                            src={screen3}
+                            src={login3}
                             alt="screenshot of login page"
                             className="border border-v2-drkblue w-1/2"
                         />
                     </div>
+                </div>
+                <h3 className="text-2xl text-center my-10 border-bottom">
+                    Using the Dashboard
+                </h3>
+                <div className="flex flex-col gap-5 mx-20 px-10">
+                    <div className="flex gap-5 items-center">
+                        <p>
+                            You're in! Let's look at the Dashboard. The
+                            Dashboard is where all the muscle of workplace
+                            Wellness gets flexed. Here you can see department
+                            statistics, manage employees, set goals, add
+                            employees and much more.
+                        </p>
+                        <img
+                            src={dash1}
+                            alt="screenshot of login page"
+                            className="border border-v2-drkblue w-1/2"
+                        />
+                    </div>
+                    <div className="flex gap-5 items-center">
+                        <p>
+                            Feel free to register a new account (we recommend
+                            chosing admin to see all of the features WW has to
+                            offer). But for now, we're going to sign in using
+                            the demo credentials
+                        </p>
+                        <img
+                            src={dash2}
+                            alt="screenshot of login page"
+                            className="border border-v2-drkblue w-1/2"
+                        />
+                    </div>
+                    {/* <div className="flex gap-5 items-center">
+                        <p>
+                            Click on the "Looking for a demo?" link to open a
+                            pop-up with the Demo Credentials. We're going to
+                            choose Admin so click "Fill-in Admin Login".
+                        </p>
+                        <img
+                            src={login2}
+                            alt="screenshot of login page"
+                            className="border border-v2-drkblue w-1/2"
+                        />
+                    </div>
+                    <div className="flex gap-5 items-center">
+                        <p>
+                            The username and password (encripted) should now be
+                            provided for you, so just click the "Sign In"
+                            button.
+                        </p>
+                        <img
+                            src={login3}
+                            alt="screenshot of login page"
+                            className="border border-v2-drkblue w-1/2"
+                        />
+                    </div> */}
                 </div>
             </div>
         </div>
