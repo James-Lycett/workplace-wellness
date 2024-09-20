@@ -87,11 +87,11 @@ export default function LandingPage() {
                 <div className="flex flex-col gap-5 mx-20 px-10">
                     <div className="flex gap-5 items-center">
                         <p>
-                            You're in! Let's look at the Dashboard. The
-                            Dashboard is where all the muscle of workplace
-                            Wellness gets flexed. Here you can see department
-                            statistics, manage employees, set goals, add
-                            employees and much more.
+                            You're in! The Dashboard is where all the muscle of
+                            workplace Wellness gets flexed. Here you can see
+                            department statistics, manage employees, set goals,
+                            add employees and much more. Let's break it down and
+                            go over the features.
                         </p>
                         <img
                             src={dash1}
