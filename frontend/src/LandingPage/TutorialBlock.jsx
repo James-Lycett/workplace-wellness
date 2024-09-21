@@ -58,7 +58,7 @@ export default function TutorialBlock() {
                     <div className="flex flex-col lg:flex-row gap-5 items-center">
                         <p className="order-2 lg:order-1">
                             To sign in simply click the "Get Started" button
-                            above, or Sign in in the far right of the header
+                            above, or "Sign In" on the far right of the header
                             links. You will be directed to the sign in page
                             pictured here.
                         </p>
@@ -98,7 +98,7 @@ export default function TutorialBlock() {
                     </div>
                     <div className="flex flex-col lg:flex-row gap-5 items-center">
                         <p className="order-2 lg:order-1">
-                            The username and password (encripted) should now be
+                            The username and password (encrypted) should now be
                             provided for you, so just click the "Sign In"
                             button.
                         </p>
@@ -142,7 +142,7 @@ export default function TutorialBlock() {
                             </p>
                             <p>
                                 2. Tells you whether you are in Admin view or
-                                looking at your personal logs.
+                                looking at your personal logs
                             </p>
                             <p>
                                 3. Some generated stats from your team's health
