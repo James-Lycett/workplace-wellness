@@ -8,11 +8,18 @@ function Header() {
     const [showMenu, setShowMenu] = useState(false)
     const mobileMenuRef = useRef(null)
 
-    function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        })
+    function scrollToSection(sectionId) {
+        if (sectionId) {
+            const section = document.querySelector(sectionId)
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' })
+            }
+        } else {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            })
+        }
     }
 
     useEffect(() => {
@@ -35,7 +42,7 @@ function Header() {
     }, [mobileMenuRef])
 
     return (
-        <header className="bg-white text-center text-neutral-600 border-b dark:bg-neutral-600 dark:text-neutral-200">
+        <header className=" sticky top-0 z-20 bg-white text-center text-neutral-600 border-b dark:bg-neutral-600 dark:text-neutral-200">
             <div className="flex flex-row justify-between pe-16 ">
                 <div className="flex flex-col mx-12">
                     <Link to="/">
@@ -47,34 +54,38 @@ function Header() {
                     </Link>
                 </div>
                 <nav className="font-normal flex items-center ">
-                    <ul className="hidden sm:flex flex-row gap-3 lg:flex lg:flex-row lg:gap-6 text-blue-800 dark:text-neutral-200">
+                    <ul className="hidden md:flex flex-row gap-3 lg:flex lg:flex-row lg:gap-6 text-blue-800 dark:text-neutral-200">
+                        <li className="text-red-800 hover:text-blue-500 dark:hover:text-blue-400 font-bold">
+                            <Link to="/" state={{ sectionId: 'tutorial' }}>
+                                Tutorial
+                            </Link>
+                        </li>
                         <li className=" hover:text-blue-500 dark:hover:text-blue-400 ">
-                            <Link to="/bp/contact" onClick={scrollToTop}>
+                            <Link to="/bp/contact" onClick={scrollToSection}>
                                 Contact
                             </Link>
                         </li>
                         <li className="hover:text-blue-500 dark:hover:text-blue-400">
-                            <Link to="/bp/about" onClick={scrollToTop}>
+                            <Link to="/bp/about" onClick={scrollToSection}>
                                 About
                             </Link>
                         </li>
                         <li className="hover:text-blue-500 dark:hover:text-blue-400">
-                            <Link to="/bp/careers" onClick={scrollToTop}>
+                            <Link to="/bp/careers" onClick={scrollToSection}>
                                 Careers
                             </Link>
                         </li>
                         <li className="hover:text-blue-500 dark:hover:text-blue-400">
-                            <Link to="/login" onClick={scrollToTop}>
+                            <Link to="/login" onClick={scrollToSection}>
                                 Sign In
                             </Link>
                         </li>
                     </ul>
                     <FontAwesomeIcon
                         icon={faBars}
-                        className="burger text-2xl sm:hidden"
+                        className="burger text-2xl md:hidden"
                         onClick={() => {
                             setShowMenu(!showMenu)
-                            scrollToTop()
                         }}
                     />
                     <div
@@ -83,11 +94,21 @@ function Header() {
                         style={{ display: showMenu ? 'flex' : 'none' }}
                     >
                         <Link
+                            to="/"
+                            className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white text-red-800 font-bold"
+                            state={{ sectionId: 'tutorial' }}
+                            onClick={(e) => {
+                                setShowMenu(false)
+                            }}
+                        >
+                            Tutorial
+                        </Link>
+                        <Link
                             to="/bp/contact"
                             className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white"
                             onClick={() => {
                                 setShowMenu(!showMenu)
-                                scrollToTop()
+                                scrollToSection()
                             }}
                         >
                             Contact
@@ -97,17 +118,27 @@ function Header() {
                             className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white"
                             onClick={() => {
                                 setShowMenu(!showMenu)
-                                scrollToTop()
+                                scrollToSection()
                             }}
                         >
                             About
+                        </Link>
+                        <Link
+                            to="/bp/careers"
+                            className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white"
+                            onClick={() => {
+                                setShowMenu(!showMenu)
+                                scrollToSection()
+                            }}
+                        >
+                            Careers
                         </Link>
                         <Link
                             to="/login"
                             className="py-4 text-2xl hover:bg-v2-ltblue hover:text-white"
                             onClick={() => {
                                 setShowMenu(!showMenu)
-                                scrollToTop()
+                                scrollToSection()
                             }}
                         >
                             Sign In
